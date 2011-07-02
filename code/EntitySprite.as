@@ -14,15 +14,15 @@ package {
 		public var entity:Entity;
 		
 		// Constructor.
-		public function Sprite(entity:Entity, x:Number = 0, y:Number = 0) {
+		public function EntitySprite(entity:Entity, x:Number = 0, y:Number = 0) {
 			super(x, y);
 			this.entity = entity;
 		}
 		
-		override public function render():void {
-			entity.beforeRender();
-			super.render();
-			entity.afterRender();
+		override public function draw():void {
+			entity.beforeDraw();
+			super.draw();
+			entity.afterDraw();
 		}
 		
 		override public function update():void {

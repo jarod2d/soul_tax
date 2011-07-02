@@ -11,11 +11,23 @@ package {
 	
 	public class Entity {
 		
+		// The entity's FlxSprite object.
 		public var sprite:EntitySprite;
 		
+		// The direction of the entity's movement. You can use this property along with the max_speed and acceleration
+		// getters and setters to get some good simple movement behavior.
+		public var direction:FlxPoint;
+		
+		
+		// TEMP
+		private var $acceleration:FlxPoint;
+		
 		// Constructor.
-		public function EntitySprite(x:Number = 0, y:Number = 0) {
-			sprite = new Sprite(this, x, y);
+		public function Entity(x:Number = 0, y:Number = 0) {
+			sprite = new EntitySprite(this, x, y);
+			
+			direction = new FlxPoint();
+			$acceleration = new FlxPoint();
 		}
 		
 		// Convenience function allows moving an Entity in one call.
@@ -26,19 +38,21 @@ package {
 		
 		// Update callbacks -- one before the Sprite gets updated and one after.
 		public function beforeUpdate():void {
-			
+			// Set up entity movement based on their direction.
+			sprite.acceleration.x = direction.x * $acceleration.x;
+			sprite.acceleration.y = direction.y * $acceleration.y;
 		}
 		
 		public function afterUpdate():void {
 			
 		}
 		
-		// Render callbacks -- one before the Sprite gets updated and one after.
-		public function beforeRender():void {
+		// Draw callbacks -- one before the Sprite gets updated and one after.
+		public function beforeDraw():void {
 			
 		}
 		
-		public function afterRender():void {
+		public function afterDraw():void {
 			
 		}
 		
@@ -53,52 +67,52 @@ package {
 			return sprite.x;
 		}
 		
-		public function set x(x:Number):void {
-			sprite.x = x;
+		public function set x(value:Number):void {
+			sprite.x = value;
 		}
 		
 		public function get y():Number {
 			return sprite.y;
 		}
 		
-		public function set y(y:Number):void {
-			sprite.y = y;
+		public function set y(value:Number):void {
+			sprite.y = value;
 		}
 		
 		public function get width():Number {
 			return sprite.width;
 		}
 		
-		public function set width(w:Number):void {
-			sprite.width = w;
+		public function set width(value:Number):void {
+			sprite.width = value;
 		}
 		
 		public function get height():Number {
 			return sprite.height;
 		}
 		
-		public function set height(h:Number):void {
-			sprite.height = h;
+		public function set height(value:Number):void {
+			sprite.height = value;
 		}
 		
 		public function get center():FlxPoint {
-			return new FlxPoint(sprite.left + sprite.width / 2, sprite.top + sprite.height / 2);
+			return new FlxPoint(left + sprite.width / 2, top + sprite.height / 2);
 		}
 		
 		public function get top():Number {
-			return sprite.top;
+			return x;
 		}
 		
 		public function get right():Number {
-			return sprite.right;
+			return left + width;
 		}
 		
 		public function get bottom():Number {
-			return sprite.bottom;
+			return top + height;
 		}
 		
 		public function get left():Number {
-			return sprite.left;
+			return y;
 		}
 		
 		public function get s_width():uint {
@@ -114,7 +128,7 @@ package {
 		}
 		
 		public function get s_top():Number {
-			return sprite.y - sprite.offset.y;
+			return top - sprite.offset.y;
 		}
 		
 		public function get s_right():Number {
@@ -126,11 +140,7 @@ package {
 		}
 		
 		public function get s_left():Number {
-			return sprite.x - sprite.offset.x;
-		}
-		
-		public function get velocity():FlxPoint {
-			return sprite.velocity;
+			return left - sprite.offset.x;
 		}
 		
 		public function get offset():FlxPoint {
@@ -147,6 +157,28 @@ package {
 		
 		public function get scrollFactor():Number {
 			return sprite.scrollFactor.x;
+		}
+		
+		public function get acceleration():FlxPoint {
+//			return sprite.acceleration;
+			return $acceleration;
+		}
+		
+		public function set acceleration(value:FlxPoint):void {
+//			sprite.acceleration = sprite.drag = value;
+			$acceleration = sprite.drag = value;
+		}
+		
+		public function get max_speed():FlxPoint {
+			return sprite.maxVelocity;
+		}
+		
+		public function set max_speed(value:FlxPoint):void {
+			sprite.maxVelocity = value;
+		}
+		
+		public function get velocity():FlxPoint {
+			return sprite.velocity;
 		}
 		
 		public function set scrollFactor(value:Number):void {

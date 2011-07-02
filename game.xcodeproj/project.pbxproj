@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		7ABC6EC213BEB4370007FF9B /* Assets.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = Assets.as; path = code/Assets.as; sourceTree = "<group>"; };
+		7ABC6EC513BEF81D0007FF9B /* MathUtil.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = MathUtil.as; path = code/MathUtil.as; sourceTree = "<group>"; };
 		7AC8114A13BE420D00656C2A /* autotiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = autotiles.png; sourceTree = "<group>"; };
 		7AC8114B13BE420D00656C2A /* autotiles_alt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = autotiles_alt.png; sourceTree = "<group>"; };
 		7AC8114C13BE420D00656C2A /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beep.mp3; sourceTree = "<group>"; };
@@ -87,6 +89,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		7ABC6EC413BEF7F50007FF9B /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				7ABC6EC513BEF81D0007FF9B /* MathUtil.as */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
 		7AC8112C13BE403200656C2A = {
 			isa = PBXGroup;
 			children = (
@@ -256,10 +266,12 @@
 		7AC8119813BE423E00656C2A /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				7AC811AC13BE930300656C2A /* Entities */,
 				7AC8119B13BE445400656C2A /* States */,
-				7AC8119913BE427900656C2A /* Game.as */,
+				7AC811AC13BE930300656C2A /* Entities */,
+				7ABC6EC413BEF7F50007FF9B /* Util */,
 				7AC811A213BE536500656C2A /* Preloader.as */,
+				7AC8119913BE427900656C2A /* Game.as */,
+				7ABC6EC213BEB4370007FF9B /* Assets.as */,
 			);
 			name = Game;
 			sourceTree = "<group>";

@@ -1,3 +1,9 @@
+//
+// The second game state after the MainMenuState. Lets users select a level, then sends them to the PlayState.
+// 
+// Created by Jarod Long on 7/1/2011.
+//
+
 package {
 	
 	import org.flixel.*;
@@ -11,7 +17,7 @@ package {
 			var text:FlxText;
 			
 			text = new FlxText(0, 100, FlxG.width, "Level Select");
-			text.setFormat(null, 16, 0x553333, "center", 0xFF705555);
+			text.setFormat("propomin", 16, 0x553333, "center", 0xFF705555);
 			add(text);
 		}
 		
