@@ -79,6 +79,11 @@
 		7AC8119913BE427900656C2A /* Game.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = Game.as; path = code/Game.as; sourceTree = "<group>"; };
 		7AC8119A13BE445000656C2A /* MainMenuState.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = MainMenuState.as; path = code/MainMenuState.as; sourceTree = "<group>"; };
 		7AC811A213BE536500656C2A /* Preloader.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = Preloader.as; path = code/Preloader.as; sourceTree = "<group>"; };
+		7AC811A913BE8C2200656C2A /* Player.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = Player.as; path = code/Player.as; sourceTree = "<group>"; };
+		7AC811AB13BE8C5000656C2A /* Entity.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = Entity.as; path = code/Entity.as; sourceTree = "<group>"; };
+		7AC811AD13BE931300656C2A /* EntitySprite.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = EntitySprite.as; path = code/EntitySprite.as; sourceTree = "<group>"; };
+		7AC811AE13BE98C800656C2A /* LevelSelectState.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = LevelSelectState.as; path = code/LevelSelectState.as; sourceTree = "<group>"; };
+		7AC811B013BE9A0100656C2A /* PlayState.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = PlayState.as; path = code/PlayState.as; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -251,6 +256,7 @@
 		7AC8119813BE423E00656C2A /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				7AC811AC13BE930300656C2A /* Entities */,
 				7AC8119B13BE445400656C2A /* States */,
 				7AC8119913BE427900656C2A /* Game.as */,
 				7AC811A213BE536500656C2A /* Preloader.as */,
@@ -262,8 +268,20 @@
 			isa = PBXGroup;
 			children = (
 				7AC8119A13BE445000656C2A /* MainMenuState.as */,
+				7AC811AE13BE98C800656C2A /* LevelSelectState.as */,
+				7AC811B013BE9A0100656C2A /* PlayState.as */,
 			);
 			name = States;
+			sourceTree = "<group>";
+		};
+		7AC811AC13BE930300656C2A /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				7AC811AD13BE931300656C2A /* EntitySprite.as */,
+				7AC811AB13BE8C5000656C2A /* Entity.as */,
+				7AC811A913BE8C2200656C2A /* Player.as */,
+			);
+			name = Entities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -356,6 +374,7 @@
 				7AC8114313BE40CF00656C2A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
