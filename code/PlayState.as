@@ -25,15 +25,14 @@ package {
 			// Create the level.
 			level = new Level("test");
 			
-			FlxG.log(level.width + ", " + level.t_width + ", " + level.t_height);
-			
 			// Set up the camera and bounds.
-			FlxG.worldBounds = FlxG.camera.bounds = new FlxRect(0, 0, level.width, level.height);
+			var border_size    = Level.BorderSize;	
+			FlxG.camera.bounds = new FlxRect(0, 0, level.width, level.height);
+			FlxG.worldBounds   = new FlxRect(-border_size, -border_size, level.width + border_size * 2, level.height + border_size * 2);
 			FlxG.camera.follow(player.sprite);
 			
 			// Add everything to the scene.
-			add(level.bg_tiles);
-			add(level.wall_tiles);
+			add(level.tiles);
 			add(player.sprite);
 		}
 		
@@ -55,6 +54,9 @@ package {
 			if (FlxG.keys.S) {
 				player.direction.x -= 1.0;
 			}
+			
+			// Perform collisions.
+			FlxG.collide(player.sprite, level.borders);
 		}
 		
 	}

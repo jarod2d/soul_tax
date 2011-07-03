@@ -14,9 +14,11 @@ package {
 	public class Game extends FlxGame {
 		
 		public function Game() {
-			FlxG.debug = true;
-			
 			super(400, 325, MainMenuState, 2);
+			
+			// Set up a few values.
+			FlxG.debug     = true;
+			FlxG.framerate = FlxG.flashFramerate = 45;
 		}
 		
 	}
