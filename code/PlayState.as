@@ -25,6 +25,12 @@ package {
 			// Create the level.
 			level = new Level("test");
 			
+			FlxG.log(level.width + ", " + level.t_width + ", " + level.t_height);
+			
+			// Set up the camera and bounds.
+			FlxG.worldBounds = FlxG.camera.bounds = new FlxRect(0, 0, level.width, level.height);
+			FlxG.camera.follow(player.sprite);
+			
 			// Add everything to the scene.
 			add(level.bg_tiles);
 			add(level.wall_tiles);
