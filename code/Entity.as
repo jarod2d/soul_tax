@@ -18,16 +18,10 @@ package {
 		// getters and setters to get some good simple movement behavior.
 		public var direction:FlxPoint;
 		
-		
-		// TEMP
-		private var $acceleration:FlxPoint;
-		
 		// Constructor.
 		public function Entity(x:Number = 0, y:Number = 0) {
-			sprite = new EntitySprite(this, x, y);
-			
+			sprite    = new EntitySprite(this, x, y);
 			direction = new FlxPoint();
-			$acceleration = new FlxPoint();
 		}
 		
 		// Convenience function allows moving an Entity in one call.
@@ -38,9 +32,17 @@ package {
 		
 		// Update callbacks -- one before the Sprite gets updated and one after.
 		public function beforeUpdate():void {
+			// Normalize the direction.
+			MathUtil.normalize(direction);
+			
 			// Set up entity movement based on their direction.
-			sprite.acceleration.x = direction.x * $acceleration.x;
-			sprite.acceleration.y = direction.y * $acceleration.y;
+			sprite.acceleration.x = direction.x * acceleration.x;
+			sprite.acceleration.y = direction.y * acceleration.y;
+			
+			// Set facing based on the direction.
+			if (direction.x !== 0) {
+				facing = (direction.x > 0.0) ? FlxObject.RIGHT : FlxObject.LEFT;
+			}
 		}
 		
 		public function afterUpdate():void {
@@ -160,13 +162,13 @@ package {
 		}
 		
 		public function get acceleration():FlxPoint {
-//			return sprite.acceleration;
-			return $acceleration;
+			// This is a bit different from how acceleration works on FlxSprites. Here, acceleration determines how fast
+			// the entity will get to max_speed (and how fast they will slow down) when direction != 0.
+			return sprite.drag;
 		}
 		
 		public function set acceleration(value:FlxPoint):void {
-//			sprite.acceleration = sprite.drag = value;
-			$acceleration = sprite.drag = value;
+			sprite.drag = value;
 		}
 		
 		public function get max_speed():FlxPoint {

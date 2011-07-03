@@ -10,7 +10,11 @@ package {
 	
 	public class PlayState extends FlxState {
 		
+		// The player object.
 		public var player:Player;
+		
+		// The current level.
+		public var level:Level;
 		
 		override public function create():void {
 			super.create();
@@ -18,7 +22,12 @@ package {
 			// Create the player.
 			player = new Player();
 			
+			// Create the level.
+			level = new Level("test");
+			
 			// Add everything to the scene.
+			add(level.bg_tiles);
+			add(level.wall_tiles);
 			add(player.sprite);
 		}
 		

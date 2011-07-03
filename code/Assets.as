@@ -20,6 +20,13 @@ package {
 		[Embed(source="../images/office_worker.png")] public static var OfficeWorkerSprite:Class;
 		[Embed(source="../images/construction_worker.png")] public static var ConstructionWorkerSprite:Class;
 		
+		// Tiles.
+		[Embed(source="../images/tiles.png")] public static var Tiles:Class;
+		
+		// Level data.
+		[Embed(source="../levels/test.0.csv", mimeType="application/octet-stream")] public static var TestBGTiles:Class;
+		[Embed(source="../levels/test.1.csv", mimeType="application/octet-stream")] public static var TestWallTiles:Class;
+		
 	}
 	
 }

@@ -150,10 +150,10 @@ package {
 		// Little convenience function that returns a numerical direction based on a FlxSprite direction.
 		public static function facingToPoint(facing:uint):FlxPoint {
 			switch (facing) {
-				case FlxSprite.UP:    return new FlxPoint(0, -1);
-				case FlxSprite.RIGHT: return new FlxPoint(1,  0);
-				case FlxSprite.DOWN:  return new FlxPoint(0,  1);
-				case FlxSprite.LEFT:  return new FlxPoint(-1, 0);
+				case FlxObject.UP:    return new FlxPoint(0, -1);
+				case FlxObject.RIGHT: return new FlxPoint(1,  0);
+				case FlxObject.DOWN:  return new FlxPoint(0,  1);
+				case FlxObject.LEFT:  return new FlxPoint(-1, 0);
 			}
 			
 			return new FlxPoint(0, 0);

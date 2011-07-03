@@ -73,9 +73,6 @@
 		7AC8118D13BE420D00656C2A /* Mouse.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Mouse.as; sourceTree = "<group>"; };
 		7AC8118F13BE420D00656C2A /* FrameRecord.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FrameRecord.as; sourceTree = "<group>"; };
 		7AC8119013BE420D00656C2A /* MouseRecord.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MouseRecord.as; sourceTree = "<group>"; };
-		7AC8119213BE420D00656C2A /* construction_worker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = construction_worker.png; sourceTree = "<group>"; };
-		7AC8119313BE420D00656C2A /* ghost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ghost.png; sourceTree = "<group>"; };
-		7AC8119413BE420D00656C2A /* office_worker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = office_worker.png; sourceTree = "<group>"; };
 		7AC8119513BE420D00656C2A /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		7AC8119613BE420D00656C2A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		7AC8119913BE427900656C2A /* Game.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = Game.as; path = code/Game.as; sourceTree = "<group>"; };
@@ -86,6 +83,10 @@
 		7AC811AD13BE931300656C2A /* EntitySprite.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = EntitySprite.as; path = code/EntitySprite.as; sourceTree = "<group>"; };
 		7AC811AE13BE98C800656C2A /* LevelSelectState.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = LevelSelectState.as; path = code/LevelSelectState.as; sourceTree = "<group>"; };
 		7AC811B013BE9A0100656C2A /* PlayState.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = PlayState.as; path = code/PlayState.as; sourceTree = "<group>"; };
+		7AD0D08313BF9F7300E5A811 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
+		7AD0D08413BF9F7300E5A811 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
+		7AD0D08513BF9F7300E5A811 /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; path = levels; sourceTree = "<group>"; };
+		7AD0D08813BFA0BE00E5A811 /* Level.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = Level.as; path = code/Level.as; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -102,8 +103,8 @@
 			children = (
 				7AC8119813BE423E00656C2A /* Game */,
 				7AC8114813BE420D00656C2A /* Flixel */,
-				7AC8119113BE420D00656C2A /* Images */,
 				7AC8119713BE422E00656C2A /* Support */,
+				7AD0D08613BF9F7F00E5A811 /* Resources */,
 			);
 			sourceTree = "<group>";
 		};
@@ -243,17 +244,6 @@
 			path = replay;
 			sourceTree = "<group>";
 		};
-		7AC8119113BE420D00656C2A /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				7AC8119213BE420D00656C2A /* construction_worker.png */,
-				7AC8119313BE420D00656C2A /* ghost.png */,
-				7AC8119413BE420D00656C2A /* office_worker.png */,
-			);
-			name = Images;
-			path = images;
-			sourceTree = "<group>";
-		};
 		7AC8119713BE422E00656C2A /* Support */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,6 +262,7 @@
 				7AC811A213BE536500656C2A /* Preloader.as */,
 				7AC8119913BE427900656C2A /* Game.as */,
 				7ABC6EC213BEB4370007FF9B /* Assets.as */,
+				7AD0D08813BFA0BE00E5A811 /* Level.as */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -294,6 +285,16 @@
 				7AC811A913BE8C2200656C2A /* Player.as */,
 			);
 			name = Entities;
+			sourceTree = "<group>";
+		};
+		7AD0D08613BF9F7F00E5A811 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7AD0D08313BF9F7300E5A811 /* fonts */,
+				7AD0D08413BF9F7300E5A811 /* images */,
+				7AD0D08513BF9F7300E5A811 /* levels */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
