@@ -7,6 +7,7 @@
 package {
 	
 	import org.flixel.*;
+	import com.adobe.serialization.json.*;
 	
 	public class Level {
 		
@@ -17,7 +18,7 @@ package {
 		public static const BorderSize:int = 16;
 		
 		// For convenience, we group all of our tiles here.
-		public var tiles:FlxGroup;
+		public var contents:FlxGroup;
 		
 		// We have two tilemaps -- one for the background stuff, and one for the wall and platform tiles on top of the
 		// background.
@@ -28,17 +29,46 @@ package {
 		// exiting the level.
 		public var borders:FlxGroup;
 		
+		// The list of props in the level.
+		public var props:FlxGroup;
+		
+		// The list of NPCs in the level.
+		public var NPCs:FlxGroup;
+		
 		// Constructor. The level is created based on its name, which corresponds to the tilemap filenames.
 		public function Level(name:String) {
 			// Create the tilemaps and groups.
+			contents   = new FlxGroup();
 			bg_tiles   = new FlxTilemap();
 			wall_tiles = new FlxTilemap();
 			borders    = new FlxGroup();
-			tiles      = new FlxGroup();
+			props      = new FlxGroup();
+			NPCs       = new FlxGroup();
 			
-			// TEMP: Hardcode the tiles. We'll need to fetch the tiles based on the name eventually.
+			// TEMP: Hardcode the tiles and props. We'll need to fetch them based on the name eventually.
 			bg_tiles.loadMap(new Assets.TestBGTiles, Assets.Tiles, TileSize, TileSize, NaN, 1, 1, 2);
 			wall_tiles.loadMap(new Assets.TestWallTiles, Assets.Tiles, TileSize, TileSize, NaN, 1, 1, 2);
+			
+			// Set up the props and NPCs.
+			var prop_data:Object = JSON.decode(new Assets.TestProps);
+			var i:Number;
+			
+			// Add props.
+			for (i = 0; i < prop_data[0].length; i++) {
+				// TODO: Add props.
+			}
+			
+			// Add NPCs and position the player.
+			for (i = 0; i < prop_data[1].length; i++) {
+				var npc_data:Object = prop_data[1][i];
+				
+				if (npc_data.id === "player") {
+					(FlxG.state as PlayState).player.warp(npc_data.x, npc_data.y);
+				}
+				else {
+					NPCs.add(new NPC(npc_data.id, npc_data.x, npc_data.y).sprite);
+				}
+			}
 			
 			// Create the borders.
 			var border:FlxSprite;
@@ -54,7 +84,7 @@ package {
 			borders.add(border.makeGraphic(BorderSize, height + BorderSize * 2));
 			
 			// Bottom border.
-			border = new FlxSprite(0, height);
+			border = new FlxSprite(0, height - TileSize / 2);
 			border.immovable = true;
 			borders.add(border.makeGraphic(width, BorderSize));
 			
@@ -64,9 +94,11 @@ package {
 			borders.add(border.makeGraphic(BorderSize, height + BorderSize * 2));
 			
 			// Group the tilemaps.
-			tiles.add(bg_tiles);
-			tiles.add(wall_tiles);
-			tiles.add(borders);
+			contents.add(bg_tiles);
+			contents.add(props);
+			contents.add(wall_tiles);
+			contents.add(borders);
+			contents.add(NPCs);
 		}
 		
 		// Getters for the width and height, in tiles and pixels.

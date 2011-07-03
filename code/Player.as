@@ -15,6 +15,8 @@ package {
 		private static const PossessionColor:uint = 0xDDAAEE;
 		
 		public function Player() {
+			super();
+			
 			// Load the player sprite.
 			sprite.loadGraphic(Assets.GhostSprite, true, true, 4, 15);
 			
@@ -26,8 +28,9 @@ package {
 			max_speed    = new FlxPoint(100.0, 100.0);
 			acceleration = new FlxPoint(280.0, 280.0);
 			
-			// Set the player's default color.
+			// Set the player's default color and opacity.
 			sprite.color = NormalColor;
+			sprite.alpha = 0.8;
 		}
 		
 	}

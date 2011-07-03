@@ -26,6 +26,7 @@ package {
 		// Level data.
 		[Embed(source="../levels/test.0.csv", mimeType="application/octet-stream")] public static var TestBGTiles:Class;
 		[Embed(source="../levels/test.1.csv", mimeType="application/octet-stream")] public static var TestWallTiles:Class;
+		[Embed(source="../levels/test.props.json", mimeType="application/octet-stream")] public static var TestProps:Class;
 		
 	}
 	

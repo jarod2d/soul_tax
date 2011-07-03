@@ -26,13 +26,13 @@ package {
 			level = new Level("test");
 			
 			// Set up the camera and bounds.
-			var border_size    = Level.BorderSize;	
-			FlxG.camera.bounds = new FlxRect(0, 0, level.width, level.height);
-			FlxG.worldBounds   = new FlxRect(-border_size, -border_size, level.width + border_size * 2, level.height + border_size * 2);
+			var border_size:int = Level.BorderSize;	
+			FlxG.camera.bounds  = new FlxRect(0, 0, level.width, level.height - Level.TileSize / 2);
+			FlxG.worldBounds    = new FlxRect(-border_size, -border_size, level.width + border_size * 2, level.height + border_size * 2);
 			FlxG.camera.follow(player.sprite);
 			
 			// Add everything to the scene.
-			add(level.tiles);
+			add(level.contents);
 			add(player.sprite);
 		}
 		

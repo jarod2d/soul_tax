@@ -87,6 +87,72 @@
 		7AD0D08413BF9F7300E5A811 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 		7AD0D08513BF9F7300E5A811 /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; path = levels; sourceTree = "<group>"; };
 		7AD0D08813BFA0BE00E5A811 /* Level.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = Level.as; path = code/Level.as; sourceTree = "<group>"; };
+		7AD0D08A13C03E5A00E5A811 /* NPC.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = NPC.as; path = code/NPC.as; sourceTree = "<group>"; };
+		7AE34BB313C04D1800F5B66A /* EncryptionKeyGenerator.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = EncryptionKeyGenerator.as; sourceTree = "<group>"; };
+		7AE34BB613C04D1800F5B66A /* FileMonitorEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FileMonitorEvent.as; sourceTree = "<group>"; };
+		7AE34BB713C04D1800F5B66A /* FileMonitor.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FileMonitor.as; sourceTree = "<group>"; };
+		7AE34BB813C04D1800F5B66A /* FileUtil.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FileUtil.as; sourceTree = "<group>"; };
+		7AE34BB913C04D1800F5B66A /* VolumeMonitor.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VolumeMonitor.as; sourceTree = "<group>"; };
+		7AE34BBB13C04D1800F5B66A /* FileTarget.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FileTarget.as; sourceTree = "<group>"; };
+		7AE34BBE13C04D1800F5B66A /* ResourceCacheEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ResourceCacheEvent.as; sourceTree = "<group>"; };
+		7AE34BBF13C04D1800F5B66A /* ResourceCache.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ResourceCache.as; sourceTree = "<group>"; };
+		7AE34BC113C04D1800F5B66A /* HMAC.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HMAC.as; sourceTree = "<group>"; };
+		7AE34BC213C04D1800F5B66A /* MD5.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MD5.as; sourceTree = "<group>"; };
+		7AE34BC313C04D1800F5B66A /* MD5Stream.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MD5Stream.as; sourceTree = "<group>"; };
+		7AE34BC413C04D1800F5B66A /* SHA1.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SHA1.as; sourceTree = "<group>"; };
+		7AE34BC513C04D1800F5B66A /* SHA224.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SHA224.as; sourceTree = "<group>"; };
+		7AE34BC613C04D1800F5B66A /* SHA256.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SHA256.as; sourceTree = "<group>"; };
+		7AE34BC713C04D1800F5B66A /* WSSEUsernameToken.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WSSEUsernameToken.as; sourceTree = "<group>"; };
+		7AE34BC913C04D1800F5B66A /* IllegalStateError.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = IllegalStateError.as; sourceTree = "<group>"; };
+		7AE34BCC13C04D1800F5B66A /* Address.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Address.as; sourceTree = "<group>"; };
+		7AE34BCD13C04D1800F5B66A /* Email.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Email.as; sourceTree = "<group>"; };
+		7AE34BCE13C04D1800F5B66A /* Phone.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Phone.as; sourceTree = "<group>"; };
+		7AE34BCF13C04D1800F5B66A /* VCard.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VCard.as; sourceTree = "<group>"; };
+		7AE34BD013C04D1800F5B66A /* VCardParser.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VCardParser.as; sourceTree = "<group>"; };
+		7AE34BD213C04D1800F5B66A /* BitString.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BitString.as; sourceTree = "<group>"; };
+		7AE34BD313C04D1800F5B66A /* JPGEncoder.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JPGEncoder.as; sourceTree = "<group>"; };
+		7AE34BD413C04D1800F5B66A /* PNGEncoder.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PNGEncoder.as; sourceTree = "<group>"; };
+		7AE34BD613C04D1800F5B66A /* DynamicURLLoader.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DynamicURLLoader.as; sourceTree = "<group>"; };
+		7AE34BD713C04D1800F5B66A /* IURIResolver.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = IURIResolver.as; sourceTree = "<group>"; };
+		7AE34BD813C04D1800F5B66A /* MimeTypeMap.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MimeTypeMap.as; sourceTree = "<group>"; };
+		7AE34BDA13C04D1800F5B66A /* RFC2817Socket.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RFC2817Socket.as; sourceTree = "<group>"; };
+		7AE34BDB13C04D1800F5B66A /* URI.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = URI.as; sourceTree = "<group>"; };
+		7AE34BDC13C04D1800F5B66A /* URIEncodingBitmap.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = URIEncodingBitmap.as; sourceTree = "<group>"; };
+		7AE34BDF13C04D1800F5B66A /* Database.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Database.as; sourceTree = "<group>"; };
+		7AE34BE013C04D1800F5B66A /* Definition.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Definition.as; sourceTree = "<group>"; };
+		7AE34BE113C04D1800F5B66A /* Dict.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Dict.as; sourceTree = "<group>"; };
+		7AE34BE213C04D1800F5B66A /* DictionaryServer.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DictionaryServer.as; sourceTree = "<group>"; };
+		7AE34BE413C04D1800F5B66A /* ConnectedEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ConnectedEvent.as; sourceTree = "<group>"; };
+		7AE34BE513C04D1800F5B66A /* DatabaseEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DatabaseEvent.as; sourceTree = "<group>"; };
+		7AE34BE613C04D1800F5B66A /* DefinitionEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DefinitionEvent.as; sourceTree = "<group>"; };
+		7AE34BE713C04D1800F5B66A /* DefinitionHeaderEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DefinitionHeaderEvent.as; sourceTree = "<group>"; };
+		7AE34BE813C04D1800F5B66A /* DictionaryServerEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DictionaryServerEvent.as; sourceTree = "<group>"; };
+		7AE34BE913C04D1800F5B66A /* DisconnectedEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DisconnectedEvent.as; sourceTree = "<group>"; };
+		7AE34BEA13C04D1800F5B66A /* ErrorEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ErrorEvent.as; sourceTree = "<group>"; };
+		7AE34BEB13C04D1800F5B66A /* MatchEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MatchEvent.as; sourceTree = "<group>"; };
+		7AE34BEC13C04D1800F5B66A /* MatchStrategiesEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MatchStrategiesEvent.as; sourceTree = "<group>"; };
+		7AE34BED13C04D1800F5B66A /* NoMatchEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NoMatchEvent.as; sourceTree = "<group>"; };
+		7AE34BEE13C04D1800F5B66A /* MatchStrategy.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MatchStrategy.as; sourceTree = "<group>"; };
+		7AE34BEF13C04D1800F5B66A /* Response.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Response.as; sourceTree = "<group>"; };
+		7AE34BF113C04D1800F5B66A /* CompleteResponseEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CompleteResponseEvent.as; sourceTree = "<group>"; };
+		7AE34BF213C04D1800F5B66A /* SocketHelper.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SocketHelper.as; sourceTree = "<group>"; };
+		7AE34BF513C04D1800F5B66A /* JSON.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JSON.as; sourceTree = "<group>"; };
+		7AE34BF613C04D1800F5B66A /* JSONDecoder.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JSONDecoder.as; sourceTree = "<group>"; };
+		7AE34BF713C04D1800F5B66A /* JSONEncoder.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JSONEncoder.as; sourceTree = "<group>"; };
+		7AE34BF813C04D1800F5B66A /* JSONParseError.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JSONParseError.as; sourceTree = "<group>"; };
+		7AE34BF913C04D1800F5B66A /* JSONToken.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JSONToken.as; sourceTree = "<group>"; };
+		7AE34BFA13C04D1800F5B66A /* JSONTokenizer.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JSONTokenizer.as; sourceTree = "<group>"; };
+		7AE34BFB13C04D1800F5B66A /* JSONTokenType.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JSONTokenType.as; sourceTree = "<group>"; };
+		7AE34BFD13C04D1800F5B66A /* ArrayUtil.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ArrayUtil.as; sourceTree = "<group>"; };
+		7AE34BFE13C04D1800F5B66A /* DateUtil.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DateUtil.as; sourceTree = "<group>"; };
+		7AE34BFF13C04D1800F5B66A /* DictionaryUtil.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DictionaryUtil.as; sourceTree = "<group>"; };
+		7AE34C0013C04D1800F5B66A /* IntUtil.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = IntUtil.as; sourceTree = "<group>"; };
+		7AE34C0113C04D1800F5B66A /* NumberFormatter.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NumberFormatter.as; sourceTree = "<group>"; };
+		7AE34C0213C04D1800F5B66A /* StringUtil.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = StringUtil.as; sourceTree = "<group>"; };
+		7AE34C0313C04D1800F5B66A /* XMLUtil.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = XMLUtil.as; sourceTree = "<group>"; };
+		7AE34C0613C04D1800F5B66A /* ServiceEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ServiceEvent.as; sourceTree = "<group>"; };
+		7AE34C0713C04D1800F5B66A /* ServiceBase.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ServiceBase.as; sourceTree = "<group>"; };
+		7AE34C0813C04D1800F5B66A /* URLLoaderBase.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = URLLoaderBase.as; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -103,6 +169,7 @@
 			children = (
 				7AC8119813BE423E00656C2A /* Game */,
 				7AC8114813BE420D00656C2A /* Flixel */,
+				7AE34BAD13C04CE000F5B66A /* Lib */,
 				7AC8119713BE422E00656C2A /* Support */,
 				7AD0D08613BF9F7F00E5A811 /* Resources */,
 			);
@@ -283,6 +350,7 @@
 				7AC811AD13BE931300656C2A /* EntitySprite.as */,
 				7AC811AB13BE8C5000656C2A /* Entity.as */,
 				7AC811A913BE8C2200656C2A /* Player.as */,
+				7AD0D08A13C03E5A00E5A811 /* NPC.as */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -295,6 +363,271 @@
 				7AD0D08513BF9F7300E5A811 /* levels */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		7AE34BAD13C04CE000F5B66A /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				7AE34BB013C04D1800F5B66A /* adobe */,
+			);
+			name = Lib;
+			sourceTree = "<group>";
+		};
+		7AE34BB013C04D1800F5B66A /* adobe */ = {
+			isa = PBXGroup;
+			children = (
+				7AE34BB113C04D1800F5B66A /* air */,
+				7AE34BC013C04D1800F5B66A /* crypto */,
+				7AE34BC813C04D1800F5B66A /* errors */,
+				7AE34BCA13C04D1800F5B66A /* fileformats */,
+				7AE34BD113C04D1800F5B66A /* images */,
+				7AE34BD513C04D1800F5B66A /* net */,
+				7AE34BDD13C04D1800F5B66A /* protocols */,
+				7AE34BF313C04D1800F5B66A /* serialization */,
+				7AE34BFC13C04D1800F5B66A /* utils */,
+				7AE34C0413C04D1800F5B66A /* webapis */,
+			);
+			name = adobe;
+			path = code/com/adobe;
+			sourceTree = "<group>";
+		};
+		7AE34BB113C04D1800F5B66A /* air */ = {
+			isa = PBXGroup;
+			children = (
+				7AE34BB213C04D1800F5B66A /* crypto */,
+				7AE34BB413C04D1800F5B66A /* filesystem */,
+				7AE34BBA13C04D1800F5B66A /* logging */,
+				7AE34BBC13C04D1800F5B66A /* net */,
+			);
+			path = air;
+			sourceTree = "<group>";
+		};
+		7AE34BB213C04D1800F5B66A /* crypto */ = {
+			isa = PBXGroup;
+			children = (
+				7AE34BB313C04D1800F5B66A /* EncryptionKeyGenerator.as */,
+			);
+			path = crypto;
+			sourceTree = "<group>";
+		};
+		7AE34BB413C04D1800F5B66A /* filesystem */ = {
+			isa = PBXGroup;
+			children = (
+				7AE34BB513C04D1800F5B66A /* events */,
+				7AE34BB713C04D1800F5B66A /* FileMonitor.as */,
+				7AE34BB813C04D1800F5B66A /* FileUtil.as */,
+				7AE34BB913C04D1800F5B66A /* VolumeMonitor.as */,
+			);
+			path = filesystem;
+			sourceTree = "<group>";
+		};
+		7AE34BB513C04D1800F5B66A /* events */ = {
+			isa = PBXGroup;
+			children = (
+				7AE34BB613C04D1800F5B66A /* FileMonitorEvent.as */,
+			);
+			path = events;
+			sourceTree = "<group>";
+		};
+		7AE34BBA13C04D1800F5B66A /* logging */ = {
+			isa = PBXGroup;
+			children = (
+				7AE34BBB13C04D1800F5B66A /* FileTarget.as */,
+			);
+			path = logging;
+			sourceTree = "<group>";
+		};
+		7AE34BBC13C04D1800F5B66A /* net */ = {
+			isa = PBXGroup;
+			children = (
+				7AE34BBD13C04D1800F5B66A /* events */,
+				7AE34BBF13C04D1800F5B66A /* ResourceCache.as */,
+			);
+			path = net;
+			sourceTree = "<group>";
+		};
+		7AE34BBD13C04D1800F5B66A /* events */ = {
+			isa = PBXGroup;
+			children = (
+				7AE34BBE13C04D1800F5B66A /* ResourceCacheEvent.as */,
+			);
+			path = events;
+			sourceTree = "<group>";
+		};
+		7AE34BC013C04D1800F5B66A /* crypto */ = {
+			isa = PBXGroup;
+			children = (
+				7AE34BC113C04D1800F5B66A /* HMAC.as */,
+				7AE34BC213C04D1800F5B66A /* MD5.as */,
+				7AE34BC313C04D1800F5B66A /* MD5Stream.as */,
+				7AE34BC413C04D1800F5B66A /* SHA1.as */,
+				7AE34BC513C04D1800F5B66A /* SHA224.as */,
+				7AE34BC613C04D1800F5B66A /* SHA256.as */,
+				7AE34BC713C04D1800F5B66A /* WSSEUsernameToken.as */,
+			);
+			path = crypto;
+			sourceTree = "<group>";
+		};
+		7AE34BC813C04D1800F5B66A /* errors */ = {
+			isa = PBXGroup;
+			children = (
+				7AE34BC913C04D1800F5B66A /* IllegalStateError.as */,
+			);
+			path = errors;
+			sourceTree = "<group>";
+		};
+		7AE34BCA13C04D1800F5B66A /* fileformats */ = {
+			isa = PBXGroup;
+			children = (
+				7AE34BCB13C04D1800F5B66A /* vcard */,
+			);
+			path = fileformats;
+			sourceTree = "<group>";
+		};
+		7AE34BCB13C04D1800F5B66A /* vcard */ = {
+			isa = PBXGroup;
+			children = (
+				7AE34BCC13C04D1800F5B66A /* Address.as */,
+				7AE34BCD13C04D1800F5B66A /* Email.as */,
+				7AE34BCE13C04D1800F5B66A /* Phone.as */,
+				7AE34BCF13C04D1800F5B66A /* VCard.as */,
+				7AE34BD013C04D1800F5B66A /* VCardParser.as */,
+			);
+			path = vcard;
+			sourceTree = "<group>";
+		};
+		7AE34BD113C04D1800F5B66A /* images */ = {
+			isa = PBXGroup;
+			children = (
+				7AE34BD213C04D1800F5B66A /* BitString.as */,
+				7AE34BD313C04D1800F5B66A /* JPGEncoder.as */,
+				7AE34BD413C04D1800F5B66A /* PNGEncoder.as */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		7AE34BD513C04D1800F5B66A /* net */ = {
+			isa = PBXGroup;
+			children = (
+				7AE34BD613C04D1800F5B66A /* DynamicURLLoader.as */,
+				7AE34BD713C04D1800F5B66A /* IURIResolver.as */,
+				7AE34BD813C04D1800F5B66A /* MimeTypeMap.as */,
+				7AE34BD913C04D1800F5B66A /* proxies */,
+				7AE34BDB13C04D1800F5B66A /* URI.as */,
+				7AE34BDC13C04D1800F5B66A /* URIEncodingBitmap.as */,
+			);
+			path = net;
+			sourceTree = "<group>";
+		};
+		7AE34BD913C04D1800F5B66A /* proxies */ = {
+			isa = PBXGroup;
+			children = (
+				7AE34BDA13C04D1800F5B66A /* RFC2817Socket.as */,
+			);
+			path = proxies;
+			sourceTree = "<group>";
+		};
+		7AE34BDD13C04D1800F5B66A /* protocols */ = {
+			isa = PBXGroup;
+			children = (
+				7AE34BDE13C04D1800F5B66A /* dict */,
+			);
+			path = protocols;
+			sourceTree = "<group>";
+		};
+		7AE34BDE13C04D1800F5B66A /* dict */ = {
+			isa = PBXGroup;
+			children = (
+				7AE34BDF13C04D1800F5B66A /* Database.as */,
+				7AE34BE013C04D1800F5B66A /* Definition.as */,
+				7AE34BE113C04D1800F5B66A /* Dict.as */,
+				7AE34BE213C04D1800F5B66A /* DictionaryServer.as */,
+				7AE34BE313C04D1800F5B66A /* events */,
+				7AE34BEE13C04D1800F5B66A /* MatchStrategy.as */,
+				7AE34BEF13C04D1800F5B66A /* Response.as */,
+				7AE34BF013C04D1800F5B66A /* util */,
+			);
+			path = dict;
+			sourceTree = "<group>";
+		};
+		7AE34BE313C04D1800F5B66A /* events */ = {
+			isa = PBXGroup;
+			children = (
+				7AE34BE413C04D1800F5B66A /* ConnectedEvent.as */,
+				7AE34BE513C04D1800F5B66A /* DatabaseEvent.as */,
+				7AE34BE613C04D1800F5B66A /* DefinitionEvent.as */,
+				7AE34BE713C04D1800F5B66A /* DefinitionHeaderEvent.as */,
+				7AE34BE813C04D1800F5B66A /* DictionaryServerEvent.as */,
+				7AE34BE913C04D1800F5B66A /* DisconnectedEvent.as */,
+				7AE34BEA13C04D1800F5B66A /* ErrorEvent.as */,
+				7AE34BEB13C04D1800F5B66A /* MatchEvent.as */,
+				7AE34BEC13C04D1800F5B66A /* MatchStrategiesEvent.as */,
+				7AE34BED13C04D1800F5B66A /* NoMatchEvent.as */,
+			);
+			path = events;
+			sourceTree = "<group>";
+		};
+		7AE34BF013C04D1800F5B66A /* util */ = {
+			isa = PBXGroup;
+			children = (
+				7AE34BF113C04D1800F5B66A /* CompleteResponseEvent.as */,
+				7AE34BF213C04D1800F5B66A /* SocketHelper.as */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
+		7AE34BF313C04D1800F5B66A /* serialization */ = {
+			isa = PBXGroup;
+			children = (
+				7AE34BF413C04D1800F5B66A /* json */,
+			);
+			path = serialization;
+			sourceTree = "<group>";
+		};
+		7AE34BF413C04D1800F5B66A /* json */ = {
+			isa = PBXGroup;
+			children = (
+				7AE34BF513C04D1800F5B66A /* JSON.as */,
+				7AE34BF613C04D1800F5B66A /* JSONDecoder.as */,
+				7AE34BF713C04D1800F5B66A /* JSONEncoder.as */,
+				7AE34BF813C04D1800F5B66A /* JSONParseError.as */,
+				7AE34BF913C04D1800F5B66A /* JSONToken.as */,
+				7AE34BFA13C04D1800F5B66A /* JSONTokenizer.as */,
+				7AE34BFB13C04D1800F5B66A /* JSONTokenType.as */,
+			);
+			path = json;
+			sourceTree = "<group>";
+		};
+		7AE34BFC13C04D1800F5B66A /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				7AE34BFD13C04D1800F5B66A /* ArrayUtil.as */,
+				7AE34BFE13C04D1800F5B66A /* DateUtil.as */,
+				7AE34BFF13C04D1800F5B66A /* DictionaryUtil.as */,
+				7AE34C0013C04D1800F5B66A /* IntUtil.as */,
+				7AE34C0113C04D1800F5B66A /* NumberFormatter.as */,
+				7AE34C0213C04D1800F5B66A /* StringUtil.as */,
+				7AE34C0313C04D1800F5B66A /* XMLUtil.as */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
+		7AE34C0413C04D1800F5B66A /* webapis */ = {
+			isa = PBXGroup;
+			children = (
+				7AE34C0513C04D1800F5B66A /* events */,
+				7AE34C0713C04D1800F5B66A /* ServiceBase.as */,
+				7AE34C0813C04D1800F5B66A /* URLLoaderBase.as */,
+			);
+			path = webapis;
+			sourceTree = "<group>";
+		};
+		7AE34C0513C04D1800F5B66A /* events */ = {
+			isa = PBXGroup;
+			children = (
+				7AE34C0613C04D1800F5B66A /* ServiceEvent.as */,
+			);
+			path = events;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
