@@ -57,6 +57,7 @@ package {
 			
 			// Perform collisions.
 			FlxG.collide(player.sprite, level.borders);
+			FlxG.collide(level.NPCs, level.wall_tiles);
 		}
 		
 	}

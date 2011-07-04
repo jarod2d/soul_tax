@@ -59,6 +59,11 @@ package {
 			// TODO: Set up animations.
 		}
 		
+		// NPCs are platforming entities.
+		override public function get isPlatforming():Boolean {
+			return true;
+		}
+		
 	}
 	
 }

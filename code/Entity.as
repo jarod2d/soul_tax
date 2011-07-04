@@ -37,7 +37,7 @@ package {
 			
 			// Set up entity movement based on their direction.
 			sprite.acceleration.x = direction.x * acceleration.x;
-			sprite.acceleration.y = direction.y * acceleration.y;
+			sprite.acceleration.y = (isPlatforming) ? 600.0 : direction.y * acceleration.y;
 			
 			// Set facing based on the direction.
 			if (direction.x !== 0) {
@@ -56,6 +56,13 @@ package {
 		
 		public function afterDraw():void {
 			
+		}
+		
+		// A getter that determines whether or not the entity is a "platforming" entity or not. A platforming entity
+		// will restrict its direction-based movement to be horizontal and apply gravity, whereas a non-platforming
+		// entity can freely move in any direction. Override this in subclasses to change its value.
+		public function get isPlatforming():Boolean {
+			return false;
 		}
 		
 		// To string.
