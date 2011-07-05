@@ -30,7 +30,7 @@ package {
 			
 			// Set the player's default color and opacity.
 			sprite.color = NormalColor;
-			sprite.alpha = 0.8;
+			sprite.alpha = 0.9;
 		}
 		
 	}

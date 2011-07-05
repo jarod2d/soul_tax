@@ -63,7 +63,7 @@ package {
 				var npc_data:Object = prop_data[1][i];
 				
 				if (npc_data.id === "player") {
-					(FlxG.state as PlayState).player.warp(npc_data.x, npc_data.y);
+					Game.player.warp(npc_data.x, npc_data.y);
 				}
 				else {
 					NPCs.add(new NPC(npc_data.id, npc_data.x, npc_data.y).sprite);

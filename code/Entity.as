@@ -58,6 +58,11 @@ package {
 			
 		}
 		
+		// To string.
+		public function toString():String {
+			return "Entity: " + x + ", " + y;
+		}
+		
 		// A getter that determines whether or not the entity is a "platforming" entity or not. A platforming entity
 		// will restrict its direction-based movement to be horizontal and apply gravity, whereas a non-platforming
 		// entity can freely move in any direction. Override this in subclasses to change its value.
@@ -65,9 +70,17 @@ package {
 			return false;
 		}
 		
-		// To string.
-		public function toString():String {
-			return "Entity: " + x + ", " + y;
+		// A getter that returns the index of the tile that is currently underneath the entity's center point.
+		public function get current_tile():int {
+			var center:FlxPoint = this.center;
+			return Math.floor(center.y / Level.TileSize) * Game.level.t_width + Math.floor(center.x / Level.TileSize);
+		}
+		
+		// A getter that returns the index of the tile that is currently underneath the entity (i.e., the one they're
+		// standing on, in a platforming context), based on their center point.
+		public function get tile_below():int {
+			var p:FlxPoint = new FlxPoint(center.x, bottom + 1);
+			return int(p.y / Level.TileSize) * Game.level.wall_tiles.widthInTiles + int(p.x / Level.TileSize);
 		}
 		
 		// A collection of getters and setters, mostly to allow access to the properties of the entity's sprite through
@@ -105,11 +118,11 @@ package {
 		}
 		
 		public function get center():FlxPoint {
-			return new FlxPoint(left + sprite.width / 2, top + sprite.height / 2);
+			return new FlxPoint(sprite.x + sprite.width / 2, sprite.y + sprite.height / 2);
 		}
 		
 		public function get top():Number {
-			return x;
+			return y;
 		}
 		
 		public function get right():Number {
@@ -121,7 +134,7 @@ package {
 		}
 		
 		public function get left():Number {
-			return y;
+			return x;
 		}
 		
 		public function get s_width():uint {

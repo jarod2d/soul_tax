@@ -10,20 +10,14 @@ package {
 	
 	public class PlayState extends FlxState {
 		
-		// The player object.
-		public var player:Player;
-		
-		// The current level.
-		public var level:Level;
-		
 		override public function create():void {
 			super.create();
 			
 			// Create the player.
-			player = new Player();
+			var player:Player = Game.player = new Player();
 			
 			// Create the level.
-			level = new Level("test");
+			var level:Level = Game.level = new Level("test");
 			
 			// Set up the camera and bounds.
 			var border_size:int = Level.BorderSize;	
@@ -38,6 +32,9 @@ package {
 		
 		override public function update():void {
 			super.update();
+			
+			var player:Player = Game.player;
+			var level:Level   = Game.level;
 			
 			// Process player input.
 			player.direction.x = player.direction.y = 0.0;
