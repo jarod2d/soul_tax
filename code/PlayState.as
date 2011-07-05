@@ -27,6 +27,7 @@ package {
 			
 			// Add everything to the scene.
 			add(level.contents);
+			add(player.trails);
 			add(player.sprite);
 		}
 		
