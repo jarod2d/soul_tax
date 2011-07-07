@@ -16,21 +16,23 @@ package {
 				image:         Assets.OfficeWorkerSprite,
 				hp:            100.0,
 				strength:      35.0,
-				jump_strength: 4.25
+				jump_strength: 3.75
 			},
 			
 			"construction_worker": {
 				image:         Assets.ConstructionWorkerSprite,
 				hp:            100.0,
 				strength:      35.0,
-				jump_strength: 4.25
+				jump_strength: 3.75
 			}
 		};
 		
 		// The list of possible AI states. Their names should hopefully be self-documenting.
-		public static const IdleState:int   = 0;
-		public static const WanderState:int = 1;
-		public static const FleeState:int   = 2;
+		public static const IdleState:int      = 0;
+		public static const WanderState:int    = 1;
+		public static const FleeState:int      = 2;
+		public static const PossessedState:int = 3;
+		public static const StunnedState:int   = 4;
 		
 		// Multipliers for the NPC's speed in various states.
 		public static const WanderSpeedFactor:Number = 0.25;
@@ -53,8 +55,9 @@ package {
 		// complex formulas here.
 		public var strength:Number;
 		
-		// How high can the NPC jump? Measured in tiles -- so a value of 4.0 would allow the NPC to jump just barely
-		// high enough to reach a ledge 4 tiles above.
+		// How high can the NPC jump? Supposed to be measured in tiles -- so a value of 4.0 would allow the NPC to jump
+		// just barely high enough to reach a ledge 4 tiles above. In reality it doesn't quite work that way, so just
+		// experiment until you get the value you want.
 		public var jump_strength:Number;
 		
 		// Constructor. The id should be a string that corresponds to one of the keys in the types object above.
@@ -64,9 +67,15 @@ package {
 			var properties:Object = NPC.types[id];
 			
 			// Set the NPC's stats.
-			hp             = properties.hp;
-			strength       = properties.strength;
-			jump_strength  = properties.jump_strength;
+			hp            = properties.hp;
+			strength      = properties.strength;
+			jump_strength = properties.jump_strength;
+			
+			// Set up movement.
+			// TODO: Grab speed stats from the NPC stat data.
+			max_velocity   = new FlxPoint(90.0, 450.0);
+			drag           = new FlxPoint(450.0, 450.0);
+			acceleration.y = 600.0;
 			
 			// Set the initial state.
 			state = IdleState;
@@ -76,6 +85,22 @@ package {
 			sprite.loadGraphic(properties.image, true, true, 4, 13);
 			
 			// TODO: Set up animations.
+			
+			
+			FlxG.watch(acceleration, "x", "accel. x");
+			FlxG.watch(acceleration, "y", "accel. y");
+			FlxG.watch(velocity, "x", "vel. x");
+			FlxG.watch(velocity, "y", "vel. y");
+			FlxG.watch(this, "state", "state");
+		}
+		
+		// Makes the NPC jump. The height of the jump is relative to their jump_strength stat. You can pass in a
+		// multiplier to increase or decrease the relative height of the jump. A value of 1.0 will make the NPC jump at
+		// their intended maximum jump height. 
+		public function jump(power:Number = 1.0):void {
+			if (sprite.isTouching(FlxObject.DOWN)) {
+				velocity.y = jump_strength * power * -60.0;
+			}
 		}
 		
 		// Callback that occurs when the NPC's behavior changes to idle.
@@ -90,18 +115,36 @@ package {
 			state_max_duration = 0.5 + Math.random() * 2.25;
 			
 			// Most of the time we'll just wander on our current platform. But sometimes we'll do a more complicated
-			// traversal to another platform.
-			if (Math.random() < 0.8) {
+			// traversal to another platform. Eventually anyways.
+//			if (Math.random() < 0.8) {
 				moveOnCurrentPlatform();
-			}
-			else {
-				// TODO: Implement me!
-			}
+//			}
+//			else {
+//				// TODO: Implement me!
+//			}
 		}
 		
 		// Callback that occurs when the NPC's behavior changes to flee.
 		protected function startFlee():void {
 			// TODO: Implement me!
+		}
+		
+		// Callback that occurs when the NPC enters the possessed state.
+		protected function startBePossessed():void {
+			// TODO: Implement me!
+		}
+		
+		// Callback that occurs when the NPC enters the stunned state.
+		protected function startBeStunned():void {
+			// Set the max duration.
+			state_max_duration = 0.25;
+			
+			// Stop the NPC from moving.
+			// TODO: It would be nice if we could retain movement if we're currently in the air, so that when the player
+			// stops possessing the NPC mid-jump, they continue their trajectory.
+			acceleration.x = 0.0;
+			
+			// TODO: Play some sort of stunned animation.
 		}
 		
 		// Runs the NPC's idle behavior.
@@ -125,12 +168,27 @@ package {
 			// TODO: Implement me!
 		}
 		
+		// Runs the NPC's possessed behavior.
+		protected function bePossessed():void {
+			// We don't really do anything here yet.
+		}
+		
+		// Runs the NPC's stunned behavior.
+		protected function beStunned():void {
+			// Switch back to idle behavior after a certain duration.
+			if (state_duration > state_max_duration) {
+				state = IdleState;
+			}
+		}
+		
 		// Runs all of the NPC's AI. This just calls out to the AI method that corresponds to the NPC's current state.
 		protected function behave():void {
 			switch (state) {
-				case IdleState:   idle();   break;
-				case WanderState: wander(); break;
-				case FleeState:   flee();   break;
+				case IdleState:      idle();        break;
+				case WanderState:    wander();      break;
+				case FleeState:      flee();        break;
+				case PossessedState: bePossessed(); break;
+				case StunnedState:   beStunned();   break;
 			}
 		}
 		
@@ -138,13 +196,17 @@ package {
 		override public function beforeUpdate():void {
 			super.beforeUpdate();
 			
-			// Run the AI.
-			behave();
-			
-			// For some reason Flixel makes us explicitly tell sprites to stop following their path when they're done.
-			if (sprite.pathSpeed == 0.0) {
-				sprite.stopFollowingPath(true);
-				velocity.x = 0.0;
+			// We don't do anything if we're being possessed.
+			if (state !== PossessedState) {
+				// Run the AI.
+				behave();
+				
+				// For some reason Flixel makes us explicitly tell sprites to stop following their path when they're
+				// done.
+				if (sprite.pathSpeed == 0.0) {
+					sprite.stopFollowingPath(true);
+					velocity.x = 0.0;
+				}
 			}
 			
 			// Increment the state duration.
@@ -185,7 +247,7 @@ package {
 		// do anything. They won't fall down pits or jump onto new platforms.
 		private function moveOnCurrentPlatform():void {
 			// Make sure we're actually standing on a platform.
-			if (Game.level.wall_tiles.getTileByIndex(tile_below) <= 1) {
+			if (!sprite.isTouching(FlxObject.DOWN)) {
 				return;
 			}
 			
@@ -193,7 +255,7 @@ package {
 			var direction:int = (Math.random() < 0.5) ? 1 : -1;
 			
 			// See how far we can go in the chosen direction.
-			var walkable_distance = walkableDistance(direction, 8);
+			var walkable_distance:int = walkableDistance(direction, 8);
 			
 			// If we can't go anywhere in that direction, let's try the other direction instead.
 			if (walkable_distance === 0) {
@@ -207,10 +269,11 @@ package {
 				var path:FlxPath        = Game.level.wall_tiles.findPath(center, new FlxPoint(center.x + actual_distance * Level.TileSize, center.y));
 				
 				if (path) {
+					// TODO: Set speed based on the NPC's speed.
 					sprite.followPath(path, 30.0, FlxObject.PATH_HORIZONTAL_ONLY | FlxObject.PATH_FORWARD);
 					
 					// Set the NPC's facing based on the direction.
-					facing = (direction === 1) ? FlxObject.LEFT : FlxObject.RIGHT;
+					facing = (direction === 1) ? FlxObject.RIGHT : FlxObject.LEFT;
 				}
 			}
 		}
@@ -225,15 +288,12 @@ package {
 			state_duration = state_max_duration = 0.0;
 			
 			switch (state) {
-				case IdleState:   startIdle();   break;
-				case WanderState: startWander(); break;
-				case FleeState:   startFlee();   break;
+				case IdleState:      startIdle();        break;
+				case WanderState:    startWander();      break;
+				case FleeState:      startFlee();        break;
+				case PossessedState: startBePossessed(); break;
+				case StunnedState:   startBeStunned();   break;
 			}
-		}
-		
-		// NPCs are platforming entities.
-		override public function get isPlatforming():Boolean {
-			return true;
 		}
 		
 	}

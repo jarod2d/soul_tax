@@ -37,7 +37,9 @@ package {
 			var player:Player = Game.player;
 			var level:Level   = Game.level;
 			
-			// Process player input.
+			// Process player input. We handle some input differently based on whether the player is possessing an NPC.
+			// We start with basic player movement, most of which will work regardless of whether or not the player is
+			// possessing someone.
 			player.direction.x = player.direction.y = 0.0;
 			
 			if (FlxG.keys.E) {
@@ -53,9 +55,30 @@ package {
 				player.direction.x -= 1.0;
 			}
 			
+			// Possess or unpossess.
+			if (FlxG.keys.justPressed("SPACE")) {
+				(player.victim) ? player.stopPossessing() : player.possess();
+			}
+			
 			// Perform collisions.
 			FlxG.collide(player.sprite, level.borders);
 			FlxG.collide(level.NPCs, level.wall_tiles);
+			
+			// Controls and behavior that is specific to possession or non-possession goes here.
+			if (player.victim) {
+				// Jump.
+				if (FlxG.keys.justPressed("E")) {
+					player.victim.jump();
+				}
+			}
+			else {
+				// Set the possessable NPC.
+				player.potential_victim = null;
+				
+				FlxG.overlap(player.sprite, level.NPCs, function(a:FlxObject, b:FlxObject):void {
+					player.potential_victim = (b as EntitySprite).entity as NPC;
+				});
+			}
 		}
 		
 	}

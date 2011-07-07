@@ -12,13 +12,25 @@ package {
 		
 		// The various colors the player character changes to.
 		private static const NormalColor:uint     = 0x55DDFF;
-		private static const PossessionColor:uint = 0xDDAAEE;
+		private static const PossessionColor:uint = 0xFF99DD;
 		
 		// How quickly (in seconds) player trail sprites should spawn and fade, as well as the initial opacity of the
 		// trail when it is spawned.
 		private static const TrailSpawnRate:Number      = 0.175;
 		private static const TrailFadeRate:Number       = 0.7;
 		private static const TrailInitialOpacity:Number = 0.45;
+		
+		// The direction of the player's movement. To move the player (or the NPC that the player is possessing), set
+		// this to point towards where you want the player to move. You need to set the player's sprite's maxSpeed and
+		// drag attributes for this to work. They will accelerate in the given direction by the same factor as their
+		// drag attribute.
+		public var direction:FlxPoint;
+		
+		// The NPC that the player is hovering over, and therefore can currently possess.
+		public var potential_victim:NPC;
+		
+		// The NPC that the player is currently possessing. If they're not possessing anyone, this will be null.
+		public var victim:NPC;
 		
 		// The group that contains the player's lingering trail effect and the timer that determines when a new sprite
 		// is added.
@@ -27,6 +39,8 @@ package {
 		
 		public function Player() {
 			super();
+			
+			direction = new FlxPoint();
 			
 			// Pre-allocate the player's trail sprites. We can figure out how many we need to create based on the spawn
 			// and fade rates.
@@ -37,7 +51,6 @@ package {
 			for (var i:int = 0; i < trail_count; i++) {
 				var trail:FlxSprite = new FlxSprite();
 				trail.loadGraphic(Assets.GhostSprite, true, true, 4, 15).kill();
-				
 				trails.add(trail);
 			}
 			
@@ -48,21 +61,86 @@ package {
 			sprite.addAnimation("float", [0, 1, 2, 3, 4, 5, 6, 7], 20);
 			sprite.play("float");
 			
-			// Set up the player's basic stats.
-			max_speed    = new FlxPoint(100.0, 100.0);
-			acceleration = new FlxPoint(280.0, 280.0);
+			// Set up movement.
+			max_velocity = new FlxPoint(100.0, 100.0);
+			drag         = new FlxPoint(280.0, 280.0);
 			
 			// Set the player's default color and opacity.
 			color        = NormalColor;
 			sprite.alpha = 0.9;
 		}
 		
+		// Possesses the NPC that the player is currently hovering over.
+		public function possess():void {
+			// We need a potential victim.
+			if (!potential_victim) {
+				return;
+			}
+			
+			// Set the possession color.
+			color = PossessionColor;
+			
+			// The potential victim is now the actual victim.
+			victim = potential_victim;
+			potential_victim = null;
+			
+			// Process the victim and player.
+			victim.state = NPC.PossessedState;
+			victim.sprite.stopFollowingPath(true);
+		}
+		
+		public function stopPossessing():void {
+			// Get rid of the victim.
+			victim.state = NPC.StunnedState;
+			victim       = null;
+			
+			// Return to the normal color.
+			color = NormalColor;
+			
+			// TODO: Launch the player upwards.
+		}
+		
 		override public function beforeUpdate():void {
 			super.beforeUpdate();
 			
+			// Set facing based on the direction.
+			if (direction.x !== 0) {
+				facing = (direction.x > 0.0) ? FlxObject.RIGHT : FlxObject.LEFT;
+			}
+			
+			// Handle movement. We have very different movement behavior based on whether we're possessing someone at
+			// the moment.
+			if (victim) {
+				// NPCs only move horizontally.
+				victim.acceleration.x = direction.x * victim.drag.x;
+				
+				// Make the player rotate behind the victim and sync up the movement.
+				// TODO: For now they're just stuck in a fixed location.
+				x = victim.x + 3.0;
+				y = victim.y - 5.0;
+				
+				victim.facing = facing;
+			}
+			else {
+				// Normalize the direction.
+				MathUtil.normalize(direction);
+				
+				// Set acceleration.
+				acceleration.x = direction.x * drag.x;
+				acceleration.y = direction.y * drag.y;
+			}
+			
+			// Update the player's trail effect.
+			updateTrail();
+		}
+		
+		// A little helper function for updating the player's trail effect.
+		private function updateTrail():void {
+			var trail:FlxSprite;
+			
 			// Fade out the current trails.
 			for (var i:int = 0; i < trails.length; i++) {
-				var trail:FlxSprite = trails.members[i];
+				trail = trails.members[i];
 				
 				if (trail.alive) {
 					trail.alpha = Math.max(trail.alpha - FlxG.elapsed / (TrailFadeRate / TrailInitialOpacity), 0.0);
@@ -75,8 +153,10 @@ package {
 			}
 			
 			// Add new trails.
-			if (trails_timer >= TrailSpawnRate && (velocity.x !== 0.0 || velocity.y !== 0.0)) {
-				var trail:FlxSprite = trails.getFirstDead() as FlxSprite;
+			var player_moving = velocity.x !== 0.0 || velocity.y !== 0.0;
+			
+			if (trails_timer >= TrailSpawnRate && (player_moving || victim)) {
+				trail = trails.getFirstDead() as FlxSprite;
 				
 				if (trail) {
 					trail.revive();

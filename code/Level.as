@@ -46,11 +46,11 @@ package {
 			NPCs       = new FlxGroup();
 			
 			// TEMP: Hardcode the tiles and props. We'll need to fetch them based on the name eventually.
-			bg_tiles.loadMap(new Assets.TestBGTiles, Assets.Tiles, TileSize, TileSize, NaN, 1, 1, 2);
-			wall_tiles.loadMap(new Assets.TestWallTiles, Assets.Tiles, TileSize, TileSize, NaN, 1, 1, 2);
+			bg_tiles.loadMap(new Assets.TinyBGTiles, Assets.Tiles, TileSize, TileSize, NaN, 1, 1, 2);
+			wall_tiles.loadMap(new Assets.TinyWallTiles, Assets.Tiles, TileSize, TileSize, NaN, 1, 1, 2);
 			
 			// Set up the props and NPCs.
-			var prop_data:Object = JSON.decode(new Assets.TestProps);
+			var prop_data:Object = JSON.decode(new Assets.TinyProps);
 			var i:Number;
 			
 			// Add props.

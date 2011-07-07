@@ -28,6 +28,10 @@ package {
 		[Embed(source="../levels/test.1.csv", mimeType="application/octet-stream")] public static var TestWallTiles:Class;
 		[Embed(source="../levels/test.props.json", mimeType="application/octet-stream")] public static var TestProps:Class;
 		
+		[Embed(source="../levels/tiny.0.csv", mimeType="application/octet-stream")] public static var TinyBGTiles:Class;
+		[Embed(source="../levels/tiny.1.csv", mimeType="application/octet-stream")] public static var TinyWallTiles:Class;
+		[Embed(source="../levels/tiny.props.json", mimeType="application/octet-stream")] public static var TinyProps:Class;
+		
 	}
 	
 }

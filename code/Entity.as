@@ -14,14 +14,9 @@ package {
 		// The entity's FlxSprite object.
 		public var sprite:EntitySprite;
 		
-		// The direction of the entity's movement. You can use this property along with the max_speed and acceleration
-		// getters and setters to get some good simple movement behavior.
-		public var direction:FlxPoint;
-		
 		// Constructor.
 		public function Entity(x:Number = 0, y:Number = 0) {
-			sprite    = new EntitySprite(this, x, y);
-			direction = new FlxPoint();
+			sprite = new EntitySprite(this, x, y);
 		}
 		
 		// Convenience function allows moving an Entity in one call.
@@ -31,43 +26,16 @@ package {
 		}
 		
 		// Update callbacks -- one before the Sprite gets updated and one after.
-		public function beforeUpdate():void {
-			// Normalize the direction.
-			MathUtil.normalize(direction);
-			
-			// Set up entity movement based on their direction.
-			sprite.acceleration.x = direction.x * acceleration.x;
-			sprite.acceleration.y = (isPlatforming) ? 600.0 : direction.y * acceleration.y;
-			
-			// Set facing based on the direction.
-			if (direction.x !== 0) {
-				facing = (direction.x > 0.0) ? FlxObject.RIGHT : FlxObject.LEFT;
-			}
-		}
-		
-		public function afterUpdate():void {
-			
-		}
+		public function beforeUpdate():void {}
+		public function afterUpdate():void {}
 		
 		// Draw callbacks -- one before the Sprite gets updated and one after.
-		public function beforeDraw():void {
-			
-		}
-		
-		public function afterDraw():void {
-			
-		}
+		public function beforeDraw():void {}
+		public function afterDraw():void {}
 		
 		// To string.
 		public function toString():String {
 			return "Entity: " + x + ", " + y;
-		}
-		
-		// A getter that determines whether or not the entity is a "platforming" entity or not. A platforming entity
-		// will restrict its direction-based movement to be horizontal and apply gravity, whereas a non-platforming
-		// entity can freely move in any direction. Override this in subclasses to change its value.
-		public function get isPlatforming():Boolean {
-			return false;
 		}
 		
 		// A getter that returns the index of the tile that is currently underneath the entity's center point.
@@ -181,26 +149,36 @@ package {
 			return sprite.scrollFactor.x;
 		}
 		
+		public function get velocity():FlxPoint {
+			return sprite.velocity;
+		}
+		
+		public function set velocity(value:FlxPoint):void {
+			sprite.velocity = value;
+		}
+		
 		public function get acceleration():FlxPoint {
-			// This is a bit different from how acceleration works on FlxSprites. Here, acceleration determines how fast
-			// the entity will get to max_speed (and how fast they will slow down) when direction != 0.
-			return sprite.drag;
+			return sprite.acceleration;
 		}
 		
 		public function set acceleration(value:FlxPoint):void {
+			sprite.acceleration = value;
+		}
+		
+		public function get drag():FlxPoint {
+			return sprite.drag;
+		}
+		
+		public function set drag(value:FlxPoint):void {
 			sprite.drag = value;
 		}
 		
-		public function get max_speed():FlxPoint {
+		public function get max_velocity():FlxPoint {
 			return sprite.maxVelocity;
 		}
 		
-		public function set max_speed(value:FlxPoint):void {
+		public function set max_velocity(value:FlxPoint):void {
 			sprite.maxVelocity = value;
-		}
-		
-		public function get velocity():FlxPoint {
-			return sprite.velocity;
 		}
 		
 		public function set scrollFactor(value:Number):void {
