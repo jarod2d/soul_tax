@@ -87,6 +87,9 @@ package {
 			// Process the victim and player.
 			victim.state = NPC.PossessedState;
 			victim.sprite.stopFollowingPath(true);
+			
+			// Reorder the player and the NPCs in the scene to put the player behind the NPCs.
+			Game.level.swapPlayerAndNPCs();
 		}
 		
 		public function stopPossessing():void {
@@ -98,6 +101,9 @@ package {
 			color = NormalColor;
 			
 			// TODO: Launch the player upwards.
+			
+			// Swap the player and NPCs.
+			Game.level.swapPlayerAndNPCs();
 		}
 		
 		override public function beforeUpdate():void {

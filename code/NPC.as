@@ -85,13 +85,6 @@ package {
 			sprite.loadGraphic(properties.image, true, true, 4, 13);
 			
 			// TODO: Set up animations.
-			
-			
-			FlxG.watch(acceleration, "x", "accel. x");
-			FlxG.watch(acceleration, "y", "accel. y");
-			FlxG.watch(velocity, "x", "vel. x");
-			FlxG.watch(velocity, "y", "vel. y");
-			FlxG.watch(this, "state", "state");
 		}
 		
 		// Makes the NPC jump. The height of the jump is relative to their jump_strength stat. You can pass in a

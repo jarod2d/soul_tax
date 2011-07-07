@@ -93,12 +93,35 @@ package {
 			border.immovable = true;
 			borders.add(border.makeGraphic(BorderSize, height + BorderSize * 2));
 			
-			// Group the tilemaps.
+			// Group all of the contents of the level.
 			contents.add(bg_tiles);
 			contents.add(props);
 			contents.add(wall_tiles);
 			contents.add(borders);
 			contents.add(NPCs);
+			contents.add(Game.player.sprite);
+			contents.add(Game.player.trails);
+		}
+		
+		// A little function that swaps the visual position of the player and the NPCs. That is, if the player is in
+		// front of the NPCs (the default), he will be moved behind them, and vice versa. This is necessary for when the
+		// player possesses an NPC -- we want him to move to the background.
+		public function swapPlayerAndNPCs():void {
+			var members:Array    = contents.members;
+			var npc_index:int    = members.indexOf(NPCs);
+			var trails_index:int = members.indexOf(Game.player.trails);
+			var player_index:int = members.indexOf(Game.player.sprite);
+			
+			if (npc_index < player_index) {
+				members[npc_index]    = Game.player.trails;
+				members[trails_index] = Game.player.sprite;
+				members[player_index] = NPCs;
+			}
+			else {
+				members[trails_index] = NPCs;
+				members[player_index] = Game.player.trails;
+				members[npc_index]    = Game.player.sprite;
+			}
 		}
 		
 		// Getters for the width and height, in tiles and pixels.
