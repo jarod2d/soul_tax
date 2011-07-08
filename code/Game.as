@@ -15,11 +15,10 @@ package {
 	
 	public class Game extends FlxGame {
 		
-		// The player.
+		// The major game objects.
 		public static var player:Player;
-		
-		// The level.
 		public static var level:Level;
+		public static var ui:UI;
 		
 		public function Game() {
 			super(400, 325, MainMenuState, 2);

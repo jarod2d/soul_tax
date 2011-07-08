@@ -22,6 +22,9 @@ package {
 			// Create the level.
 			var level:Level = Game.level = new Level("test");
 			
+			// Create the UI.
+			var ui:UI = Game.ui = new UI();
+			
 			// Set up the camera and bounds.
 			var border_size:int = Level.BorderSize;	
 			FlxG.camera.bounds  = new FlxRect(0, 0, level.width, level.height - Level.TileSize / 2);
@@ -30,6 +33,7 @@ package {
 			
 			// Add everything to the scene.
 			add(level.contents);
+			add(ui.contents);
 		}
 		
 		override public function update():void {

@@ -164,7 +164,7 @@ package {
 			}
 			
 			// Add new trails.
-			var player_moving = velocity.x !== 0.0 || velocity.y !== 0.0;
+			var player_moving:Boolean = velocity.x !== 0.0 || velocity.y !== 0.0;
 			
 			if (trails_timer >= TrailSpawnRate && (player_moving || victim)) {
 				trail = trails.getFirstDead() as FlxSprite;

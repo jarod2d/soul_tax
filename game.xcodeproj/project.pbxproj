@@ -88,6 +88,8 @@
 		7AD0D08513BF9F7300E5A811 /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; path = levels; sourceTree = "<group>"; };
 		7AD0D08813BFA0BE00E5A811 /* Level.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = Level.as; path = code/Level.as; sourceTree = "<group>"; };
 		7AD0D08A13C03E5A00E5A811 /* NPC.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = NPC.as; path = code/NPC.as; sourceTree = "<group>"; };
+		7ADDAF1113C6CF8C00D799FE /* UI.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = UI.as; path = code/UI.as; sourceTree = "<group>"; };
+		7ADDAF1213C6D28700D799FE /* PossessionMonitor.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = PossessionMonitor.as; path = code/PossessionMonitor.as; sourceTree = "<group>"; };
 		7AE34BB313C04D1800F5B66A /* EncryptionKeyGenerator.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = EncryptionKeyGenerator.as; sourceTree = "<group>"; };
 		7AE34BB613C04D1800F5B66A /* FileMonitorEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FileMonitorEvent.as; sourceTree = "<group>"; };
 		7AE34BB713C04D1800F5B66A /* FileMonitor.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FileMonitor.as; sourceTree = "<group>"; };
@@ -325,6 +327,7 @@
 			children = (
 				7AC8119B13BE445400656C2A /* States */,
 				7AC811AC13BE930300656C2A /* Entities */,
+				7ADDAF0F13C6CF7300D799FE /* UI */,
 				7ABC6EC413BEF7F50007FF9B /* Util */,
 				7AC811A213BE536500656C2A /* Preloader.as */,
 				7AC8119913BE427900656C2A /* Game.as */,
@@ -363,6 +366,15 @@
 				7AD0D08513BF9F7300E5A811 /* levels */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		7ADDAF0F13C6CF7300D799FE /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				7ADDAF1113C6CF8C00D799FE /* UI.as */,
+				7ADDAF1213C6D28700D799FE /* PossessionMonitor.as */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 		7AE34BAD13C04CE000F5B66A /* Lib */ = {
