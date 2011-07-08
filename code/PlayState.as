@@ -13,6 +13,9 @@ package {
 		override public function create():void {
 			super.create();
 			
+			// Set the background color.
+			FlxG.bgColor = 0xFFBBDDFF;
+			
 			// Create the player.
 			var player:Player = Game.player = new Player();
 			

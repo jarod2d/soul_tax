@@ -90,6 +90,9 @@ package {
 			
 			// Reorder the player and the NPCs in the scene to put the player behind the NPCs.
 			Game.level.swapPlayerAndNPCs();
+			
+			// Have the camera follow the NPC now.
+			FlxG.camera.follow(victim.sprite);
 		}
 		
 		public function stopPossessing():void {
@@ -100,10 +103,11 @@ package {
 			// Return to the normal color.
 			color = NormalColor;
 			
-			// TODO: Launch the player upwards.
-			
 			// Swap the player and NPCs.
 			Game.level.swapPlayerAndNPCs();
+			
+			// Have the camera follow the player again.
+			FlxG.camera.follow(sprite);
 		}
 		
 		override public function beforeUpdate():void {
@@ -120,10 +124,11 @@ package {
 				// NPCs only move horizontally.
 				victim.acceleration.x = direction.x * victim.drag.x;
 				
-				// Make the player rotate behind the victim and sync up the movement.
-				// TODO: For now they're just stuck in a fixed location.
-				x = victim.x + 3.0;
-				y = victim.y - 5.0;
+				// Have the player follow behind the victim with a sort of "yoyo" effect.
+				var yoyo_distance:FlxPoint  = new FlxPoint(victim.x - x, (victim.y - 5.0) - y);
+				
+				acceleration.x = yoyo_distance.x * 90.0;
+				acceleration.y = yoyo_distance.y * 90.0;
 				
 				victim.facing = facing;
 			}

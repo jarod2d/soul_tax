@@ -99,8 +99,8 @@ package {
 			contents.add(wall_tiles);
 			contents.add(borders);
 			contents.add(NPCs);
-			contents.add(Game.player.sprite);
 			contents.add(Game.player.trails);
+			contents.add(Game.player.sprite);
 		}
 		
 		// A little function that swaps the visual position of the player and the NPCs. That is, if the player is in
