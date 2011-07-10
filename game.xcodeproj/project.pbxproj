@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		7A27D68513C7D02700E05BF1 /* HitBox.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = HitBox.as; path = code/HitBox.as; sourceTree = "<group>"; };
 		7ABC6EC213BEB4370007FF9B /* Assets.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = Assets.as; path = code/Assets.as; sourceTree = "<group>"; };
 		7ABC6EC513BEF81D0007FF9B /* MathUtil.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = MathUtil.as; path = code/MathUtil.as; sourceTree = "<group>"; };
 		7AC8114A13BE420D00656C2A /* autotiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = autotiles.png; sourceTree = "<group>"; };
@@ -59,15 +60,15 @@
 		7AC8117E13BE420D00656C2A /* Vis.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Vis.as; sourceTree = "<group>"; };
 		7AC8117F13BE420D00656C2A /* Watch.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Watch.as; sourceTree = "<group>"; };
 		7AC8118013BE420D00656C2A /* WatchEntry.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WatchEntry.as; sourceTree = "<group>"; };
-		7AC8118113BE420D00656C2A /* FlxAnim.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FlxAnim.as; sourceTree = "<group>"; };
-		7AC8118213BE420D00656C2A /* FlxDebugger.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FlxDebugger.as; sourceTree = "<group>"; };
-		7AC8118313BE420D00656C2A /* FlxList.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FlxList.as; sourceTree = "<group>"; };
-		7AC8118413BE420D00656C2A /* FlxPreloader.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FlxPreloader.as; sourceTree = "<group>"; };
-		7AC8118513BE420D00656C2A /* FlxQuadTree.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FlxQuadTree.as; sourceTree = "<group>"; };
-		7AC8118613BE420D00656C2A /* FlxReplay.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FlxReplay.as; sourceTree = "<group>"; };
-		7AC8118713BE420D00656C2A /* FlxTile.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FlxTile.as; sourceTree = "<group>"; };
-		7AC8118813BE420D00656C2A /* FlxTilemapBuffer.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FlxTilemapBuffer.as; sourceTree = "<group>"; };
-		7AC8118913BE420D00656C2A /* FlxWindow.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FlxWindow.as; sourceTree = "<group>"; };
+		7AC8118113BE420D00656C2A /* FlxAnim.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; path = FlxAnim.as; sourceTree = "<group>"; };
+		7AC8118213BE420D00656C2A /* FlxDebugger.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; path = FlxDebugger.as; sourceTree = "<group>"; };
+		7AC8118313BE420D00656C2A /* FlxList.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; path = FlxList.as; sourceTree = "<group>"; };
+		7AC8118413BE420D00656C2A /* FlxPreloader.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; path = FlxPreloader.as; sourceTree = "<group>"; };
+		7AC8118513BE420D00656C2A /* FlxQuadTree.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; path = FlxQuadTree.as; sourceTree = "<group>"; };
+		7AC8118613BE420D00656C2A /* FlxReplay.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; path = FlxReplay.as; sourceTree = "<group>"; };
+		7AC8118713BE420D00656C2A /* FlxTile.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; path = FlxTile.as; sourceTree = "<group>"; };
+		7AC8118813BE420D00656C2A /* FlxTilemapBuffer.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; path = FlxTilemapBuffer.as; sourceTree = "<group>"; };
+		7AC8118913BE420D00656C2A /* FlxWindow.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; path = FlxWindow.as; sourceTree = "<group>"; };
 		7AC8118B13BE420D00656C2A /* Input.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Input.as; sourceTree = "<group>"; };
 		7AC8118C13BE420D00656C2A /* Keyboard.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Keyboard.as; sourceTree = "<group>"; };
 		7AC8118D13BE420D00656C2A /* Mouse.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Mouse.as; sourceTree = "<group>"; };
@@ -354,6 +355,7 @@
 				7AC811AB13BE8C5000656C2A /* Entity.as */,
 				7AC811A913BE8C2200656C2A /* Player.as */,
 				7AD0D08A13C03E5A00E5A811 /* NPC.as */,
+				7A27D68513C7D02700E05BF1 /* HitBox.as */,
 			);
 			name = Entities;
 			sourceTree = "<group>";

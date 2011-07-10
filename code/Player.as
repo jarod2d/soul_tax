@@ -14,6 +14,9 @@ package {
 		private static const NormalColor:uint     = 0x55DDFF;
 		private static const PossessionColor:uint = 0xFF99DD;
 		
+		// The color that the NPC changes to while possessed.
+		private static const NPCPossessionColor:uint = 0xFFCCEE;
+		
 		// How quickly (in seconds) player trail sprites should spawn and fade, as well as the initial opacity of the
 		// trail when it is spawned.
 		private static const TrailSpawnRate:Number      = 0.175;
@@ -77,12 +80,13 @@ package {
 				return;
 			}
 			
-			// Set the possession color.
-			color = PossessionColor;
-			
 			// The potential victim is now the actual victim.
 			victim = potential_victim;
 			potential_victim = null;
+			
+			// Set the possession color.
+			color               = PossessionColor;
+			victim.sprite.color = NPCPossessionColor;
 			
 			// Process the victim and player.
 			victim.state = NPC.PossessedState;
@@ -95,7 +99,13 @@ package {
 			FlxG.camera.follow(victim.sprite);
 		}
 		
+		// Stops possessing the current victim, releasing the ghost from the NPC.
 		public function stopPossessing():void {
+			// We need to be possessing a victim.
+			if (!victim) {
+				return;
+			}
+			
 			// Get rid of the victim.
 			victim.state = NPC.StunnedState;
 			victim       = null;
@@ -110,6 +120,31 @@ package {
 			FlxG.camera.follow(sprite);
 		}
 		
+		// The regular punch attack the player uses when they're possessing someone.
+		public function punchAttack():void {
+			// We need a victim to punch anything.
+			if (!victim) {
+				return;
+			}
+			
+			// Create the hitbox.
+			var hb:HitBox = new HitBox(victim, 0, 0, 5, victim.height);
+			hb.setAttributes(HitBox.PlayerAllegiance, 0.15, victim.strength, 25.0);
+		}
+		
+		// The secondary knockback attack the player uses when they're possessing someone.
+		public function knockbackAttack():void {
+			// We need a victim to attack anything.
+			if (!victim) {
+				return;
+			}
+			
+			// Create the hitbox.
+			var hb:HitBox = new HitBox(victim, 0, 0, 5, victim.height);
+			hb.setAttributes(HitBox.PlayerAllegiance, 0.15, victim.strength / 5.0, 150.0);
+		}
+		
+		// Update.
 		override public function beforeUpdate():void {
 			super.beforeUpdate();
 			

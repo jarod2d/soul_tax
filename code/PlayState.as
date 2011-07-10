@@ -65,9 +65,37 @@ package {
 				(player.victim) ? player.stopPossessing() : player.possess();
 			}
 			
+			// Attack.
+			if (FlxG.keys.justPressed("J")) {
+				player.punchAttack();
+			}
+			else if (FlxG.keys.justPressed("K")) {
+				player.knockbackAttack();
+			}
+			
 			// Perform collisions.
-			FlxG.collide(player.sprite, level.borders);
+			if (player.victim) {
+				FlxG.collide(player.victim.sprite, level.borders);
+				FlxG.collide(player.victim.sprite, level.NPCs);
+			}
+			else {
+				FlxG.collide(player.sprite, level.borders);
+			}
+			
 			FlxG.collide(level.NPCs, level.wall_tiles);
+			
+			// Handle hitbox collisions.
+			FlxG.overlap(level.NPCs, level.hitboxes, function(npc_sprite:EntitySprite, hb_sprite:EntitySprite):void {
+				var npc:NPC   = npc_sprite.entity as NPC;
+				var hb:HitBox = hb_sprite.entity as HitBox;
+				
+				// Flixel has a very strange bug at the moment where it will give you a bunch of false overlaps in some
+				// cases. In order to get around this, we do our own stupid overlap detection before trying to attack
+				// the npc.
+				if ((hb.left < npc.right && hb.right >= npc.left) && (hb.top < npc.bottom && hb.bottom >= npc.top)) {
+					hb.attackNPC(npc);
+				}
+			});
 			
 			// Controls and behavior that is specific to possession or non-possession goes here.
 			if (player.victim) {

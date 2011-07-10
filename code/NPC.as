@@ -60,6 +60,10 @@ package {
 		// experiment until you get the value you want.
 		public var jump_strength:Number;
 		
+		// NPCs need to store their knockback velocity separately from their regular velocity. Just set the x and y
+		// values to get knockback behavior.
+		public var knockback_velocity:FlxPoint;
+		
 		// Constructor. The id should be a string that corresponds to one of the keys in the types object above.
 		public function NPC(id:String, x:Number, y:Number) {
 			super(x, y);
@@ -73,9 +77,10 @@ package {
 			
 			// Set up movement.
 			// TODO: Grab speed stats from the NPC stat data.
-			max_velocity   = new FlxPoint(90.0, 450.0);
-			drag           = new FlxPoint(450.0, 450.0);
-			acceleration.y = 600.0;
+			max_velocity       = new FlxPoint(90.0, 450.0);
+			drag               = new FlxPoint(450.0, 450.0);
+			acceleration.y     = 600.0;
+			knockback_velocity = new FlxPoint();
 			
 			// Set the initial state.
 			state = IdleState;
@@ -94,6 +99,25 @@ package {
 			if (sprite.isTouching(FlxObject.DOWN)) {
 				velocity.y = jump_strength * power * -60.0;
 			}
+		}
+		
+		// Hurts the NPC, killing him if necessary.
+		public function hurt(damage:Number):void {
+			hp -= damage;
+			
+			if (hp <= 0.0) {
+				kill();
+			}
+			else if (state !== FleeState) {
+				state = FleeState;
+			}
+		}
+		
+		// Kills the NPC. This is different from Flixel's version of killing -- this is what happens when the NPC
+		// actually runs out of health and dies, including playing sounds, animations, etc.
+		public function kill():void {
+			// For now we just kill the sprite.
+			sprite.kill();
 		}
 		
 		// Callback that occurs when the NPC's behavior changes to idle.
@@ -202,6 +226,21 @@ package {
 				}
 			}
 			
+			// Add knockback velocity and reduce it over time.
+			var knockback_drag:Number;
+			
+			if (knockback_velocity.x !== 0.0) {
+				knockback_drag        = (knockback_velocity.x > 0.0) ? -drag.x * FlxG.elapsed / 2.0 : drag.x * FlxG.elapsed / 2.0;
+				velocity.x           += knockback_velocity.x;
+				knockback_velocity.x  = (Math.abs(knockback_velocity.x) <= knockback_drag) ? 0.0 : knockback_velocity.x + knockback_drag;
+			}
+			
+			if (knockback_velocity.y !== 0.0) {
+				knockback_drag       = (knockback_velocity.y > 0.0) ? -drag.y * FlxG.elapsed / 2.0 : drag.y * FlxG.elapsed / 2.0;
+				velocity.y           = knockback_velocity.y;
+				knockback_velocity.y = (Math.abs(knockback_velocity.y) <= knockback_drag) ? 0.0 : knockback_velocity.y + knockback_drag;
+			}
+			
 			// Increment the state duration.
 			state_duration += FlxG.elapsed;
 		}
@@ -279,6 +318,7 @@ package {
 		public function set state(value:int):void {
 			$state         = value;
 			state_duration = state_max_duration = 0.0;
+			sprite.stopFollowingPath(true);
 			
 			switch (state) {
 				case IdleState:      startIdle();        break;

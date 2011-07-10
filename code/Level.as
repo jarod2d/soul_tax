@@ -35,6 +35,9 @@ package {
 		// The list of NPCs in the level.
 		public var NPCs:FlxGroup;
 		
+		// The list of hitboxes in the level.
+		public var hitboxes:FlxGroup;
+		
 		// Constructor. The level is created based on its name, which corresponds to the tilemap filenames.
 		public function Level(name:String) {
 			// Create the tilemaps and groups.
@@ -44,13 +47,14 @@ package {
 			borders    = new FlxGroup();
 			props      = new FlxGroup();
 			NPCs       = new FlxGroup();
+			hitboxes   = new FlxGroup();
 			
 			// TEMP: Hardcode the tiles and props. We'll need to fetch them based on the name eventually.
-			bg_tiles.loadMap(new Assets.TinyBGTiles, Assets.Tiles, TileSize, TileSize, NaN, 1, 1, 2);
-			wall_tiles.loadMap(new Assets.TinyWallTiles, Assets.Tiles, TileSize, TileSize, NaN, 1, 1, 2);
+			bg_tiles.loadMap(new Assets.TestBGTiles, Assets.Tiles, TileSize, TileSize, NaN, 1, 1, 2);
+			wall_tiles.loadMap(new Assets.TestWallTiles, Assets.Tiles, TileSize, TileSize, NaN, 1, 1, 2);
 			
 			// Set up the props and NPCs.
-			var prop_data:Object = JSON.decode(new Assets.TinyProps);
+			var prop_data:Object = JSON.decode(new Assets.TestProps);
 			var i:Number;
 			
 			// Add props.
@@ -99,6 +103,7 @@ package {
 			contents.add(wall_tiles);
 			contents.add(borders);
 			contents.add(NPCs);
+			contents.add(hitboxes);
 			contents.add(Game.player.trails);
 			contents.add(Game.player.sprite);
 		}
