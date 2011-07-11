@@ -1,0 +1,25 @@
+//
+// Our master list of levels. This determines the level order as well as all the information about each level.
+// 
+// Created by Jarod Long on 7/10/2011.
+//
+
+[
+	{
+		"id":   "Test",
+		"name": "Test Level",
+		"objectives": {
+			"any": 5,
+			"businessman": 5,
+			"maintenance_guy": 2
+		}
+	},
+	
+	{
+        "id":   "Tiny",
+		"name": "Tiny Level",
+		"objectives": {
+			"businessman": 1
+		}
+	}
+]

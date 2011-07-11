@@ -106,12 +106,13 @@ package {
 				return;
 			}
 			
+			// Return to the normal color.
+			color               = NormalColor;
+			victim.sprite.color = 0xFFFFFF;
+			
 			// Get rid of the victim.
 			victim.state = NPC.StunnedState;
 			victim       = null;
-			
-			// Return to the normal color.
-			color = NormalColor;
 			
 			// Swap the player and NPCs.
 			Game.level.swapPlayerAndNPCs();

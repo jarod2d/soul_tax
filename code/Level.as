@@ -17,6 +17,9 @@ package {
 		// The width of our borders. Not really important actually, but we need a value.
 		public static const BorderSize:int = 16;
 		
+		// Stores all of the basic level data for each level in the game.
+		public static var levels:Array;
+		
 		// For convenience, we group all of our tiles here.
 		public var contents:FlxGroup;
 		
@@ -38,9 +41,16 @@ package {
 		// The list of hitboxes in the level.
 		public var hitboxes:FlxGroup;
 		
-		// Constructor. The level is created based on its name, which corresponds to the tilemap filenames.
-		public function Level(name:String) {
-			// Create the tilemaps and groups.
+		// The level objectives and progress.
+		public var objectives:Object;
+		public var progress:Object;
+		
+		// Constructor. The level is created based on its index in levels.json, so the first level in the game is 0.
+		public function Level(index:uint) {
+			// Grab our raw level data.
+			var level_data:Object = levels[index];
+			
+			// Create all of our groups, etc.
 			contents   = new FlxGroup();
 			bg_tiles   = new FlxTilemap();
 			wall_tiles = new FlxTilemap();
@@ -49,12 +59,20 @@ package {
 			NPCs       = new FlxGroup();
 			hitboxes   = new FlxGroup();
 			
-			// TEMP: Hardcode the tiles and props. We'll need to fetch them based on the name eventually.
-			bg_tiles.loadMap(new Assets.TestBGTiles, Assets.Tiles, TileSize, TileSize, NaN, 1, 1, 2);
-			wall_tiles.loadMap(new Assets.TestWallTiles, Assets.Tiles, TileSize, TileSize, NaN, 1, 1, 2);
+			// Create our tilemaps.
+			bg_tiles.loadMap(new Assets[level_data.id + "BGTiles"], Assets.Tiles, TileSize, TileSize, NaN, 1, 1, 2);
+			wall_tiles.loadMap(new Assets[level_data.id + "WallTiles"], Assets.Tiles, TileSize, TileSize, NaN, 1, 1, 2);
+			
+			// Set up our objectives.
+			objectives = level_data.objectives;
+			progress   = { bonus: 0 };
+			
+			for (var npc_type:String in objectives) {
+				progress[npc_type] = 0;
+			}
 			
 			// Set up the props and NPCs.
-			var prop_data:Object = JSON.decode(new Assets.TestProps);
+			var prop_data:Object = JSON.decode(new Assets[level_data.id + "Props"]);
 			var i:Number;
 			
 			// Add props.
@@ -126,6 +144,21 @@ package {
 				members[trails_index] = NPCs;
 				members[player_index] = Game.player.trails;
 				members[npc_index]    = Game.player.sprite;
+			}
+		}
+		
+		// Updates the progress of the player in the level by counting the given NPC as a kill.
+		public function updateProgress(killed_npc:NPC):void {
+			var npc_id:String = killed_npc.type.id;
+			
+			if (progress[npc_id] >= objectives[npc_id]) {
+				progress.any++;
+			}
+			else if (objectives[npc_id] !== null) {
+				progress[npc_id]++;
+			}
+			else {
+				progress.bonus++;
 			}
 		}
 		

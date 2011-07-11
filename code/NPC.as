@@ -12,15 +12,19 @@ package {
 		
 		// The master list of all NPC types. The keys need to match up with the values for each prop given in Flevel.
 		public static var types:Object = {
-			"office_worker": {
-				image:         Assets.OfficeWorkerSprite,
+			"businessman": {
+				id:            "businessman",
+				name:          "Business Man",
+				image:         Assets.BusinessmanSprite,
 				hp:            100.0,
 				strength:      35.0,
 				jump_strength: 3.75
 			},
 			
-			"construction_worker": {
-				image:         Assets.ConstructionWorkerSprite,
+			"maintenance_guy": {
+				id:            "maintenance_guy",
+				name:          "Maintenance Guy",
+				image:         Assets.MaintenanceGuySprite,
 				hp:            100.0,
 				strength:      35.0,
 				jump_strength: 3.75
@@ -37,6 +41,9 @@ package {
 		// Multipliers for the NPC's speed in various states.
 		public static const WanderSpeedFactor:Number = 0.25;
 		public static const FleeSpeedFactor:Number   = 1.0;
+		
+		// Each NPC stores a reference to their type configuration object.
+		public var type:Object;
 		
 		// The AI state of the NPC, which should correspond to one of the AI state constants above. Don't set this
 		// directly -- use the getters and setters.
@@ -68,12 +75,12 @@ package {
 		public function NPC(id:String, x:Number, y:Number) {
 			super(x, y);
 			
-			var properties:Object = NPC.types[id];
+			type = NPC.types[id];
 			
 			// Set the NPC's stats.
-			hp            = properties.hp;
-			strength      = properties.strength;
-			jump_strength = properties.jump_strength;
+			hp            = type.hp;
+			strength      = type.strength;
+			jump_strength = type.jump_strength;
 			
 			// Set up movement.
 			// TODO: Grab speed stats from the NPC stat data.
@@ -87,7 +94,7 @@ package {
 			
 			// Load the player sprite.
 			// TEMP: We're just using a default width and height for now.
-			sprite.loadGraphic(properties.image, true, true, 4, 13);
+			sprite.loadGraphic(type.image, true, true, 4, 13);
 			
 			// TODO: Set up animations.
 		}
@@ -116,7 +123,15 @@ package {
 		// Kills the NPC. This is different from Flixel's version of killing -- this is what happens when the NPC
 		// actually runs out of health and dies, including playing sounds, animations, etc.
 		public function kill():void {
-			// For now we just kill the sprite.
+			// If the player is possessing us, we need to release him now.
+			if (Game.player.victim === this) {
+				Game.player.stopPossessing();
+			}
+			
+			// Update the level progress.
+			Game.level.updateProgress(this);
+			
+			// Kill the sprite.
 			sprite.kill();
 		}
 		

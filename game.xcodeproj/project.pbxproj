@@ -8,6 +8,8 @@
 
 /* Begin PBXFileReference section */
 		7A27D68513C7D02700E05BF1 /* HitBox.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = HitBox.as; path = code/HitBox.as; sourceTree = "<group>"; };
+		7A27D68713CA5C6600E05BF1 /* KillCounter.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = KillCounter.as; path = code/KillCounter.as; sourceTree = "<group>"; };
+		7A27D68813CA627200E05BF1 /* Meter.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = Meter.as; path = code/Meter.as; sourceTree = "<group>"; };
 		7ABC6EC213BEB4370007FF9B /* Assets.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = Assets.as; path = code/Assets.as; sourceTree = "<group>"; };
 		7ABC6EC513BEF81D0007FF9B /* MathUtil.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = MathUtil.as; path = code/MathUtil.as; sourceTree = "<group>"; };
 		7AC8114A13BE420D00656C2A /* autotiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = autotiles.png; sourceTree = "<group>"; };
@@ -139,13 +141,13 @@
 		7AE34BEF13C04D1800F5B66A /* Response.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Response.as; sourceTree = "<group>"; };
 		7AE34BF113C04D1800F5B66A /* CompleteResponseEvent.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CompleteResponseEvent.as; sourceTree = "<group>"; };
 		7AE34BF213C04D1800F5B66A /* SocketHelper.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SocketHelper.as; sourceTree = "<group>"; };
-		7AE34BF513C04D1800F5B66A /* JSON.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JSON.as; sourceTree = "<group>"; };
-		7AE34BF613C04D1800F5B66A /* JSONDecoder.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JSONDecoder.as; sourceTree = "<group>"; };
-		7AE34BF713C04D1800F5B66A /* JSONEncoder.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JSONEncoder.as; sourceTree = "<group>"; };
-		7AE34BF813C04D1800F5B66A /* JSONParseError.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JSONParseError.as; sourceTree = "<group>"; };
-		7AE34BF913C04D1800F5B66A /* JSONToken.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JSONToken.as; sourceTree = "<group>"; };
-		7AE34BFA13C04D1800F5B66A /* JSONTokenizer.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JSONTokenizer.as; sourceTree = "<group>"; };
-		7AE34BFB13C04D1800F5B66A /* JSONTokenType.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JSONTokenType.as; sourceTree = "<group>"; };
+		7AE34BF513C04D1800F5B66A /* JSON.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; path = JSON.as; sourceTree = "<group>"; };
+		7AE34BF613C04D1800F5B66A /* JSONDecoder.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; path = JSONDecoder.as; sourceTree = "<group>"; };
+		7AE34BF713C04D1800F5B66A /* JSONEncoder.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; path = JSONEncoder.as; sourceTree = "<group>"; };
+		7AE34BF813C04D1800F5B66A /* JSONParseError.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; path = JSONParseError.as; sourceTree = "<group>"; };
+		7AE34BF913C04D1800F5B66A /* JSONToken.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; path = JSONToken.as; sourceTree = "<group>"; };
+		7AE34BFA13C04D1800F5B66A /* JSONTokenizer.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; path = JSONTokenizer.as; sourceTree = "<group>"; };
+		7AE34BFB13C04D1800F5B66A /* JSONTokenType.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; path = JSONTokenType.as; sourceTree = "<group>"; };
 		7AE34BFD13C04D1800F5B66A /* ArrayUtil.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ArrayUtil.as; sourceTree = "<group>"; };
 		7AE34BFE13C04D1800F5B66A /* DateUtil.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DateUtil.as; sourceTree = "<group>"; };
 		7AE34BFF13C04D1800F5B66A /* DictionaryUtil.as */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DictionaryUtil.as; sourceTree = "<group>"; };
@@ -159,6 +161,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		7A36537113CA79FC003B93C9 /* Level */ = {
+			isa = PBXGroup;
+			children = (
+				7AD0D08813BFA0BE00E5A811 /* Level.as */,
+			);
+			name = Level;
+			sourceTree = "<group>";
+		};
 		7ABC6EC413BEF7F50007FF9B /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -328,12 +338,12 @@
 			children = (
 				7AC8119B13BE445400656C2A /* States */,
 				7AC811AC13BE930300656C2A /* Entities */,
+				7A36537113CA79FC003B93C9 /* Level */,
 				7ADDAF0F13C6CF7300D799FE /* UI */,
 				7ABC6EC413BEF7F50007FF9B /* Util */,
 				7AC811A213BE536500656C2A /* Preloader.as */,
 				7AC8119913BE427900656C2A /* Game.as */,
 				7ABC6EC213BEB4370007FF9B /* Assets.as */,
-				7AD0D08813BFA0BE00E5A811 /* Level.as */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -374,7 +384,9 @@
 			isa = PBXGroup;
 			children = (
 				7ADDAF1113C6CF8C00D799FE /* UI.as */,
+				7A27D68813CA627200E05BF1 /* Meter.as */,
 				7ADDAF1213C6D28700D799FE /* PossessionMonitor.as */,
+				7A27D68713CA5C6600E05BF1 /* KillCounter.as */,
 			);
 			name = UI;
 			sourceTree = "<group>";
