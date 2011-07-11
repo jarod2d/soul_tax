@@ -1,0 +1,117 @@
+//
+// Our master list of NPCs and their data.
+// 
+// Created by Jarod Long on 7/11/2011.
+//
+
+{
+	"bank_manager": {
+		"id":            "bank_manager",
+		"name":          "Bank Manager",
+		"special":       "Yells at dudes, scaring them",
+		"hp":            100.0,
+		"strength":      35.0,
+		"jump_strength": 3.75,
+		"width":         8,
+		"height":        16
+	},
+	
+	"burglar": {
+		"id":            "burglar",
+		"name":          "Burglar",
+		"special":       "Unlocks doors",
+		"hp":            100.0,
+		"strength":      35.0,
+		"jump_strength": 3.75,
+		"width":         8,
+		"height":        16
+	},
+	
+	"businessman": {
+		"id":            "businessman",
+		"name":          "Business Man",
+		"special":       "Whacks dudes with briefcase",
+		"hp":            100.0,
+		"strength":      35.0,
+		"jump_strength": 3.75,
+		"width":         8,
+		"height":        16
+	},
+	
+	"ceo": {
+		"id":            "ceo",
+		"name":          "CEO",
+		"special":       "Does something special",
+		"hp":            100.0,
+		"strength":      35.0,
+		"jump_strength": 3.75,
+		"width":         8,
+		"height":        16
+	},
+	
+	"maintenance_guy": {
+		"id":            "maintenance_guy",
+		"name":          "Maintenance Guy",
+		"special":       "Breaks floors",
+		"hp":            100.0,
+		"strength":      35.0,
+		"jump_strength": 3.75,
+		"width":         8,
+		"height":        16
+	},
+	
+	"old_lady": {
+		"id":            "old_lady",
+		"name":          "Old Lady",
+		"special":       "Makes dudes fall asleep with stories",
+		"hp":            100.0,
+		"strength":      35.0,
+		"jump_strength": 3.75,
+		"width":         11,
+		"height":        16
+	},
+	
+	"robot": {
+		"id":            "robot",
+		"name":          "Robot",
+		"special":       "Can detect possessed dudes",
+		"hp":            100.0,
+		"strength":      35.0,
+		"jump_strength": 3.75,
+		"width":         11,
+		"height":        16
+	},
+	
+	"security_guard": {
+		"id":            "security_guard",
+		"name":          "Security Guard",
+		"special":       "Shoots dudes with gun",
+		"hp":            100.0,
+		"strength":      35.0,
+		"jump_strength": 3.75,
+		"width":         8,
+		"height":        16
+	},
+	
+	"superhero": {
+		"id":            "superhero",
+		"name":          "Cpt. Rush",
+		"special":       "Uses superhuman speed to crush dudes",
+		"hp":            100.0,
+		"strength":      35.0,
+		"jump_strength": 3.75,
+		"width":         12,
+		"height":        16
+	},
+	
+	"supervillain": {
+		"id":            "supervillain",
+		"name":          "Dr. Derp",
+		"special":       "Shrinks dudes with shrink ray",
+		"hp":            100.0,
+		"strength":      35.0,
+		"jump_strength": 3.75,
+		"width":         8,
+		"height":        16
+	}
+}

@@ -53,12 +53,12 @@ package {
 			
 			for (var i:int = 0; i < trail_count; i++) {
 				var trail:FlxSprite = new FlxSprite();
-				trail.loadGraphic(Assets.GhostSprite, true, true, 4, 15).kill();
+				trail.loadGraphic(Assets.ghost_sprite, true, true, 4, 15).kill();
 				trails.add(trail);
 			}
 			
 			// Load the player sprite.
-			sprite.loadGraphic(Assets.GhostSprite, true, true, 4, 15);
+			sprite.loadGraphic(Assets.ghost_sprite, true, true, 4, 15);
 			
 			// Set up animations.
 			sprite.addAnimation("float", [0, 1, 2, 3, 4, 5, 6, 7], 20);

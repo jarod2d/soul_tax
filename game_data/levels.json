@@ -6,7 +6,7 @@
 
 [
 	{
-		"id":   "Test",
+		"id":   "test",
 		"name": "Test Level",
 		"objectives": {
 			"any": 5,
@@ -16,7 +16,7 @@
 	},
 	
 	{
-        "id":   "Tiny",
+        "id":   "tiny",
 		"name": "Tiny Level",
 		"objectives": {
 			"businessman": 1

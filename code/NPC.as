@@ -11,25 +11,7 @@ package {
 	public class NPC extends Entity {
 		
 		// The master list of all NPC types. The keys need to match up with the values for each prop given in Flevel.
-		public static var types:Object = {
-			"businessman": {
-				id:            "businessman",
-				name:          "Business Man",
-				image:         Assets.BusinessmanSprite,
-				hp:            100.0,
-				strength:      35.0,
-				jump_strength: 3.75
-			},
-			
-			"maintenance_guy": {
-				id:            "maintenance_guy",
-				name:          "Maintenance Guy",
-				image:         Assets.MaintenanceGuySprite,
-				hp:            100.0,
-				strength:      35.0,
-				jump_strength: 3.75
-			}
-		};
+		public static var types:Object;
 		
 		// The list of possible AI states. Their names should hopefully be self-documenting.
 		public static const IdleState:int      = 0;
@@ -71,10 +53,11 @@ package {
 		// values to get knockback behavior.
 		public var knockback_velocity:FlxPoint;
 		
-		// Constructor. The id should be a string that corresponds to one of the keys in the types object above.
+		// Constructor. The id should be a string that corresponds to one of the keys in npcs.json.
 		public function NPC(id:String, x:Number, y:Number) {
 			super(x, y);
 			
+			// Grab the type data.
 			type = NPC.types[id];
 			
 			// Set the NPC's stats.
@@ -93,10 +76,15 @@ package {
 			state = IdleState;
 			
 			// Load the player sprite.
-			// TEMP: We're just using a default width and height for now.
-			sprite.loadGraphic(type.image, true, true, 4, 13);
+			sprite.loadGraphic(Assets[type.id + "_sprite"], true, true, type.width, type.height);
 			
-			// TODO: Set up animations.
+			// TODO: Set bounds and offset.
+			
+			// Set up animations.
+			// TODO: We'll probably need to define everything but the idle and walk animations in the config.
+			sprite.addAnimation("idle", [0], 10);
+			sprite.addAnimation("walk", [0, 1, 2, 3], 10);
+			sprite.play("idle");
 		}
 		
 		// Makes the NPC jump. The height of the jump is relative to their jump_strength stat. You can pass in a
@@ -139,6 +127,9 @@ package {
 		protected function startIdle():void {
 			// Set the max duration.
 			state_max_duration = 2.5 + Math.random() * 8.0;
+			
+			// Set the animation.
+			sprite.play("idle");
 		}
 		
 		// Callback that occurs when the NPC's behavior changes to wander.
@@ -154,6 +145,9 @@ package {
 //			else {
 //				// TODO: Implement me!
 //			}
+			
+			// Set the animation.
+			sprite.play("walk");
 		}
 		
 		// Callback that occurs when the NPC's behavior changes to flee.
@@ -176,7 +170,9 @@ package {
 			// stops possessing the NPC mid-jump, they continue their trajectory.
 			acceleration.x = 0.0;
 			
+			// Set the animation.
 			// TODO: Play some sort of stunned animation.
+			sprite.play("idle");
 		}
 		
 		// Runs the NPC's idle behavior.
@@ -228,7 +224,7 @@ package {
 		override public function beforeUpdate():void {
 			super.beforeUpdate();
 			
-			// We don't do anything if we're being possessed.
+			// We don't run AI if we're possessed.
 			if (state !== PossessedState) {
 				// Run the AI.
 				behave();
@@ -238,6 +234,16 @@ package {
 				if (sprite.pathSpeed == 0.0) {
 					sprite.stopFollowingPath(true);
 					velocity.x = 0.0;
+					sprite.play("idle");
+				}
+			}
+			else {
+				// Set the animation.
+				if (velocity.x !== 0.0 && sprite.isTouching(FlxObject.DOWN)) {
+					sprite.play("walk");
+				}
+				else {
+					sprite.play("idle");
 				}
 			}
 			

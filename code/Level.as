@@ -60,8 +60,8 @@ package {
 			hitboxes   = new FlxGroup();
 			
 			// Create our tilemaps.
-			bg_tiles.loadMap(new Assets[level_data.id + "BGTiles"], Assets.Tiles, TileSize, TileSize, NaN, 1, 1, 2);
-			wall_tiles.loadMap(new Assets[level_data.id + "WallTiles"], Assets.Tiles, TileSize, TileSize, NaN, 1, 1, 2);
+			bg_tiles.loadMap(new Assets[level_data.id + "_bg_tiles"], Assets.tiles, TileSize, TileSize, NaN, 1, 1, 2);
+			wall_tiles.loadMap(new Assets[level_data.id + "_wall_tiles"], Assets.tiles, TileSize, TileSize, NaN, 1, 1, 2);
 			
 			// Set up our objectives.
 			objectives = level_data.objectives;
@@ -72,7 +72,7 @@ package {
 			}
 			
 			// Set up the props and NPCs.
-			var prop_data:Object = JSON.decode(new Assets[level_data.id + "Props"]);
+			var prop_data:Object = JSON.decode(new Assets[level_data.id + "_props"]);
 			var i:Number;
 			
 			// Add props.

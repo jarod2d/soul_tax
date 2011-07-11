@@ -16,32 +16,45 @@ package {
 	public class Assets {
 		
 		// Fonts.
-		[Embed(source="../fonts/monomin_6x5.ttf", fontName="monomin",  embedAsCFF="false")] private var MonominFont:Class;
-		[Embed(source="../fonts/propomin_5.ttf",  fontName="propomin", embedAsCFF="false")] private var PropominFont:Class;
+		[Embed(source="../fonts/monomin_6x5.ttf", fontName="monomin",  embedAsCFF="false")] private var monomin_font:Class;
+		[Embed(source="../fonts/propomin_5.ttf",  fontName="propomin", embedAsCFF="false")] private var propomin_font:Class;
 		
 		// Character sprites.
-		[Embed(source="../images/ghost.png")] public static var GhostSprite:Class;
-		[Embed(source="../images/businessman.png")] public static var BusinessmanSprite:Class;
-		[Embed(source="../images/maintenance_guy.png")] public static var MaintenanceGuySprite:Class;
+		[Embed(source="../images/ghost.png")] public static var ghost_sprite:Class;
+		[Embed(source="../images/bank_manager.png")] public static var bank_manager_sprite:Class;
+		[Embed(source="../images/burglar.png")] public static var burglar_sprite:Class;
+		[Embed(source="../images/businessman.png")] public static var businessman_sprite:Class;
+		[Embed(source="../images/ceo.png")] public static var ceo_sprite:Class;
+		[Embed(source="../images/maintenance_guy.png")] public static var maintenance_guy_sprite:Class;
+		[Embed(source="../images/old_lady.png")] public static var old_lady_sprite:Class;
+		[Embed(source="../images/robot.png")] public static var robot_sprite:Class;
+		[Embed(source="../images/security_guard.png")] public static var security_guard_sprite:Class;
+		[Embed(source="../images/superhero.png")] public static var superhero_sprite:Class;
+		[Embed(source="../images/supervillain.png")] public static var supervillain_sprite:Class;
 		
 		// Tiles.
-		[Embed(source="../images/tiles.png")] public static var Tiles:Class;
+		[Embed(source="../images/tiles.png")] public static var tiles:Class;
+		
+		// Game data.
+		[Embed(source="../game_data/levels.json", mimeType="application/octet-stream")] public static var level_data:Class;
+		[Embed(source="../game_data/npcs.json", mimeType="application/octet-stream")] public static var npc_data:Class;
 		
 		// Level data.
-		[Embed(source="../levels/levels.json", mimeType="application/octet-stream")] public static var LevelData:Class;
+		[Embed(source="../levels/test.0.csv", mimeType="application/octet-stream")] public static var test_bg_tiles:Class;
+		[Embed(source="../levels/test.1.csv", mimeType="application/octet-stream")] public static var test_wall_tiles:Class;
+		[Embed(source="../levels/test.props.json", mimeType="application/octet-stream")] public static var test_props:Class;
 		
-		[Embed(source="../levels/test.0.csv", mimeType="application/octet-stream")] public static var TestBGTiles:Class;
-		[Embed(source="../levels/test.1.csv", mimeType="application/octet-stream")] public static var TestWallTiles:Class;
-		[Embed(source="../levels/test.props.json", mimeType="application/octet-stream")] public static var TestProps:Class;
-		
-		[Embed(source="../levels/tiny.0.csv", mimeType="application/octet-stream")] public static var TinyBGTiles:Class;
-		[Embed(source="../levels/tiny.1.csv", mimeType="application/octet-stream")] public static var TinyWallTiles:Class;
-		[Embed(source="../levels/tiny.props.json", mimeType="application/octet-stream")] public static var TinyProps:Class;
+		[Embed(source="../levels/tiny.0.csv", mimeType="application/octet-stream")] public static var tiny_bg_tiles:Class;
+		[Embed(source="../levels/tiny.1.csv", mimeType="application/octet-stream")] public static var tiny_wall_tiles:Class;
+		[Embed(source="../levels/tiny.props.json", mimeType="application/octet-stream")] public static var tiny_props:Class;
 		
 		// Processes some of the loaded data. Should be called once at the beginning of the game.
 		public static function load():void {
 			// Load the level data.
-			Level.levels = JSON.decode(new LevelData);
+			Level.levels = JSON.decode(new level_data);
+			
+			// Load the NPC data.
+			NPC.types = JSON.decode(new npc_data);
 		}
 		
 	}
