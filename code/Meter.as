@@ -132,6 +132,19 @@ package {
 			return animation_start + (animation_end - animation_start) * (-(Math.cos(animation_stage * Math.PI) / 2.0) + 0.5);
 		}
 		
+		// Some getters for position data.
+		public function get x():Number {
+			return background.x;
+		}
+		
+		public function get y():Number {
+			return background.y;
+		}
+		
+		public function get center():FlxPoint {
+			return new FlxPoint(background.x + background.width / 2.0, background.y + background.height / 2.0);
+		}
+		
 	}
 	
 }

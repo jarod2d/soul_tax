@@ -19,6 +19,16 @@ package {
 			text = new FlxText(0, 100, FlxG.width, "Muerte y Los Impuestos");
 			text.setFormat("propomin", 16, 0x553333, "center", 0xFF705555);
 			add(text);
+			
+			// Add the SA Gamedev logo.
+			var logo:FlxSprite = new FlxSprite(0.0, 0.0, Assets.sa_gamedev_logo);
+			logo.origin.x = logo.width;
+			logo.origin.y = logo.height;
+			logo.x = FlxG.width - logo.width - 4;
+			logo.y = FlxG.height - logo.height - 4;
+			
+			logo.scale.x = logo.scale.y = 0.5;
+			add(logo);
 		}
 		
 		override public function update():void {

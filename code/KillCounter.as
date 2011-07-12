@@ -14,16 +14,28 @@ package {
 		private static const MeterWidth:Number  = 40.0;
 		private static const MeterMargin:Number = 4.0;
 		
-		// Each type of NPC that needs to be killed gets a meter. Each meter goes in this slot.
+		// How fast the ghosts move towards the meters.
+		private static const GhostVelocity:Number     = 250.0;
+		private static const GhostAcceleration:Number = 160.0;
+		
+		// Each type of NPC that needs to be killed gets a meter. Each meter goes in this group.
 		public var meters:FlxGroup;
+		
+		// When an NPC dies, we create a ghost sprite at their corpse and animate it up to the meter. We have an array
+		// of plain objects, each of which contains the ghost sprite and some information necessary for the animation to
+		// complete. The FlxGroup contains just the sprites like a normal FlxGroup.
+		public var ghosts:Array;
+		public var ghost_sprites:FlxGroup;
 		
 		// Constructor.
 		public function KillCounter() {
 			super();
 			
-			// Create the objective meters.
-			meters = new FlxGroup();
+			meters        = new FlxGroup();
+			ghosts        = [];
+			ghost_sprites = new FlxGroup();
 			
+			// Create the objective meters.
 			var meter_position:Number = 4.0;
 			
 			for (var npc_type:String in Game.level.objectives) {
@@ -35,11 +47,76 @@ package {
 			
 			// Add everything.
 			add(meters);
+			add(ghost_sprites);
+		}
+		
+		// When an NPC dies, we animate their ghost up to their meter.
+		public function spawnGhost(dead_npc:NPC) {
+			// Figure out where the ghost should be in screen coordinates and create it. We need to make the ghost's
+			// scroll factor 0 in order to make it part of the UI, so we put the ghost in screen coordinates.
+			var ghost:FlxSprite = new FlxSprite(dead_npc.x - FlxG.camera.scroll.x, dead_npc.y - FlxG.camera.scroll.y);
+			ghost.scrollFactor.x = ghost.scrollFactor.y = 0.0;
+			ghost.maxVelocity.x = ghost.maxVelocity.y = GhostVelocity;
+			ghost.alpha = 0.75;
+			
+			ghost.loadGraphic(Assets.ghost_sprite, true, true, 4, 15);
+			ghost.addAnimation("float", [0, 1, 2, 3, 4, 5, 6, 7], 20);
+			ghost.play("float");
+			
+			ghost_sprites.add(ghost);
+			
+			// Store the ghost data.
+			var ghost_data:Object = {
+				sprite: ghost,
+				npc: dead_npc
+			};
+			
+			ghosts.push(ghost_data);
+			
+			// Make the ghost move towards their meter.
+			// TODO: This doesn't work if the ghost needs to go to the "any" meter, or if they need to go to the bonus.
+			for each (var meter:Meter in meters.members) {
+				if (meter.value_property === dead_npc.type.id) {
+					ghost_data.destination = meter.center;
+					
+					ghost.acceleration.x = meter.center.x - ghost.x;
+					ghost.acceleration.y = meter.center.y - ghost.y;
+					
+					MathUtil.normalize(ghost.acceleration);
+					
+					ghost.acceleration.x *= GhostAcceleration;
+					ghost.acceleration.y *= GhostAcceleration;
+					
+					break;
+				}
+			}
+			
+			// Make sure that we found our meter. If we didn't, just get rid of the ghost. This should never happen
+			// though.
+			if (ghost.acceleration.x === 0.0 && ghost.acceleration.y === 0.0) {
+				ghost.kill()
+				ghosts.remove(ghost);
+				Game.level.updateProgress(dead_npc);
+			}
 		}
 		
 		// Update.
 		override public function update():void {
 			super.update();
+			
+			// Check to see if any ghosts have reached their destination.
+			for (var i:int = 0; i < ghosts.length; i++) {
+				var ghost_data:Object = ghosts[i];
+				
+				if (ghost_data.sprite.y <= ghost_data.destination.y) {
+					ghost_data.sprite.kill();
+					ghosts.splice(i, 1);
+					ghost_sprites.remove(ghost_data.sprite);
+					Game.level.updateProgress(ghost_data.npc);
+					
+					i--;
+				}
+			}
 		}
 		
 	}

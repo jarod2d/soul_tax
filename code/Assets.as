@@ -19,6 +19,9 @@ package {
 		[Embed(source="../fonts/monomin_6x5.ttf", fontName="monomin",  embedAsCFF="false")] private var monomin_font:Class;
 		[Embed(source="../fonts/propomin_5.ttf",  fontName="propomin", embedAsCFF="false")] private var propomin_font:Class;
 		
+		// Miscellaneous images.
+		[Embed(source="../images/sa_gamedev_logo.png")] public static var sa_gamedev_logo:Class;
+		
 		// Character sprites.
 		[Embed(source="../images/ghost.png")] public static var ghost_sprite:Class;
 		[Embed(source="../images/bank_manager.png")] public static var bank_manager_sprite:Class;

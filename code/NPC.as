@@ -117,7 +117,7 @@ package {
 			}
 			
 			// Update the level progress.
-			Game.level.updateProgress(this);
+			Game.level.queueDeadNPC(this);
 			
 			// Kill the sprite.
 			sprite.kill();

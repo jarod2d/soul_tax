@@ -45,6 +45,9 @@ package {
 		public var objectives:Object;
 		public var progress:Object;
 		
+		// A queue of NPCs that have recently been killed and are waiting to be logged as dead.
+		public var dying_npcs:Array;
+		
 		// Constructor. The level is created based on its index in levels.json, so the first level in the game is 0.
 		public function Level(index:uint) {
 			// Grab our raw level data.
@@ -58,6 +61,7 @@ package {
 			props      = new FlxGroup();
 			NPCs       = new FlxGroup();
 			hitboxes   = new FlxGroup();
+			dying_npcs = [];
 			
 			// Create our tilemaps.
 			bg_tiles.loadMap(new Assets[level_data.id + "_bg_tiles"], Assets.tiles, TileSize, TileSize, NaN, 1, 1, 2);
@@ -147,10 +151,29 @@ package {
 			}
 		}
 		
-		// Updates the progress of the player in the level by counting the given NPC as a kill.
-		public function updateProgress(killed_npc:NPC):void {
-			var npc_id:String = killed_npc.type.id;
+		// Queues the given NPC, who should have just been killed, to be counted towards the player's progress after
+		// playing a dying animation.
+		public function queueDeadNPC(dead_npc:NPC):void {
+			// Put the dead NPC in the queue.
+			dying_npcs.push(dead_npc);
 			
+			// Tell the UI to spawn a ghost.
+			Game.ui.kill_counter.spawnGhost(dead_npc);
+		}
+		
+		// Updates the progress of the player in the level by counting the given NPC as a kill. You probably shouldn't
+		// call this method directly -- it's meant to be called by way of queueDeadNPC.
+		public function updateProgress(dead_npc:NPC):void {
+			var npc_id:String = dead_npc.type.id;
+			
+			// Remove the NPC from the dying queue if necessary.
+			var index:int = dying_npcs.indexOf(dead_npc);
+			
+			if (index >= 0) {
+				dying_npcs.splice(index, 1);
+			}
+			
+			// Increment the appropriate progress counter.
 			if (progress[npc_id] >= objectives[npc_id]) {
 				progress.any++;
 			}
