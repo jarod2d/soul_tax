@@ -164,8 +164,6 @@ package {
 		// Updates the progress of the player in the level by counting the given NPC as a kill. You probably shouldn't
 		// call this method directly -- it's meant to be called by way of queueDeadNPC.
 		public function updateProgress(dead_npc:NPC):void {
-			var npc_id:String = dead_npc.type.id;
-			
 			// Remove the NPC from the dying queue if necessary.
 			var index:int = dying_npcs.indexOf(dead_npc);
 			
@@ -174,15 +172,7 @@ package {
 			}
 			
 			// Increment the appropriate progress counter.
-			if (progress[npc_id] >= objectives[npc_id]) {
-				progress.any++;
-			}
-			else if (objectives[npc_id] !== null) {
-				progress[npc_id]++;
-			}
-			else {
-				progress.bonus++;
-			}
+			progress[dead_npc.objective_type]++;
 		}
 		
 		// Getters for the width and height, in tiles and pixels.

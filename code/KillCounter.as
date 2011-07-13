@@ -12,6 +12,7 @@ package {
 		
 		// Some metrics for the meters.
 		private static const MeterWidth:Number  = 40.0;
+		private static const MeterHeight:Number = 3.0;
 		private static const MeterMargin:Number = 4.0;
 		
 		// How fast the ghosts move towards the meters.
@@ -36,13 +37,19 @@ package {
 			ghost_sprites = new FlxGroup();
 			
 			// Create the objective meters.
-			var meter_position:Number = 4.0;
+			var meter_position:FlxPoint = new FlxPoint(4.0, 4.0);
+			var row_count:int           = 0;
 			
 			for (var npc_type:String in Game.level.objectives) {
-				var meter:Meter = new Meter(Game.level.progress, npc_type, Game.level.objectives, npc_type, meter_position, 4.0, MeterWidth, 3.0, 0xFFCCCCCC);
+				var npc_data:Object = NPC.types[npc_type];
+				var color:uint      = (npc_data && npc_data.color) ? npc_data.color : 0xFFCCCCCC;
+				var meter:Meter     = new Meter(Game.level.progress, npc_type, Game.level.objectives, npc_type, meter_position.x, meter_position.y, MeterWidth, 3.0, color);
 				meters.add(meter);
 				
-				meter_position += MeterWidth + MeterMargin;
+				meter_position.x += MeterWidth + MeterMargin;
+				row_count++;
+				
+				meter_position
 			}
 			
 			// Add everything.
@@ -52,11 +59,14 @@ package {
 		
 		// When an NPC dies, we animate their ghost up to their meter.
 		public function spawnGhost(dead_npc:NPC):void {
+			// Figure out which meter we're going towards.
+			
 			// Figure out where the ghost should be in screen coordinates and create it. We need to make the ghost's
 			// scroll factor 0 in order to make it part of the UI, so we put the ghost in screen coordinates.
 			var ghost:FlxSprite = new FlxSprite(dead_npc.x - FlxG.camera.scroll.x, dead_npc.y - FlxG.camera.scroll.y);
 			ghost.scrollFactor.x = ghost.scrollFactor.y = 0.0;
-			ghost.maxVelocity.x = ghost.maxVelocity.y = GhostVelocity;
+			ghost.maxVelocity.x  = ghost.maxVelocity.y  = GhostVelocity;
+//			ghost.color = dead_npc.type.color
 			ghost.alpha = 0.75;
 			
 			ghost.loadGraphic(Assets.ghost_sprite, true, true, 4, 15);
@@ -74,17 +84,20 @@ package {
 			ghosts.push(ghost_data);
 			
 			// Make the ghost move towards their meter.
-			// TODO: This doesn't work if the ghost needs to go to the "any" meter, or if they need to go to the bonus.
-			for each (var meter:Meter in meters.members) {
-				if (meter.value_property === dead_npc.type.id) {
-					ghost_data.destination = meter.center;
-					
-					break;
+			FlxG.log(dead_npc.objective_type);
+			
+			if (dead_npc.objective_type === "bonus") {
+				// TODO: Fly towards the bonus text.
+			}
+			else {
+				for each (var meter:Meter in meters.members) {
+					if (meter.value_property === dead_npc.objective_type) {
+						ghost_data.destination = meter.center;
+						
+						break;
+					}
 				}
 			}
-			
-			// TODO: If we didn't find our meter, then we need to go towards the bonus text.
-			
 			
 			// Accelerate the ghost towards their meter. If, somehow, the ghost didn't get a destination, get rid of it.
 			// That should never happen though.
@@ -116,6 +129,13 @@ package {
 					ghost_data.sprite.kill();
 					ghosts.splice(i, 1);
 					ghost_sprites.remove(ghost_data.sprite);
+					// TODO: Major problem! We don't update the progress until the ghost reaches the meter, but which
+					// meter a ghost counts towards depends on the current progress. Thus if you have, say, 1
+					// businessman left to kill and 5 of any, and you kill 2 businessmen simultaneously, both will fly
+					// towards the businessman meter.
+					// 
+					// Actually not a HUGE deal I guess because the score should still be counted properly, but it still
+					// sucks.
 					Game.level.updateProgress(ghost_data.npc);
 					
 					i--;

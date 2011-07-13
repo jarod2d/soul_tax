@@ -8,6 +8,7 @@
 	"bank_manager": {
 		"id":            "bank_manager",
 		"name":          "Bank Manager",
+		"color":         "0xFFFFDDDD",
 		"special":       "Yells at dudes, scaring them",
 		"hp":            100.0,
 		"strength":      35.0,
@@ -22,6 +23,7 @@
 	"burglar": {
 		"id":            "burglar",
 		"name":          "Burglar",
+		"color":         "0xFFFFCC44",
 		"special":       "Unlocks doors",
 		"hp":            100.0,
 		"strength":      35.0,
@@ -36,6 +38,7 @@
 	"businessman": {
 		"id":            "businessman",
 		"name":          "Business Man",
+		"color":         "0xFF2266C0",
 		"special":       "Whacks dudes with briefcase",
 		"hp":            100.0,
 		"strength":      35.0,
@@ -50,6 +53,7 @@
 	"ceo": {
 		"id":            "ceo",
 		"name":          "CEO",
+		"color":         "0xFF996666",
 		"special":       "Does something special",
 		"hp":            100.0,
 		"strength":      35.0,
@@ -65,6 +69,7 @@
 		"id":            "maintenance_guy",
 		"name":          "Maintenance Guy",
 		"special":       "Breaks floors",
+		"color":         "0xFFFF8833",
 		"hp":            100.0,
 		"strength":      35.0,
 		"jump_strength": 3.75,
@@ -78,6 +83,7 @@
 	"old_lady": {
 		"id":            "old_lady",
 		"name":          "Old Lady",
+		"color":         "0xFFDDBBFF",
 		"special":       "Makes dudes fall asleep with stories",
 		"hp":            100.0,
 		"strength":      35.0,
@@ -92,6 +98,7 @@
 	"robot": {
 		"id":            "robot",
 		"name":          "Robot",
+		"color":         "0xFFDD1111",
 		"special":       "Can detect possessed dudes",
 		"hp":            100.0,
 		"strength":      35.0,
@@ -106,6 +113,7 @@
 	"security_guard": {
 		"id":            "security_guard",
 		"name":          "Security Guard",
+		"color":         "0xFF3340DD",
 		"special":       "Shoots dudes with gun",
 		"hp":            100.0,
 		"strength":      35.0,
@@ -120,6 +128,7 @@
 	"superhero": {
 		"id":            "superhero",
 		"name":          "Cpt. Rush",
+		"color":         "0xFF1133AA",
 		"special":       "Uses superhuman speed to crush dudes",
 		"hp":            100.0,
 		"strength":      35.0,
@@ -134,6 +143,7 @@
 	"supervillain": {
 		"id":            "supervillain",
 		"name":          "Dr. Derp",
+		"color":         "0xFFCC3355",
 		"special":       "Shrinks dudes with shrink ray",
 		"hp":            100.0,
 		"strength":      35.0,

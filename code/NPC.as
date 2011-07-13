@@ -354,6 +354,26 @@ package {
 			}
 		}
 		
+		// Getter for the NPC's id.
+		public function get id():String {
+			return type.id;
+		}
+		
+		// Getter for the NPC's objective type -- that is, which objective they count for.
+		public function get objective_type():String {
+			var objectives:Object = Game.level.objectives;
+			var progress:Object   = Game.level.progress;
+			
+			// If the NPC type doesn't count for an objective, or the NPC type's objective is full, we count for the
+			// "any" or "bonus" objective.
+			if (!objectives[id] || progress[id] >= objectives[id]) {
+				return (objectives.any && progress.any < objectives.any) ? "any" : "bonus";
+			}
+			
+			// Otherwise we return our own type.
+			return id;
+		}
+		
 	}
 	
 }

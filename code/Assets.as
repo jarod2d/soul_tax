@@ -58,6 +58,13 @@ package {
 			
 			// Load the NPC data.
 			NPC.types = JSON.decode(new npc_data);
+			
+			// The colors in the NPC data need to be parsed from strings to ints.
+			for each (var npc:Object in NPC.types) {
+				if (npc.color) {
+					npc.color = uint(npc.color);
+				}
+			}
 		}
 		
 	}
