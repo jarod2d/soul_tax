@@ -51,7 +51,7 @@ package {
 		}
 		
 		// When an NPC dies, we animate their ghost up to their meter.
-		public function spawnGhost(dead_npc:NPC) {
+		public function spawnGhost(dead_npc:NPC):void {
 			// Figure out where the ghost should be in screen coordinates and create it. We need to make the ghost's
 			// scroll factor 0 in order to make it part of the UI, so we put the ghost in screen coordinates.
 			var ghost:FlxSprite = new FlxSprite(dead_npc.x - FlxG.camera.scroll.x, dead_npc.y - FlxG.camera.scroll.y);
@@ -79,23 +79,27 @@ package {
 				if (meter.value_property === dead_npc.type.id) {
 					ghost_data.destination = meter.center;
 					
-					ghost.acceleration.x = meter.center.x - ghost.x;
-					ghost.acceleration.y = meter.center.y - ghost.y;
-					
-					MathUtil.normalize(ghost.acceleration);
-					
-					ghost.acceleration.x *= GhostAcceleration;
-					ghost.acceleration.y *= GhostAcceleration;
-					
 					break;
 				}
 			}
 			
-			// Make sure that we found our meter. If we didn't, just get rid of the ghost. This should never happen
-			// though.
-			if (ghost.acceleration.x === 0.0 && ghost.acceleration.y === 0.0) {
+			// TODO: If we didn't find our meter, then we need to go towards the bonus text.
+			
+			
+			// Accelerate the ghost towards their meter. If, somehow, the ghost didn't get a destination, get rid of it.
+			// That should never happen though.
+			if (ghost_data.destination) {
+				ghost.acceleration.x = ghost_data.destination.x - ghost.x;
+				ghost.acceleration.y = ghost_data.destination.y - ghost.y;
+				
+				MathUtil.normalize(ghost.acceleration);
+				
+				ghost.acceleration.x *= GhostAcceleration;
+				ghost.acceleration.y *= GhostAcceleration;
+			}
+			else {
 				ghost.kill()
-				ghosts.remove(ghost);
+				ghosts.pop();
 				Game.level.updateProgress(dead_npc);
 			}
 		}

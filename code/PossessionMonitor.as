@@ -6,6 +6,7 @@
 
 package {
 	
+	import flash.geom.Rectangle;
 	import org.flixel.*;
 	
 	public class PossessionMonitor extends FlxGroup {
@@ -27,7 +28,8 @@ package {
 			preview = new FlxGroup();
 			
 			// Set up the preview.
-			preview_bg = new FlxSprite(FlxG.width - (PreviewSize + 4), 4).makeGraphic(PreviewSize, PreviewSize, 0x44000000);
+			preview_bg = new FlxSprite(FlxG.width - (PreviewSize + 4), 4);
+			preview_bg.makeGraphic(PreviewSize, PreviewSize, 0x44000000);
 			preview_bg.scrollFactor.x = preview_bg.scrollFactor.y = 0.0;
 			preview.add(preview_bg);
 			
@@ -49,6 +51,7 @@ package {
 			// visible, stamp the victim onto the preview so we can see which type they are.
 			if (!Game.player.victim && Game.player.potential_victim) {
 				var victim_sprite:FlxSprite = Game.player.potential_victim.sprite;
+				preview_bg.pixels.fillRect(new Rectangle(0, 0, PreviewSize, PreviewSize), 0x44000000);
 				preview_bg.stamp(victim_sprite, (PreviewSize - victim_sprite.width) / 2.0, (PreviewSize - victim_sprite.height) / 2.0);
 				preview.setAll("alpha", 1.0);
 				
