@@ -52,7 +52,7 @@ package {
 			if (!Game.player.victim && Game.player.potential_victim) {
 				var victim_sprite:FlxSprite = Game.player.potential_victim.sprite;
 				preview_bg.pixels.fillRect(new Rectangle(0, 0, PreviewSize, PreviewSize), 0x44000000);
-				preview_bg.stamp(victim_sprite, (PreviewSize - victim_sprite.width) / 2.0, (PreviewSize - victim_sprite.height) / 2.0);
+				preview_bg.stamp(victim_sprite, (PreviewSize - victim_sprite.frameWidth) / 2.0, (PreviewSize - victim_sprite.frameHeight) / 2.0);
 				preview.setAll("alpha", 1.0);
 				
 				victim_name.text  = Game.player.potential_victim.type.name;

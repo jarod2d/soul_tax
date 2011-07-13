@@ -101,7 +101,7 @@ package {
 			
 			// Update the meter fill if necessary.
 			if (animation_stage < 1.0) {
-				var fill_width:Number = Math.round(width * animated_value / max_value);
+				var fill_width:Number = Math.round(width * Math.min(animated_value, max_value) / max_value);
 				
 				if (fill_width > 0.0) {
 					fill.alpha = 1.0;

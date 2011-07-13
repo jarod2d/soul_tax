@@ -76,9 +76,13 @@ package {
 			state = IdleState;
 			
 			// Load the player sprite.
-			sprite.loadGraphic(Assets[type.id + "_sprite"], true, true, type.width, type.height);
+			sprite.loadGraphic(Assets[type.id + "_sprite"], true, true, type.frame_width, type.frame_height);
 			
-			// TODO: Set bounds and offset.
+			// Set bounds and offset.
+			sprite.width    = type.bounds_width;
+			sprite.height   = type.bounds_height;
+			sprite.offset.x = type.offset.x;
+			sprite.offset.y = type.offset.y;
 			
 			// Set up animations.
 			// TODO: We'll probably need to define everything but the idle and walk animations in the config.

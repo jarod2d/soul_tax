@@ -12,8 +12,11 @@
 		"hp":            100.0,
 		"strength":      35.0,
 		"jump_strength": 3.75,
-		"width":         8,
-		"height":        16
+		"frame_width":   8,
+		"frame_height":  16,
+		"bounds_width":  4,
+		"bounds_height": 13,
+		"offset":        { "x": 2, "y": 3 }
 	},
 	
 	"burglar": {
@@ -23,8 +26,11 @@
 		"hp":            100.0,
 		"strength":      35.0,
 		"jump_strength": 3.75,
-		"width":         8,
-		"height":        16
+		"frame_width":   8,
+		"frame_height":  16,
+		"bounds_width":  4,
+		"bounds_height": 13,
+		"offset":        { "x": 2, "y": 3 }
 	},
 	
 	"businessman": {
@@ -34,8 +40,11 @@
 		"hp":            100.0,
 		"strength":      35.0,
 		"jump_strength": 3.75,
-		"width":         8,
-		"height":        16
+		"frame_width":   8,
+		"frame_height":  16,
+		"bounds_width":  4,
+		"bounds_height": 13,
+		"offset":        { "x": 2, "y": 3 }
 	},
 	
 	"ceo": {
@@ -45,8 +54,11 @@
 		"hp":            100.0,
 		"strength":      35.0,
 		"jump_strength": 3.75,
-		"width":         8,
-		"height":        16
+		"frame_width":   8,
+		"frame_height":  16,
+		"bounds_width":  5,
+		"bounds_height": 14,
+		"offset":        { "x": 2, "y": 2 }
 	},
 	
 	"maintenance_guy": {
@@ -56,8 +68,11 @@
 		"hp":            100.0,
 		"strength":      35.0,
 		"jump_strength": 3.75,
-		"width":         8,
-		"height":        16
+		"frame_width":   8,
+		"frame_height":  16,
+		"bounds_width":  4,
+		"bounds_height": 13,
+		"offset":        { "x": 2, "y": 3 }
 	},
 	
 	"old_lady": {
@@ -67,8 +82,11 @@
 		"hp":            100.0,
 		"strength":      35.0,
 		"jump_strength": 3.75,
-		"width":         11,
-		"height":        16
+		"frame_width":   11,
+		"frame_height":  16,
+		"bounds_width":  7,
+		"bounds_height": 14,
+		"offset":        { "x": 2, "y": 2 }
 	},
 	
 	"robot": {
@@ -78,8 +96,11 @@
 		"hp":            100.0,
 		"strength":      35.0,
 		"jump_strength": 3.75,
-		"width":         11,
-		"height":        16
+		"frame_width":   11,
+		"frame_height":  16,
+		"bounds_width":  7,
+		"bounds_height": 13,
+		"offset":        { "x": 2, "y": 3 }
 	},
 	
 	"security_guard": {
@@ -89,8 +110,11 @@
 		"hp":            100.0,
 		"strength":      35.0,
 		"jump_strength": 3.75,
-		"width":         8,
-		"height":        16
+		"frame_width":   8,
+		"frame_height":  16,
+		"bounds_width":  4,
+		"bounds_height": 13,
+		"offset":        { "x": 2, "y": 3 }
 	},
 	
 	"superhero": {
@@ -100,8 +124,11 @@
 		"hp":            100.0,
 		"strength":      35.0,
 		"jump_strength": 3.75,
-		"width":         12,
-		"height":        16
+		"frame_width":   12,
+		"frame_height":  16,
+		"bounds_width":  8,
+		"bounds_height": 14,
+		"offset":        { "x": 2, "y": 2 }
 	},
 	
 	"supervillain": {
@@ -111,7 +138,10 @@
 		"hp":            100.0,
 		"strength":      35.0,
 		"jump_strength": 3.75,
-		"width":         8,
-		"height":        16
+		"frame_width":   8,
+		"frame_height":  16,
+		"bounds_width":  4,
+		"bounds_height": 14,
+		"offset":        { "x": 2, "y": 2 }
 	}
 }
