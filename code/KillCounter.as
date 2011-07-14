@@ -11,7 +11,7 @@ package {
 	public class KillCounter extends FlxGroup {
 		
 		// Some metrics for the meters.
-		private static const MeterWidth:Number   = 54.0;
+		private static const MeterWidth:Number   = 57.0;
 		private static const MeterHeight:Number  = 2.0;
 		private static const MeterMarginX:Number = 4.0;
 		private static const MeterMarginY:Number = 10.0;
