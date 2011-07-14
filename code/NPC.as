@@ -60,6 +60,11 @@ package {
 			// Grab the type data.
 			type = NPC.types[id];
 			
+			// Set up animations.
+			// TODO: Anims should be defined in the NPC config.
+			sprite.addAnimation("idle", [0], 10);
+			sprite.addAnimation("walk", [0, 1, 2, 3], 10);
+			
 			// Set the NPC's stats.
 			hp            = type.hp;
 			strength      = type.strength;
@@ -83,12 +88,6 @@ package {
 			sprite.height   = type.bounds_height;
 			sprite.offset.x = type.offset.x;
 			sprite.offset.y = type.offset.y;
-			
-			// Set up animations.
-			// TODO: We'll probably need to define everything but the idle and walk animations in the config.
-			sprite.addAnimation("idle", [0], 10);
-			sprite.addAnimation("walk", [0, 1, 2, 3], 10);
-			sprite.play("idle");
 		}
 		
 		// Makes the NPC jump. The height of the jump is relative to their jump_strength stat. You can pass in a

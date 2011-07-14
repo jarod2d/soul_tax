@@ -652,6 +652,9 @@ package org.flixel
 				i++;
 			}
 			FlxG.log("WARNING: No animation called \""+AnimName+"\"");
+			
+			var x:Object = null;
+			x.dingdong();
 		}
 		
 		/**

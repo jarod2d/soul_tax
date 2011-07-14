@@ -48,11 +48,20 @@ package {
 			ghosts        = [];
 			ghost_sprites = new FlxGroup();
 			
+			// Get a sorted list of objective keys so that the meters maintain a consistent display order.
+			var objective_keys:Array = [];
+			
+			for (var npc_type:String in Game.level.objectives) {
+				objective_keys.push(npc_type);
+			}
+			
+			objective_keys.sort();
+			
 			// Create the objective meters and their labels.
 			var meter_position:FlxPoint = new FlxPoint(4.0, 3.0);
 			var row_count:int           = 0;
 			
-			for (var npc_type:String in Game.level.objectives) {
+			for each (var npc_type:String in objective_keys) {
 				// Create the meter.
 				var npc_data:Object = NPC.types[npc_type];
 				var color:uint      = (npc_data && npc_data.color) ? npc_data.color : 0xFFCCCCCC;
@@ -115,8 +124,6 @@ package {
 		
 		// When an NPC dies, we animate their ghost up to their meter.
 		public function spawnGhost(dead_npc:NPC):void {
-			// Figure out which meter we're going towards.
-			
 			// Figure out where the ghost should be in screen coordinates and create it. We need to make the ghost's
 			// scroll factor 0 in order to make it part of the UI, so we put the ghost in screen coordinates.
 			var ghost:FlxSprite = new FlxSprite(dead_npc.x - FlxG.camera.scroll.x, dead_npc.y - FlxG.camera.scroll.y);
@@ -140,8 +147,6 @@ package {
 			ghosts.push(ghost_data);
 			
 			// Make the ghost move towards their meter.
-			FlxG.log(dead_npc.objective_type);
-			
 			if (dead_npc.objective_type === "bonus") {
 				ghost_data.destination = new FlxPoint(bonus_value.x, bonus_value.y);
 			}

@@ -27,8 +27,6 @@ package {
 			FlxG.debug     = true;
 			FlxG.framerate = FlxG.flashFramerate = 45;
 			
-			// We start off on level 0!
-			
 			// Load assets.
 			Assets.load();
 		}
