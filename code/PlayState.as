@@ -42,6 +42,11 @@ package {
 			var player:Player = Game.player;
 			var level:Level   = Game.level;
 			
+			// Count down the level timer, and end the level if necessary.
+			Game.level.time_remaining -= FlxG.elapsed;
+			
+			// TODO: End the level.
+			
 			// Process player input. We handle some input differently based on whether the player is possessing an NPC.
 			// We start with basic player movement, most of which will work regardless of whether or not the player is
 			// possessing someone.

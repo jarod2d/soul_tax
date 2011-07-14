@@ -41,12 +41,15 @@ package {
 		// The list of hitboxes in the level.
 		public var hitboxes:FlxGroup;
 		
+		// A queue of NPCs that have recently been killed and are waiting to be logged as dead.
+		public var dying_npcs:Array;
+		
 		// The level objectives and progress.
 		public var objectives:Object;
 		public var progress:Object;
 		
-		// A queue of NPCs that have recently been killed and are waiting to be logged as dead.
-		public var dying_npcs:Array;
+		// The amount of time remaining in the level.
+		public var time_remaining:Number;
 		
 		// Constructor. The level is created based on its index in levels.json, so the first level in the game is 0.
 		public function Level(index:uint) {
@@ -74,6 +77,8 @@ package {
 			for (var npc_type:String in objectives) {
 				progress[npc_type] = 0;
 			}
+			
+			time_remaining = level_data.time;
 			
 			// Set up the props and NPCs.
 			var prop_data:Object = JSON.decode(new Assets[level_data.id + "_props"]);

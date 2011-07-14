@@ -11,6 +11,7 @@
 		7A27D68713CA5C6600E05BF1 /* KillCounter.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = KillCounter.as; path = code/KillCounter.as; sourceTree = "<group>"; };
 		7A27D68813CA627200E05BF1 /* Meter.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = Meter.as; path = code/Meter.as; sourceTree = "<group>"; };
 		7AA58F5813CADD7F00D52B24 /* game_data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = game_data; sourceTree = "<group>"; };
+		7AA58F5F13CE627500D52B24 /* LevelTimer.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = LevelTimer.as; path = code/LevelTimer.as; sourceTree = "<group>"; };
 		7ABC6EC213BEB4370007FF9B /* Assets.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = Assets.as; path = code/Assets.as; sourceTree = "<group>"; };
 		7ABC6EC513BEF81D0007FF9B /* MathUtil.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = MathUtil.as; path = code/MathUtil.as; sourceTree = "<group>"; };
 		7AC8114A13BE420D00656C2A /* autotiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = autotiles.png; sourceTree = "<group>"; };
@@ -389,6 +390,7 @@
 				7A27D68813CA627200E05BF1 /* Meter.as */,
 				7ADDAF1213C6D28700D799FE /* PossessionMonitor.as */,
 				7A27D68713CA5C6600E05BF1 /* KillCounter.as */,
+				7AA58F5F13CE627500D52B24 /* LevelTimer.as */,
 			);
 			name = UI;
 			sourceTree = "<group>";

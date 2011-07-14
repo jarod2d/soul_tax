@@ -35,6 +35,18 @@ package {
 		[Embed(source="../images/superhero.png")] public static var superhero_sprite:Class;
 		[Embed(source="../images/supervillain.png")] public static var supervillain_sprite:Class;
 		
+		// Character icons.
+		[Embed(source="../images/bank_manager_icon.png")] public static var bank_manager_icon:Class;
+		[Embed(source="../images/burglar_icon.png")] public static var burglar_icon:Class;
+		[Embed(source="../images/businessman_icon.png")] public static var businessman_icon:Class;
+		[Embed(source="../images/ceo_icon.png")] public static var ceo_icon:Class;
+		[Embed(source="../images/maintenance_guy_icon.png")] public static var maintenance_guy_icon:Class;
+		[Embed(source="../images/old_lady_icon.png")] public static var old_lady_icon:Class;
+		[Embed(source="../images/robot_icon.png")] public static var robot_icon:Class;
+		[Embed(source="../images/security_guard_icon.png")] public static var security_guard_icon:Class;
+		[Embed(source="../images/superhero_icon.png")] public static var superhero_icon:Class;
+		[Embed(source="../images/supervillain_icon.png")] public static var supervillain_icon:Class;
+		
 		// Tiles.
 		[Embed(source="../images/tiles.png")] public static var tiles:Class;
 		

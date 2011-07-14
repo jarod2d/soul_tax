@@ -8,16 +8,19 @@
 	{
 		"id":   "test",
 		"name": "Test Level",
+		"time": 30.0,
 		"objectives": {
-			"any": 5,
-			"businessman": 5,
-			"maintenance_guy": 2
+			"any": 3,
+			"businessman": 3,
+			"maintenance_guy": 2,
+			"old_lady": 1
 		}
 	},
 	
 	{
-        "id":   "tiny",
+		"id":   "tiny",
 		"name": "Tiny Level",
+		"time": 8000.0,
 		"objectives": {
 			"businessman": 1
 		}
