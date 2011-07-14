@@ -27,7 +27,7 @@ package {
 			
 			// Set up the camera and bounds.
 			var border_size:int = Level.BorderSize;	
-			FlxG.camera.bounds  = new FlxRect(0, 0, level.width, level.height - Level.TileSize / 2);
+			FlxG.camera.bounds  = new FlxRect(0, -UI.HUDBarHeight, level.width, level.height - Level.TileSize / 2 + UI.HUDBarHeight);
 			FlxG.worldBounds    = new FlxRect(-border_size, -border_size, level.width + border_size * 2, level.height + border_size * 2);
 			FlxG.camera.follow(player.sprite);
 			

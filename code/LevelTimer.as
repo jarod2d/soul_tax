@@ -27,7 +27,7 @@ package {
 			
 			// Set up the timer text.
 			timer_label = new FlxText(0, 1.0, FlxG.width, "time").setFormat("propomin", 8, 0xFFEEEEDD, "center", 0xFF332222);
-			timer_value = new FlxText(0, 9.0, FlxG.width, "0").setFormat("propomin", 16, TimerStandardColor, "center", 0xFF442222);
+			timer_value = new FlxText(0, 10.0, FlxG.width, "0").setFormat("propomin", 16, TimerStandardColor, "center", 0xFF332222);
 			timer_label.scrollFactor.x = timer_label.scrollFactor.y = timer_value.scrollFactor.x = timer_value.scrollFactor.y = 0.0;
 			
 			add(timer_label);

@@ -107,6 +107,7 @@ package {
 			// Top border.
 			border = new FlxSprite(0, -BorderSize);
 			border.immovable = true;
+			border.alpha = 0.0;
 			borders.add(border.makeGraphic(width, BorderSize));
 			
 			// Right border.

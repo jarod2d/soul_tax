@@ -11,11 +11,11 @@ package {
 	public class KillCounter extends FlxGroup {
 		
 		// Some metrics for the meters.
-		private static const MeterWidth:Number   = 57.0;
+		private static const MeterWidth:Number   = 56.0;
 		private static const MeterHeight:Number  = 2.0;
 		private static const MeterMarginX:Number = 4.0;
 		private static const MeterMarginY:Number = 10.0;
-		private static const MetersPerRow:int    = 3;
+		private static const MetersPerRow:int    = 6;
 		
 		// How fast the ghosts move towards the meters.
 		private static const GhostVelocity:Number     = 250.0;
@@ -49,7 +49,7 @@ package {
 			ghost_sprites = new FlxGroup();
 			
 			// Create the objective meters and their labels.
-			var meter_position:FlxPoint = new FlxPoint(4.0, 4.0);
+			var meter_position:FlxPoint = new FlxPoint(4.0, 3.0);
 			var row_count:int           = 0;
 			
 			for (var npc_type:String in Game.level.objectives) {
@@ -81,6 +81,10 @@ package {
 				meter_position.x += MeterWidth + MeterMarginX;
 				row_count++;
 				
+				if (row_count === 3) {
+					meter_position.x += 36.0;
+				}
+				
 				if (row_count === MetersPerRow) {
 					meter_position.x  = 4.0;
 					meter_position.y += MeterHeight + MeterMarginY + 2.0;
@@ -92,7 +96,7 @@ package {
 			var bonus_y:Number = meter_position.y;
 			
 			if (row_count > 0) {
-				bonus_y += MeterHeight + MeterMarginY + 2.0;
+				bonus_y += MeterHeight + MeterMarginY;
 			}
 			
 			bonus_label = new FlxText(3.0, bonus_y, FlxG.width, "bonus:").setFormat("propomin", 8, 0xFFEEEEE0, "left", 0xFF332222);
