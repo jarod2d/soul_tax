@@ -51,8 +51,8 @@ package {
 			// Get a sorted list of objective keys so that the meters maintain a consistent display order.
 			var objective_keys:Array = [];
 			
-			for (var npc_type:String in Game.level.objectives) {
-				objective_keys.push(npc_type);
+			for (var key:String in Game.level.objectives) {
+				objective_keys.push(key);
 			}
 			
 			objective_keys.sort();

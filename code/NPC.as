@@ -24,6 +24,9 @@ package {
 		public static const WanderSpeedFactor:Number = 0.25;
 		public static const FleeSpeedFactor:Number   = 1.0;
 		
+		// The velocity threshold after which the NPC will take damage when colliding with something.
+		private static const ContactDamageThreshold:Number = 300.0;
+		
 		// Each NPC stores a reference to their type configuration object.
 		public var type:Object;
 		
@@ -53,6 +56,10 @@ package {
 		// values to get knockback behavior.
 		public var knockback_velocity:FlxPoint;
 		
+		// Flixel has a rather poorly-designed collision callback system that doesn't provide information about the
+		// objects' changes in velocity. We need that information, so each NPC stores their pre-collision velocity here.
+		private var old_velocity:FlxPoint;
+		
 		// Constructor. The id should be a string that corresponds to one of the keys in npcs.json.
 		public function NPC(id:String, x:Number, y:Number) {
 			super(x, y);
@@ -72,10 +79,11 @@ package {
 			
 			// Set up movement.
 			// TODO: Grab speed stats from the NPC stat data.
-			max_velocity       = new FlxPoint(90.0, 450.0);
+			max_velocity       = new FlxPoint(90.0, 480.0);
 			drag               = new FlxPoint(450.0, 450.0);
-			acceleration.y     = 600.0;
+			acceleration.y     = 615.0;
 			knockback_velocity = new FlxPoint();
+			old_velocity       = new FlxPoint();
 			
 			// Set the initial state.
 			state = IdleState;
@@ -88,6 +96,57 @@ package {
 			sprite.height   = type.bounds_height;
 			sprite.offset.x = type.offset.x;
 			sprite.offset.y = type.offset.y;
+		}
+		
+		// A callback that occurs when an NPC collides with anything, to be used in calculating collision damage,
+		// diminishing knockback velocity, etc.
+		public static function processCollision(npc_sprite:EntitySprite, obstacle:FlxObject):void {
+			var npc:NPC = npc_sprite.entity as NPC;
+			
+			// Grab the change in the NPC's velocity.
+			var velocity_change:FlxPoint = new FlxPoint(Math.abs(npc.velocity.x - npc.old_velocity.x), Math.abs(npc.velocity.y - npc.old_velocity.y));
+			
+			// We need to diminish the NPC's knockback velocity.
+			if (npc.knockback_velocity.x !== 0.0 || npc.knockback_velocity.y !== 0.0) {
+				var diminish:FlxPoint = new FlxPoint();
+				
+				if (npc.old_velocity.x !== 0.0) {
+					diminish.x = Math.abs(velocity_change.x / npc.old_velocity.x) * npc.knockback_velocity.x;
+				}
+				
+				if (npc.old_velocity.y !== 0.0) {
+					diminish.y = Math.abs(velocity_change.y / npc.old_velocity.y) * npc.knockback_velocity.y;
+				}
+				
+				// Apply the diminish.
+				npc.knockback_velocity.x -= diminish.x;
+				npc.knockback_velocity.y -= diminish.y;
+				
+				// The velocity change needs to account for the diminish as well. We use a multiplier to balance how
+				// much knockback velocity contributes to collision damage.
+				velocity_change.x += Math.abs(diminish.x) * 0.2;
+				velocity_change.y += Math.abs(diminish.y) * 0.3;
+			}
+			
+			// Calculate the NPC's impact force to determine how much damage should be done.
+			var impact:Number = (MathUtil.vectorLength(velocity_change) - ContactDamageThreshold) * 0.95;
+			
+			if (impact > 0.0) {
+				npc.hurt(impact);
+				
+				// Hurt the other NPC too if the other object is indeed an NPC.
+				// TODO: There's some weird stuff going on when colliding with other NPCs at the moment. I think it has
+				// to do with the value of the velocity change not being quite right in that case.
+				if (obstacle is EntitySprite && (obstacle as EntitySprite).entity is NPC) {
+					((obstacle as EntitySprite).entity as NPC).hurt(impact);
+				}
+			}
+			
+			// TODO: If we collided with glass, we need to restore our old velocity so that the NPC keeps moving through
+			// the window.
+			if (obstacle === Game.level.wall_tiles) {
+				// Nothin yet.
+			}
 		}
 		
 		// Makes the NPC jump. The height of the jump is relative to their jump_strength stat. You can pass in a
@@ -106,7 +165,7 @@ package {
 			if (hp <= 0.0) {
 				kill();
 			}
-			else if (state !== FleeState) {
+			else if (Game.player.victim !== this && state !== FleeState) {
 				state = FleeState;
 			}
 		}
@@ -121,6 +180,9 @@ package {
 			
 			// Update the level progress.
 			Game.level.queueDeadNPC(this);
+			
+			// Explode!!!
+			Game.level.gib_emitter.spawnGibsForNPC(this);
 			
 			// Kill the sprite.
 			sprite.kill();
@@ -223,7 +285,7 @@ package {
 			}
 		}
 		
-		// Update.
+		// Before update.
 		override public function beforeUpdate():void {
 			super.beforeUpdate();
 			
@@ -267,6 +329,15 @@ package {
 			
 			// Increment the state duration.
 			state_duration += FlxG.elapsed;
+		}
+		
+		// After update.
+		override public function afterUpdate():void {
+			super.afterUpdate();
+			
+			// We just store our "old" velocity here, which will be used if the NPC collides with something.
+			old_velocity.x = velocity.x;
+			old_velocity.y = velocity.y;
 		}
 		
 		// Returns how far the NPC can walk in the given direction (use -1 for left, 1 for right) without falling in a

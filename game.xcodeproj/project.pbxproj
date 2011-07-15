@@ -10,6 +10,12 @@
 		7A27D68513C7D02700E05BF1 /* HitBox.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = HitBox.as; path = code/HitBox.as; sourceTree = "<group>"; };
 		7A27D68713CA5C6600E05BF1 /* KillCounter.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = KillCounter.as; path = code/KillCounter.as; sourceTree = "<group>"; };
 		7A27D68813CA627200E05BF1 /* Meter.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = Meter.as; path = code/Meter.as; sourceTree = "<group>"; };
+		7A4D426413CFBD1C00B073F6 /* GibEmitter.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = GibEmitter.as; path = code/GibEmitter.as; sourceTree = "<group>"; };
+		7A4D426513CFBDCC00B073F6 /* Emitter.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = Emitter.as; path = code/Emitter.as; sourceTree = "<group>"; };
+		7A4D426D13CFC21100B073F6 /* Particle.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = Particle.as; path = code/Particle.as; sourceTree = "<group>"; };
+		7A4D426E13CFC35100B073F6 /* ColorUtil.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = ColorUtil.as; path = code/ColorUtil.as; sourceTree = "<group>"; };
+		7A4D426F13CFC35100B073F6 /* Range.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = Range.as; path = code/Range.as; sourceTree = "<group>"; };
+		7A4D427013CFC35100B073F6 /* RangedValue.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = RangedValue.as; path = code/RangedValue.as; sourceTree = "<group>"; };
 		7AA58F5813CADD7F00D52B24 /* game_data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = game_data; sourceTree = "<group>"; };
 		7AA58F5F13CE627500D52B24 /* LevelTimer.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = LevelTimer.as; path = code/LevelTimer.as; sourceTree = "<group>"; };
 		7ABC6EC213BEB4370007FF9B /* Assets.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = Assets.as; path = code/Assets.as; sourceTree = "<group>"; };
@@ -171,10 +177,23 @@
 			name = Level;
 			sourceTree = "<group>";
 		};
+		7A4D426313CFBD0700B073F6 /* Effects */ = {
+			isa = PBXGroup;
+			children = (
+				7A4D426513CFBDCC00B073F6 /* Emitter.as */,
+				7A4D426D13CFC21100B073F6 /* Particle.as */,
+				7A4D426413CFBD1C00B073F6 /* GibEmitter.as */,
+			);
+			name = Effects;
+			sourceTree = "<group>";
+		};
 		7ABC6EC413BEF7F50007FF9B /* Util */ = {
 			isa = PBXGroup;
 			children = (
 				7ABC6EC513BEF81D0007FF9B /* MathUtil.as */,
+				7A4D426E13CFC35100B073F6 /* ColorUtil.as */,
+				7A4D426F13CFC35100B073F6 /* Range.as */,
+				7A4D427013CFC35100B073F6 /* RangedValue.as */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -341,6 +360,7 @@
 				7AC8119B13BE445400656C2A /* States */,
 				7AC811AC13BE930300656C2A /* Entities */,
 				7A36537113CA79FC003B93C9 /* Level */,
+				7A4D426313CFBD0700B073F6 /* Effects */,
 				7ADDAF0F13C6CF7300D799FE /* UI */,
 				7ABC6EC413BEF7F50007FF9B /* Util */,
 				7AC811A213BE536500656C2A /* Preloader.as */,
