@@ -14,9 +14,6 @@ package {
 		private static const NormalColor:uint     = 0x55DDFF;
 		private static const PossessionColor:uint = 0xFF99DD;
 		
-		// The color that the NPC changes to while possessed.
-		private static const NPCPossessionColor:uint = 0xFFCCEE;
-		
 		// How quickly (in seconds) player trail sprites should spawn and fade, as well as the initial opacity of the
 		// trail when it is spawned.
 		private static const TrailSpawnRate:Number      = 0.175;
@@ -85,8 +82,7 @@ package {
 			potential_victim = null;
 			
 			// Set the possession color.
-			color               = PossessionColor;
-			victim.sprite.color = NPCPossessionColor;
+			color = PossessionColor;
 			
 			// Process the victim and player.
 			victim.state = NPC.PossessedState;
@@ -107,8 +103,7 @@ package {
 			}
 			
 			// Return to the normal color.
-			color               = NormalColor;
-			victim.sprite.color = 0xFFFFFF;
+			color = NormalColor;
 			
 			// Get rid of the victim.
 			victim.state = NPC.StunnedState;

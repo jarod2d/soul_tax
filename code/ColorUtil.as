@@ -5,7 +5,7 @@
 // Created by Jarod Long on 7/14/2011.
 //
 
-package p_util {
+package {
 	
 	public class ColorUtil {
 		
@@ -46,6 +46,24 @@ package p_util {
 			];
 		}
 		
+		// Blends two colors together. The ratio is a number between 0 and 1 that determines how much of each color
+		// should be in the result. 0.0 will give you 100% color1, and 1.0 will give you 100% color2.
+		public static function blend(color1:uint, color2:uint, ratio:Number = 0.5):uint {
+			// Clamp the ratio.
+			ratio = MathUtil.clamp(ratio, 0.0, 1.0);
+			
+			var result:Array = [0, 0, 0, 0];
+			var rgba1:Array  = intToArray(color1);
+			var rgba2:Array  = intToArray(color2);
+			
+			// Create the blended color.
+			for (var i:uint = 0; i < 4; i++) {
+				result[i] = MathUtil.clamp(rgba1[i] + (rgba2[i] - rgba1[i]) * ratio, 0, 255);
+			}
+			
+			return valuesToInt(result[0], result[1], result[2], result[3]);
+		}
+		
 		// Adds two colors, capping each component appropriately.
 		public static function add(color1:uint, color2:uint):uint {
 			return arithmetic(ADD, color1, color2);
@@ -74,9 +92,9 @@ package p_util {
 			
 			for (var i:uint = 0; i < 4; i++) {
 				switch (type) {
-					case ADD:      result[i] = MathUtil.clamp(rgba1[i] + rgba2[i], 0, 255); break;
-					case SUBTRACT: result[i] = MathUtil.clamp(rgba1[i] - rgba2[i], 0, 255); break;
-					case MULTIPLY: result[i] = MathUtil.clamp(rgba1[i] * rgba2[i], 0, 255); break;
+					case ADD:      result[i] = MathUtil.clamp(rgba1[i] + rgba2[i], 0, 255);             break;
+					case SUBTRACT: result[i] = MathUtil.clamp(rgba1[i] - rgba2[i], 0, 255);             break;
+					case MULTIPLY: result[i] = MathUtil.clamp(rgba1[i] * rgba2[i], 0, 255);             break;
 					case DIVIDE:   result[i] = MathUtil.clamp(Math.round(rgba1[i] / rgba2[i]), 0, 255); break;
 				}
 			}

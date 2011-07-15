@@ -24,8 +24,15 @@ package {
 		public static const WanderSpeedFactor:Number = 0.25;
 		public static const FleeSpeedFactor:Number   = 1.0;
 		
+		// How long the NPC should flash when they get hurt.
+		public static const HurtFlashTime:Number = 0.14;
+		
 		// The velocity threshold after which the NPC will take damage when colliding with something.
-		private static const ContactDamageThreshold:Number = 300.0;
+		public static const ContactDamageThreshold:Number = 300.0;
+		
+		// Some NPC tinting colors.
+		public static const PossessionColor:uint = 0xFFCCEE;
+		public static const HurtColor:uint       = 0xEE3333;
 		
 		// Each NPC stores a reference to their type configuration object.
 		public var type:Object;
@@ -60,6 +67,9 @@ package {
 		// objects' changes in velocity. We need that information, so each NPC stores their pre-collision velocity here.
 		private var old_velocity:FlxPoint;
 		
+		// A timer that gets set whenever the NPC gets hurt, used for tinting the NPC and fading it out over time.
+		private var flash_timer:Number;
+		
 		// Constructor. The id should be a string that corresponds to one of the keys in npcs.json.
 		public function NPC(id:String, x:Number, y:Number) {
 			super(x, y);
@@ -90,6 +100,7 @@ package {
 			
 			// Load the player sprite.
 			sprite.loadGraphic(Assets[type.id + "_sprite"], true, true, type.frame_width, type.frame_height);
+			flash_timer = 0.0;
 			
 			// Set bounds and offset.
 			sprite.width    = type.bounds_width;
@@ -162,6 +173,10 @@ package {
 		public function hurt(damage:Number):void {
 			hp -= damage;
 			
+			// Set the hurt flash timer.
+			flash_timer = HurtFlashTime;
+			
+			// Kill the NPC if necessary, or make them flee if they're not dead.
 			if (hp <= 0.0) {
 				kill();
 			}
@@ -301,6 +316,9 @@ package {
 					velocity.x = 0.0;
 					sprite.play("idle");
 				}
+				
+				// Fade out the NPC's color over time.
+				sprite.color
 			}
 			else {
 				// Set the animation.
@@ -311,6 +329,9 @@ package {
 					sprite.play("idle");
 				}
 			}
+			
+			// Set the NPC's color.
+			sprite.color = current_color;
 			
 			// Add knockback velocity and reduce it over time.
 			var knockback_drag:Number;
@@ -326,6 +347,9 @@ package {
 				velocity.y           = knockback_velocity.y;
 				knockback_velocity.y = (Math.abs(knockback_velocity.y) <= knockback_drag) ? 0.0 : knockback_velocity.y + knockback_drag;
 			}
+			
+			// Decrement the flash timer.
+			flash_timer = Math.max(0.0, flash_timer - FlxG.elapsed);
 			
 			// Increment the state duration.
 			state_duration += FlxG.elapsed;
@@ -442,6 +466,14 @@ package {
 			
 			// Otherwise we return our own type.
 			return id;
+		}
+		
+		// Getter for the current color the NPC should be based on their state and the flash timer.
+		public function get current_color():uint {
+			var base_color:uint       = (state === PossessedState) ? PossessionColor : 0xFFFFFF;
+			var flash_progress:Number = 1.0 - flash_timer / HurtFlashTime;
+			
+			return (flash_timer > 0.0) ? ColorUtil.blend(HurtColor, base_color, flash_progress) : base_color;
 		}
 		
 	}
