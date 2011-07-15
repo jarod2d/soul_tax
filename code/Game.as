@@ -20,12 +20,18 @@ package {
 		public static var level:Level;
 		public static var ui:UI;
 		
+		// The index of the current level. Should be set before PlayState is loaded.
+		public static var current_level:int;
+		
 		public function Game() {
 			super(400, 375, MainMenuState, 2);
 			
 			// Set up a few values.
 			FlxG.debug     = true;
 			FlxG.framerate = FlxG.flashFramerate = 45;
+			
+			// By default we start on the first level.
+			current_level = 0;
 			
 			// Load assets.
 			Assets.load();

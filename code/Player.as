@@ -89,7 +89,9 @@ package {
 			victim.sprite.stopFollowingPath(true);
 			
 			// Reorder the player and the NPCs in the scene to put the player behind the NPCs.
-			Game.level.swapPlayerAndNPCs();
+			if (Game.level) {
+				Game.level.swapPlayerAndNPCs();
+			}
 			
 			// Have the camera follow the NPC now.
 			FlxG.camera.follow(victim.sprite);
@@ -110,7 +112,9 @@ package {
 			victim       = null;
 			
 			// Swap the player and NPCs.
-			Game.level.swapPlayerAndNPCs();
+			if (Game.level) {
+				Game.level.swapPlayerAndNPCs();
+			}
 			
 			// Have the camera follow the player again.
 			FlxG.camera.follow(sprite);

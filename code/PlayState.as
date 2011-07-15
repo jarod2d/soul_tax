@@ -20,7 +20,7 @@ package {
 			var player:Player = Game.player = new Player();
 			
 			// Create the level.
-			var level:Level = Game.level = new Level(0);
+			var level:Level = Game.level = new Level(Game.current_level);
 			
 			// Create the UI.
 			var ui:UI = Game.ui = new UI();
