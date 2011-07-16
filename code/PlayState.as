@@ -10,6 +10,24 @@ package {
 	
 	public class PlayState extends FlxState {
 		
+		// The various substates of the play state.
+		public static const NoSubstate:int       = 0;
+		public static const IntroSubstate:int    = 1;
+		public static const DialogueSubstate:int = 2;
+		public static const TimeUpSubstate:int   = 3;
+		public static const FinishedSubstate:int = 4;
+		
+		// Metrics for the level intro.
+		public static const LevelIntroPauseTime:Number  = 1.0;
+		public static const LevelIntroScrollTime:Number = 2.5;
+		public static const LevelIntroTotalTime:Number  = LevelIntroPauseTime * 2.0 + LevelIntroScrollTime;
+		
+		// The play state has a few substates for different situations.
+		public var substate:int;
+		
+		// Some timers.
+		public var intro_timer:Number;
+		
 		override public function create():void {
 			super.create();
 			
@@ -25,20 +43,50 @@ package {
 			// Create the UI.
 			var ui:UI = Game.ui = new UI();
 			
+			// Set the initial substate and initialize some stuff.
+			substate    = IntroSubstate;
+			intro_timer = 0.0;
+			
 			// Set up the camera and bounds.
 			var border_size:int = Level.BorderSize;	
 			FlxG.camera.bounds  = new FlxRect(0, -UI.HUDBarHeight, level.width, level.height - Level.TileSize / 2 + UI.HUDBarHeight);
 			FlxG.worldBounds    = new FlxRect(-border_size, -border_size, level.width + border_size * 2, level.height + border_size * 2);
-			FlxG.camera.follow(player.sprite);
 			
 			// Add everything to the scene.
 			add(level.contents);
 			add(ui.contents);
 		}
 		
-		override public function update():void {
-			super.update();
+		// Intro-specific update.
+		private function updateIntroSubstate():void {
+			// Set the camera location based on the intro timer.
+			var time:Number          = MathUtil.clamp((intro_timer - LevelIntroPauseTime) / LevelIntroScrollTime, 0.0, LevelIntroScrollTime);
+			var scroll_height:Number = FlxG.camera.bounds.height - FlxG.height;
 			
+			FlxG.camera.scroll.y = time * scroll_height + FlxG.camera.bounds.y;
+			
+			// Scrolls up instead if the player is in the top half of the level.
+			if (Game.player.y < Game.level.height / 2.0) {
+				FlxG.camera.scroll.y = scroll_height - FlxG.camera.scroll.y;
+			}
+			
+			// Increment the intro timer.
+			intro_timer += FlxG.elapsed;
+			
+			// Move on to the intro dialogue.
+			// TODO: Actually go to dialogue instead of playing.
+			if (intro_timer >= LevelIntroTotalTime || FlxG.keys.SPACE || FlxG.keys.J || FlxG.keys.ENTER) {
+				// Follow the player and change the state.
+				FlxG.camera.follow(Game.player.sprite);
+				substate = NoSubstate;
+			}
+			
+			// Do collisions.
+			performCollisions();
+		}
+		
+		// Update specific to the actual playable part of the game. Handles things like player input, etc.
+		private function updateMainSubstate():void {
 			var player:Player = Game.player;
 			var level:Level   = Game.level;
 			
@@ -78,7 +126,31 @@ package {
 				player.knockbackAttack();
 			}
 			
-			// Perform collisions.
+			// Do collisions.
+			performCollisions();
+			
+			// Controls and behavior that is specific to possession or non-possession goes here.
+			if (player.victim) {
+				// Jump.
+				if (FlxG.keys.justPressed("E")) {
+					player.victim.jump();
+				}
+			}
+			else {
+				// Set the possessable NPC.
+				player.potential_victim = null;
+				
+				FlxG.overlap(player.sprite, level.NPCs, function(a:FlxObject, b:FlxObject):void {
+					player.potential_victim = (b as EntitySprite).entity as NPC;
+				});
+			}
+		}
+		
+		// Performs pretty much all of our collisions. Each substate needs to call this at some point.
+		private function performCollisions():void {
+			var player:Player = Game.player;
+			var level:Level   = Game.level;
+			
 			if (player.victim) {
 				FlxG.collide(level.borders, player.victim.sprite);
 				FlxG.collide(level.NPCs, player.victim.sprite, NPC.processCollision);
@@ -102,21 +174,16 @@ package {
 					hb.attackNPC(npc);
 				}
 			});
+		}
+		
+		// Update.
+		override public function update():void {
+			super.update();
 			
-			// Controls and behavior that is specific to possession or non-possession goes here.
-			if (player.victim) {
-				// Jump.
-				if (FlxG.keys.justPressed("E")) {
-					player.victim.jump();
-				}
-			}
-			else {
-				// Set the possessable NPC.
-				player.potential_victim = null;
-				
-				FlxG.overlap(player.sprite, level.NPCs, function(a:FlxObject, b:FlxObject):void {
-					player.potential_victim = (b as EntitySprite).entity as NPC;
-				});
+			// Perform substate-specific behavior.
+			switch (substate) {
+				case IntroSubstate: updateIntroSubstate(); break;
+				default:            updateMainSubstate();  break;
 			}
 		}
 		

@@ -10,8 +10,7 @@ package {
 	
 	public class MathUtil {
 		
-		// Handy constant for speeding up normalization of vectors whose x and y values both
-		// have a magnitude of 1.0.
+		// Handy constant for speeding up normalization of vectors whose x and y values both have a magnitude of 1.0.
 		public static const VECTOR_NORMALIZATION_CONSTANT:Number = 0.7071067811865475;
 		
 		// More handy constants for converting between radians and degrees.
@@ -39,15 +38,15 @@ package {
 			return Math.sqrt(vectorLengthSquared(v));
 		}
 		
-		// Returns the length of a vector, squared. Much faster to use this to compare vector
-		// lengths, since we forgo the expensive square root calculation.
+		// Returns the length of a vector, squared. Much faster to use this to compare vector lengths, since we forgo
+		// the expensive square root calculation.
 		public static function vectorLengthSquared(v:FlxPoint):Number {
 			return v.x * v.x + v.y * v.y;
 		}
 		
-		// This version of round allows the user to specify the precision of the rounding. A precision
-		// of 0 will round to the nearest integer like normal. A precision of 1 will round to the
-		// tenths place, and a precision of -1 will round to the tens place.
+		// This version of round allows the user to specify the precision of the rounding. A precision of 0 will round
+		// to the nearest integer like normal. A precision of 1 will round to the tenths place, and a precision of -1
+		// will round to the tens place.
 		public static function round(n:Number, precision:int = 0):Number {
 			var m:Number = Math.pow(10, precision);
 			return Math.round(n * m) / m;
@@ -95,8 +94,8 @@ package {
 			return Math.floor(Math.random() * n);
 		}
 		
-		// Returns the next integer above n. This is different from Math.ceil in that if n is an
-		// integer, it is still incremented.
+		// Returns the next integer above n. This is different from Math.ceil in that if n is an integer, it is still
+		// incremented.
 		public static function nextInt(n:Number):int {
 			if (n == int(n)) {
 				return n + 1;
@@ -105,8 +104,8 @@ package {
 			return Math.ceil(n);
 		}
 		
-		// Returns the previous integer before n. This is different from Math.floor in that if n is an
-		// integer, it is still decremented.
+		// Returns the previous integer before n. This is different from Math.floor in that if n is an integer, it is
+		// still decremented.
 		public static function prevInt(n:Number):int {
 			if (n == int(n)) {
 				return n - 1;
@@ -126,9 +125,8 @@ package {
 			return divisor % dividend;
 		}
 		
-		// Rotates a point around a pivot point around the given angle (in degrees, since Flixel likes
-		// to use degrees). Rotates clockwise by default -- pass in true for reverse to rotate counter-
-		// clockwise.
+		// Rotates a point around a pivot point around the given angle (in degrees, since Flixel likes to use degrees).
+		// Rotates clockwise by default -- pass in true for reverse to rotate counter-clockwise.
 		public static function rotatePoint(p:FlxPoint, pivot:FlxPoint, angle:Number, reverse:Boolean = false):FlxPoint {
 			var result:FlxPoint = new FlxPoint(p.x, p.y);
 			
