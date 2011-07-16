@@ -94,6 +94,10 @@ package {
 				}
 			}
 			
+			// Add the keyboard instruction graphics.
+			var j_key:FlxSprite     = new FlxSprite(66.0, FlxG.height - 22.0, Assets.j_key);
+			var esdf_keys:FlxSprite = new FlxSprite(6.0,  FlxG.height - 26.0, Assets.esdf_keys);
+			
 			// Create the text for the level title at the bottom.
 			level_name = new FlxText(0, FlxG.height - 30, FlxG.width, "");
 			level_name.setFormat("propomin", 16, 0xFF88A0BB, "center", 0xFF001133);
@@ -115,6 +119,8 @@ package {
 			add(icon_numbers);
 			add(ghost.trails);
 			add(ghost.sprite);
+			add(j_key);
+			add(esdf_keys);
 			add(level_name);
 		}
 		
@@ -130,7 +136,7 @@ package {
 			icon_highlight.y = icon_position.y - IconSize / 2.0 - 2;
 			
 			// Set the level's name.
-			level_name.text = Level.levels[Game.current_level].name;
+			level_name.text = (Game.current_level < Level.levels.length) ? Level.levels[Game.current_level].name : "";
 		}
 		
 		// Returns the center point of the icon for the given level index. Depends on the icons already being generated.

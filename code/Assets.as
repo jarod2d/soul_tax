@@ -21,6 +21,8 @@ package {
 		
 		// Miscellaneous images.
 		[Embed(source="../images/sa_gamedev_logo.png")] public static var sa_gamedev_logo:Class;
+		[Embed(source="../images/j_key.png")] public static var j_key:Class;
+		[Embed(source="../images/esdf_keys.png")] public static var esdf_keys:Class;
 		
 		// Character sprites.
 		[Embed(source="../images/ghost.png")] public static var ghost_sprite:Class;
