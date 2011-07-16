@@ -11,8 +11,8 @@ package {
 	public class LevelSelectState extends FlxState {
 		
 		// Some numbers related to key repeating.
-		private static const KeyRepeatThreshold:Number = 0.38;
-		private static const KeyRepeatRate:Number      = 0.04;
+		private static const KeyRepeatThreshold:Number = 0.44;
+		private static const KeyRepeatRate:Number      = 0.05;
 		
 		// Some metrics for the various components of the screen.
 		private static const ScreenPaddingX:Number = 10.0;
@@ -65,7 +65,7 @@ package {
 			
 			// Set up the title text.
 			var title:FlxText = new FlxText(0, ScreenPaddingY, FlxG.width, "Level Select");
-			title.setFormat("propomin", 24, 0xE0F0FF, "center", 0xFF112244);
+			title.setFormat("propomin", 24, 0xFFE0F0FF, "center", 0xFF112244);
 			
 			// Set up the icon highlight.
 			icon_highlight = new FlxSprite();
@@ -85,7 +85,7 @@ package {
 				
 				// Create the number.
 				var number:FlxText = new FlxText(icon.x - 1.0, icon.y + 9.0, icon.width, String(i + 1));
-				number.setFormat("propomin", 16, 0xCCDDEE, "center", 0xFF001122);
+				number.setFormat("propomin", 16, 0xFFCCDDEE, "center", 0xFF001122);
 				icon_numbers.add(number);
 				
 				// Move to the next row if necessary.
@@ -94,9 +94,15 @@ package {
 				}
 			}
 			
-			// Add the keyboard instruction graphics.
-			var j_key:FlxSprite     = new FlxSprite(66.0, FlxG.height - 22.0, Assets.j_key);
-			var esdf_keys:FlxSprite = new FlxSprite(6.0,  FlxG.height - 26.0, Assets.esdf_keys);
+			// Add the keyboard instruction graphics and labels.
+			var select_label:FlxText  = new FlxText(10.0, FlxG.height - 38.0, 200.0, "Select");
+			select_label.setFormat("propomin", 8, 0xFF112244, "left", 0xFFE0F0FF);
+			
+			var confirm_label:FlxText = new FlxText(53.0, FlxG.height - 38.0, 200.0, "Confirm");
+			confirm_label.setFormat("propomin", 8, 0xFF112244, "left", 0xFFE0F0FF);
+			
+			var esdf_keys:FlxSprite   = new FlxSprite(6.0,  FlxG.height - 26.0, Assets.esdf_keys);
+			var j_key:FlxSprite       = new FlxSprite(66.0, FlxG.height - 22.0, Assets.j_key);
 			
 			// Create the text for the level title at the bottom.
 			level_name = new FlxText(0, FlxG.height - 30, FlxG.width, "");
@@ -119,14 +125,16 @@ package {
 			add(icon_numbers);
 			add(ghost.trails);
 			add(ghost.sprite);
-			add(j_key);
+			add(select_label);
+			add(confirm_label);
 			add(esdf_keys);
+			add(j_key);
 			add(level_name);
 		}
 		
 		// Selects the given level, moving the selection.
 		public function selectLevel(level_index:int):void {
-			Game.current_level = (level_index + Level.levels.length) % Level.levels.length;
+			Game.current_level = MathUtil.mod(level_index, Level.levels.length);
 			
 			// Move the NPC bait and selection highlight.
 			var icon_position:FlxPoint = levelIconPosition(Game.current_level);
@@ -141,6 +149,7 @@ package {
 		
 		// Returns the center point of the icon for the given level index. Depends on the icons already being generated.
 		private function levelIconPosition(level_index:int):FlxPoint {
+			level_index        = MathUtil.mod(level_index, Level.levels.length);
 			var icon:FlxSprite = icons.members[level_index];
 			
 			return new FlxPoint(icon.x + icon.width / 2.0, icon.y + icon.height / 2.0);
@@ -175,8 +184,14 @@ package {
 				repeat_time += FlxG.elapsed;
 				
 				if (repeat_time >= KeyRepeatRate) {
-					if (FlxG.keys.S) {
+					if (FlxG.keys.E) {
+						selectLevel(Game.current_level - levels_per_row);
+					}
+					else if (FlxG.keys.S) {
 						selectLevel(Game.current_level - 1);
+					}
+					else if (FlxG.keys.D) {
+						selectLevel(Game.current_level + levels_per_row);
 					}
 					else if (FlxG.keys.F) {
 						selectLevel(Game.current_level + 1);

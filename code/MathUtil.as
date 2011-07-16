@@ -115,6 +115,17 @@ package {
 			return Math.floor(n);
 		}
 		
+		// Performs a modulo on the given numbers, but differs from the standard modulo operator in that it allows you
+		// to take the modulo of a negative number.
+		public static function mod(divisor:int, dividend:int):int {
+			// TODO: Could do this more efficiently, but so lazy...
+			while (divisor < 0) {
+				divisor += dividend;
+			}
+			
+			return divisor % dividend;
+		}
+		
 		// Rotates a point around a pivot point around the given angle (in degrees, since Flixel likes
 		// to use degrees). Rotates clockwise by default -- pass in true for reverse to rotate counter-
 		// clockwise.
