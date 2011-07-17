@@ -11,14 +11,14 @@ package {
 	public class Player extends Entity {
 		
 		// The various colors the player character changes to.
-		private static const NormalColor:uint     = 0x55DDFF;
-		private static const PossessionColor:uint = 0xFF99DD;
+		public static const NormalColor:uint     = 0x55DDFF;
+		public static const PossessionColor:uint = 0xFF99DD;
 		
 		// How quickly (in seconds) player trail sprites should spawn and fade, as well as the initial opacity of the
 		// trail when it is spawned.
-		private static const TrailSpawnRate:Number      = 0.175;
-		private static const TrailFadeRate:Number       = 0.7;
-		private static const TrailInitialOpacity:Number = 0.45;
+		public static const TrailSpawnRate:Number      = 0.175;
+		public static const TrailFadeRate:Number       = 0.7;
+		public static const TrailInitialOpacity:Number = 0.45;
 		
 		// The direction of the player's movement. To move the player (or the NPC that the player is possessing), set
 		// this to point towards where you want the player to move. You need to set the player's sprite's maxSpeed and

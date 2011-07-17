@@ -13,9 +13,8 @@ package {
 		// The various substates of the play state.
 		public static const NoSubstate:int       = 0;
 		public static const IntroSubstate:int    = 1;
-		public static const DialogueSubstate:int = 2;
-		public static const TimeUpSubstate:int   = 3;
-		public static const FinishedSubstate:int = 4;
+		public static const TimeUpSubstate:int   = 2;
+		public static const FinishedSubstate:int = 3;
 		
 		// Metrics for the level intro.
 		public static const LevelIntroPauseTime:Number  = 1.0;
@@ -48,7 +47,7 @@ package {
 			intro_timer = 0.0;
 			
 			// Set up the camera and bounds.
-			var border_size:int = Level.BorderSize;	
+			var border_size:int = Level.BorderSize;
 			FlxG.camera.bounds  = new FlxRect(0, -UI.HUDBarHeight, level.width, level.height - Level.TileSize / 2 + UI.HUDBarHeight);
 			FlxG.worldBounds    = new FlxRect(-border_size, -border_size, level.width + border_size * 2, level.height + border_size * 2);
 			
@@ -57,28 +56,48 @@ package {
 			add(ui.contents);
 		}
 		
+		// Update for dialogue mode.
+		private function updateDialogue():void {
+			// Just advance the dialogue.
+			if (FlxG.keys.justPressed("J") || FlxG.keys.justPressed("SPACE") || FlxG.keys.justPressed("ENTER")) {
+				Game.ui.dialogue_box.advanceDialogue();
+			}
+			
+			// Do collisions.
+			performCollisions();
+		}
+		
 		// Intro-specific update.
 		private function updateIntroSubstate():void {
+			var level:Level = Game.level;
+			
 			// Set the camera location based on the intro timer.
 			var time:Number          = MathUtil.clamp((intro_timer - LevelIntroPauseTime) / LevelIntroScrollTime, 0.0, LevelIntroScrollTime);
 			var scroll_height:Number = FlxG.camera.bounds.height - FlxG.height;
-			
-			FlxG.camera.scroll.y = time * scroll_height + FlxG.camera.bounds.y;
+			FlxG.camera.scroll.y     = time * scroll_height + FlxG.camera.bounds.y;
 			
 			// Scrolls up instead if the player is in the top half of the level.
-			if (Game.player.y < Game.level.height / 2.0) {
+			if (Game.player.y < level.height / 2.0) {
 				FlxG.camera.scroll.y = scroll_height - FlxG.camera.scroll.y;
 			}
 			
 			// Increment the intro timer.
 			intro_timer += FlxG.elapsed;
 			
-			// Move on to the intro dialogue.
-			// TODO: Actually go to dialogue instead of playing.
+			// Move on to the intro dialogue. If there's no intro dialogue, we go straight into the game.
 			if (intro_timer >= LevelIntroTotalTime || FlxG.keys.SPACE || FlxG.keys.J || FlxG.keys.ENTER) {
-				// Follow the player and change the state.
+				// Move the camera to the player.
 				FlxG.camera.follow(Game.player.sprite);
-				substate = NoSubstate;
+				
+				// Play the dialogue or change the state.
+				if (level.dialogue && level.dialogue.start) {
+					Game.ui.dialogue_box.startDialogue(level.dialogue.start, DialogueBox.StoryDialogueMode, function():void {
+						substate = NoSubstate;
+					});
+				}
+				else {
+					substate = NoSubstate;
+				}
 			}
 			
 			// Do collisions.
@@ -179,6 +198,13 @@ package {
 		// Update.
 		override public function update():void {
 			super.update();
+			
+			// Dialogue is the highest priority.
+			// TODO: This may need to come before super.update.
+			if (Game.ui.dialogue_box.mode === DialogueBox.StoryDialogueMode) {
+				updateDialogue();
+				return;
+			}
 			
 			// Perform substate-specific behavior.
 			switch (substate) {

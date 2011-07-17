@@ -54,6 +54,10 @@ package {
 		// The amount of time remaining in the level.
 		public var time_remaining:Number;
 		
+		// The level's dialogue. The object potentially has two keys -- "start" and "end", which contain the dialogue
+		// arrays for the start and the end of the level, respectively.
+		public var dialogue:Object;
+		
 		// Constructor. The level is created based on its index in levels.json, so the first level in the game is 0.
 		public function Level(index:uint) {
 			// Grab our raw level data.
@@ -73,6 +77,9 @@ package {
 			// Create our tilemaps.
 			bg_tiles.loadMap(new Assets[level_data.id + "_bg_tiles"], Assets.tiles, TileSize, TileSize, NaN, 1, 1, 2);
 			wall_tiles.loadMap(new Assets[level_data.id + "_wall_tiles"], Assets.tiles, TileSize, TileSize, NaN, 1, 1, 2);
+			
+			// Grab the dialogue.
+			dialogue = JSON.decode(new Assets[level_data.id + "_dialogue"]);
 			
 			// Set up our objectives.
 			objectives = level_data.objectives;

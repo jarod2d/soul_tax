@@ -1,0 +1,13 @@
+{
+	"start": [
+		["Death", "BLAH BLAH BLAH BLAH BLAH"],
+		["Ghost", "SDFLHJASD FHJDSKA FDSHJKA FDSNJKA FDSAHJF HFSJDAK FDHJSKA FHJKADSHJF DHJSAK FHJSDKA FHJDKSA HFJKDSA HFJKDSA FHJKDSAH DFJKSA DFHJSAK FHJSDKAF ADHJKS"],
+		["Death", "HFJDSAKF HDHSAJF DSA BLAH BLAH BLAH!"],
+		["Ghost", "RIGHT ON"]
+	],
+	
+	"end": [
+		["Death", "You beat the frickin level!!!"],
+		["Ghost", "Woohoo!!!!"]
+	]
+}

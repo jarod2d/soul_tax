@@ -16,6 +16,7 @@
 		7A4D426E13CFC35100B073F6 /* ColorUtil.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = ColorUtil.as; path = code/ColorUtil.as; sourceTree = "<group>"; };
 		7A4D426F13CFC35100B073F6 /* Range.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = Range.as; path = code/Range.as; sourceTree = "<group>"; };
 		7A4D427013CFC35100B073F6 /* RangedValue.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = RangedValue.as; path = code/RangedValue.as; sourceTree = "<group>"; };
+		7A9BB0EC13D154E6003E32FB /* DialogueBox.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = DialogueBox.as; path = code/DialogueBox.as; sourceTree = "<group>"; };
 		7AA58F5813CADD7F00D52B24 /* game_data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = game_data; sourceTree = "<group>"; };
 		7AA58F5F13CE627500D52B24 /* LevelTimer.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = LevelTimer.as; path = code/LevelTimer.as; sourceTree = "<group>"; };
 		7ABC6EC213BEB4370007FF9B /* Assets.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = Assets.as; path = code/Assets.as; sourceTree = "<group>"; };
@@ -411,6 +412,7 @@
 				7ADDAF1213C6D28700D799FE /* PossessionMonitor.as */,
 				7A27D68713CA5C6600E05BF1 /* KillCounter.as */,
 				7AA58F5F13CE627500D52B24 /* LevelTimer.as */,
+				7A9BB0EC13D154E6003E32FB /* DialogueBox.as */,
 			);
 			name = UI;
 			sourceTree = "<group>";

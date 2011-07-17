@@ -110,10 +110,11 @@ package {
 			
 			// Set up our hacky ghost following stuff.
 			ghost = new Player();
-			ghost.max_velocity.x = ghost.max_velocity.y = 150.0;
+			ghost.max_velocity.x = ghost.max_velocity.y = 90.0;
 			bait  = new NPC("businessman", 0, 0);
 			ghost.potential_victim = bait;
 			ghost.possess();
+			ghost.color = Player.NormalColor;
 			
 			// Initially we select the first level. Eventually it should be the latest unlocked level.
 			selectLevel(0);
