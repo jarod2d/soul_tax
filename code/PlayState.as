@@ -21,11 +21,16 @@ package {
 		public static const LevelIntroScrollTime:Number = 2.5;
 		public static const LevelIntroTotalTime:Number  = LevelIntroPauseTime * 2.0 + LevelIntroScrollTime;
 		
+		// Metrics for the level end.
+		public static const LevelEndGracePeriod:Number      = 2.25;
+		public static const GracePeriodDyingNPCBonus:Number = 10.0;
+		
 		// The play state has a few substates for different situations.
 		public var substate:int;
 		
 		// Some timers.
 		public var intro_timer:Number;
+		public var level_end_timer:Number;
 		
 		override public function create():void {
 			super.create();
@@ -43,8 +48,9 @@ package {
 			var ui:UI = Game.ui = new UI();
 			
 			// Set the initial substate and initialize some stuff.
-			substate    = IntroSubstate;
-			intro_timer = 0.0;
+			substate        = IntroSubstate;
+			intro_timer     = 0.0;
+			level_end_timer = 0.0;
 			
 			// Set up the camera and bounds.
 			var border_size:int = Level.BorderSize;
@@ -109,11 +115,6 @@ package {
 			var player:Player = Game.player;
 			var level:Level   = Game.level;
 			
-			// Count down the level timer, and end the level if necessary.
-			Game.level.time_remaining -= FlxG.elapsed;
-			
-			// TODO: End the level.
-			
 			// Process player input. We handle some input differently based on whether the player is possessing an NPC.
 			// We start with basic player movement, most of which will work regardless of whether or not the player is
 			// possessing someone.
@@ -163,6 +164,50 @@ package {
 					player.potential_victim = (b as EntitySprite).entity as NPC;
 				});
 			}
+			
+			// Count down the level timer, and end the level if necessary.
+			Game.level.time_remaining -= FlxG.elapsed;
+			
+			if (Game.level.time_remaining <= 0.0) {
+				// Make the player stop possessing their victim and stop their movement.
+				player.stopPossessing();
+				player.direction.x = player.direction.y = 0.0;
+				
+				// Update the substate.
+				substate = TimeUpSubstate;
+			}
+		}
+		
+		// Update for after the timer has run out.
+		private function updateTimeUpSubstate():void {
+			var level:Level = Game.level;
+			
+			// The grace period depends on whether we have dying NPCs or not, because we don't want to say the player
+			// has lost if he's just waiting on a ghost to fly up to the kill counter.
+			var grace_period:Number = LevelEndGracePeriod;
+			
+			if (level.dying_npcs.length > 0) {
+				grace_period += GracePeriodDyingNPCBonus;
+			}
+			
+			// Increment the grace period timer.
+			level_end_timer += FlxG.elapsed;
+			
+			// End the level.
+			if (level_end_timer >= grace_period) {
+				// TODO: Did the player win or lose? For now we assume the player won.
+				if (level.dialogue && level.dialogue.end) {
+					Game.ui.dialogue_box.startDialogue(level.dialogue.end, DialogueBox.StoryDialogueMode, function():void {
+						substate = FinishedSubstate;
+					});
+				}
+				else {
+					substate = FinishedSubstate;
+				}
+			}
+			
+			// Do collisions.
+			performCollisions();
 		}
 		
 		// Performs pretty much all of our collisions. Each substate needs to call this at some point.
@@ -170,6 +215,7 @@ package {
 			var player:Player = Game.player;
 			var level:Level   = Game.level;
 			
+			// Standard collisions.
 			if (player.victim) {
 				FlxG.collide(level.borders, player.victim.sprite);
 				FlxG.collide(level.NPCs, player.victim.sprite, NPC.processCollision);
@@ -208,8 +254,9 @@ package {
 			
 			// Perform substate-specific behavior.
 			switch (substate) {
-				case IntroSubstate: updateIntroSubstate(); break;
-				default:            updateMainSubstate();  break;
+				case IntroSubstate:  updateIntroSubstate();  break;
+				case TimeUpSubstate: updateTimeUpSubstate(); break;
+				default:             updateMainSubstate();   break;
 			}
 		}
 		

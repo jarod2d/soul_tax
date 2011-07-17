@@ -19,9 +19,9 @@ package {
 		public static const PaddingY:Number        = 3.0;
 		
 		// Time-related constants.
-		public static const ScrollRate:Number     = 0.065;
-		public static const FastScrollRate:Number = 0.0225;
-		public static const AdvancePause:Number   = 0.225;
+		public static const ScrollRate:Number     = 0.055;
+		public static const FastScrollRate:Number = 0.01;
+		public static const AdvancePause:Number   = 0.1;
 		
 		// The different dialogue modes. This determines the behavior and display of the box. Story mode is your
 		// traditional RPG-style dialogue box -- large, with character portraits above it on either side. Game mode is
@@ -87,13 +87,14 @@ package {
 		// Starts a dialogue.
 		public function startDialogue(dialogue:Array, mode:int = StoryDialogueMode, onEnd:Function = null):void {
 			// Set everything up.
-			this.dialogue = dialogue;
-			this.mode     = mode;
-			this.onEnd    = onEnd;
-			current_line  = 0;
-			current_char  = 0;
-			scroll_timer  = 0.0;
-			done_timer    = 0.0;
+			this.dialogue     = dialogue;
+			this.mode         = mode;
+			this.onEnd        = onEnd;
+			current_line      = 0;
+			current_char      = 0;
+			scroll_timer      = 0.0;
+			done_timer        = 0.0;
+			display_text.text = "";
 		}
 		
 		// Advances the dialogue to the next line, ending the dialogue if we're out of lines. Only advances if the
@@ -145,7 +146,6 @@ package {
 					scroll_timer -= scroll_rate;
 				}
 				
-				var display_text:FlxText = (mode === GameDialogueMode) ? game_text : story_text;
 				display_text.text = current_text.substr(0, current_char + 1);
 				
 				// Advance the timer.
@@ -191,6 +191,11 @@ package {
 		// Another convenience getter that tells us whether we're done scrolling our current dialogue.
 		public function get done_scrolling():Boolean {
 			return (current_char >= current_text.length - 1);
+		}
+		
+		// Getter for the current FlxText based on the mode.
+		public function get display_text():FlxText {
+			return (mode === GameDialogueMode) ? game_text : story_text;
 		}
 		
 	}
