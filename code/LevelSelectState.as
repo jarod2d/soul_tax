@@ -131,6 +131,11 @@ package {
 			add(esdf_keys);
 			add(j_key);
 			add(level_name);
+			
+			// Play the level select music.
+			FlxG.music.stop();
+			FlxG.music = null;
+			FlxG.playMusic(Assets.level_select_music, 0.8);
 		}
 		
 		// Selects the given level, moving the selection.

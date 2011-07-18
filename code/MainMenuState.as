@@ -29,6 +29,9 @@ package {
 			
 			logo.scale.x = logo.scale.y = 0.5;
 			add(logo);
+			
+			// Play the title theme.
+			FlxG.playMusic(Assets.title_screen_music);
 		}
 		
 		override public function update():void {

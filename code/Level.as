@@ -20,6 +20,18 @@ package {
 		// Stores all of the basic level data for each level in the game.
 		public static var levels:Array;
 		
+		// The dialogue that plays when you fail the level, and the default dialogue (typically overridden) when you
+		// beat the level.
+		public static var LevelFailedDialogue:Array = [
+			["Death", "You have failed!!!!!!"],
+			["Ghost", "Nooooooooooooo!!!!"]
+		];
+		
+		public static var LevelWonDialogue:Array = [
+			["Death", "You beat the level!!!!"],
+			["Ghost", "Woohooooo!!!!"]
+		];
+		
 		// For convenience, we group all of our tiles here.
 		public var contents:FlxGroup;
 		
@@ -191,6 +203,17 @@ package {
 			
 			// Increment the appropriate progress counter.
 			progress[dead_npc.objective_type]++;
+		}
+		
+		// A getter for whether or not the player has completed all of their objectives.
+		public function get objectives_complete():Boolean {
+			for (var objective:String in objectives) {
+				if (progress[objective] < objectives[objective]) {
+					return false;
+				}
+			}
+			
+			return true;
 		}
 		
 		// Getters for the width and height, in tiles and pixels.

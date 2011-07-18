@@ -10,6 +10,7 @@
 		7A27D68513C7D02700E05BF1 /* HitBox.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = HitBox.as; path = code/HitBox.as; sourceTree = "<group>"; };
 		7A27D68713CA5C6600E05BF1 /* KillCounter.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = KillCounter.as; path = code/KillCounter.as; sourceTree = "<group>"; };
 		7A27D68813CA627200E05BF1 /* Meter.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = Meter.as; path = code/Meter.as; sourceTree = "<group>"; };
+		7A38EC0413D347C100416B91 /* LevelEndScreen.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = LevelEndScreen.as; path = code/LevelEndScreen.as; sourceTree = "<group>"; };
 		7A4D426413CFBD1C00B073F6 /* GibEmitter.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = GibEmitter.as; path = code/GibEmitter.as; sourceTree = "<group>"; };
 		7A4D426513CFBDCC00B073F6 /* Emitter.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = Emitter.as; path = code/Emitter.as; sourceTree = "<group>"; };
 		7A4D426D13CFC21100B073F6 /* Particle.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = Particle.as; path = code/Particle.as; sourceTree = "<group>"; };
@@ -412,6 +413,7 @@
 				7ADDAF1213C6D28700D799FE /* PossessionMonitor.as */,
 				7A27D68713CA5C6600E05BF1 /* KillCounter.as */,
 				7AA58F5F13CE627500D52B24 /* LevelTimer.as */,
+				7A38EC0413D347C100416B91 /* LevelEndScreen.as */,
 				7A9BB0EC13D154E6003E32FB /* DialogueBox.as */,
 			);
 			name = UI;

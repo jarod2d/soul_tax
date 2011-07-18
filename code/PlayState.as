@@ -17,8 +17,8 @@ package {
 		public static const FinishedSubstate:int = 3;
 		
 		// Metrics for the level intro.
-		public static const LevelIntroPauseTime:Number  = 1.0;
-		public static const LevelIntroScrollTime:Number = 2.5;
+		public static const LevelIntroPauseTime:Number  = 1.55;
+		public static const LevelIntroScrollTime:Number = 2.75;
 		public static const LevelIntroTotalTime:Number  = LevelIntroPauseTime * 2.0 + LevelIntroScrollTime;
 		
 		// Metrics for the level end.
@@ -31,6 +31,10 @@ package {
 		// Some timers.
 		public var intro_timer:Number;
 		public var level_end_timer:Number;
+		
+		// We need to keep track of our one-shot music (intro theme, etc) so we can fade it out prematurely if
+		// necessary.
+		private var music:FlxSound;
 		
 		override public function create():void {
 			super.create();
@@ -60,6 +64,11 @@ package {
 			// Add everything to the scene.
 			add(level.contents);
 			add(ui.contents);
+			
+			// Play the level intro music.
+			FlxG.music.stop();
+			FlxG.music = null;
+			music = FlxG.play(Assets.level_start_music, 0.7);
 		}
 		
 		// Update for dialogue mode.
@@ -92,6 +101,9 @@ package {
 			
 			// Move on to the intro dialogue. If there's no intro dialogue, we go straight into the game.
 			if (intro_timer >= LevelIntroTotalTime || FlxG.keys.SPACE || FlxG.keys.J || FlxG.keys.ENTER) {
+				// Fade out the intro music.
+				music.fadeOut(0.3);
+				
 				// Move the camera to the player.
 				FlxG.camera.follow(Game.player.sprite);
 				
@@ -149,7 +161,7 @@ package {
 			// Do collisions.
 			performCollisions();
 			
-			// Controls and behavior that is specific to possession or non-possession goes here.
+			// Controls and behavior that are specific to possession or non-possession go here.
 			if (player.victim) {
 				// Jump.
 				if (FlxG.keys.justPressed("E")) {
@@ -195,15 +207,61 @@ package {
 			
 			// End the level.
 			if (level_end_timer >= grace_period) {
-				// TODO: Did the player win or lose? For now we assume the player won.
-				if (level.dialogue && level.dialogue.end) {
-					Game.ui.dialogue_box.startDialogue(level.dialogue.end, DialogueBox.StoryDialogueMode, function():void {
-						substate = FinishedSubstate;
-					});
+				// Figure out which dialogue we need to show.
+				var dialogue:Array;
+				
+				if (!level.objectives_complete) {
+					dialogue = Level.LevelFailedDialogue;
+				}
+				else if (level.dialogue && level.dialogue.end) {
+					dialogue = level.dialogue.end;
 				}
 				else {
-					substate = FinishedSubstate;
+					dialogue = Level.LevelWonDialogue;
 				}
+				
+				// Play the dialogue.
+				Game.ui.dialogue_box.startDialogue(dialogue, DialogueBox.StoryDialogueMode, function():void {
+					substate = FinishedSubstate;
+					Game.ui.level_end_screen.activate();
+					
+					// Play the proper music.
+					music = FlxG.play((level.objectives_complete) ? Assets.level_won_music : Assets.level_failed_music, 0.75);
+					
+					// TODO: Play a little cutscene of the player being killed by Death if they lost.
+				});
+			}
+			
+			// Do collisions.
+			performCollisions();
+		}
+		
+		// Update for the "you won" or "you lost" screen.
+		private function updateFinishedSubstate():void {
+			// Restart the level.
+			if (FlxG.keys.justPressed("R")) {
+				FlxG.switchState(new PlayState());
+				return;
+			}
+			
+			// Go back to the level select.
+			if (FlxG.keys.justPressed("L")) {
+				// TODO: Doesn't work yet.
+//				FlxG.switchState(new LevelSelectState());
+				return;
+			}
+			
+			// Move on to the next level, or to the credits if we're on the last level.
+			if (FlxG.keys.justPressed("J") && Game.level.objectives_complete) {
+				if (Game.current_level === Level.levels.length - 1) {
+					// TODO: Move to credits state.
+				}
+				else {
+					Game.current_level++;
+					FlxG.switchState(new PlayState());
+				}
+				
+				return;
 			}
 			
 			// Do collisions.
@@ -246,7 +304,6 @@ package {
 			super.update();
 			
 			// Dialogue is the highest priority.
-			// TODO: This may need to come before super.update.
 			if (Game.ui.dialogue_box.mode === DialogueBox.StoryDialogueMode) {
 				updateDialogue();
 				return;
@@ -254,9 +311,10 @@ package {
 			
 			// Perform substate-specific behavior.
 			switch (substate) {
-				case IntroSubstate:  updateIntroSubstate();  break;
-				case TimeUpSubstate: updateTimeUpSubstate(); break;
-				default:             updateMainSubstate();   break;
+				case IntroSubstate:    updateIntroSubstate();    break;
+				case TimeUpSubstate:   updateTimeUpSubstate();   break;
+				case FinishedSubstate: updateFinishedSubstate(); break;
+				default:               updateMainSubstate();     break;
 			}
 		}
 		
