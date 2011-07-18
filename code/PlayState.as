@@ -68,7 +68,7 @@ package {
 			// Play the level intro music.
 			FlxG.music.stop();
 			FlxG.music = null;
-			music = FlxG.play(Assets.level_start_music, 0.7);
+			music = FlxG.play(Assets.level_start_music, 0.65);
 		}
 		
 		// Update for dialogue mode.
@@ -111,10 +111,12 @@ package {
 				if (level.dialogue && level.dialogue.start) {
 					Game.ui.dialogue_box.startDialogue(level.dialogue.start, DialogueBox.StoryDialogueMode, function():void {
 						substate = NoSubstate;
+						FlxG.playMusic(Assets.main_theme_music, 0.85);
 					});
 				}
 				else {
 					substate = NoSubstate;
+					FlxG.playMusic(Assets.main_theme_music, 0.85);
 				}
 			}
 			
@@ -184,6 +186,9 @@ package {
 				// Make the player stop possessing their victim and stop their movement.
 				player.stopPossessing();
 				player.direction.x = player.direction.y = 0.0;
+				
+				// Stop the music.
+				FlxG.music.fadeOut(1.0);
 				
 				// Update the substate.
 				substate = TimeUpSubstate;

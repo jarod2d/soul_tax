@@ -58,7 +58,7 @@ package {
 		[Embed(source="../audio/level_start.mp3")] public static var level_start_music:Class;
 		[Embed(source="../audio/level_won.mp3")] public static var level_won_music:Class;
 		[Embed(source="../audio/level_failed.mp3")] public static var level_failed_music:Class;
-//		[Embed(source="../audio/main_theme.mp3")] public static var main_theme_music:Class;
+		[Embed(source="../audio/main_theme.mp3")] public static var main_theme_music:Class;
 		
 		// Game data.
 		[Embed(source="../game_data/levels.json", mimeType="application/octet-stream")] public static var level_data:Class;
