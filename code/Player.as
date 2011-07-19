@@ -129,7 +129,7 @@ package {
 			
 			// Create the hitbox.
 			var hb:HitBox = new HitBox(victim, 0, 0, 5, victim.height);
-			hb.setAttributes(HitBox.PlayerAllegiance, 0.15, victim.strength, 25.0);
+			hb.setAttributes(HitBox.PlayerAllegiance, 0.15, victim.strength, 0.0);
 		}
 		
 		// The secondary knockback attack the player uses when they're possessing someone.

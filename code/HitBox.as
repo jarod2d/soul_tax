@@ -82,7 +82,7 @@ package {
 			// Do damage to the victim.
 			npc.hurt(damage);
 			
-			// TODO: Do some knockback.
+			// Do some knockback.
 			if (knockback > 0.0) {
 				npc.knockback_velocity.x = npc.center.x - host.center.x;
 				npc.knockback_velocity.y = npc.center.y - (host.center.y + 1.0);

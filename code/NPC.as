@@ -122,11 +122,11 @@ package {
 				var diminish:FlxPoint = new FlxPoint();
 				
 				if (npc.old_velocity.x !== 0.0) {
-					diminish.x = Math.abs(velocity_change.x / npc.old_velocity.x) * npc.knockback_velocity.x;
+					diminish.x = MathUtil.clamp(Math.abs(velocity_change.x / npc.old_velocity.x), 0.0, 1.0) * npc.knockback_velocity.x;
 				}
 				
 				if (npc.old_velocity.y !== 0.0) {
-					diminish.y = Math.abs(velocity_change.y / npc.old_velocity.y) * npc.knockback_velocity.y;
+					diminish.y = MathUtil.clamp(Math.abs(velocity_change.y / npc.old_velocity.y), 0.0, 1.0) * npc.knockback_velocity.y;
 				}
 				
 				// Apply the diminish.

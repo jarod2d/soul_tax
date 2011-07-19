@@ -66,8 +66,11 @@ package {
 			add(ui.contents);
 			
 			// Play the level intro music.
-			FlxG.music.stop();
-			FlxG.music = null;
+			if (FlxG.music) {
+				FlxG.music.stop();
+				FlxG.music = null;
+			}
+			
 			music = FlxG.play(Assets.level_start_music, 0.65);
 		}
 		
@@ -231,6 +234,11 @@ package {
 					Game.ui.level_end_screen.activate();
 					
 					// Play the proper music.
+					if (FlxG.music) {
+						FlxG.music.stop();
+						FlxG.music = null;
+					}
+
 					music = FlxG.play((level.objectives_complete) ? Assets.level_won_music : Assets.level_failed_music, 0.75);
 					
 					// TODO: Play a little cutscene of the player being killed by Death if they lost.
@@ -252,7 +260,7 @@ package {
 			// Go back to the level select.
 			if (FlxG.keys.justPressed("L")) {
 				// TODO: Doesn't work yet.
-//				FlxG.switchState(new LevelSelectState());
+//				FlxG.switchState(new LevelSelectState());222222222222222222
 				return;
 			}
 			

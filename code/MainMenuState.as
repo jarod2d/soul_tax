@@ -31,6 +31,11 @@ package {
 			add(logo);
 			
 			// Play the title theme.
+			if (FlxG.music) {
+				FlxG.music.stop();
+				FlxG.music = null;
+			}
+			
 			FlxG.playMusic(Assets.title_screen_music);
 		}
 		
