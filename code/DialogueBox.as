@@ -19,7 +19,7 @@ package {
 		public static const PaddingY:Number        = 3.0;
 		
 		// Time-related constants.
-		public static const ScrollRate:Number     = 0.055;
+		public static const ScrollRate:Number     = 0.025;
 		public static const FastScrollRate:Number = 0.01;
 		public static const AdvancePause:Number   = 0.1;
 		

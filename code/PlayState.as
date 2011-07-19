@@ -259,8 +259,7 @@ package {
 			
 			// Go back to the level select.
 			if (FlxG.keys.justPressed("L")) {
-				// TODO: Doesn't work yet.
-//				FlxG.switchState(new LevelSelectState());222222222222222222
+				FlxG.switchState(new LevelSelectState());
 				return;
 			}
 			

@@ -89,7 +89,7 @@ package {
 			victim.sprite.stopFollowingPath(true);
 			
 			// Reorder the player and the NPCs in the scene to put the player behind the NPCs.
-			if (Game.level) {
+			if (FlxG.state is PlayState) {
 				Game.level.swapPlayerAndNPCs();
 			}
 			
