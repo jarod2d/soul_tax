@@ -6,6 +6,7 @@
 
 package {
 	
+	import flash.geom.Rectangle;
 	import org.flixel.*;
 	
 	public class DialogueBox extends FlxGroup {
@@ -17,6 +18,8 @@ package {
 		public static const GameModeFontSize:int   = 8;
 		public static const PaddingX:Number        = 8.0;
 		public static const PaddingY:Number        = 3.0;
+		public static const NameplateFontSize:int  = 16;
+		public static const PortraitMargin:Number  = 30.0;
 		
 		// Time-related constants.
 		public static const ScrollRate:Number     = 0.025;
@@ -41,8 +44,16 @@ package {
 		public var story_text:FlxText;
 		public var game_text:FlxText;
 		
-		// The current dialogue. A dialogue should be a 2 by n array with the first column specifying the name of the
-		// speaker and the second column containing the actual dialogue.
+		// The speaker's nameplate and portrait in story mode.
+		public var nameplate:FlxText;
+		public var portrait:FlxSprite;
+		
+		// The portrait used during game mode.
+		public var game_mode_portrait:FlxSprite;
+		
+		// The current dialogue. A dialogue should be a 3 by n array with the first column specifying the name of the
+		// speaker, the second column containing the side of the screen the speaker should be on (as in "left" or
+		// "right"), and the third column containing the actual line of dialogue.
 		public var dialogue:Array;
 		
 		// Indexes for the current line of dialogue, and the current character within that line.
@@ -75,10 +86,21 @@ package {
 			game_text.setFormat("propomin", GameModeFontSize, 0xFFEEFFFF, "left");
 			game_text.scrollFactor.x = game_text.scrollFactor.y = 0.0;
 			
+			// Set up the nameplate.
+			nameplate = new FlxText(PaddingX, bg.y - 10.0, FlxG.width - PaddingX * 2.0, "");
+			nameplate.setFormat("propomin", NameplateFontSize, 0xFFBBCCCC, "left", 0xFF223333);
+			nameplate.scrollFactor.x = nameplate.scrollFactor.y = 0.0;
+			
+			// Set up the portrait.
+			portrait = new FlxSprite();
+			portrait.scrollFactor.x = portrait.scrollFactor.y = 0.0;
+			
 			// Add everything.
+			add(portrait);
 			add(bg);
 			add(story_text);
 			add(game_text);
+//			add(nameplate);
 			
 			// We start in no-dialogue mode.
 			mode = NoDialogueMode;
@@ -95,6 +117,9 @@ package {
 			scroll_timer      = 0.0;
 			done_timer        = 0.0;
 			display_text.text = "";
+			
+			// Set the initial speaker.
+			updateSpeaker();
 		}
 		
 		// Advances the dialogue to the next line, ending the dialogue if we're out of lines. Only advances if the
@@ -105,16 +130,14 @@ package {
 				return;
 			}
 			
-			// Move to the next dialogue.
+			// Move to the next line.
 			current_line++;
 			current_char = 0;
 			scroll_timer = 0.0;
 			done_timer   = 0.0;
 			
-			// End the dialogue if necessary.
-			if (current_line >= dialogue.length) {
-				endDialogue();
-			}
+			// End the dialogue if necessary, otherwise update the speaker.
+			(current_line >= dialogue.length) ? endDialogue() : updateSpeaker();
 		}
 		
 		// Ends the current dialogue.
@@ -126,6 +149,34 @@ package {
 			dialogue = null;
 			mode     = NoDialogueMode;
 			onEnd    = null;
+		}
+		
+		// Moves through the dialogue, updating speaker nameplates and portraits if necessary.
+		private function updateSpeaker():void {
+			// Update the nameplate.
+//			nameplate.text      = current_name;
+//			nameplate.alignment = current_side;
+			
+			// Update the portrait.
+			var graphic:Class = Assets[StringUtil.clean(current_name) + "_portrait"];
+			
+			if (graphic) {
+				portrait.alpha = 1.0;
+				portrait.loadGraphic(graphic, false, true);
+				portrait.y = FlxG.height - portrait.height - StoryModeHeight;
+			}
+			else {
+				portrait.alpha = 0.0;
+			}
+			
+			if (current_side === "right") {
+				portrait.x = FlxG.width - portrait.width - PortraitMargin;
+				portrait.facing = FlxObject.LEFT;
+			}
+			else {
+				portrait.x = PortraitMargin;
+				portrait.facing = FlxObject.RIGHT;
+			}
 		}
 		
 		// Update.
@@ -180,7 +231,7 @@ package {
 		// Convenience getter for the current text of the dialogue. This gives you the full text of the current line,
 		// not the truncated version for scrolling.
 		public function get current_text():String {
-			return dialogue[current_line][1];
+			return dialogue[current_line][2];
 		}
 		
 		// Same as above, but for the current name.
@@ -188,8 +239,14 @@ package {
 			return dialogue[current_line][0];
 		}
 		
+		// Same as above, but for the current side.
+		public function get current_side():String {
+			return dialogue[current_line][1];
+		}
+		
 		// Another convenience getter that tells us whether we're done scrolling our current dialogue.
 		public function get done_scrolling():Boolean {
+			FlxG.log(dialogue);
 			return (current_char >= current_text.length - 1);
 		}
 		

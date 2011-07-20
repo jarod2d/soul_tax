@@ -96,6 +96,7 @@
 		7AC811AD13BE931300656C2A /* EntitySprite.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = EntitySprite.as; path = code/EntitySprite.as; sourceTree = "<group>"; };
 		7AC811AE13BE98C800656C2A /* LevelSelectState.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = LevelSelectState.as; path = code/LevelSelectState.as; sourceTree = "<group>"; };
 		7AC811B013BE9A0100656C2A /* PlayState.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = PlayState.as; path = code/PlayState.as; sourceTree = "<group>"; };
+		7ACA13A113D6554C006021DE /* StringUtil.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = StringUtil.as; path = code/StringUtil.as; sourceTree = "<group>"; };
 		7AD0D08313BF9F7300E5A811 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		7AD0D08413BF9F7300E5A811 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 		7AD0D08513BF9F7300E5A811 /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; path = levels; sourceTree = "<group>"; };
@@ -193,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				7ABC6EC513BEF81D0007FF9B /* MathUtil.as */,
+				7ACA13A113D6554C006021DE /* StringUtil.as */,
 				7A4D426E13CFC35100B073F6 /* ColorUtil.as */,
 				7A4D426F13CFC35100B073F6 /* Range.as */,
 				7A4D427013CFC35100B073F6 /* RangedValue.as */,

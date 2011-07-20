@@ -23,13 +23,13 @@ package {
 		// The dialogue that plays when you fail the level, and the default dialogue (typically overridden) when you
 		// beat the level.
 		public static var LevelFailedDialogue:Array = [
-			["Death", "You have failed!!!!!!"],
-			["Ghost", "Nooooooooooooo!!!!"]
+			["Death", "right", "You have failed!!!!!!"],
+			["Ghost", "left", "Nooooooooooooo!!!!"]
 		];
 		
 		public static var LevelWonDialogue:Array = [
-			["Death", "You beat the level!!!!"],
-			["Ghost", "Woohooooo!!!!"]
+			["Death", "right", "You beat the level!!!!"],
+			["Ghost", "left", "Woohooooo!!!!"]
 		];
 		
 		// For convenience, we group all of our tiles here.

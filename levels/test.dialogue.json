@@ -1,12 +1,12 @@
 {
 	"start": [
-		["Death", "BLAH BLAH BLAH BLAH BLAH"],
-		["Ghost", "SDFLHJASD FHJDSKA FDSHJKA FDSNJKA FDSAHJF HFSJDAK FDHJSKA FHJKADSHJF DHJSAK FHJSDKA FHJDKSA HFJKDSA HFJKDSA FHJKDSAH DFJKSA DFHJSAK FHJSDKAF ADHJKS"],
-		["Death", "HFJDSAKF HDHSAJF DSA BLAH BLAH BLAH!"]
+		["Death", "right", "BLAH BLAH BLAH BLAH BLAH"],
+		["Ghost", "left",  "SDFLHJASD FHJDSKA FDSHJKA FDSNJKA FDSAHJF HFSJDAK FDHJSKA FHJKADSHJF DHJSAK FHJSDKA FHJDKSA HFJKDSA HFJKDSA FHJKDSAH DFJKSA DFHJSAK FHJSDKAF ADHJKS"],
+		["Death", "right", "HFJDSAKF HDHSAJF DSA BLAH BLAH BLAH!"]
 	],
 	
 	"end": [
-		["Death", "You beat the frickin level!!!"],
-		["Ghost", "Woohoo!!!!"]
+		["Death", "right", "You beat the frickin level!!!"],
+		["Ghost", "left",  "Woohoo!!!!"]
 	]
 }
