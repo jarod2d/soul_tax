@@ -246,7 +246,6 @@ package {
 		
 		// Another convenience getter that tells us whether we're done scrolling our current dialogue.
 		public function get done_scrolling():Boolean {
-			FlxG.log(dialogue);
 			return (current_char >= current_text.length - 1);
 		}
 		

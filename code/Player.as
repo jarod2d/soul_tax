@@ -130,6 +130,9 @@ package {
 			// Create the hitbox.
 			var hb:HitBox = new HitBox(victim, 0, 0, 5, victim.height);
 			hb.setAttributes(HitBox.PlayerAllegiance, 0.15, victim.strength, 0.0);
+			
+			// Play the victim's punch animation.
+			victim.sprite.play("punch", true);
 		}
 		
 		// The secondary knockback attack the player uses when they're possessing someone.
@@ -142,6 +145,9 @@ package {
 			// Create the hitbox.
 			var hb:HitBox = new HitBox(victim, 0, 0, 5, victim.height);
 			hb.setAttributes(HitBox.PlayerAllegiance, 0.15, victim.strength / 5.0, 150.0);
+			
+			// Play the victim's kick animation.
+			victim.sprite.play("kick", true);
 		}
 		
 		// Update.

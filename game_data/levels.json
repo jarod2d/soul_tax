@@ -24,5 +24,17 @@
 		"objectives": {
 			"businessman": 1
 		}
+	},
+	
+	{
+		"id":   "demo",
+		"name": "Demo Level",
+		"time": 50.0,
+		"objectives": {
+			"any": 4,
+			"businessman": 6,
+			"maintenance_guy": 2,
+			"old_lady": 1
+		}
 	}
 ]

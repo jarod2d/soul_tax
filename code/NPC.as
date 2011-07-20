@@ -78,9 +78,9 @@ package {
 			type = NPC.types[id];
 			
 			// Set up animations.
-			// TODO: Anims should be defined in the NPC config.
-			sprite.addAnimation("idle", [0], 10);
-			sprite.addAnimation("walk", [0, 1, 2, 3], 10);
+			for each (var animation:Object in type.animations) {
+				sprite.addAnimation(animation.name, animation.frames, animation.speed, animation.looped);
+			}
 			
 			// Set the NPC's stats.
 			hp            = type.hp;
@@ -314,7 +314,10 @@ package {
 				if (sprite.pathSpeed == 0.0) {
 					sprite.stopFollowingPath(true);
 					velocity.x = 0.0;
-					sprite.play("idle");
+					
+					if (sprite.finished) {
+						sprite.play("idle");
+					}
 				}
 				
 				// Fade out the NPC's color over time.
@@ -322,11 +325,13 @@ package {
 			}
 			else {
 				// Set the animation.
-				if (velocity.x !== 0.0 && sprite.isTouching(FlxObject.DOWN)) {
-					sprite.play("walk");
-				}
-				else {
-					sprite.play("idle");
+				if (sprite.finished) {
+					if (velocity.x !== 0.0 && sprite.isTouching(FlxObject.DOWN)) {
+						sprite.play("walk");
+					}
+					else {
+						sprite.play("idle");
+					}
 				}
 			}
 			

@@ -1,0 +1,11 @@
+{
+	"start": [
+		["Death", "right", "BLAH BLAH BLAH"],
+		["Ghost", "left",  "FDSNAHJKLF NDJSKALF NJKDSAL FNJKSDLAN FJKLDASN JKFASN JKLFNDAJKL FNSDJAKL"]
+	],
+	
+	"end": [
+		["Death", "right", "YOU WON!!!!!!!!!!!!!!!!!!!!!"],
+		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"]
+	]
+}

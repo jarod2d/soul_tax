@@ -88,6 +88,11 @@ package {
 		[Embed(source="../levels/tiny.props.json", mimeType="application/octet-stream")] public static var tiny_props:Class;
 		[Embed(source="../levels/tiny.dialogue.json", mimeType="application/octet-stream")] public static var tiny_dialogue:Class;
 		
+		[Embed(source="../levels/demo.0.csv", mimeType="application/octet-stream")] public static var demo_bg_tiles:Class;
+		[Embed(source="../levels/demo.1.csv", mimeType="application/octet-stream")] public static var demo_wall_tiles:Class;
+		[Embed(source="../levels/demo.props.json", mimeType="application/octet-stream")] public static var demo_props:Class;
+		[Embed(source="../levels/demo.dialogue.json", mimeType="application/octet-stream")] public static var demo_dialogue:Class;
+		
 		// Processes some of the loaded data. Should be called once at the beginning of the game.
 		public static function load():void {
 			// Load the level data.
