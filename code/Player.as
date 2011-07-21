@@ -171,6 +171,15 @@ package {
 				acceleration.x = yoyo_distance.x * 90.0;
 				acceleration.y = yoyo_distance.y * 90.0;
 				
+				// We need to make sure the player doesn't stray too far from the NPC.
+				if (Math.abs(yoyo_distance.x) > 10.0) {
+					x += yoyo_distance.x * FlxG.elapsed * 7.5;
+				}
+				
+				if (Math.abs(yoyo_distance.y) > 10.0) {
+					y += yoyo_distance.y * FlxG.elapsed * 7.5;
+				}
+				
 				victim.facing = facing;
 			}
 			else {
