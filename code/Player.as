@@ -20,6 +20,10 @@ package {
 		public static const TrailFadeRate:Number       = 0.7;
 		public static const TrailInitialOpacity:Number = 0.45;
 		
+		// The base cooldown times for each attack.
+		public static const PunchCooldownTime:Number = 0.3;
+		public static const KickCooldownTime:Number  = 0.195;
+		
 		// The direction of the player's movement. To move the player (or the NPC that the player is possessing), set
 		// this to point towards where you want the player to move. You need to set the player's sprite's maxSpeed and
 		// drag attributes for this to work. They will accelerate in the given direction by the same factor as their
@@ -27,7 +31,7 @@ package {
 		public var direction:FlxPoint;
 		
 		// The NPC that the player is hovering over, and therefore can currently possess.
-		public var potential_victim:NPC;
+		private var $potential_victim:NPC;
 		
 		// The NPC that the player is currently possessing. If they're not possessing anyone, this will be null.
 		public var victim:NPC;
@@ -36,6 +40,10 @@ package {
 		// is added.
 		public var trails:FlxGroup;
 		private var trails_timer:Number;
+		
+		// Cooldown timers for the player's basic attacks.
+		public var punch_cooldown:Number;
+		public var kick_cooldown:Number;
 		
 		public function Player() {
 			super();
@@ -68,6 +76,10 @@ package {
 			// Set the player's default color and opacity.
 			color        = NormalColor;
 			sprite.alpha = 0.9;
+			
+			// Set up timers.
+			punch_cooldown = 0.0;
+			kick_cooldown  = 0.0;
 		}
 		
 		// Possesses the NPC that the player is currently hovering over.
@@ -122,10 +134,14 @@ package {
 		
 		// The regular punch attack the player uses when they're possessing someone.
 		public function punchAttack():void {
-			// We need a victim to punch anything.
-			if (!victim) {
+			// We need a victim to punch anything, and we need to make sure our cooldown is up.
+			if (punch_cooldown > 0.0 || !victim) {
 				return;
 			}
+			
+			// Set the cooldown.
+			// TODO: Multiply by the NPC's attack speed multiplier stat.
+			punch_cooldown = PunchCooldownTime * victim.attack_speed;
 			
 			// Create the hitbox.
 			var hb:HitBox = new HitBox(victim, 0, 0, 5, victim.height);
@@ -137,10 +153,14 @@ package {
 		
 		// The secondary knockback attack the player uses when they're possessing someone.
 		public function knockbackAttack():void {
-			// We need a victim to attack anything.
-			if (!victim) {
+			// We need a victim to attack anything, and we need to make sure our cooldown is up.
+			if (kick_cooldown > 0.0 || !victim) {
 				return;
 			}
+			
+			// Set the cooldown.
+			// TODO: Multiply by the NPC's attack speed multiplier stat.
+			kick_cooldown = KickCooldownTime * victim.attack_speed;
 			
 			// Create the hitbox.
 			var hb:HitBox = new HitBox(victim, 0, 0, 5, victim.height);
@@ -153,6 +173,10 @@ package {
 		// Update.
 		override public function beforeUpdate():void {
 			super.beforeUpdate();
+			
+			// Reduce cooldowns.
+			punch_cooldown = Math.max(0.0, punch_cooldown - FlxG.elapsed);
+			kick_cooldown  = Math.max(0.0, kick_cooldown - FlxG.elapsed);
 			
 			// Set facing based on the direction.
 			if (direction.x !== 0) {
@@ -173,11 +197,11 @@ package {
 				
 				// We need to make sure the player doesn't stray too far from the NPC.
 				if (Math.abs(yoyo_distance.x) > 10.0) {
-					x += yoyo_distance.x * FlxG.elapsed * 7.5;
+					x += yoyo_distance.x * FlxG.elapsed * 10.0;
 				}
 				
 				if (Math.abs(yoyo_distance.y) > 10.0) {
-					y += yoyo_distance.y * FlxG.elapsed * 7.5;
+					y += yoyo_distance.y * FlxG.elapsed * 10.0;
 				}
 				
 				victim.facing = facing;
@@ -245,6 +269,18 @@ package {
 			// We need to set the color of all of our trails as well.
 			for (var i:int = 0; i < trails.length; i++) {
 				trails.members[i].color = value;
+			}
+		}
+		
+		// Getters and setters for the potential victim.
+		public function get potential_victim():NPC {
+			return $potential_victim;
+		}
+		
+		public function set potential_victim(value:NPC):void {
+			// We don't allow the player to possess robots.
+			if (value === null || value.type.id !== "robot") {
+				$potential_victim = value;
 			}
 		}
 		

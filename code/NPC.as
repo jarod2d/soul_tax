@@ -59,6 +59,14 @@ package {
 		// experiment until you get the value you want.
 		public var jump_strength:Number;
 		
+		// A multiplier for how fast the NPC should attack. 1.0 will give you default attacking speed, < 1.0 attacks
+		// faster, > 1.0 attacks slower.
+		public var attack_speed:Number;
+		
+		// A multiplier for how fast the NPC can run. 1.0 gives you default run speed, < 1.0 runs slower, > 1.0 runs
+		// faster.
+		public var run_speed:Number;
+		
 		// NPCs need to store their knockback velocity separately from their regular velocity. Just set the x and y
 		// values to get knockback behavior.
 		public var knockback_velocity:FlxPoint;
@@ -86,11 +94,13 @@ package {
 			hp            = type.hp;
 			strength      = type.strength;
 			jump_strength = type.jump_strength;
+			attack_speed  = type.attack_speed;
+			run_speed     = type.run_speed;
 			
 			// Set up movement.
 			// TODO: Grab speed stats from the NPC stat data.
-			max_velocity       = new FlxPoint(90.0, 480.0);
-			drag               = new FlxPoint(450.0, 450.0);
+			max_velocity       = new FlxPoint(90.0 * run_speed, 480.0);
+			drag               = new FlxPoint(450.0 * run_speed, 450.0);
 			acceleration.y     = 615.0;
 			knockback_velocity = new FlxPoint();
 			old_velocity       = new FlxPoint();
@@ -426,7 +436,7 @@ package {
 				
 				if (path) {
 					// TODO: Set speed based on the NPC's speed.
-					sprite.followPath(path, 30.0, FlxObject.PATH_HORIZONTAL_ONLY | FlxObject.PATH_FORWARD);
+					sprite.followPath(path, 30.0 * run_speed * (Math.random() * 0.6 + 0.6), FlxObject.PATH_HORIZONTAL_ONLY | FlxObject.PATH_FORWARD);
 					
 					// Set the NPC's facing based on the direction.
 					facing = (direction === 1) ? FlxObject.RIGHT : FlxObject.LEFT;
