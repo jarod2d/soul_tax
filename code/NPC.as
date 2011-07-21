@@ -47,6 +47,9 @@ package {
 		public var state_duration:Number;
 		public var state_max_duration:Number;
 		
+		// Keeps track of the NPC's special attack cooldown.
+		public var special_cooldown:Number;
+		
 		// How much health does the NPC have?
 		public var hp:Number;
 		
@@ -70,6 +73,10 @@ package {
 		// NPCs need to store their knockback velocity separately from their regular velocity. Just set the x and y
 		// values to get knockback behavior.
 		public var knockback_velocity:FlxPoint;
+		
+		// A flag for whether or not the NPC is currently in the process of using their special attack. This helps us
+		// out with cooldowns.
+		public var using_special:Boolean;
 		
 		// Flixel has a rather poorly-designed collision callback system that doesn't provide information about the
 		// objects' changes in velocity. We need that information, so each NPC stores their pre-collision velocity here.
@@ -110,13 +117,16 @@ package {
 			
 			// Load the player sprite.
 			sprite.loadGraphic(Assets[type.id + "_sprite"], true, true, type.frame_width, type.frame_height);
-			flash_timer = 0.0;
 			
 			// Set bounds and offset.
 			sprite.width    = type.bounds_width;
 			sprite.height   = type.bounds_height;
 			sprite.offset.x = type.offset.x;
 			sprite.offset.y = type.offset.y;
+			
+			// Set up timers and flags.
+			special_cooldown = flash_timer = 0.0;
+			using_special    = false;
 		}
 		
 		// A callback that occurs when an NPC collides with anything, to be used in calculating collision damage,
@@ -145,7 +155,7 @@ package {
 				
 				// The velocity change needs to account for the diminish as well. We use a multiplier to balance how
 				// much knockback velocity contributes to collision damage.
-				velocity_change.x += Math.abs(diminish.x) * 0.2;
+				velocity_change.x += Math.abs(diminish.x) * 0.55;
 				velocity_change.y += Math.abs(diminish.y) * 0.3;
 			}
 			
@@ -177,6 +187,50 @@ package {
 			if (sprite.isTouching(FlxObject.DOWN)) {
 				velocity.y = jump_strength * power * -60.0;
 			}
+		}
+		
+		// Called when the player just pressed the special attack button. It's a giant nasty monolithic function, but
+		// deadlines are calling so it will have to do!
+		public function startSpecialAttack():void {
+			// Ensure our cooldown is up.
+			if (special_cooldown > 0.0) {
+				return;
+			}
+			
+			// Set the cooldown and flag us as having started an attack.
+			special_cooldown = type.cooldown;
+			using_special    = true;
+			
+			// The businessman does a large knockback attack.
+			if (type.id === "businessman") {
+				var hb:HitBox = new HitBox(this, 0, 0, 6, height);
+				hb.setAttributes(HitBox.PlayerAllegiance, 0.15, strength / 6.0, 300.0);
+			}
+			
+			// TODO: Add other attacks.
+		}
+		
+		// Called when the player is holding down the special attack button.
+		public function continueSpecialAttack():void {
+			// Make sure we're actually using our special attack right now.
+			if (!using_special) {
+				return;
+			}
+			
+			// TODO.
+		}
+		
+		// Called when the player releases the special attack button.
+		public function endSpecialAttack():void {
+			// Make sure we're actually using our special attack right now.
+			if (!using_special) {
+				return;
+			}
+			
+			// We're no longer using the special attack.
+			using_special = false;
+			
+			// TODO.
 		}
 		
 		// Hurts the NPC, killing him if necessary.
@@ -365,6 +419,9 @@ package {
 			
 			// Decrement the flash timer.
 			flash_timer = Math.max(0.0, flash_timer - FlxG.elapsed);
+			
+			// Reduce cooldown.
+			special_cooldown = Math.max(0.0, special_cooldown - FlxG.elapsed);
 			
 			// Increment the state duration.
 			state_duration += FlxG.elapsed;

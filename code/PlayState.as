@@ -155,13 +155,7 @@ package {
 				(player.victim) ? player.stopPossessing() : player.possess();
 			}
 			
-			// Attack.
-			if (FlxG.keys.justPressed("J")) {
-				player.punchAttack();
-			}
-			else if (FlxG.keys.justPressed("K")) {
-				player.knockbackAttack();
-			}
+			
 			
 			// Do collisions.
 			performCollisions();
@@ -171,6 +165,25 @@ package {
 				// Jump.
 				if (FlxG.keys.justPressed("E")) {
 					player.victim.jump();
+				}
+				
+				// Attack.
+				if (FlxG.keys.justPressed("J")) {
+					player.punchAttack();
+				}
+				else if (FlxG.keys.justPressed("K")) {
+					player.knockbackAttack();
+				}
+				
+				// Special attack.
+				if (FlxG.keys.justPressed("L")) {
+					player.victim.startSpecialAttack();
+				}
+				else if (FlxG.keys.justReleased("L")) {
+					player.victim.endSpecialAttack();
+				}
+				else if (FlxG.keys.L) {
+					player.victim.continueSpecialAttack();
 				}
 			}
 			else {
