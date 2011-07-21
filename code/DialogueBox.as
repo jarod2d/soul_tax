@@ -79,10 +79,12 @@ package {
 			
 			// Set up the texts.
 			story_text = new FlxText(PaddingX, bg.y + PaddingY, FlxG.width - PaddingX * 2.0, "");
+			story_text.lineSpacing = 4.0;
 			story_text.setFormat("propomin", StoryModeFontSize, 0xFFEEFFFF, "left");
 			story_text.scrollFactor.x = story_text.scrollFactor.y = 0.0;
 			
 			game_text = new FlxText(PaddingX + GameModeHeight + 1.0, bg.y + PaddingY, FlxG.width - PaddingX * 2.0 - GameModeHeight - 1.0, "");
+			game_text.lineSpacing = 4.0;
 			game_text.setFormat("propomin", GameModeFontSize, 0xFFEEFFFF, "left");
 			game_text.scrollFactor.x = game_text.scrollFactor.y = 0.0;
 			

@@ -31,10 +31,12 @@ package {
 			
 			// Set up win/lose texts.
 			var won_text:FlxText = new FlxText(0, FlxG.height / 3.0 - 10.0, FlxG.width, "TAXES PAID!");
+			won_text.lineSpacing = 10.0;
 			won_text.setFormat("propomin", 32, 0xFF88EE66, "center");
 			won_text.scrollFactor.x = won_text.scrollFactor.y = 0.0;
 			
 			var lost_text:FlxText = new FlxText(0, FlxG.height / 3.0 - 10.0, FlxG.width, "MORE TAXES REQUIRED");
+			lost_text.lineSpacing = 10.0;
 			lost_text.setFormat("propomin", 32, 0xFFCC2222, "center");
 			lost_text.scrollFactor.x = lost_text.scrollFactor.y = 0.0;
 			

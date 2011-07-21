@@ -13,11 +13,26 @@ package {
 		override public function create():void {
 			super.create();
 			
-			// Set up the title screen text.
+			// Set the background color.
+			FlxG.bgColor = 0xFFBBDDFF;
+			
+			// Set up the title.
 			var text:FlxText;
 			
-			text = new FlxText(0, 100, FlxG.width, "Muerte y Los Impuestos");
-			text.setFormat("propomin", 16, 0x553333, "center", 0xFF705555);
+			text = new FlxText(0, 100, FlxG.width, "A Ghost and His Taxes");
+			text.lineSpacing = 10.0;
+			text.setFormat("propomin", 32, 0xFFE0F0FF, "center", 0xFF112244);
+			add(text);
+			
+			// Set up the credits.
+			text = new FlxText(0, FlxG.height - 30, 100, "Coding and Design:\nArt and Design:\nMusic and Sounds:");
+			text.lineSpacing = 3.0;
+			text.setFormat("propomin", 8, 0xFF334055, "right", 0xFFE0F0FF);
+			add(text);
+			
+			text = new FlxText(100, FlxG.height - 30, 150, "Jarod Long\nLauren Careccia\nBrad Snyder");
+			text.lineSpacing = 3.0;
+			text.setFormat("propomin", 8, 0xFF112266, "left", 0xFFE0F0FF);
 			add(text);
 			
 			// Add the SA Gamedev logo.

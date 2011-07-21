@@ -29,6 +29,9 @@ package org.flixel
 		 */
 		protected var _shadow:uint;
 		
+		// A quick hack added by me (Jarod) to allow us to specify the line height of FlxText.
+		public var lineSpacing:Number;
+		
 		/**
 		 * Creates a new <code>FlxText</code> object at the specified position.
 		 * 
@@ -60,6 +63,8 @@ package org.flixel
 				_textField.height = 1;
 			else
 				_textField.height = 10;
+			
+			lineSpacing = 0.0;
 			
 			_regen = true;
 			_shadow = 0;
@@ -241,6 +246,7 @@ package org.flixel
 				while(i < nl)
 					height += _textField.getLineMetrics(i++).height;
 				height += 4; //account for 2px gutter on top and bottom
+				height += lineSpacing * (_textField.numLines - 1);
 				_pixels = new BitmapData(width,height,true,0);
 				frameHeight = height;
 				_textField.height = height*1.2;
@@ -262,22 +268,22 @@ package org.flixel
 				//If it's a single, centered line of text, we center it ourselves so it doesn't blur to hell
 				if((format.align == "center") && (_textField.numLines == 1))
 				{
-					formatAdjusted = new TextFormat(format.font,format.size,format.color,null,null,null,null,null,"left");
+					formatAdjusted = new TextFormat(format.font,format.size,format.color,null,null,null,null,null,"left",null,null,null,lineSpacing);
 					_textField.setTextFormat(formatAdjusted);				
 					_matrix.translate(Math.floor((width - _textField.getLineMetrics(0).width)/2),0);
 				}
 				//Render a single pixel shadow beneath the text
 				if(_shadow > 0)
 				{
-					_textField.setTextFormat(new TextFormat(formatAdjusted.font,formatAdjusted.size,_shadow,null,null,null,null,null,formatAdjusted.align));				
+					_textField.setTextFormat(new TextFormat(formatAdjusted.font,formatAdjusted.size,_shadow,null,null,null,null,null,formatAdjusted.align,null,null,null,lineSpacing));				
 					_matrix.translate(1,1);
 					_pixels.draw(_textField,_matrix,_colorTransform);
 					_matrix.translate(-1,-1);
-					_textField.setTextFormat(new TextFormat(formatAdjusted.font,formatAdjusted.size,formatAdjusted.color,null,null,null,null,null,formatAdjusted.align));
+					_textField.setTextFormat(new TextFormat(formatAdjusted.font,formatAdjusted.size,formatAdjusted.color,null,null,null,null,null,formatAdjusted.align,null,null,null,lineSpacing));
 				}
 				//Actually draw the text onto the buffer
 				_pixels.draw(_textField,_matrix,_colorTransform);
-				_textField.setTextFormat(new TextFormat(format.font,format.size,format.color,null,null,null,null,null,format.align));
+				_textField.setTextFormat(new TextFormat(format.font,format.size,format.color,null,null,null,null,null,format.align,null,null,null,lineSpacing));
 			}
 			
 			//Finally, update the visible pixels
@@ -294,7 +300,7 @@ package org.flixel
 		protected function dtfCopy():TextFormat
 		{
 			var defaultTextFormat:TextFormat = _textField.defaultTextFormat;
-			return new TextFormat(defaultTextFormat.font,defaultTextFormat.size,defaultTextFormat.color,defaultTextFormat.bold,defaultTextFormat.italic,defaultTextFormat.underline,defaultTextFormat.url,defaultTextFormat.target,defaultTextFormat.align);
+			return new TextFormat(defaultTextFormat.font,defaultTextFormat.size,defaultTextFormat.color,defaultTextFormat.bold,defaultTextFormat.italic,defaultTextFormat.underline,defaultTextFormat.url,defaultTextFormat.target,defaultTextFormat.align,null,null,null,lineSpacing);
 		}
 	}
 }
