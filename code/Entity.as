@@ -47,8 +47,7 @@ package {
 		// A getter that returns the index of the tile that is currently underneath the entity (i.e., the one they're
 		// standing on, in a platforming context), based on their center point.
 		public function get tile_below():int {
-			var p:FlxPoint = new FlxPoint(center.x, bottom + 1);
-			return int(p.y / Level.TileSize) * Game.level.wall_tiles.widthInTiles + int(p.x / Level.TileSize);
+			return int((bottom + 1.0) / Level.TileSize) * Game.level.wall_tiles.widthInTiles + int(center.x / Level.TileSize);
 		}
 		
 		// A collection of getters and setters, mostly to allow access to the properties of the entity's sprite through

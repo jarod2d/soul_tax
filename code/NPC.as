@@ -205,8 +205,13 @@ package {
 			special_cooldown = type.cooldown;
 			using_special    = true;
 			
+			// The burglar opens doors.
+			if (type.id === "burglar") {
+				Game.level.openDoorAt((facing === FlxObject.RIGHT) ? right + Level.TileSize / 2.0 : left - Level.TileSize / 2.0, s_center.y);
+			}
+			
 			// The businessman does a large knockback attack.
-			if (type.id === "businessman") {
+			else if (type.id === "businessman") {
 				var hb:HitBox = new HitBox(this, 0, 0, 6, height);
 				hb.setAttributes(HitBox.PlayerAllegiance, 0.15, strength / 6.0, 300.0);
 			}
@@ -231,8 +236,6 @@ package {
 			if (type.id === "ceo") {
 				Game.level.money_emitter.vomitFromNPC(this);
 			}
-			
-			// TODO.
 		}
 		
 		// Called when the player releases the special attack button.
@@ -244,8 +247,6 @@ package {
 			
 			// We're no longer using the special attack.
 			using_special = false;
-			
-			// TODO.
 		}
 		
 		// Hurts the NPC, killing him if necessary.

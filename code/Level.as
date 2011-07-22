@@ -165,6 +165,45 @@ package {
 			contents.add(Game.player.sprite);
 		}
 		
+		// Looks at the tile at the given coordinates (pixels, not tiles), checks if it is the same type as tile_type,
+		// and if so, destroys that tile and any tiles of the same type that are in a contiguous vertical line with it
+		// (or horizontal line the horizontal parameter is true, except it doesn't work yet). This is basically used as
+		// a helper function for opening doors and breaking glass.
+		public function destroyWall(tile_type:int, x:int, y:int, horizontal:Boolean = false):void {
+			// Convert pixels to tiles.
+			x /= Level.TileSize;
+			y /= Level.TileSize;
+			
+			// Smash the tiles!!
+			if (wall_tiles.getTile(x, y) === tile_type) {
+				// Move to the top of the wall.
+				while (wall_tiles.getTile(x, y - 1) === tile_type) {
+					y--;
+				}
+				
+				// Now move down the door, smashing as we go.
+				// TODO: Maybe have a specifiable particle effect or something.
+				while (wall_tiles.getTile(x, y) === tile_type) {
+					wall_tiles.setTile(x, y, 0);
+					y++;
+				}
+			}
+		}
+		
+		// If there's a door tile at the given coordinates (pixels, not tiles), this will open that door.
+		public function openDoorAt(x:int, y:int):void {
+			destroyWall(3, x, y);
+		}
+		
+		// If there's a glass tile at the given coordinates (pixels, not tiles), this will break the glass.
+		public function breakGlassAt(x:int, y:int):void {
+			// Glass can be left- or right-facing, so there are two different tiles we need to check.
+			destroyWall(4, x, y);
+			destroyWall(6, x, y);
+			
+			// TODO: Create a particle effect.
+		}
+		
 		// A little function that swaps the visual position of the player and the NPCs. That is, if the player is in
 		// front of the NPCs (the default), he will be moved behind them, and vice versa. This is necessary for when the
 		// player possesses an NPC -- we want him to move to the background.
