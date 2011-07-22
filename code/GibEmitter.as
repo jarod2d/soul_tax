@@ -17,7 +17,7 @@ package {
 			// Create all the particles.
 			// TODO: We should throw in some gibs of different sizes and colors (get some flesh-colored gibs in there,
 			// etc).
-			createParticles(125, new Range(1, 3), [0xFFCC0000]);
+			createParticles(125, [0xFFCC0000], new Range(1, 3));
 			
 			// Set up the particle motion.
 			velocity.min = 75.0;

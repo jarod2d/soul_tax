@@ -207,6 +207,12 @@ package {
 				hb.setAttributes(HitBox.PlayerAllegiance, 0.15, strength / 6.0, 300.0);
 			}
 			
+			// The CEO does a money vomit attack.
+			else if (type.id === "ceo") {
+				// It's a continuous effect, so just call down to that.
+				continueSpecialAttack();
+			}
+			
 			// TODO: Add other attacks.
 		}
 		
@@ -215,6 +221,11 @@ package {
 			// Make sure we're actually using our special attack right now.
 			if (!using_special) {
 				return;
+			}
+			
+			// CEO special.
+			if (type.id === "ceo") {
+				Game.level.money_emitter.vomitFromNPC(this);
 			}
 			
 			// TODO.

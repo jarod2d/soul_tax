@@ -309,6 +309,7 @@ package {
 			
 			FlxG.collide(level.NPCs, level.wall_tiles, NPC.processCollision);
 			FlxG.collide(level.gib_emitter.particles, level.wall_tiles);
+			FlxG.collide(level.money_emitter.particles, level.wall_tiles);
 			
 			// Handle hitbox collisions.
 			FlxG.overlap(level.NPCs, level.hitboxes, function(npc_sprite:EntitySprite, hb_sprite:EntitySprite):void {

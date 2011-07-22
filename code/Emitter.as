@@ -60,15 +60,17 @@ package {
 		}
 		
 		// Creates the given number of particles as simple colored squares.
-		public function createParticles(count:uint, size:Range, colors:Array):void {
+		public function createParticles(count:uint, colors:Array, width:Range, height:Range = null):void {
 			var particle:Particle;
 			
+			// If there is no height specified, then we assume the size to be square.
+			if (!height) {
+				height = width;
+			}
+			
 			for (var i:uint = 0; i < count; i++) {
-				var particle_size:uint  = size.random();
-				var particle_color:uint = colors[MathUtil.randomInt(colors.length)];
-				
 				particle = new Particle();
-				particle.makeGraphic(particle_size, particle_size, particle_color);
+				particle.makeGraphic(width.random(), height.random(), colors[MathUtil.randomInt(colors.length)]);
 				add(particle);
 			}
 		}

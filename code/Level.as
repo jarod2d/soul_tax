@@ -56,6 +56,9 @@ package {
 		// Our gib spawning effect.
 		public var gib_emitter:GibEmitter;
 		
+		// An emitter for the CEO's special attack.
+		public var money_emitter:MoneyEmitter;
+		
 		// A queue of NPCs that have recently been killed and are waiting to be logged as dead.
 		public var dying_npcs:Array;
 		
@@ -76,15 +79,16 @@ package {
 			var level_data:Object = levels[index];
 			
 			// Create all of our groups, etc.
-			contents    = new FlxGroup();
-			bg_tiles    = new FlxTilemap();
-			wall_tiles  = new FlxTilemap();
-			borders     = new FlxGroup();
-			props       = new FlxGroup();
-			NPCs        = new FlxGroup();
-			hitboxes    = new FlxGroup();
-			gib_emitter = new GibEmitter();
-			dying_npcs  = [];
+			contents      = new FlxGroup();
+			bg_tiles      = new FlxTilemap();
+			wall_tiles    = new FlxTilemap();
+			borders       = new FlxGroup();
+			props         = new FlxGroup();
+			NPCs          = new FlxGroup();
+			hitboxes      = new FlxGroup();
+			gib_emitter   = new GibEmitter();
+			money_emitter = new MoneyEmitter();
+			dying_npcs    = [];
 			
 			// Create our tilemaps.
 			bg_tiles.loadMap(new Assets[level_data.id + "_bg_tiles"], Assets.tiles, TileSize, TileSize, NaN, 1, 1, 2);
@@ -154,6 +158,7 @@ package {
 			contents.add(wall_tiles);
 			contents.add(borders);
 			contents.add(gib_emitter.particles);
+			contents.add(money_emitter.particles);
 			contents.add(NPCs);
 			contents.add(hitboxes);
 			contents.add(Game.player.trails);
