@@ -8,7 +8,7 @@
 	{
 		"id":   "test",
 		"name": "Test Level",
-		"time": 30.0,
+		"time": 300.0,
 		"objectives": {
 			"any": 3,
 			"businessman": 3,

@@ -17,8 +17,9 @@ package {
 		public static const IdleState:int      = 0;
 		public static const WanderState:int    = 1;
 		public static const FleeState:int      = 2;
-		public static const PossessedState:int = 3;
-		public static const StunnedState:int   = 4;
+		public static const ChaseState:int     = 3;
+		public static const PossessedState:int = 4;
+		public static const StunnedState:int   = 5;
 		
 		// Multipliers for the NPC's speed in various states.
 		public static const WanderSpeedFactor:Number = 0.25;
@@ -77,6 +78,9 @@ package {
 		// A flag for whether or not the NPC is currently in the process of using their special attack. This helps us
 		// out with cooldowns.
 		public var using_special:Boolean;
+		
+		// The target sprite that the NPC is chasing when he's in the chase state.
+		public var chase_target:FlxSprite;
 		
 		// Flixel has a rather poorly-designed collision callback system that doesn't provide information about the
 		// objects' changes in velocity. We need that information, so each NPC stores their pre-collision velocity here.
@@ -305,6 +309,11 @@ package {
 			sprite.play("walk");
 		}
 		
+		protected function startChase():void {
+			// Set the animation.
+			sprite.play("walk");
+		}
+		
 		// Callback that occurs when the NPC's behavior changes to flee.
 		protected function startFlee():void {
 			// TODO: Implement me!
@@ -332,16 +341,22 @@ package {
 		
 		// Runs the NPC's idle behavior.
 		protected function idle():void {
-			// Just switch to wander behavior after a certain duration.
-			if (state_duration > state_max_duration) {
+			// Search for money!
+			searchForMoney();
+			
+			// Switch to wander behavior after a certain duration.
+			if (state !== ChaseState && state_duration > state_max_duration) {
 				state = WanderState;
 			}
 		}
 		
 		// Runs the NPC's wander behavior.
 		protected function wander():void {
+			// Search for money!
+			searchForMoney();
+			
 			// Switch back to idle behavior after a certain duration.
-			if (state_duration > state_max_duration) {
+			if (state !== ChaseState && state_duration > state_max_duration) {
 				state = IdleState;
 			}
 		}
@@ -349,6 +364,31 @@ package {
 		// Runs the NPC's flee behavior.
 		protected function flee():void {
 			// TODO: Implement me!
+		}
+		
+		// Runs the NPC's chase behavior.
+		protected function chase():void {
+			// If the target's gone, we're done chasing.
+			if (!chase_target || !chase_target.alive) {
+				chase_target = null;
+				state = IdleState;
+				return;
+			}
+			
+			// The horizontal distance between the NPC and the target.
+			var distance:Number = chase_target.x - x;
+			
+			// If we've found our target, we jump up and down on it. Otherwise we chase it.
+			if (Math.abs(distance) < 3.0) {
+				jump(0.35);
+			}
+			else {
+				// Chase the sprite!
+				velocity.x = (50.0 * Math.abs(distance) / distance) * run_speed;
+				
+				// Set the NPC's facing based on the direction.
+				facing = (distance < 0.0) ? FlxObject.LEFT : FlxObject.RIGHT;
+			}
 		}
 		
 		// Runs the NPC's possessed behavior.
@@ -370,6 +410,7 @@ package {
 				case IdleState:      idle();        break;
 				case WanderState:    wander();      break;
 				case FleeState:      flee();        break;
+				case ChaseState:     chase();       break;
 				case PossessedState: bePossessed(); break;
 				case StunnedState:   beStunned();   break;
 			}
@@ -386,7 +427,7 @@ package {
 				
 				// For some reason Flixel makes us explicitly tell sprites to stop following their path when they're
 				// done.
-				if (sprite.pathSpeed == 0.0) {
+				if (state !== ChaseState && sprite.pathSpeed == 0.0) {
 					sprite.stopFollowingPath(true);
 					velocity.x = 0.0;
 					
@@ -394,9 +435,6 @@ package {
 						sprite.play("idle");
 					}
 				}
-				
-				// Fade out the NPC's color over time.
-				sprite.color
 			}
 			else {
 				// Set the animation.
@@ -512,6 +550,48 @@ package {
 			}
 		}
 		
+		// An AI helper function that makes the NPC search for any nearby money (spawned by the CEO's special attack)
+		// and chase it if so.
+		private function searchForMoney():void {
+			var money:FlxGroup = Game.level.money_emitter.particles;
+			
+			// Check to make sure that there is some money to begin with.
+			if (money.getFirstAlive()) {
+				// We look at each money particle to see if it's close enough to the NPC to attract them. Because the
+				// particles are emitted in pairs, and because there are so many of them, we skip every other particle
+				// for a bit of a performance boost.
+				var nearby_particle:FlxSprite = null;
+				var distance:FlxPoint         = new FlxPoint();
+				
+				for (var i:int = 0; i < money.length; i += 2) {
+					var particle:FlxSprite = money.members[i];
+					
+					// Don't care about dead particles.
+					if (!particle.alive) {
+						continue;
+					}
+					
+					// Calculate the distance squared.
+					distance.x = particle.x - x;
+					distance.y = particle.y - y;
+					
+					var distance_squared = MathUtil.vectorLengthSquared(distance);
+					
+					// Select any particle that is within the given distance limit.
+					if (distance_squared < 2500.0) {
+						nearby_particle = particle;
+						break;
+					}
+				}
+				
+				// Make the NPC run towards the particle.
+				if (nearby_particle) {
+					chase_target = nearby_particle;
+					state        = ChaseState;
+				}
+			}
+		}
+		
 		// State getters and setters.
 		public function get state():int {
 			return $state;
@@ -526,6 +606,7 @@ package {
 				case IdleState:      startIdle();        break;
 				case WanderState:    startWander();      break;
 				case FleeState:      startFlee();        break;
+				case ChaseState:     startChase();       break;
 				case PossessedState: startBePossessed(); break;
 				case StunnedState:   startBeStunned();   break;
 			}
