@@ -29,7 +29,8 @@ package {
 		public static const HurtFlashTime:Number = 0.14;
 		
 		// The velocity threshold after which the NPC will take damage when colliding with something.
-		public static const ContactDamageThreshold:Number = 300.0;
+		public static const ContactDamageThreshold:Number = 280.0;
+		public static const GlassBreakThreshold:Number    = 150.0;
 		
 		// Some NPC tinting colors.
 		public static const PossessionColor:uint = 0xFFCCEE;
@@ -164,32 +165,35 @@ package {
 			}
 			
 			// Calculate the NPC's impact force to determine how much damage should be done.
-			var impact:Number = (MathUtil.vectorLength(velocity_change) - ContactDamageThreshold) * 0.95;
+			var base_impact:Number   = MathUtil.vectorLength(velocity_change);
+			var damage_impact:Number = (base_impact - ContactDamageThreshold) * 0.95;
+			var glass_impact:Number  = (base_impact - GlassBreakThreshold);
 			
-			if (impact > 0.0) {
-				npc.hurt(impact);
+			// Apply damage.
+			if (damage_impact > 0.0) {
+				npc.hurt(damage_impact);
 				
 				// Hurt the other NPC too if the other object is indeed an NPC.
 				// TODO: There's some weird stuff going on when colliding with other NPCs at the moment. I think it has
 				// to do with the value of the velocity change not being quite right in that case.
 				if (obstacle is EntitySprite && (obstacle as EntitySprite).entity is NPC) {
-					((obstacle as EntitySprite).entity as NPC).hurt(impact);
+					((obstacle as EntitySprite).entity as NPC).hurt(damage_impact);
 				}
+			}
+			
+			// Break glass.
+			if (glass_impact >= 0.0 && obstacle === Game.level.wall_tiles) {
+				// We look in the opposite direction of our velocity change -- i.e., the opposite of where we're
+				// being pushed back from -- to check if the tile in that direction is a glass tile. That should
+				// hopefully be a pretty good indication of whether or not we collided with some glass.
+				var impact_direction:FlxPoint = new FlxPoint(npc.old_velocity.x - npc.velocity.x, npc.old_velocity.y);
+				MathUtil.normalize(impact_direction);
 				
 				// If we collided with glass, we need to break the glass and restore our old velocity so that the NPC
 				// keeps moving through the window.
-				if (obstacle === Game.level.wall_tiles) {
-					// We look in the opposite direction of our velocity change -- i.e., the opposite of where we're
-					// being pushed back from -- to check if the tile in that direction is a glass tile. That should
-					// hopefully be a pretty good indication of whether or not we collided with some glass.
-					var impact_direction:FlxPoint = new FlxPoint(npc.old_velocity.x - npc.velocity.x, npc.old_velocity.y);
-					MathUtil.normalize(impact_direction);
-					
-					if (Game.level.breakGlassAt(npc.center.x + impact_direction.x * Level.TileSize, npc.center.y + impact_direction.y * Level.TileSize)) {
-						// If we broke the glass, restore velocity.
-						npc.knockback_velocity.x = npc.old_velocity.x;
-						npc.knockback_velocity.y = npc.old_velocity.y;
-					}
+				if (Game.level.breakGlassAt(npc.center.x + impact_direction.x * Level.TileSize, npc.center.y + impact_direction.y * Level.TileSize)) {
+					npc.knockback_velocity.x = npc.old_velocity.x;
+					npc.knockback_velocity.y = npc.old_velocity.y;
 				}
 			}
 		}
