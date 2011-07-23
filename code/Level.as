@@ -59,6 +59,9 @@ package {
 		// An emitter for the CEO's special attack.
 		public var money_emitter:MoneyEmitter;
 		
+		// An emitter for when glass breaks.
+		public var glass_emitter:GlassEmitter;
+		
 		// A queue of NPCs that have recently been killed and are waiting to be logged as dead.
 		public var dying_npcs:Array;
 		
@@ -88,6 +91,7 @@ package {
 			hitboxes      = new FlxGroup();
 			gib_emitter   = new GibEmitter();
 			money_emitter = new MoneyEmitter();
+			glass_emitter = new GlassEmitter();
 			dying_npcs    = [];
 			
 			// Create our tilemaps.
@@ -157,6 +161,7 @@ package {
 			contents.add(props);
 			contents.add(wall_tiles);
 			contents.add(borders);
+			contents.add(glass_emitter.particles);
 			contents.add(gib_emitter.particles);
 			contents.add(money_emitter.particles);
 			contents.add(NPCs);
@@ -168,8 +173,8 @@ package {
 		// Looks at the tile at the given coordinates (pixels, not tiles), checks if it is the same type as tile_type,
 		// and if so, destroys that tile and any tiles of the same type that are in a contiguous vertical line with it
 		// (or horizontal line the horizontal parameter is true, except it doesn't work yet). This is basically used as
-		// a helper function for opening doors and breaking glass.
-		public function destroyWall(tile_type:int, x:int, y:int, horizontal:Boolean = false):void {
+		// a helper function for opening doors and breaking glass. Returns whether or not any wall was destroyed.
+		public function destroyWall(tile_type:int, x:int, y:int, horizontal:Boolean = false):Boolean {
 			// Convert pixels to tiles.
 			x /= Level.TileSize;
 			y /= Level.TileSize;
@@ -182,26 +187,30 @@ package {
 				}
 				
 				// Now move down the door, smashing as we go.
-				// TODO: Maybe have a specifiable particle effect or something.
 				while (wall_tiles.getTile(x, y) === tile_type) {
 					wall_tiles.setTile(x, y, 0);
 					y++;
 				}
+				
+				return true;
 			}
+			
+			return false;
 		}
 		
-		// If there's a door tile at the given coordinates (pixels, not tiles), this will open that door.
-		public function openDoorAt(x:int, y:int):void {
-			destroyWall(3, x, y);
+		// If there's a door tile at the given coordinates (pixels, not tiles), this will open that door. Returns
+		// whether we opened a door or not.
+		public function openDoorAt(x:int, y:int):Boolean {
+			return destroyWall(3, x, y);
 		}
 		
 		// If there's a glass tile at the given coordinates (pixels, not tiles), this will break the glass.
-		public function breakGlassAt(x:int, y:int):void {
-			// Glass can be left- or right-facing, so there are two different tiles we need to check.
-			destroyWall(4, x, y);
-			destroyWall(6, x, y);
+		public function breakGlassAt(x:int, y:int):Boolean {
+			// Create a particle effect.
+			glass_emitter.spawnGlassAt(x, y);
 			
-			// TODO: Create a particle effect.
+			// Glass can be left- or right-facing, so there are two different tiles we need to check.
+			return (destroyWall(4, x, y) || destroyWall(6, x, y));
 		}
 		
 		// A little function that swaps the visual position of the player and the NPCs. That is, if the player is in

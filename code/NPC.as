@@ -175,12 +175,22 @@ package {
 				if (obstacle is EntitySprite && (obstacle as EntitySprite).entity is NPC) {
 					((obstacle as EntitySprite).entity as NPC).hurt(impact);
 				}
-			}
-			
-			// TODO: If we collided with glass, we need to restore our old velocity so that the NPC keeps moving through
-			// the window.
-			if (obstacle === Game.level.wall_tiles) {
-				// Nothin yet.
+				
+				// If we collided with glass, we need to break the glass and restore our old velocity so that the NPC
+				// keeps moving through the window.
+				if (obstacle === Game.level.wall_tiles) {
+					// We look in the opposite direction of our velocity change -- i.e., the opposite of where we're
+					// being pushed back from -- to check if the tile in that direction is a glass tile. That should
+					// hopefully be a pretty good indication of whether or not we collided with some glass.
+					var impact_direction:FlxPoint = new FlxPoint(npc.old_velocity.x - npc.velocity.x, npc.old_velocity.y);
+					MathUtil.normalize(impact_direction);
+					
+					if (Game.level.breakGlassAt(npc.center.x + impact_direction.x * Level.TileSize, npc.center.y + impact_direction.y * Level.TileSize)) {
+						// If we broke the glass, restore velocity.
+						npc.knockback_velocity.x = npc.old_velocity.x;
+						npc.knockback_velocity.y = npc.old_velocity.y;
+					}
+				}
 			}
 		}
 		
@@ -475,13 +485,18 @@ package {
 			
 			// Increment the state duration.
 			state_duration += FlxG.elapsed;
+			
+			// Kill the NPC if they've fallen off the map.
+			if (y > Game.level.height) {
+				kill();
+			}
 		}
 		
 		// After update.
 		override public function afterUpdate():void {
 			super.afterUpdate();
 			
-			// We just store our "old" velocity here, which will be used if the NPC collides with something.
+			// We store our "old" velocity here, which will be used if the NPC collides with something.
 			old_velocity.x = velocity.x;
 			old_velocity.y = velocity.y;
 		}
