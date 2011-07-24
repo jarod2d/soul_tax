@@ -155,8 +155,6 @@ package {
 				(player.victim) ? player.stopPossessing() : player.possess();
 			}
 			
-			
-			
 			// Do collisions.
 			performCollisions();
 			

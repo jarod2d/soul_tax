@@ -169,6 +169,7 @@ package {
 			var damage_impact:Number = (base_impact - ContactDamageThreshold) * 0.95;
 			var glass_impact:Number  = (base_impact - GlassBreakThreshold);
 			
+			
 			// Apply damage.
 			if (damage_impact > 0.0) {
 				npc.hurt(damage_impact);
@@ -236,7 +237,11 @@ package {
 				continueSpecialAttack();
 			}
 			
-			// TODO: Add other attacks.
+			// The superhero does a charge attack.
+			else if (type.id === "superhero") {
+				// It's a continuous effect, so just call down to that.
+				continueSpecialAttack();
+			}
 		}
 		
 		// Called when the player is holding down the special attack button.
@@ -250,6 +255,20 @@ package {
 			if (type.id === "ceo") {
 				Game.level.money_emitter.vomitFromNPC(this);
 			}
+			
+			// Superhero special.
+			else if (type.id === "superhero") {
+				// We need to cancel out player movement during the charge.
+				Game.player.direction.x = Game.player.direction.y = 0.0;
+				
+				// Set our charge velocity.
+				velocity.x = max_velocity.x = (facing === FlxObject.LEFT) ? -360.0 : 360.0;
+				
+				// Kill dudes we run into.
+				FlxG.overlap(this.sprite, Game.level.NPCs, function(npc_sprite:EntitySprite, victim_sprite:EntitySprite):void {
+					(victim_sprite.entity as NPC).kill();
+				});
+			}
 		}
 		
 		// Called when the player releases the special attack button.
@@ -257,6 +276,13 @@ package {
 			// Make sure we're actually using our special attack right now.
 			if (!using_special) {
 				return;
+			}
+			
+			// Superhero special.
+			if (type.id === "superhero") {
+				// Reset the charge velocity and max velocity with some yucky repeated values.
+				velocity.x     = 0.0;
+				max_velocity.x = 90.0 * run_speed;
 			}
 			
 			// We're no longer using the special attack.
