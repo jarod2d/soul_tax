@@ -10,7 +10,7 @@ package {
 	
 	import org.flixel.*;
 	
-	[SWF(width="800", height="750", backgroundColor="#000000")]
+	[SWF(width="800", height="640", backgroundColor="#000000")]
 	[Frame(factoryClass="Preloader")]
 	
 	public class Game extends FlxGame {
@@ -24,7 +24,7 @@ package {
 		public static var current_level:int;
 		
 		public function Game() {
-			super(400, 375, MainMenuState, 2);
+			super(400, 320, MainMenuState, 2);
 			
 			// Set up a few values.
 			FlxG.debug     = true;

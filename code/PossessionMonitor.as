@@ -17,6 +17,8 @@ package {
 		// The components of the NPC preview pane.
 		private var preview:FlxGroup;
 		private var preview_bg:FlxSprite;
+		private var preview_cooldown:FlxSprite;
+		private var preview_border:FlxSprite;
 		
 		// Some text that displays the name of the victim and their special ability.
 		private var victim_name:FlxText;
@@ -33,6 +35,16 @@ package {
 			preview_bg.makeGraphic(PreviewSize, PreviewSize, 0x99000000);
 			preview_bg.scrollFactor.x = preview_bg.scrollFactor.y = 0.0;
 			preview.add(preview_bg);
+			
+			preview_cooldown = new FlxSprite(preview_bg.x, preview_bg.y);
+			preview_cooldown.scrollFactor.x = preview_cooldown.scrollFactor.y = 0.0;
+			preview.add(preview_cooldown);
+			
+			preview_border = new FlxSprite(preview_bg.x - 1.0, preview_bg.y - 1.0);
+			preview_border.makeGraphic(PreviewSize + 2.0, PreviewSize + 2.0, 0xFFEE77CC);
+			preview_border.pixels.fillRect(new Rectangle(1.0, 1.0, PreviewSize, PreviewSize), 0x00000000);
+			preview_border.scrollFactor.x = preview_border.scrollFactor.y = 0.0;
+			preview.add(preview_border);
 			
 			// Set up the victim name.
 			victim_name = new FlxText(preview_bg.x - 202.0, preview_bg.y, 200.0);
@@ -56,16 +68,30 @@ package {
 			
 			// Show or hide the preview based on whether the player is able to possess someone right now, and if it is
 			// visible, stamp the victim onto the preview so we can see which type they are.
-			if (!Game.player.victim && Game.player.potential_victim) {
-				var victim_sprite:FlxSprite = Game.player.potential_victim.sprite;
+			if (Game.player.victim || Game.player.potential_victim) {
+				var victim:NPC = (Game.player.victim) ? Game.player.victim : Game.player.potential_victim;
+				
 				preview_bg.pixels.fillRect(new Rectangle(0, 0, PreviewSize, PreviewSize), 0x88000000);
-				preview_bg.stamp(victim_sprite, (PreviewSize - victim_sprite.frameWidth) / 2.0, (PreviewSize - victim_sprite.frameHeight) / 2.0 - 1.0);
+				preview_bg.stamp(victim.sprite, (PreviewSize - victim.sprite.frameWidth) / 2.0, (PreviewSize - victim.sprite.frameHeight) / 2.0 - 1.0);
+				
+				victim_name.text = victim.type.name;
+				victim_text.text = victim.type.special;
+				
 				preview.setAll("alpha", 1.0);
-				
-				victim_name.text = Game.player.potential_victim.type.name;
-				victim_text.text = Game.player.potential_victim.type.special;
-				
+				preview_border.alpha = (Game.player.victim) ? 1.0 : 0.0;
 				victim_name.alpha = victim_text.alpha = 1.0;
+				
+				// Update the cooldown meter.
+				var cooldown_height:Number = (victim.type.cooldown > 0.0) ? Math.ceil(preview_bg.height * victim.special_cooldown / victim.type.cooldown) : 0.0;
+				
+				if (Game.player.victim && cooldown_height > 0.0) {
+					preview_cooldown.alpha = 1.0;
+					preview_cooldown.makeGraphic(preview_bg.width, cooldown_height, 0x99220011);
+					preview_cooldown.y = preview_bg.y + preview_bg.height - preview_cooldown.height;
+				}
+				else {
+					preview_cooldown.alpha = 0.0;
+				}
 			}
 			else {
 				preview.setAll("alpha", 0.0);

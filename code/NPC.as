@@ -222,7 +222,10 @@ package {
 			
 			// The burglar opens doors.
 			if (type.id === "burglar") {
-				Game.level.openDoorAt((facing === FlxObject.RIGHT) ? right + Level.TileSize / 2.0 : left - Level.TileSize / 2.0, s_center.y);
+				// If we didn't open a door, don't blow our cooldown.
+				if (!Game.level.openDoorAt((facing === FlxObject.RIGHT) ? right + Level.TileSize / 2.0 : left - Level.TileSize / 2.0, s_center.y)) {
+					special_cooldown = 0.0;
+				}
 			}
 			
 			// The businessman does a large knockback attack.
@@ -268,6 +271,9 @@ package {
 				FlxG.overlap(this.sprite, Game.level.NPCs, function(npc_sprite:EntitySprite, victim_sprite:EntitySprite):void {
 					(victim_sprite.entity as NPC).kill();
 				});
+				
+				// Superhero's cooldown resets when he's done charging.
+				special_cooldown = type.cooldown;
 			}
 		}
 		
@@ -314,7 +320,9 @@ package {
 			}
 			
 			// Update the level progress.
-			Game.level.queueDeadNPC(this);
+			if (type.id !== "robot") {
+				Game.level.queueDeadNPC(this);
+			}
 			
 			// Explode!!!
 			Game.level.gib_emitter.spawnGibsForNPC(this);
