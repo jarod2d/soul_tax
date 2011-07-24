@@ -194,9 +194,12 @@ package {
 			}
 			
 			// Count down the level timer, and end the level if necessary.
-			Game.level.time_remaining -= FlxG.elapsed;
+			level.time_remaining -= FlxG.elapsed;
 			
-			if (Game.level.time_remaining <= 0.0) {
+			if (level.time_remaining <= 0.0 || (FlxG.keys.ENTER && level.objectives_complete)) {
+				// Set the timer to zero in case the user ended the level early.
+				level.time_remaining = 0.0;
+				
 				// Make the player stop possessing their victim and stop their movement.
 				player.stopPossessing();
 				player.direction.x = player.direction.y = 0.0;
@@ -206,6 +209,9 @@ package {
 				
 				// Update the substate.
 				substate = TimeUpSubstate;
+				
+				// Hide the level complete message.
+				Game.ui.level_complete_message.setAll("alpha", 0.0);
 			}
 		}
 		

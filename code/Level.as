@@ -267,6 +267,11 @@ package {
 			
 			// Increment the appropriate progress counter.
 			progress[dead_npc.objective_type]++;
+			
+			// If the level is complete, show the level complete message.
+			if (objectives_complete) {
+				Game.ui.level_complete_message.setAll("alpha", 1.0);
+			}
 		}
 		
 		// A getter for whether or not the player has completed all of their objectives.

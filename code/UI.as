@@ -23,18 +23,20 @@ package {
 		public var possession_monitor:PossessionMonitor;
 		public var kill_counter:KillCounter;
 		public var level_timer:LevelTimer;
+		public var level_complete_message:LevelCompleteMessage;
 		public var level_end_screen:LevelEndScreen;
 		public var dialogue_box:DialogueBox;
 		
 		// Constructor.
 		public function UI() {
-			contents           = new FlxGroup();
-			hud_bar            = new FlxSprite();
-			possession_monitor = new PossessionMonitor();
-			kill_counter       = new KillCounter();
-			level_timer        = new LevelTimer();
-			level_end_screen   = new LevelEndScreen();
-			dialogue_box       = new DialogueBox();
+			contents               = new FlxGroup();
+			hud_bar                = new FlxSprite();
+			possession_monitor     = new PossessionMonitor();
+			kill_counter           = new KillCounter();
+			level_timer            = new LevelTimer();
+			level_complete_message = new LevelCompleteMessage();
+			level_end_screen       = new LevelEndScreen();
+			dialogue_box           = new DialogueBox();
 			
 			// Set up the HUD bar.
 			hud_bar.makeGraphic(FlxG.width, HUDBarHeight, 0x99151818);
@@ -45,6 +47,7 @@ package {
 			contents.add(possession_monitor);
 			contents.add(kill_counter);
 			contents.add(level_timer);
+			contents.add(level_complete_message);
 			contents.add(level_end_screen);
 			contents.add(dialogue_box);
 		}

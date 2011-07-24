@@ -19,6 +19,7 @@
 		7A4D427013CFC35100B073F6 /* RangedValue.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = RangedValue.as; path = code/RangedValue.as; sourceTree = "<group>"; };
 		7A70B19213D8DE4800D36C09 /* MoneyEmitter.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = MoneyEmitter.as; path = code/MoneyEmitter.as; sourceTree = "<group>"; };
 		7A97CEAB13DA504800AADDDC /* GlassEmitter.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = GlassEmitter.as; path = code/GlassEmitter.as; sourceTree = "<group>"; };
+		7A97CEAD13DCBD2C00AADDDC /* LevelCompleteMessage.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = LevelCompleteMessage.as; path = code/LevelCompleteMessage.as; sourceTree = "<group>"; };
 		7A9BB0EC13D154E6003E32FB /* DialogueBox.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = DialogueBox.as; path = code/DialogueBox.as; sourceTree = "<group>"; };
 		7AA58F5813CADD7F00D52B24 /* game_data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = game_data; sourceTree = "<group>"; };
 		7AA58F5F13CE627500D52B24 /* LevelTimer.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = LevelTimer.as; path = code/LevelTimer.as; sourceTree = "<group>"; };
@@ -421,6 +422,7 @@
 				7AA58F5F13CE627500D52B24 /* LevelTimer.as */,
 				7A38EC0413D347C100416B91 /* LevelEndScreen.as */,
 				7A9BB0EC13D154E6003E32FB /* DialogueBox.as */,
+				7A97CEAD13DCBD2C00AADDDC /* LevelCompleteMessage.as */,
 			);
 			name = UI;
 			sourceTree = "<group>";
