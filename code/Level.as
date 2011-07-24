@@ -50,6 +50,10 @@ package {
 		// The list of NPCs in the level.
 		public var NPCs:FlxGroup;
 		
+		// The list of all robot NPCs in the level -- a subset of the NPCs group. They have some special behavior that
+		// requires them to be in their own list.
+		public var robots:FlxGroup;
+		
 		// The list of hitboxes in the level.
 		public var hitboxes:FlxGroup;
 		
@@ -88,6 +92,7 @@ package {
 			borders       = new FlxGroup();
 			props         = new FlxGroup();
 			NPCs          = new FlxGroup();
+			robots        = new FlxGroup();
 			hitboxes      = new FlxGroup();
 			gib_emitter   = new GibEmitter();
 			money_emitter = new MoneyEmitter();
@@ -128,7 +133,13 @@ package {
 					Game.player.warp(npc_data.x, npc_data.y);
 				}
 				else {
-					NPCs.add(new NPC(npc_data.id, npc_data.x, npc_data.y).sprite);
+					var npc:NPC = new NPC(npc_data.id, npc_data.x, npc_data.y);
+					NPCs.add(npc.sprite);
+					
+					// Add robots to their own group.
+					if (npc.type.id === "robot") {
+						robots.add(npc.sprite);
+					}
 				}
 			}
 			

@@ -74,8 +74,8 @@ package {
 		
 		// Attacks the given NPC. Should be called whenever the hitbox overlaps with the NPC.
 		public function attackNPC(npc:NPC):void {
-			// We don't want to attack the NPC who spawned the hitbox, or NPCs that we've already attacked.
-			if (npc === host || victims.indexOf(npc) >= 0) {
+			// We don't want to attack the NPC who spawned the hitbox, NPCs that we've already attacked, or robots.
+			if (npc === host || victims.indexOf(npc) >= 0 || npc.type.id === "robot") {
 				return;
 			}
 			

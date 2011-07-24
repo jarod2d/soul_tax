@@ -324,6 +324,13 @@ package {
 					hb.attackNPC(npc);
 				}
 			});
+			
+			// Robot collisions.
+			if (player.victim) {
+				FlxG.overlap(level.robots, player.victim.sprite, function(robot_sprite:EntitySprite, victim_sprite:EntitySprite):void {
+					player.victim.kill();
+				});
+			}
 		}
 		
 		// Update.

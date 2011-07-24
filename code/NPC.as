@@ -356,6 +356,11 @@ package {
 		
 		// Runs the NPC's idle behavior.
 		protected function idle():void {
+			// Search for the player if we're a robot.
+			if (type.id === "robot") {
+				searchForPlayer();
+			}
+			
 			// Search for money!
 			searchForMoney();
 			
@@ -367,6 +372,11 @@ package {
 		
 		// Runs the NPC's wander behavior.
 		protected function wander():void {
+			// Search for the player if we're a robot.
+			if (type.id === "robot") {
+				searchForPlayer();
+			}
+			
 			// Search for money!
 			searchForMoney();
 			
@@ -383,8 +393,16 @@ package {
 		
 		// Runs the NPC's chase behavior.
 		protected function chase():void {
+			// Figure out if we're chasing an NPC or not. For now, we have two possible chase targets -- an NPC who is
+			// the player's victim (for robot chasing) or a money particle.
+			var target_npc:NPC = null;
+			
+			if ((chase_target is EntitySprite && (chase_target as EntitySprite).entity is NPC)) {
+				target_npc = (chase_target as EntitySprite).entity as NPC;
+			}
+			
 			// If the target's gone, we're done chasing.
-			if (!chase_target || !chase_target.alive) {
+			if (!chase_target || !chase_target.alive || (target_npc && Game.player.victim !== target_npc)) {
 				chase_target = null;
 				state = IdleState;
 				return;
@@ -393,9 +411,11 @@ package {
 			// The horizontal distance between the NPC and the target.
 			var distance:Number = chase_target.x - x;
 			
-			// If we've found our target, we jump up and down on it. Otherwise we chase it.
+			// If we've found our target, we jump up and down on it unless it's an NPC. Otherwise we chase it.
 			if (Math.abs(distance) < 3.0) {
-				jump(0.35);
+				if (!target_npc) {
+					jump(0.35);
+				}
 			}
 			else {
 				// Chase the sprite!
@@ -595,7 +615,7 @@ package {
 					distance.x = particle.x - x;
 					distance.y = particle.y - y;
 					
-					var distance_squared = MathUtil.vectorLengthSquared(distance);
+					var distance_squared:Number = MathUtil.vectorLengthSquared(distance);
 					
 					// Select any particle that is within the given distance limit.
 					if (distance_squared < 2500.0) {
@@ -609,6 +629,27 @@ package {
 					chase_target = nearby_particle;
 					state        = ChaseState;
 				}
+			}
+		}
+		
+		// An AI helper function that causes the NPC to search for the player within a certain radius, and if he is
+		// found, starts chasing after him.
+		private function searchForPlayer():void {
+			// We're actually looking for the NPC the player is possessing.
+			var victim:NPC = Game.player.victim;
+			
+			// If the player's not possessing anyone, we have nothing to look for.
+			if (!victim) {
+				return;
+			}
+			
+			// Get the distance squared from the player.
+			var distance_squared:Number = MathUtil.vectorLengthSquared(new FlxPoint(victim.x - x, victim.y - y));
+			
+			// If they're within a certain distance, run towards them.
+			if (distance_squared < 2500.0) {
+				chase_target = victim.sprite;
+				state        = ChaseState;
 			}
 		}
 		
