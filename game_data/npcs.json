@@ -270,16 +270,21 @@
 		"attack_speed":  0.85,
 		"run_speed":     1.075,
 		"cooldown":      1.0,
-		"frame_width":   10,
+		"frame_width":   16,
 		"frame_height":  16,
 		"bounds_width":  4,
 		"bounds_height": 14,
-		"offset":        { "x": 2, "y": 2 },
+		"offset":        { "x": 6, "y": 2 },
 		"animations": [
-			{ "name": "idle",  "speed": 10, "looped": true,  "frames": [0] },
-			{ "name": "walk",  "speed": 10, "looped": true,  "frames": [0, 1, 2, 3] },
-			{ "name": "punch", "speed": 22, "looped": false, "frames": [4, 5, 6, 7] },
-			{ "name": "kick",  "speed": 44, "looped": false, "frames": [9, 10, 10, 11] }
+			{ "name": "idle",           "speed": 10, "looped": true,  "frames": [0] },
+			{ "name": "walk",           "speed": 10, "looped": true,  "frames": [0, 1, 2, 3] },
+			{ "name": "possessed_idle", "speed": 10, "looped": true,  "frames": [12] },
+			{ "name": "possessed_walk", "speed": 10, "looped": true,  "frames": [12, 13, 14, 15] },
+			{ "name": "punch",          "speed": 22, "looped": false, "frames": [4, 5, 6, 7] },
+			{ "name": "kick",           "speed": 44, "looped": false, "frames": [9, 10, 10, 11] },
+			{ "name": "sleep",          "speed": 7,  "looped": true,  "frames": [16, 16, 16, 17] },
+			{ "name": "panic",          "speed": 10, "looped": true,  "frames": [20, 21, 22, 23] },
+			{ "name": "special",        "speed": 2,  "looped": false, "frames": [25] }
 		]
 	}
 }

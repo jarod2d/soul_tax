@@ -49,8 +49,9 @@ package {
 		// The list of props in the level.
 		public var props:FlxGroup;
 		
-		// The list of NPCs in the level.
+		// The list of NPCs in the level, as well as a subset of shrunken NPCs.
 		public var NPCs:FlxGroup;
+		public var shrunk_NPCs:FlxGroup;
 		
 		// The list of all robot NPCs in the level -- a subset of the NPCs group. They have some special behavior that
 		// requires them to be in their own list.
@@ -95,6 +96,7 @@ package {
 			bottomless_borders = new FlxGroup();
 			props              = new FlxGroup();
 			NPCs               = new FlxGroup();
+			shrunk_NPCs        = new FlxGroup();
 			robots             = new FlxGroup();
 			hitboxes           = new FlxGroup();
 			gib_emitter        = new GibEmitter();

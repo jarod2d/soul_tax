@@ -314,8 +314,11 @@ package {
 			
 			// Standard collisions.
 			if (player.victim) {
-				FlxG.collide(level.bottomless_borders, player.victim.sprite);
-				FlxG.collide(level.NPCs, player.victim.sprite, NPC.processCollision);
+				FlxG.collide(player.victim.sprite, level.bottomless_borders);
+				FlxG.collide(player.victim.sprite, level.NPCs, NPC.processCollision);
+				FlxG.overlap(player.victim.sprite, level.shrunk_NPCs, function(victim_sprite:EntitySprite, npc_sprite:EntitySprite):void {
+					(npc_sprite.entity as NPC).kill();
+				});
 			}
 			
 			FlxG.collide(player.sprite, level.borders);

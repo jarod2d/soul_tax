@@ -55,6 +55,9 @@ package {
 		// Keeps track of the NPC's special attack cooldown.
 		public var special_cooldown:Number;
 		
+		// Whether or not the NPC has been shrunk by the supervillain's shrink ray attack.
+		public var is_shrunk:Boolean;
+		
 		// How much health does the NPC have?
 		public var hp:Number;
 		
@@ -220,6 +223,22 @@ package {
 			}
 		}
 		
+		// Shrinks the NPC so that they can be stomped on.
+		public function shrink():void {
+			// Scale down the sprite.
+			sprite.scale.x = sprite.scale.y = 0.5;
+			width  = Math.ceil(s_width * 0.25);
+			height = Math.ceil(s_height * 0.75);
+			offset.y = 0.0;
+			offset.x = 6.0;
+			
+			// Add the NPC to the list of shrunken NPCs.
+			Game.level.shrunk_NPCs.add(sprite);
+			
+			// Need to keep track of the fact that we're shrunk.
+			is_shrunk = true;
+		}
+		
 		// Called when the player just pressed the special attack button. It's a giant nasty monolithic function, but
 		// deadlines are calling so it will have to do!
 		public function startSpecialAttack():void {
@@ -259,11 +278,31 @@ package {
 				bullet.sprite.loadGraphic(Assets.bullet_sprite);
 				bullet.velocity.x = (facing === FlxObject.LEFT) ? -300.0 : 300.0;
 				
-				// For some reason, when facing left, the bullet spawns way out in front of the player. This is a little
-				// hack to fix that.
-				if (facing === FlxObject.LEFT) {
-					bullet.x -= bullet.velocity.x * FlxG.elapsed * 2.75;
-				}
+				// Projectiles don't spawn exactly where they're supposed to
+				bullet.x -= bullet.velocity.x * FlxG.elapsed * ((facing === FlxObject.LEFT) ? 2.75 : 0.75);
+				
+				// Play the shooting animation.
+				sprite.play("special", true);
+			}
+			
+			// The supervillain shoots a shrink ray.
+			else if (type.id === "supervillain") {
+				// Spawn the laser.
+				var laser:HitBox = new HitBox(this, 0, 5, 5, 2, true);
+				laser.setAttributes(HitBox.PlayerAllegiance, 3.0, 0.0, 0.0, function(hb:HitBox, npc:NPC):void {
+					if (npc.type.id !== "robot") {
+						npc.shrink();
+					}
+				});
+				
+				laser.sprite.loadGraphic(Assets.laser_sprite, true, true, 5, 2);
+				laser.sprite.addAnimation("shoot", [0, 1, 2, 3], 15, true);
+				laser.sprite.play("shoot");
+				laser.velocity.x = (facing === FlxObject.LEFT) ? -300.0 : 300.0;
+				laser.facing     = facing;
+				
+				// Same hack as the security guard above.
+				laser.x -= laser.velocity.x * FlxG.elapsed * ((facing === FlxObject.LEFT) ? 2.25 : 1.0);
 				
 				// Play the shooting animation.
 				sprite.play("special", true);
@@ -383,7 +422,9 @@ package {
 			hp -= damage;
 			
 			// Set the hurt flash timer.
-			flash_timer = HurtFlashTime;
+			if (damage > 0.0) {
+				flash_timer = HurtFlashTime;
+			}
 			
 			// Kill the NPC if necessary, or make them flee if they're not dead.
 			if (hp <= 0.0) {

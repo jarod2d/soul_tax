@@ -284,8 +284,8 @@ package {
 		}
 		
 		public function set potential_victim(value:NPC):void {
-			// We don't allow the player to possess robots.
-			if (value === null || value.type.id !== "robot") {
+			// We don't allow the player to possess robots or shrunken NPCs.
+			if (value === null || (value.type.id !== "robot" && !value.is_shrunk)) {
 				$potential_victim = value;
 			}
 		}

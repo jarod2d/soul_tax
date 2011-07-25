@@ -111,7 +111,7 @@ package {
 			victims.push(npc);
 			
 			// Do the callback.
-			if (callback) {
+			if (callback !== null) {
 				callback(this, npc);
 			}
 		}
