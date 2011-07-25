@@ -140,7 +140,6 @@ package {
 			}
 			
 			// Set the cooldown.
-			// TODO: Multiply by the NPC's attack speed multiplier stat.
 			punch_cooldown = PunchCooldownTime * victim.attack_speed;
 			
 			// Create the hitbox.
@@ -149,6 +148,10 @@ package {
 			
 			// Play the victim's punch animation.
 			victim.sprite.play("punch", true);
+			
+			// Break any glass that we hit.
+			var break_direction:Number = (victim.facing === FlxObject.RIGHT) ? victim.right + Level.TileSize / 2.0 : victim.left - Level.TileSize / 2.0;
+			Game.level.breakGlassAt(break_direction, victim.s_center.y);
 		}
 		
 		// The secondary knockback attack the player uses when they're possessing someone.
@@ -159,7 +162,6 @@ package {
 			}
 			
 			// Set the cooldown.
-			// TODO: Multiply by the NPC's attack speed multiplier stat.
 			kick_cooldown = KickCooldownTime * victim.attack_speed;
 			
 			// Create the hitbox.
@@ -168,6 +170,10 @@ package {
 			
 			// Play the victim's kick animation.
 			victim.sprite.play("kick", true);
+			
+			// Break any glass that we hit.
+			var break_direction:Number = (victim.facing === FlxObject.RIGHT) ? victim.right + Level.TileSize / 2.0 : victim.left - Level.TileSize / 2.0;
+			Game.level.breakGlassAt(break_direction, victim.s_center.y);
 		}
 		
 		// Update.
