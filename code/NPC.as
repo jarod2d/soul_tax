@@ -210,6 +210,11 @@ package {
 		// multiplier to increase or decrease the relative height of the jump. A value of 1.0 will make the NPC jump at
 		// their intended maximum jump height. 
 		public function jump(power:Number = 1.0):void {
+			// Don't let certain NPCs jump while using their special.
+			if (using_special && (type.id === "bank_manager" || type.id === "maintenance_guy" || type.id === "old_lady")) {
+				return;
+			}
+			
 			if (sprite.isTouching(FlxObject.DOWN)) {
 				velocity.y = jump_strength * power * -60.0;
 			}
@@ -239,28 +244,33 @@ package {
 			else if (type.id === "businessman") {
 				var hb:HitBox = new HitBox(this, 0, 0, 6, height);
 				hb.setAttributes(HitBox.PlayerAllegiance, 0.15, strength / 6.0, 300.0);
+				
+				sprite.play("special", true);
 			}
 			
 			// The security guard shoots a gun.
 			else if (type.id === "security_guard") {
-				var bullet:HitBox = new HitBox(this, 0, 4, 3, 2, true);
+				// Spawn the bullet.
+				var bullet:HitBox = new HitBox(this, 0, 3, 3, 2, true);
 				bullet.setAttributes(HitBox.PlayerAllegiance, 3.0, 150.0, 50.0, function(hb:HitBox, npc:NPC):void {
 					hb.sprite.kill();
 				});
 				
 				bullet.sprite.loadGraphic(Assets.bullet_sprite);
 				bullet.velocity.x = (facing === FlxObject.LEFT) ? -300.0 : 300.0;
-				bullet.x -= bullet.velocity.x * FlxG.elapsed;
 				
 				// For some reason, when facing left, the bullet spawns way out in front of the player. This is a little
 				// hack to fix that.
 				if (facing === FlxObject.LEFT) {
-					bullet.x -= bullet.velocity.x * FlxG.elapsed * 2.0;
+					bullet.x -= bullet.velocity.x * FlxG.elapsed * 2.75;
 				}
+				
+				// Play the shooting animation.
+				sprite.play("special", true);
 			}
 			
 			// These NPCs have continuous attacks that just require calling down to the continuous effect.
-			else if (type.id === "ceo" || type.id === "maintenance_guy" || type.id === "superhero") {
+			else if (type.id === "bank_manager" || type.id === "ceo" || type.id === "maintenance_guy" || type.id === "old_lady" || type.id === "superhero") {
 				continueSpecialAttack();
 			}
 		}
@@ -272,13 +282,30 @@ package {
 				return;
 			}
 			
+			// Manager special.
+			if (type.id === "bank_manager") {
+				// TODO: Implement fleeing stuff.
+				
+				// We don't want the player to move while this is happening.
+				Game.player.direction.x = Game.player.direction.y = 0.0;
+				
+				// Play the yelling animation.
+				sprite.play("special");
+				
+				// Manager's cooldown resets when she's done yapping.
+				special_cooldown = type.cooldown;
+			}
+			
 			// CEO special.
-			if (type.id === "ceo") {
+			else if (type.id === "ceo") {
 				Game.level.money_emitter.vomitFromNPC(this);
 			}
 			
 			// Maintenance guy special.
 			else if (type.id === "maintenance_guy") {
+				// We don't want the player to move while this is happening.
+				Game.player.direction.x = Game.player.direction.y = 0.0;
+				
 				// Destroy tiles underneath the NPC.
 				if (special_interval <= 0.0) {
 					Game.level.wall_tiles.setTile(center.x / Level.TileSize, (bottom + Level.TileSize / 2.0) / Level.TileSize, 0);
@@ -286,6 +313,23 @@ package {
 				}
 				
 				// Maintenance guy's cooldown resets when he's done drilling.
+				special_cooldown = type.cooldown;
+				
+				// Play the drill animation.
+				sprite.play("special");
+			}
+			
+			// Old lady special.
+			else if (type.id === "old_lady") {
+				// TODO: Implement sleep stuff.
+				
+				// We don't want the player to move while this is happening.
+				Game.player.direction.x = Game.player.direction.y = 0.0;
+				
+				// Play the jabbering animation.
+				sprite.play("special");
+				
+				// Old lady's cooldown resets when she's done yapping.
 				special_cooldown = type.cooldown;
 			}
 			
@@ -301,6 +345,9 @@ package {
 				FlxG.overlap(this.sprite, Game.level.NPCs, function(npc_sprite:EntitySprite, victim_sprite:EntitySprite):void {
 					(victim_sprite.entity as NPC).kill();
 				});
+				
+				// Play the charging animation.
+				sprite.play("special");
 				
 				// Superhero's cooldown resets when he's done charging.
 				special_cooldown = type.cooldown;
@@ -373,7 +420,7 @@ package {
 			state_max_duration = 2.5 + Math.random() * 8.0;
 			
 			// Set the animation.
-			sprite.play("idle");
+			sprite.play(animation_prefix + "idle");
 		}
 		
 		// Callback that occurs when the NPC's behavior changes to wander.
@@ -391,12 +438,12 @@ package {
 //			}
 			
 			// Set the animation.
-			sprite.play("walk");
+			sprite.play(animation_prefix + "walk");
 		}
 		
 		protected function startChase():void {
 			// Set the animation.
-			sprite.play("walk");
+			sprite.play(animation_prefix + "walk");
 		}
 		
 		// Callback that occurs when the NPC's behavior changes to flee.
@@ -421,7 +468,7 @@ package {
 			
 			// Set the animation.
 			// TODO: Play some sort of stunned animation.
-			sprite.play("idle");
+			sprite.play(animation_prefix + "idle");
 		}
 		
 		// Runs the NPC's idle behavior.
@@ -667,7 +714,7 @@ package {
 					velocity.x = 0.0;
 					
 					if (sprite.finished) {
-						sprite.play("idle");
+						sprite.play(animation_prefix + "idle");
 					}
 				}
 			}
@@ -675,10 +722,10 @@ package {
 				// Set the animation.
 				if (sprite.finished) {
 					if (velocity.x !== 0.0 && sprite.isTouching(FlxObject.DOWN)) {
-						sprite.play("walk");
+						sprite.play(animation_prefix + "walk");
 					}
 					else {
-						sprite.play("idle");
+						sprite.play(animation_prefix + "idle");
 					}
 				}
 			}
@@ -772,6 +819,17 @@ package {
 			var flash_progress:Number = 1.0 - flash_timer / HurtFlashTime;
 			
 			return (flash_timer > 0.0) ? ColorUtil.blend(HurtColor, base_color, flash_progress) : base_color;
+		}
+		
+		// A getter for our current animation prefix. Some animations need a prefix of "possessed_" during the possessed
+		// state. This getter will return "possessed_" or "" based on the state.
+		public function get animation_prefix():String {
+			// Robots have different animations.
+			if (type.id === "robot") {
+				return (state === ChaseState) ? "hunt_" : "scan_";
+			}
+			
+			return (state === PossessedState) ? "possessed_" : "";
 		}
 		
 	}
