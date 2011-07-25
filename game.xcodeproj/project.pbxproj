@@ -21,6 +21,7 @@
 		7A97CEAB13DA504800AADDDC /* GlassEmitter.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = GlassEmitter.as; path = code/GlassEmitter.as; sourceTree = "<group>"; };
 		7A97CEAD13DCBD2C00AADDDC /* LevelCompleteMessage.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = LevelCompleteMessage.as; path = code/LevelCompleteMessage.as; sourceTree = "<group>"; };
 		7A97CEAE13DCD3EC00AADDDC /* PauseScreen.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = PauseScreen.as; path = code/PauseScreen.as; sourceTree = "<group>"; };
+		7A97CEAF13DCF2A600AADDDC /* CreditsState.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = CreditsState.as; path = code/CreditsState.as; sourceTree = "<group>"; };
 		7A9BB0EC13D154E6003E32FB /* DialogueBox.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = DialogueBox.as; path = code/DialogueBox.as; sourceTree = "<group>"; };
 		7AA58F5813CADD7F00D52B24 /* game_data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = game_data; sourceTree = "<group>"; };
 		7AA58F5F13CE627500D52B24 /* LevelTimer.as */ = {isa = PBXFileReference; explicitFileType = sourcecode.javascript; fileEncoding = 4; name = LevelTimer.as; path = code/LevelTimer.as; sourceTree = "<group>"; };
@@ -386,6 +387,7 @@
 				7AC8119A13BE445000656C2A /* MainMenuState.as */,
 				7AC811AE13BE98C800656C2A /* LevelSelectState.as */,
 				7AC811B013BE9A0100656C2A /* PlayState.as */,
+				7A97CEAF13DCF2A600AADDDC /* CreditsState.as */,
 			);
 			name = States;
 			sourceTree = "<group>";

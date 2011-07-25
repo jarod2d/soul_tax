@@ -288,7 +288,7 @@ package {
 			// Move on to the next level, or to the credits if we're on the last level.
 			if (FlxG.keys.justPressed("J") && Game.level.objectives_complete) {
 				if (Game.current_level === Level.levels.length - 1) {
-					// TODO: Move to credits state.
+					FlxG.switchState(new CreditsState());
 				}
 				else {
 					Game.current_level++;
