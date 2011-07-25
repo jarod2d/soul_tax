@@ -36,6 +36,10 @@ package {
 		// necessary.
 		private var music:FlxSound;
 		
+		// When we pause the game, we reduce the volume. We need to store the player's old volume setting so that we can
+		// restore it when they unpause.
+		private var old_volume:Number;
+		
 		override public function create():void {
 			super.create();
 			
@@ -55,6 +59,7 @@ package {
 			substate        = IntroSubstate;
 			intro_timer     = 0.0;
 			level_end_timer = 0.0;
+			old_volume      = FlxG.volume;
 			
 			// Set up the camera and bounds.
 			var border_size:int  = Level.BorderSize;
@@ -337,11 +342,68 @@ package {
 			}
 		}
 		
+		// Update for the pause menu and pause functionality.
+		private function updatePause():void {
+			// Pause or unpause the game.
+			if (FlxG.keys.justPressed("P") || FlxG.keys.justPressed("ESCAPE")) {
+				(FlxG.paused) ? unpause() : pause();
+			}
+			
+			// Handle restarting, etc.
+			if (FlxG.paused) {
+				// Restart the level.
+				if (FlxG.keys.justPressed("R")) {
+					unpause();
+					FlxG.switchState(new PlayState());
+					return;
+				}
+				
+				// Go back to the level select.
+				if (FlxG.keys.justPressed("L")) {
+					unpause();
+					FlxG.switchState(new LevelSelectState());
+					return;
+				}
+				
+				// Need to update the pause menu explicitly because the state is not actually being updated.
+				Game.ui.pause_screen.update();
+			}
+		}
+		
+		// A helper function to pause the game.
+		private function pause():void {
+			FlxG.paused = true;
+			Game.ui.pause_screen.fadeInOrOut();
+			
+			// Lower the volume.
+			old_volume  = FlxG.volume;
+			FlxG.volume = (old_volume > 0.15) ? 0.15 : old_volume;
+		}
+		
+		// A helper function to unpause the game.
+		private function unpause():void {
+			FlxG.paused = false;
+			Game.ui.pause_screen.fadeInOrOut();
+			
+			// Restore volume.
+			FlxG.volume = old_volume;
+		}
+		
 		// Update.
 		override public function update():void {
+			// Handle pause functionality.
+			if (substate === NoSubstate) {
+				updatePause();
+			}
+			
+			if (FlxG.paused) {
+				return;
+			}
+			
+			// Update all of our stuff.
 			super.update();
 			
-			// Dialogue is the highest priority.
+			// Handle dialogue functionality.
 			if (Game.ui.dialogue_box.mode === DialogueBox.StoryDialogueMode) {
 				updateDialogue();
 				return;

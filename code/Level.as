@@ -269,7 +269,7 @@ package {
 			progress[dead_npc.objective_type]++;
 			
 			// If the level is complete, show the level complete message.
-			if (objectives_complete) {
+			if (objectives_complete && time_remaining > 0.0) {
 				Game.ui.level_complete_message.setAll("alpha", 1.0);
 			}
 		}

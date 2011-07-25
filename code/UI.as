@@ -26,6 +26,7 @@ package {
 		public var level_complete_message:LevelCompleteMessage;
 		public var level_end_screen:LevelEndScreen;
 		public var dialogue_box:DialogueBox;
+		public var pause_screen:PauseScreen;
 		
 		// Constructor.
 		public function UI() {
@@ -37,6 +38,7 @@ package {
 			level_complete_message = new LevelCompleteMessage();
 			level_end_screen       = new LevelEndScreen();
 			dialogue_box           = new DialogueBox();
+			pause_screen           = new PauseScreen();
 			
 			// Set up the HUD bar.
 			hud_bar.makeGraphic(FlxG.width, HUDBarHeight, 0x99151818);
@@ -50,6 +52,7 @@ package {
 			contents.add(level_complete_message);
 			contents.add(level_end_screen);
 			contents.add(dialogue_box);
+			contents.add(pause_screen);
 		}
 		
 	}
