@@ -40,6 +40,10 @@ package {
 		public var damage:Number;
 		public var knockback:Number;
 		
+		// Whether or not the hitbox is a projectile. The only difference is that a projectile doesn't sync its position
+		// during update.
+		public var is_projectile:Boolean;
+		
 		// Any special behavior that needs to happen when the hitbox makes contact, for whatever special effects your
 		// attack needs. The function takes two parameters, the hitbox and the victim.
 		public var callback:Function;
@@ -47,17 +51,24 @@ package {
 		// We keep track of who we've hit so that we don't attack the same NPC twice.
 		public var victims:Array;
 		
-		// Constructor. Everything should be pretty straightforward, except the x_offset and y_offset. 
-		public function HitBox(host:Entity, x_offset:Number, y_offset:Number, width:Number, height:Number) {
+		// Constructor. Everything should be pretty straightforward, except the x_offset and y_offset. These values
+		// determine where the hitbox appears relative to the host. For example, an x_offset of 2.0 would mean the
+		// hitbox has 2 pixels of space between it and its host on either the right or left side, depending on which way
+		// the host is facing.
+		public function HitBox(host:Entity, x_offset:Number, y_offset:Number, width:Number, height:Number, is_projectile:Boolean = false) {
 			super();
 			
-			this.host   = host;
-			host_offset = new FlxPoint(x_offset, y_offset);
-			live_time   = 0.0;
-			victims     = [];
+			this.host          = host;
+			host_offset        = new FlxPoint(x_offset, y_offset);
+			this.is_projectile = is_projectile;
+			live_time          = 0.0;
+			victims            = [];
 			
-			sprite.makeGraphic(width, height, 0xCCEEAA11);
-			sprite.alpha = 0.0;
+			if (!is_projectile) {
+				sprite.makeGraphic(width, height, 0xCCEEAA11);
+				sprite.alpha = 0.0;
+			}
+			
 			syncPosition();
 			
 			Game.level.hitboxes.add(this.sprite);
@@ -74,27 +85,35 @@ package {
 		
 		// Attacks the given NPC. Should be called whenever the hitbox overlaps with the NPC.
 		public function attackNPC(npc:NPC):void {
-			// We don't want to attack the NPC who spawned the hitbox, NPCs that we've already attacked, or robots.
-			if (npc === host || victims.indexOf(npc) >= 0 || npc.type.id === "robot") {
+			// We don't want to attack the NPC who spawned the hitbox or NPCs that we've already attacked.
+			if (npc === host || victims.indexOf(npc) >= 0) {
 				return;
 			}
 			
-			// Do damage to the victim.
-			npc.hurt(damage);
-			
-			// Do some knockback.
-			if (knockback > 0.0) {
-				npc.knockback_velocity.x = npc.center.x - host.center.x;
-				npc.knockback_velocity.y = npc.center.y - (host.center.y + 1.0);
+			// We skip damage and knockback if we're hitting a robot. We still want the callback though.
+			if (npc.type.id !== "robot") {
+				// Do damage to the victim.
+				npc.hurt(damage);
 				
-				MathUtil.normalize(npc.knockback_velocity);
-				
-				npc.knockback_velocity.x *= knockback;
-				npc.knockback_velocity.y *= knockback;
+				// Do some knockback.
+				if (knockback > 0.0) {
+					npc.knockback_velocity.x = npc.center.x - host.center.x;
+					npc.knockback_velocity.y = npc.center.y - (host.center.y + 1.0);
+					
+					MathUtil.normalize(npc.knockback_velocity);
+					
+					npc.knockback_velocity.x *= knockback;
+					npc.knockback_velocity.y *= knockback;
+				}
 			}
 			
 			// Make note that we've attacked this victim.
 			victims.push(npc);
+			
+			// Do the callback.
+			if (callback) {
+				callback(this, npc);
+			}
 		}
 		
 		// Syncs the position of the hitbox to the host.
@@ -109,7 +128,11 @@ package {
 		// Before update.
 		override public function beforeUpdate():void {
 			super.beforeUpdate();
-			syncPosition();
+			
+			// Only sync position if we're not a projectile.
+			if (!is_projectile) {
+				syncPosition();
+			}
 		}
 		
 		// After update.

@@ -241,6 +241,24 @@ package {
 				hb.setAttributes(HitBox.PlayerAllegiance, 0.15, strength / 6.0, 300.0);
 			}
 			
+			// The security guard shoots a gun.
+			else if (type.id === "security_guard") {
+				var bullet:HitBox = new HitBox(this, 0, 4, 3, 2, true);
+				bullet.setAttributes(HitBox.PlayerAllegiance, 3.0, 150.0, 50.0, function(hb:HitBox, npc:NPC):void {
+					hb.sprite.kill();
+				});
+				
+				bullet.sprite.loadGraphic(Assets.bullet_sprite);
+				bullet.velocity.x = (facing === FlxObject.LEFT) ? -300.0 : 300.0;
+				bullet.x -= bullet.velocity.x * FlxG.elapsed;
+				
+				// For some reason, when facing left, the bullet spawns way out in front of the player. This is a little
+				// hack to fix that.
+				if (facing === FlxObject.LEFT) {
+					bullet.x -= bullet.velocity.x * FlxG.elapsed * 2.0;
+				}
+			}
+			
 			// These NPCs have continuous attacks that just require calling down to the continuous effect.
 			else if (type.id === "ceo" || type.id === "maintenance_guy" || type.id === "superhero") {
 				continueSpecialAttack();

@@ -183,7 +183,7 @@
 		"jump_strength": 3.75,
 		"attack_speed":  0.8,
 		"run_speed":     1.1,
-		"cooldown":      1.0,
+		"cooldown":      1.25,
 		"frame_width":   10,
 		"frame_height":  16,
 		"bounds_width":  4,

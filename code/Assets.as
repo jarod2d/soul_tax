@@ -62,6 +62,10 @@ package {
 		[Embed(source="../images/superhero_portrait.png")] public static var superhero_portrait:Class;
 		[Embed(source="../images/supervillain_portrait.png")] public static var supervillain_portrait:Class;
 		
+		// Projectile images.
+		[Embed(source="../images/bullet.png")] public static var bullet_sprite:Class;
+		[Embed(source="../images/laser.png")] public static var laser_sprite:Class;
+		
 		// Tiles.
 		[Embed(source="../images/tiles.png")] public static var tiles:Class;
 		
