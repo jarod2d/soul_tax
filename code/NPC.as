@@ -32,6 +32,9 @@ package {
 		public static const ContactDamageThreshold:Number = 280.0;
 		public static const GlassBreakThreshold:Number    = 150.0;
 		
+		// How often the maintenance guy's special attack gets triggered.
+		public static const MaintenanceGuySpecialInterval:Number = 0.6;
+		
 		// Some NPC tinting colors.
 		public static const PossessionColor:uint = 0xFFCCEE;
 		public static const HurtColor:uint       = 0xEE3333;
@@ -79,6 +82,10 @@ package {
 		// A flag for whether or not the NPC is currently in the process of using their special attack. This helps us
 		// out with cooldowns.
 		public var using_special:Boolean;
+		
+		// An interval timer for the maintenance guy's special attack. Since we're not subclassing our NPC types it
+		// unfortunately has to be stuck on all NPCs for now.
+		public var special_interval:Number;
 		
 		// The target sprite that the NPC is chasing when he's in the chase state.
 		public var chase_target:FlxSprite;
@@ -130,7 +137,7 @@ package {
 			sprite.offset.y = type.offset.y;
 			
 			// Set up timers and flags.
-			special_cooldown = flash_timer = 0.0;
+			special_cooldown = special_interval = flash_timer = 0.0;
 			using_special    = false;
 		}
 		
@@ -234,15 +241,8 @@ package {
 				hb.setAttributes(HitBox.PlayerAllegiance, 0.15, strength / 6.0, 300.0);
 			}
 			
-			// The CEO does a money vomit attack.
-			else if (type.id === "ceo") {
-				// It's a continuous effect, so just call down to that.
-				continueSpecialAttack();
-			}
-			
-			// The superhero does a charge attack.
-			else if (type.id === "superhero") {
-				// It's a continuous effect, so just call down to that.
+			// These NPCs have continuous attacks that just require calling down to the continuous effect.
+			else if (type.id === "ceo" || type.id === "maintenance_guy" || type.id === "superhero") {
 				continueSpecialAttack();
 			}
 		}
@@ -257,6 +257,18 @@ package {
 			// CEO special.
 			if (type.id === "ceo") {
 				Game.level.money_emitter.vomitFromNPC(this);
+			}
+			
+			// Maintenance guy special.
+			else if (type.id === "maintenance_guy") {
+				// Destroy tiles underneath the NPC.
+				if (special_interval <= 0.0) {
+					Game.level.wall_tiles.setTile(center.x / Level.TileSize, (bottom + Level.TileSize / 2.0) / Level.TileSize, 0);
+					special_interval = MaintenanceGuySpecialInterval;
+				}
+				
+				// Maintenance guy's cooldown resets when he's done drilling.
+				special_cooldown = type.cooldown;
 			}
 			
 			// Superhero special.
@@ -284,6 +296,11 @@ package {
 				return;
 			}
 			
+			// Maintenance guy special.
+			if (type.id === "maintenance_guy") {
+				// Reset his interval
+			}
+			
 			// Superhero special.
 			if (type.id === "superhero") {
 				// Reset the charge velocity and max velocity with some yucky repeated values.
@@ -291,8 +308,9 @@ package {
 				max_velocity.x = 90.0 * run_speed;
 			}
 			
-			// We're no longer using the special attack.
-			using_special = false;
+			// We're no longer using the special attack, and we need to reset our interval.
+			using_special    = false;
+			special_interval = 0.0;
 		}
 		
 		// Hurts the NPC, killing him if necessary.
@@ -485,79 +503,7 @@ package {
 			}
 		}
 		
-		// Before update.
-		override public function beforeUpdate():void {
-			super.beforeUpdate();
-			
-			// We don't run AI if we're possessed.
-			if (state !== PossessedState) {
-				// Run the AI.
-				behave();
-				
-				// For some reason Flixel makes us explicitly tell sprites to stop following their path when they're
-				// done.
-				if (state !== ChaseState && sprite.pathSpeed == 0.0) {
-					sprite.stopFollowingPath(true);
-					velocity.x = 0.0;
-					
-					if (sprite.finished) {
-						sprite.play("idle");
-					}
-				}
-			}
-			else {
-				// Set the animation.
-				if (sprite.finished) {
-					if (velocity.x !== 0.0 && sprite.isTouching(FlxObject.DOWN)) {
-						sprite.play("walk");
-					}
-					else {
-						sprite.play("idle");
-					}
-				}
-			}
-			
-			// Set the NPC's color.
-			sprite.color = current_color;
-			
-			// Add knockback velocity and reduce it over time.
-			var knockback_drag:Number;
-			
-			if (knockback_velocity.x !== 0.0) {
-				knockback_drag        = (knockback_velocity.x > 0.0) ? -drag.x * FlxG.elapsed / 2.0 : drag.x * FlxG.elapsed / 2.0;
-				velocity.x           += knockback_velocity.x;
-				knockback_velocity.x  = (Math.abs(knockback_velocity.x) <= knockback_drag) ? 0.0 : knockback_velocity.x + knockback_drag;
-			}
-			
-			if (knockback_velocity.y !== 0.0) {
-				knockback_drag       = (knockback_velocity.y > 0.0) ? -drag.y * FlxG.elapsed / 2.0 : drag.y * FlxG.elapsed / 2.0;
-				velocity.y           = knockback_velocity.y;
-				knockback_velocity.y = (Math.abs(knockback_velocity.y) <= knockback_drag) ? 0.0 : knockback_velocity.y + knockback_drag;
-			}
-			
-			// Decrement the flash timer.
-			flash_timer = Math.max(0.0, flash_timer - FlxG.elapsed);
-			
-			// Reduce cooldown.
-			special_cooldown = Math.max(0.0, special_cooldown - FlxG.elapsed);
-			
-			// Increment the state duration.
-			state_duration += FlxG.elapsed;
-			
-			// Kill the NPC if they've fallen off the map.
-			if (y > Game.level.height) {
-				kill();
-			}
-		}
 		
-		// After update.
-		override public function afterUpdate():void {
-			super.afterUpdate();
-			
-			// We store our "old" velocity here, which will be used if the NPC collides with something.
-			old_velocity.x = velocity.x;
-			old_velocity.y = velocity.y;
-		}
 		
 		// Returns how far the NPC can walk in the given direction (use -1 for left, 1 for right) without falling in a
 		// pit or being blocked by an obstacle. You can pass in a maximum distance you'd like returned, so that the
@@ -685,6 +631,81 @@ package {
 				chase_target = victim.sprite;
 				state        = ChaseState;
 			}
+		}
+		
+		// Before update.
+		override public function beforeUpdate():void {
+			super.beforeUpdate();
+			
+			// We don't run AI if we're possessed.
+			if (state !== PossessedState) {
+				// Run the AI.
+				behave();
+				
+				// For some reason Flixel makes us explicitly tell sprites to stop following their path when they're
+				// done.
+				if (state !== ChaseState && sprite.pathSpeed == 0.0) {
+					sprite.stopFollowingPath(true);
+					velocity.x = 0.0;
+					
+					if (sprite.finished) {
+						sprite.play("idle");
+					}
+				}
+			}
+			else {
+				// Set the animation.
+				if (sprite.finished) {
+					if (velocity.x !== 0.0 && sprite.isTouching(FlxObject.DOWN)) {
+						sprite.play("walk");
+					}
+					else {
+						sprite.play("idle");
+					}
+				}
+			}
+			
+			// Set the NPC's color.
+			sprite.color = current_color;
+			
+			// Add knockback velocity and reduce it over time.
+			var knockback_drag:Number;
+			
+			if (knockback_velocity.x !== 0.0) {
+				knockback_drag        = (knockback_velocity.x > 0.0) ? -drag.x * FlxG.elapsed / 2.0 : drag.x * FlxG.elapsed / 2.0;
+				velocity.x           += knockback_velocity.x;
+				knockback_velocity.x  = (Math.abs(knockback_velocity.x) <= knockback_drag) ? 0.0 : knockback_velocity.x + knockback_drag;
+			}
+			
+			if (knockback_velocity.y !== 0.0) {
+				knockback_drag       = (knockback_velocity.y > 0.0) ? -drag.y * FlxG.elapsed / 2.0 : drag.y * FlxG.elapsed / 2.0;
+				velocity.y           = knockback_velocity.y;
+				knockback_velocity.y = (Math.abs(knockback_velocity.y) <= knockback_drag) ? 0.0 : knockback_velocity.y + knockback_drag;
+			}
+			
+			// Decrement the flash timer.
+			flash_timer = Math.max(0.0, flash_timer - FlxG.elapsed);
+			
+			// Reduce special cooldown and interval.
+			special_cooldown = Math.max(0.0, special_cooldown - FlxG.elapsed);
+			special_interval = Math.max(0.0, special_interval - FlxG.elapsed);
+			
+			// Increment the state duration.
+			state_duration += FlxG.elapsed;
+			
+			// Kill the NPC if they've fallen off the map.
+			if (y > Game.level.height) {
+				kill();
+			}
+		}
+		
+		// After update.
+		override public function afterUpdate():void {
+			super.afterUpdate();
+			
+			// We store our "old" velocity here, which will be used if the NPC collides with something.
+			old_velocity.x = velocity.x;
+			old_velocity.y = velocity.y;
 		}
 		
 		// State getters and setters.

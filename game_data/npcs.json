@@ -104,7 +104,7 @@
 	"maintenance_guy": {
 		"id":            "maintenance_guy",
 		"name":          "Maintenance Guy",
-		"special":       "Throws bombs",
+		"special":       "Drills through the floor",
 		"color":         "0xFFFF8833",
 		"hp":            120.0,
 		"strength":      35.0,

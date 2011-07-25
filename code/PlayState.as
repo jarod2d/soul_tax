@@ -314,13 +314,11 @@ package {
 			
 			// Standard collisions.
 			if (player.victim) {
-				FlxG.collide(level.borders, player.victim.sprite);
+				FlxG.collide(level.bottomless_borders, player.victim.sprite);
 				FlxG.collide(level.NPCs, player.victim.sprite, NPC.processCollision);
 			}
-			else {
-				FlxG.collide(player.sprite, level.borders);
-			}
 			
+			FlxG.collide(player.sprite, level.borders);
 			FlxG.collide(level.NPCs, level.wall_tiles, NPC.processCollision);
 			FlxG.collide(level.gib_emitter.particles, level.wall_tiles);
 			FlxG.collide(level.money_emitter.particles, level.wall_tiles);

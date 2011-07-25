@@ -40,9 +40,11 @@ package {
 		public var bg_tiles:FlxTilemap;
 		public var wall_tiles:FlxTilemap;
 		
-		// We create a couple sprites around the edge of the level just outside of view to prevent the player from
-		// exiting the level.
+		// We create a couple sprites around the edge of the level just outside of view to act as borders, preventing
+		// the player from exiting the level. We also keep a second set of borders that doesn't have a bottom border,
+		// which is useful for other purposes.
 		public var borders:FlxGroup;
+		public var bottomless_borders:FlxGroup;
 		
 		// The list of props in the level.
 		public var props:FlxGroup;
@@ -86,18 +88,19 @@ package {
 			var level_data:Object = levels[index];
 			
 			// Create all of our groups, etc.
-			contents      = new FlxGroup();
-			bg_tiles      = new FlxTilemap();
-			wall_tiles    = new FlxTilemap();
-			borders       = new FlxGroup();
-			props         = new FlxGroup();
-			NPCs          = new FlxGroup();
-			robots        = new FlxGroup();
-			hitboxes      = new FlxGroup();
-			gib_emitter   = new GibEmitter();
-			money_emitter = new MoneyEmitter();
-			glass_emitter = new GlassEmitter();
-			dying_npcs    = [];
+			contents           = new FlxGroup();
+			bg_tiles           = new FlxTilemap();
+			wall_tiles         = new FlxTilemap();
+			borders            = new FlxGroup();
+			bottomless_borders = new FlxGroup();
+			props              = new FlxGroup();
+			NPCs               = new FlxGroup();
+			robots             = new FlxGroup();
+			hitboxes           = new FlxGroup();
+			gib_emitter        = new GibEmitter();
+			money_emitter      = new MoneyEmitter();
+			glass_emitter      = new GlassEmitter();
+			dying_npcs         = [];
 			
 			// Create our tilemaps.
 			bg_tiles.loadMap(new Assets[level_data.id + "_bg_tiles"], Assets.tiles, TileSize, TileSize, NaN, 1, 1, 2);
@@ -151,11 +154,13 @@ package {
 			border.immovable = true;
 			border.alpha = 0.0;
 			borders.add(border.makeGraphic(width, BorderSize));
+			bottomless_borders.add(border);
 			
 			// Right border.
 			border = new FlxSprite(width, -BorderSize);
 			border.immovable = true;
 			borders.add(border.makeGraphic(BorderSize, height + BorderSize * 2));
+			bottomless_borders.add(border);
 			
 			// Bottom border.
 			border = new FlxSprite(0, height - TileSize / 2);
@@ -166,12 +171,12 @@ package {
 			border = new FlxSprite(-BorderSize, -BorderSize);
 			border.immovable = true;
 			borders.add(border.makeGraphic(BorderSize, height + BorderSize * 2));
+			bottomless_borders.add(border);
 			
 			// Group all of the contents of the level.
 			contents.add(bg_tiles);
 			contents.add(props);
 			contents.add(wall_tiles);
-			contents.add(borders);
 			contents.add(glass_emitter.particles);
 			contents.add(gib_emitter.particles);
 			contents.add(money_emitter.particles);
