@@ -81,9 +81,14 @@ package {
 		
 		// Update for dialogue mode.
 		private function updateDialogue():void {
-			// Just advance the dialogue.
-			if (FlxG.keys.justPressed("J") || FlxG.keys.justPressed("SPACE") || FlxG.keys.justPressed("ENTER")) {
+			// Advance the dialogue.
+			if (FlxG.keys.justPressed("J") || FlxG.keys.justPressed("SPACE")) {
 				Game.ui.dialogue_box.advanceDialogue();
+			}
+			
+			// Allow players to skip the dialogue.
+			if ( FlxG.keys.justPressed("ENTER")) {
+				Game.ui.dialogue_box.endDialogue();
 			}
 			
 			// Do collisions.

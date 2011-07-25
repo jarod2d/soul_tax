@@ -51,6 +51,9 @@ package {
 		// The portrait used during game mode.
 		public var game_mode_portrait:FlxSprite;
 		
+		// A little helper text that tells the player they can skip the dialogue.
+		public var skip_text:FlxText;
+		
 		// The current dialogue. A dialogue should be a 3 by n array with the first column specifying the name of the
 		// speaker, the second column containing the side of the screen the speaker should be on (as in "left" or
 		// "right"), and the third column containing the actual line of dialogue.
@@ -88,6 +91,10 @@ package {
 			game_text.setFormat("propomin", GameModeFontSize, 0xFFEEFFFF, "left");
 			game_text.scrollFactor.x = game_text.scrollFactor.y = 0.0;
 			
+			skip_text = new FlxText(FlxG.width - PaddingX - 54.0, bg.y - 10.0, 60.0, "Enter: Skip");
+			skip_text.setFormat("propomin", 8, 0xFFFAFAFA, "left", 0xFF222222);
+			skip_text.scrollFactor.x = skip_text.scrollFactor.y = 0.0;
+			
 			// Set up the nameplate.
 			nameplate = new FlxText(PaddingX, bg.y - 10.0, FlxG.width - PaddingX * 2.0, "");
 			nameplate.setFormat("propomin", NameplateFontSize, 0xFFBBCCCC, "left", 0xFF223333);
@@ -102,6 +109,7 @@ package {
 			add(bg);
 			add(story_text);
 			add(game_text);
+			add(skip_text);
 //			add(nameplate);
 			
 			// We start in no-dialogue mode.
