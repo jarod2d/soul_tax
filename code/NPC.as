@@ -183,13 +183,13 @@ package {
 			
 			// Apply damage.
 			if (damage_impact > 0.0) {
-				npc.hurt(damage_impact);
+				npc.hurt(damage_impact, "falling");
 				
 				// Hurt the other NPC too if the other object is indeed an NPC.
 				// TODO: There's some weird stuff going on when colliding with other NPCs at the moment. I think it has
 				// to do with the value of the velocity change not being quite right in that case.
 				if (obstacle is EntitySprite && (obstacle as EntitySprite).entity is NPC) {
-					((obstacle as EntitySprite).entity as NPC).hurt(damage_impact);
+					((obstacle as EntitySprite).entity as NPC).hurt(damage_impact, "falling");
 				}
 			}
 			
@@ -446,7 +446,7 @@ package {
 		}
 		
 		// Hurts the NPC, killing him if necessary.
-		public function hurt(damage:Number):void {
+		public function hurt(damage:Number, source:String = null):void {
 			hp -= damage;
 			
 			// Set the hurt flash timer.
@@ -456,13 +456,21 @@ package {
 			
 			// Kill the NPC if necessary, or make them flee if they're not dead.
 			if (hp <= 0.0) {
-				kill();
+				kill(source);
+			}
+			
+			// If the NPC got hurt from falling, shake the screen a bit.
+			if (source === "falling") {
+				// How severe we want the screen shake to be, based on the damage done.
+				var severity:Number = MathUtil.clamp(damage / 100.0, 0.0, 1.0);
+				
+				FlxG.shake(0.00065 + 0.0015 * severity, 0.15 + 0.075 * severity);
 			}
 		}
 		
 		// Kills the NPC. This is different from Flixel's version of killing -- this is what happens when the NPC
 		// actually runs out of health and dies, including playing sounds, animations, etc.
-		public function kill():void {
+		public function kill(source:String = null):void {
 			// If the player is possessing us, we need to release him now.
 			if (Game.player.victim === this) {
 				Game.player.stopPossessing();
@@ -478,6 +486,11 @@ package {
 			
 			// Kill the sprite.
 			sprite.kill();
+			
+			// Shake the screen if the NPC died from going out of bounds.
+			if (source === "out_of_bounds") {
+				FlxG.shake(0.001, 0.15);
+			}
 			
 			// TODO: Make everyone within a certain radius panic, just like in the HitBox class. Make a reusable Level
 			// function I guess.
@@ -858,7 +871,7 @@ package {
 			
 			// Kill the NPC if they've fallen off the map.
 			if (y > Game.level.height) {
-				kill();
+				kill("out_of_bounds");
 			}
 		}
 		
