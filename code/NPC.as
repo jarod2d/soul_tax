@@ -20,6 +20,7 @@ package {
 		public static const ChaseState:int     = 3;
 		public static const PossessedState:int = 4;
 		public static const StunnedState:int   = 5;
+		public static const PanicState:int     = 6;
 		
 		// Multipliers for the NPC's speed in various states.
 		public static const WanderSpeedFactor:Number = 0.25;
@@ -90,8 +91,9 @@ package {
 		// unfortunately has to be stuck on all NPCs for now.
 		public var special_interval:Number;
 		
-		// The target sprite that the NPC is chasing when he's in the chase state.
-		public var chase_target:FlxSprite;
+		// The target sprite that the NPC is chasing when he's in the chase state, or who he's fleeing from when he's in
+		// the flee state.
+		public var target:FlxSprite;
 		
 		// Flixel has a rather poorly-designed collision callback system that doesn't provide information about the
 		// objects' changes in velocity. We need that information, so each NPC stores their pre-collision velocity here.
@@ -120,7 +122,6 @@ package {
 			run_speed     = type.run_speed;
 			
 			// Set up movement.
-			// TODO: Grab speed stats from the NPC stat data.
 			max_velocity       = new FlxPoint(90.0 * run_speed, 480.0);
 			drag               = new FlxPoint(450.0 * run_speed, 450.0);
 			acceleration.y     = 615.0;
@@ -227,8 +228,8 @@ package {
 		public function shrink():void {
 			// Scale down the sprite.
 			sprite.scale.x = sprite.scale.y = 0.5;
-			width  = Math.ceil(s_width * 0.25);
-			height = Math.ceil(s_height * 0.75);
+			width    = Math.ceil(s_width * 0.25);
+			height   = Math.ceil(s_height * 0.75);
 			offset.y = 0.0;
 			offset.x = 6.0;
 			
@@ -323,7 +324,29 @@ package {
 			
 			// Manager special.
 			if (type.id === "bank_manager") {
-				// TODO: Implement fleeing stuff.
+				// Scare everyone within a certain radius.
+				var distance:FlxPoint = new FlxPoint();
+				
+				for each (var npc_sprite:EntitySprite in Game.level.NPCs.members) {
+					var npc:NPC = npc_sprite.entity as NPC;
+					
+					// We don't want to scare ourselves or robots.
+					if (npc === this || npc.type.id === "robot") {
+						continue;
+					}
+					
+					// Make sure the NPC is within a certain radius.
+					distance.x = npc.x - x;
+					distance.y = npc.y - y;
+					
+					var distance_squared:Number = MathUtil.vectorLengthSquared(distance);
+					
+					if (npc.state !== FleeState && distance_squared < 2500.0) {
+						// Scare the NPC.
+						npc.target = this.sprite;
+						npc.state  = FleeState;
+					}
+				}
 				
 				// We don't want the player to move while this is happening.
 				Game.player.direction.x = Game.player.direction.y = 0.0;
@@ -406,10 +429,15 @@ package {
 			}
 			
 			// Superhero special.
-			if (type.id === "superhero") {
+			else if (type.id === "superhero") {
 				// Reset the charge velocity and max velocity with some yucky repeated values.
 				velocity.x     = 0.0;
 				max_velocity.x = 90.0 * run_speed;
+			}
+			
+			// Certain NPCs need to stop their animation.
+			if (type.id === "bank_manager" || type.id === "maintenance_guy" || type.id === "old_lady") {
+				sprite.finished = true;
 			}
 			
 			// We're no longer using the special attack, and we need to reset our interval.
@@ -429,9 +457,6 @@ package {
 			// Kill the NPC if necessary, or make them flee if they're not dead.
 			if (hp <= 0.0) {
 				kill();
-			}
-			else if (Game.player.victim !== this && state !== FleeState) {
-				state = FleeState;
 			}
 		}
 		
@@ -453,6 +478,9 @@ package {
 			
 			// Kill the sprite.
 			sprite.kill();
+			
+			// TODO: Make everyone within a certain radius panic, just like in the HitBox class. Make a reusable Level
+			// function I guess.
 		}
 		
 		// Callback that occurs when the NPC's behavior changes to idle.
@@ -489,7 +517,11 @@ package {
 		
 		// Callback that occurs when the NPC's behavior changes to flee.
 		protected function startFlee():void {
-			// TODO: Implement me!
+			// Set the max duration.
+			state_max_duration = 1.0 + Math.random() * 0.75;
+			
+			// Set the animation.
+			sprite.play("panic");
 		}
 		
 		// Callback that occurs when the NPC enters the possessed state.
@@ -510,6 +542,11 @@ package {
 			// Set the animation.
 			// TODO: Play some sort of stunned animation.
 			sprite.play(animation_prefix + "idle");
+		}
+		
+		// Callback that occurs when the NPC's behavior changes to panic.
+		protected function startPanic():void {
+			// TODO: Implement me!
 		}
 		
 		// Runs the NPC's idle behavior.
@@ -546,7 +583,18 @@ package {
 		
 		// Runs the NPC's flee behavior.
 		protected function flee():void {
-			// TODO: Implement me!
+			// If the target's gone, we're done fleeing. Also switch back to idle behavior after a certain duration.
+			if (!target || !target.alive || state_duration > state_max_duration) {
+				target = null;
+				state = IdleState;
+				return;
+			}
+			
+			// Flee!
+			velocity.x = (x < target.x) ? -65.0 * run_speed : 65.0 * run_speed;
+			
+			// Set the NPC's facing based on the direction.
+			facing = (velocity.x < 0.0) ? FlxObject.LEFT : FlxObject.RIGHT;
 		}
 		
 		// Runs the NPC's chase behavior.
@@ -555,19 +603,19 @@ package {
 			// the player's victim (for robot chasing) or a money particle.
 			var target_npc:NPC = null;
 			
-			if ((chase_target is EntitySprite && (chase_target as EntitySprite).entity is NPC)) {
-				target_npc = (chase_target as EntitySprite).entity as NPC;
+			if ((target is EntitySprite && (target as EntitySprite).entity is NPC)) {
+				target_npc = (target as EntitySprite).entity as NPC;
 			}
 			
 			// If the target's gone, we're done chasing.
-			if (!chase_target || !chase_target.alive || (target_npc && Game.player.victim !== target_npc)) {
-				chase_target = null;
+			if (!target || !target.alive || (target_npc && Game.player.victim !== target_npc)) {
+				target = null;
 				state = IdleState;
 				return;
 			}
 			
 			// The horizontal distance between the NPC and the target.
-			var distance:Number = chase_target.x - x;
+			var distance:Number = target.x - x;
 			
 			// If we've found our target, we jump up and down on it unless it's an NPC. Otherwise we chase it.
 			if (Math.abs(distance) < 3.0) {
@@ -597,6 +645,16 @@ package {
 			}
 		}
 		
+		// Runs the NPC's panic behavior.
+		protected function panic():void {
+			// Switch back to idle behavior after a certain duration.
+			if (state_duration > state_max_duration) {
+				state = IdleState;
+			}
+			
+			// TODO: Run back and forth.
+		}
+		
 		// Runs all of the NPC's AI. This just calls out to the AI method that corresponds to the NPC's current state.
 		protected function behave():void {
 			switch (state) {
@@ -606,10 +664,9 @@ package {
 				case ChaseState:     chase();       break;
 				case PossessedState: bePossessed(); break;
 				case StunnedState:   beStunned();   break;
+				case PanicState:     panic();       break;
 			}
 		}
-		
-		
 		
 		// Returns how far the NPC can walk in the given direction (use -1 for left, 1 for right) without falling in a
 		// pit or being blocked by an obstacle. You can pass in a maximum distance you'd like returned, so that the
@@ -712,7 +769,7 @@ package {
 				
 				// Make the NPC run towards the particle.
 				if (nearby_particle) {
-					chase_target = nearby_particle;
+					target = nearby_particle;
 					state        = ChaseState;
 				}
 			}
@@ -734,7 +791,7 @@ package {
 			
 			// If they're within a certain distance, run towards them.
 			if (distance_squared < 2500.0) {
-				chase_target = victim.sprite;
+				target = victim.sprite;
 				state        = ChaseState;
 			}
 		}
@@ -750,7 +807,7 @@ package {
 				
 				// For some reason Flixel makes us explicitly tell sprites to stop following their path when they're
 				// done.
-				if (state !== ChaseState && sprite.pathSpeed == 0.0) {
+				if (state !== ChaseState && state !== FleeState && sprite.pathSpeed == 0.0) {
 					sprite.stopFollowingPath(true);
 					velocity.x = 0.0;
 					
@@ -831,6 +888,7 @@ package {
 				case ChaseState:     startChase();       break;
 				case PossessedState: startBePossessed(); break;
 				case StunnedState:   startBeStunned();   break;
+				case PanicState:     startPanic();       break;
 			}
 		}
 		

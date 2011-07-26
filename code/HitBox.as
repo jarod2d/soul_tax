@@ -110,6 +110,8 @@ package {
 			// Make note that we've attacked this victim.
 			victims.push(npc);
 			
+			// TODO: Make everyone within a certain radius panic.
+			
 			// Do the callback.
 			if (callback !== null) {
 				callback(this, npc);
