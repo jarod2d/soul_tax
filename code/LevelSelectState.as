@@ -125,8 +125,8 @@ package {
 			var confirm_label:FlxText = new FlxText(6.0, FlxG.height - 38.0, 200.0, "Continue");
 			confirm_label.setFormat("propomin", 8, 0xFFE0E2E4, "left", 0xFF000A10);
 			
-			var esdf_keys:FlxSprite   = new FlxSprite(54.0, FlxG.height - 27.0, Assets.esdf_keys);
-			var j_key:FlxSprite       = new FlxSprite(21.0, FlxG.height - 22.0, Assets.j_key);
+			var esdf_keys:FlxSprite = new FlxSprite(54.0, FlxG.height - 27.0, Assets.esdf_keys);
+			var j_key:FlxSprite     = new FlxSprite(21.0, FlxG.height - 22.0, Assets.j_key);
 			
 			// Create the text for the level title at the bottom.
 			level_name = new FlxText(0, FlxG.height - 30, FlxG.width, "");

@@ -58,11 +58,11 @@ package {
 			replay_text.scrollFactor.x = replay_text.scrollFactor.y = 0.0;
 			
 			// Set up the score display.
-			var time_icon:FlxSprite = new FlxSprite(128.0, FlxG.height / 2.0, Assets.clock_icon);
+			var time_icon:FlxSprite = new FlxSprite(111.0, FlxG.height / 2.0, Assets.clock_icon);
 			time_icon.scale.x = time_icon.scale.y = 3.0;
 			time_icon.scrollFactor.x = time_icon.scrollFactor.y = 0.0;
 			
-			time_text = new FlxText(140.0, time_icon.y - 5.0, FlxG.width - 280.0, "");
+			time_text = new FlxText(124.0, time_icon.y - 5.0, FlxG.width - 280.0, "");
 			time_text.setFormat("propomin", 16, 0xFFDDDDDD);
 			time_text.scrollFactor.x = time_text.scrollFactor.y = 0.0;
 			

@@ -383,7 +383,29 @@ package {
 			
 			// Old lady special.
 			else if (type.id === "old_lady") {
-				// TODO: Implement sleep stuff.
+				// Make everyone within a certain radius fall asleep.
+				var distance:FlxPoint = new FlxPoint();
+				
+				for each (var npc_sprite:EntitySprite in Game.level.NPCs.members) {
+					var npc:NPC = npc_sprite.entity as NPC;
+					
+					// We don't want to make ourselves fall asleep.
+					if (npc === this) {
+						continue;
+					}
+					
+					// Make sure the NPC is within a certain radius.
+					distance.x = npc.x - x;
+					distance.y = npc.y - y;
+					
+					var distance_squared:Number = MathUtil.vectorLengthSquared(distance);
+					
+					if (npc.state !== FleeState && distance_squared < 2750.0) {
+						// Make them fall asleep.
+						npc.target = this.sprite;
+						npc.state  = StunnedState;
+					}
+				}
 				
 				// We don't want the player to move while this is happening.
 				Game.player.direction.x = Game.player.direction.y = 0.0;
@@ -501,6 +523,9 @@ package {
 			// Set the max duration.
 			state_max_duration = 2.5 + Math.random() * 8.0;
 			
+			// Stop player movement.
+			acceleration.x = 0.0;
+			
 			// Set the animation.
 			sprite.play(animation_prefix + "idle");
 		}
@@ -545,16 +570,15 @@ package {
 		// Callback that occurs when the NPC enters the stunned state.
 		protected function startBeStunned():void {
 			// Set the max duration.
-			state_max_duration = 0.25;
+			state_max_duration = 9.5 + Math.random() * 2.5;
 			
 			// Stop the NPC from moving.
-			// TODO: It would be nice if we could retain movement if we're currently in the air, so that when the player
-			// stops possessing the NPC mid-jump, they continue their trajectory.
-			acceleration.x = 0.0;
+			velocity.x = acceleration.x = 0.0;
 			
 			// Set the animation.
-			// TODO: Play some sort of stunned animation.
-			sprite.play(animation_prefix + "idle");
+			sprite.play("sleep");
+			
+			// TODO: Play the Z's animation.
 		}
 		
 		// Callback that occurs when the NPC's behavior changes to panic.
@@ -820,7 +844,7 @@ package {
 				
 				// For some reason Flixel makes us explicitly tell sprites to stop following their path when they're
 				// done.
-				if (state !== ChaseState && state !== FleeState && sprite.pathSpeed == 0.0) {
+				if (state !== ChaseState && state !== FleeState && state !== StunnedState && sprite.pathSpeed == 0.0) {
 					sprite.stopFollowingPath(true);
 					velocity.x = 0.0;
 					
@@ -927,8 +951,14 @@ package {
 		
 		// Getter for the current color the NPC should be based on their state and the flash timer.
 		public function get current_color():uint {
-			var base_color:uint       = (state === PossessedState) ? PossessionColor : 0xFFFFFF;
+			var base_color:uint;
 			var flash_progress:Number = 1.0 - flash_timer / HurtFlashTime;
+			
+			switch (state) {
+				case PossessedState: base_color = PossessionColor; break;
+				case StunnedState:   base_color = 0x88AAEE;        break;
+				default:             base_color = 0xFFFFFF;
+			}
 			
 			return (flash_timer > 0.0) ? ColorUtil.blend(HurtColor, base_color, flash_progress) : base_color;
 		}

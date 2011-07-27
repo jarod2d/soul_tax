@@ -120,7 +120,7 @@ package {
 			color = NormalColor;
 			
 			// Get rid of the victim.
-			victim.state = NPC.StunnedState;
+			victim.state = NPC.IdleState;
 			victim       = null;
 			
 			// Swap the player and NPCs.
