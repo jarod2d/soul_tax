@@ -272,6 +272,7 @@ package {
 			else if (type.id === "security_guard") {
 				// Spawn the bullet.
 				var bullet:HitBox = new HitBox(this, 0, 3, 3, 2, true);
+				bullet.dies_on_contact = true;
 				bullet.setAttributes(HitBox.PlayerAllegiance, 3.0, 150.0, 50.0, function(hb:HitBox, npc:NPC):void {
 					hb.sprite.kill();
 				});
@@ -334,7 +335,7 @@ package {
 				distance = new FlxPoint();
 				
 				for each (npc_sprite in Game.level.NPCs.members) {
-					var npc:NPC = npc_sprite.entity as NPC;
+					npc = npc_sprite.entity as NPC;
 					
 					// We don't want to scare ourselves or robots.
 					if (npc === this || npc.type.id === "robot") {
@@ -392,7 +393,7 @@ package {
 				// Make everyone within a certain radius fall asleep.
 				distance = new FlxPoint();
 				
-				for each (var npc_sprite:EntitySprite in Game.level.NPCs.members) {
+				for each (npc_sprite in Game.level.NPCs.members) {
 					npc = npc_sprite.entity as NPC;
 					
 					// We don't want to make ourselves fall asleep.
@@ -530,9 +531,6 @@ package {
 		protected function startIdle():void {
 			// Set the max duration.
 			state_max_duration = 2.5 + Math.random() * 8.0;
-			
-			// Stop player movement.
-			acceleration.x = 0.0;
 			
 			// Set the animation.
 			sprite.play(animation_prefix + "idle");

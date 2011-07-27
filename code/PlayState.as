@@ -347,6 +347,22 @@ package {
 				}
 			});
 			
+			for each (var hb_sprite:EntitySprite in level.hitboxes.members) {
+				if (!hb_sprite) {
+					continue;
+				}
+				
+				var hb:HitBox = hb_sprite.entity as HitBox;
+				
+				if (hb.dies_on_contact) {
+					FlxG.collide(hb_sprite, level.wall_tiles, function(hb_sprite:EntitySprite, tiles:FlxTilemap) {
+						level.breakGlassAt(hb_sprite.x + Level.TileSize / 2.0, hb_sprite.y);
+						level.breakGlassAt(hb_sprite.x - Level.TileSize / 2.0, hb_sprite.y);
+						hb_sprite.kill();
+					});
+				}
+			}
+			
 			// Robot collisions.
 			if (player.victim) {
 				FlxG.overlap(level.robots, player.victim.sprite, function(robot_sprite:EntitySprite, victim_sprite:EntitySprite):void {
@@ -390,7 +406,7 @@ package {
 			
 			// Lower the volume.
 			old_volume  = FlxG.volume;
-			FlxG.volume = (old_volume > 0.15) ? 0.15 : old_volume;
+			FlxG.volume = (old_volume > 0.1) ? 0.1 : old_volume;
 		}
 		
 		// A helper function to unpause the game.

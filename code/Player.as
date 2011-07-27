@@ -120,8 +120,9 @@ package {
 			color = NormalColor;
 			
 			// Get rid of the victim.
-			victim.state = NPC.IdleState;
-			victim       = null;
+			victim.state          = NPC.IdleState
+			victim.acceleration.x = 0.0;
+			victim                = null;
 			
 			// Swap the player and NPCs.
 			if (Game.level) {

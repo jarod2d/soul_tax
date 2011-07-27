@@ -44,6 +44,9 @@ package {
 		// during update.
 		public var is_projectile:Boolean;
 		
+		// Whether or not the hitbox will die when it hits a wall.
+		public var dies_on_contact:Boolean;
+		
 		// Any special behavior that needs to happen when the hitbox makes contact, for whatever special effects your
 		// attack needs. The function takes two parameters, the hitbox and the victim.
 		public var callback:Function;
@@ -63,6 +66,7 @@ package {
 			this.is_projectile = is_projectile;
 			live_time          = 0.0;
 			victims            = [];
+			dies_on_contact    = false;
 			
 			if (!is_projectile) {
 				sprite.makeGraphic(width, height, 0xCCEEAA11);
