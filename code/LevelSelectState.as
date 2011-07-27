@@ -59,7 +59,7 @@ package {
 			FlxG.camera.bounds = new FlxRect(0, 0, FlxG.width, FlxG.height);
 			
 			// Set a boring background color for now until we can make something better.
-			FlxG.bgColor = 0xFFBBDDFF;
+			FlxG.bgColor = 0xFF33353A;
 			
 			// Figure out how many levels we can have per row and how to position them.
 			levels_per_row              = Math.floor((FlxG.width - ScreenPaddingX * 2 + IconPaddingX) / (IconSize + IconPaddingX));
@@ -67,11 +67,11 @@ package {
 			
 			// Set up the title text.
 			var title:FlxText = new FlxText(0, ScreenPaddingY, FlxG.width, "Level Select");
-			title.setFormat("propomin", 24, 0xFFE0F0FF, "center", 0xFF112244);
+			title.setFormat("propomin", 24, 0xFFE0E2E4, "center", 0xFF001118);
 			
 			// Set up the icon highlight.
 			icon_highlight = new FlxSprite();
-			icon_highlight.makeGraphic(IconSize + 4, IconSize + 4, 0xFF11AAEE);
+			icon_highlight.makeGraphic(IconSize + 2.0, IconSize + 2.0, 0xFF11AAEE);
 			icon_highlight.alpha = 0.75;
 			
 			// Create the icons.
@@ -84,7 +84,7 @@ package {
 				
 				// Create the icon.
 				var icon:FlxSprite = new FlxSprite(screen_padding_x + col * (IconSize + IconPaddingX), ScreenPaddingY + TitleHeight + row * (IconSize + IconPaddingY));
-				icon.makeGraphic(IconSize, IconSize, 0xFF445566);
+				icon.makeGraphic(IconSize, IconSize, 0xFF606468);
 				icon.alpha = alpha;
 				icons.add(icon);
 				
@@ -97,16 +97,16 @@ package {
 				// Add score data if necessary.
 				if (i < LevelProgress.levels_completed && scores[i]) {
 					// The time icon.
-					level_scores.add(new FlxSprite(icon.x - 2.0, icon.y + icon.height + 3.0, Assets.clock_icon));
+					level_scores.add(new FlxSprite(icon.x - 2.0, icon.y + icon.height + 4.0, Assets.clock_icon));
 					
 					// The time text.
-					var time:FlxText = new FlxText(icon.x + 3.0, icon.y + icon.height + 1.0, icon.width, MathUtil.formatNumber(scores[i].time, 1));
-					time.setFormat("propomin", 8, 0xFF333344, "left");
+					var time:FlxText = new FlxText(icon.x + 3.0, icon.y + icon.height + 2.0, icon.width, MathUtil.formatNumber(scores[i].time, 1));
+					time.setFormat("propomin", 8, 0xFFE0E2E4, "left");
 					level_scores.add(time);
 					
 					// Bonus kills text.
 					if (scores[i].bonus_kills > 0) {
-						var bonus_kills:FlxText = new FlxText(icon.x - 3.0, icon.y + icon.height + 1.0, icon.width + 7.0, scores[i].bonus_kills);
+						var bonus_kills:FlxText = new FlxText(icon.x - 3.0, icon.y + icon.height + 2.0, icon.width + 7.0, scores[i].bonus_kills);
 						bonus_kills.setFormat("propomin", 8, 0xFFDD2222, "right");
 						level_scores.add(bonus_kills);
 					}
@@ -119,29 +119,29 @@ package {
 			}
 			
 			// Add the keyboard instruction graphics and labels.
-			var select_label:FlxText  = new FlxText(10.0, FlxG.height - 38.0, 200.0, "Select");
-			select_label.setFormat("propomin", 8, 0xFF112244, "left", 0xFFE0F0FF);
+			var select_label:FlxText  = new FlxText(58.0, FlxG.height - 38.0, 200.0, "Select");
+			select_label.setFormat("propomin", 8, 0xFFE0E2E4, "left", 0xFF000A10);
 			
-			var confirm_label:FlxText = new FlxText(53.0, FlxG.height - 38.0, 200.0, "Confirm");
-			confirm_label.setFormat("propomin", 8, 0xFF112244, "left", 0xFFE0F0FF);
+			var confirm_label:FlxText = new FlxText(6.0, FlxG.height - 38.0, 200.0, "Continue");
+			confirm_label.setFormat("propomin", 8, 0xFFE0E2E4, "left", 0xFF000A10);
 			
-			var esdf_keys:FlxSprite   = new FlxSprite(6.0,  FlxG.height - 26.0, Assets.esdf_keys);
-			var j_key:FlxSprite       = new FlxSprite(66.0, FlxG.height - 22.0, Assets.j_key);
+			var esdf_keys:FlxSprite   = new FlxSprite(54.0, FlxG.height - 27.0, Assets.esdf_keys);
+			var j_key:FlxSprite       = new FlxSprite(21.0, FlxG.height - 22.0, Assets.j_key);
 			
 			// Create the text for the level title at the bottom.
 			level_name = new FlxText(0, FlxG.height - 30, FlxG.width, "");
-			level_name.setFormat("propomin", 16, 0xFF88A0BB, "center", 0xFF001133);
+			level_name.setFormat("propomin", 16, 0xFFD0D2D4, "center", 0xFF001020);
 			
 			// Set up our hacky ghost following stuff.
 			ghost = new Player();
 			ghost.max_velocity.x = ghost.max_velocity.y = 90.0;
-			bait  = new NPC("businessman", 0, 0);
+			bait  = new NPC("businessman", 0.0, 0.0);
 			ghost.potential_victim = bait;
 			ghost.possess();
 			ghost.color = Player.NormalColor;
 			
-			// Initially we select the first level. Eventually it should be the latest unlocked level.
-			selectLevel(0);
+			// Initially we select the latest unlocked level.
+			selectLevel(LevelProgress.levels_completed);
 			
 			// Add everything.
 			add(title);
@@ -174,8 +174,8 @@ package {
 			var icon_position:FlxPoint = levelIconPosition(Game.current_level);
 			bait.x = icon_position.x;
 			bait.y = icon_position.y;
-			icon_highlight.x = icon_position.x - IconSize / 2.0 - 2;
-			icon_highlight.y = icon_position.y - IconSize / 2.0 - 2;
+			icon_highlight.x = icon_position.x - IconSize / 2.0 - 1.0;
+			icon_highlight.y = icon_position.y - IconSize / 2.0 - 1.0;
 			
 			// Set the level's name.
 			level_name.text = (Game.current_level < Level.levels.length) ? Level.levels[Game.current_level].name : "";
