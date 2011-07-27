@@ -265,7 +265,7 @@ package {
 						FlxG.music.stop();
 						FlxG.music = null;
 					}
-
+					
 					music = FlxG.play((level.objectives_complete) ? Assets.level_won_music : Assets.level_failed_music, 0.75);
 					
 					// TODO: Play a little cutscene of the player being killed by Death if they lost.
@@ -329,6 +329,8 @@ package {
 			FlxG.collide(player.sprite, level.borders);
 			FlxG.collide(level.NPCs, level.wall_tiles, NPC.processCollision);
 			FlxG.collide(level.gib_emitter.particles, level.wall_tiles);
+			FlxG.collide(level.robot_gib_emitter.particles, level.wall_tiles);
+			FlxG.collide(level.smoke_emitter.particles, level.wall_tiles);
 			FlxG.collide(level.money_emitter.particles, level.wall_tiles);
 			FlxG.collide(level.glass_emitter.particles, level.wall_tiles);
 			

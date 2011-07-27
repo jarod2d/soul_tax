@@ -10,14 +10,12 @@ package {
 	
 	public class GibEmitter extends Emitter {
 		
-		// Constructor.
-		public function GibEmitter() {
+		// Constructor. You can specify what color you want your gibs to be. By default they're blood-colored.
+		public function GibEmitter(color:int = 0xFFCC0000, count:int = 125) {
 			super();
 			
 			// Create all the particles.
-			// TODO: We should throw in some gibs of different sizes and colors (get some flesh-colored gibs in there,
-			// etc).
-			createParticles(125, [0xFFCC0000], new Range(1, 3));
+			createParticles(count, [color], new Range(1, 3));
 			
 			// Set up the particle motion.
 			velocity.min = 75.0;

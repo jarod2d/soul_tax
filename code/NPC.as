@@ -322,12 +322,18 @@ package {
 				return;
 			}
 			
+			// Declaring these here to avoid stupid hoisting warnings...
+			var distance:FlxPoint;
+			var npc:NPC;
+			var npc_sprite:EntitySprite;
+			var distance_squared:Number;
+			
 			// Manager special.
 			if (type.id === "bank_manager") {
 				// Scare everyone within a certain radius.
-				var distance:FlxPoint = new FlxPoint();
+				distance = new FlxPoint();
 				
-				for each (var npc_sprite:EntitySprite in Game.level.NPCs.members) {
+				for each (npc_sprite in Game.level.NPCs.members) {
 					var npc:NPC = npc_sprite.entity as NPC;
 					
 					// We don't want to scare ourselves or robots.
@@ -339,7 +345,7 @@ package {
 					distance.x = npc.x - x;
 					distance.y = npc.y - y;
 					
-					var distance_squared:Number = MathUtil.vectorLengthSquared(distance);
+					distance_squared = MathUtil.vectorLengthSquared(distance);
 					
 					if (npc.state !== FleeState && distance_squared < 2500.0) {
 						// Scare the NPC.
@@ -384,10 +390,10 @@ package {
 			// Old lady special.
 			else if (type.id === "old_lady") {
 				// Make everyone within a certain radius fall asleep.
-				var distance:FlxPoint = new FlxPoint();
+				distance = new FlxPoint();
 				
 				for each (var npc_sprite:EntitySprite in Game.level.NPCs.members) {
-					var npc:NPC = npc_sprite.entity as NPC;
+					npc = npc_sprite.entity as NPC;
 					
 					// We don't want to make ourselves fall asleep.
 					if (npc === this) {
@@ -398,7 +404,7 @@ package {
 					distance.x = npc.x - x;
 					distance.y = npc.y - y;
 					
-					var distance_squared:Number = MathUtil.vectorLengthSquared(distance);
+					distance_squared = MathUtil.vectorLengthSquared(distance);
 					
 					if (npc.state !== FleeState && distance_squared < 2750.0) {
 						// Make them fall asleep.
@@ -498,13 +504,15 @@ package {
 				Game.player.stopPossessing();
 			}
 			
-			// Update the level progress.
+			// Update the level progress and explode.
 			if (type.id !== "robot") {
 				Game.level.queueDeadNPC(this);
+				Game.level.gib_emitter.spawnGibsForNPC(this);
 			}
-			
-			// Explode!!!
-			Game.level.gib_emitter.spawnGibsForNPC(this);
+			else {
+				Game.level.robot_gib_emitter.spawnGibsForNPC(this);
+				Game.level.smoke_emitter.spawnSmokeForNPC(this);
+			}
 			
 			// Kill the sprite.
 			sprite.kill();

@@ -60,8 +60,12 @@ package {
 		// The list of hitboxes in the level.
 		public var hitboxes:FlxGroup;
 		
-		// Our gib spawning effect.
+		// Our gib spawning effect. Robots have their own because they need different-colored gibs.
 		public var gib_emitter:GibEmitter;
+		public var robot_gib_emitter:GibEmitter;
+		
+		// A smoke emitter for robot deaths.
+		public var smoke_emitter:SmokeEmitter;
 		
 		// An emitter for the CEO's special attack.
 		public var money_emitter:MoneyEmitter;
@@ -104,6 +108,8 @@ package {
 			robots             = new FlxGroup();
 			hitboxes           = new FlxGroup();
 			gib_emitter        = new GibEmitter();
+			robot_gib_emitter  = new GibEmitter(0xFF222222, 40);
+			smoke_emitter      = new SmokeEmitter();
 			money_emitter      = new MoneyEmitter();
 			glass_emitter      = new GlassEmitter();
 			dying_npcs         = [];
@@ -186,6 +192,8 @@ package {
 			contents.add(wall_tiles);
 			contents.add(glass_emitter.particles);
 			contents.add(gib_emitter.particles);
+			contents.add(robot_gib_emitter.particles);
+			contents.add(smoke_emitter.particles);
 			contents.add(money_emitter.particles);
 			contents.add(NPCs);
 			contents.add(hitboxes);
