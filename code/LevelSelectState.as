@@ -25,6 +25,7 @@ package {
 		// The level icons and the numbers that go on top of them.
 		public var icons:FlxGroup;
 		public var icon_numbers:FlxGroup;
+		public var level_scores:FlxGroup;
 		
 		// We have a little highlight that goes behind the selected icon to show the player which icon is selected.
 		public var icon_highlight:FlxSprite;
@@ -51,6 +52,7 @@ package {
 			// Initialize some crap.
 			icons        = new FlxGroup();
 			icon_numbers = new FlxGroup();
+			level_scores = new FlxGroup();
 			button_held_time = repeat_time = 0.0;
 			
 			// We need to restrict the camera because it tries to follow the ghost.
@@ -73,20 +75,42 @@ package {
 			icon_highlight.alpha = 0.75;
 			
 			// Create the icons.
-			var row:int = 0;
+			var scores:Array = LevelProgress.scores;
+			var row:int      = 0;
 			
 			for (var i:int = 0; i < Level.levels.length; i++) {
-				var col:int = i % levels_per_row;
+				var col:int      = i % levels_per_row;
+				var alpha:Number = (i <= LevelProgress.levels_completed) ? 1.0 : 0.45;
 				
 				// Create the icon.
 				var icon:FlxSprite = new FlxSprite(screen_padding_x + col * (IconSize + IconPaddingX), ScreenPaddingY + TitleHeight + row * (IconSize + IconPaddingY));
 				icon.makeGraphic(IconSize, IconSize, 0xFF445566);
+				icon.alpha = alpha;
 				icons.add(icon);
 				
 				// Create the number.
 				var number:FlxText = new FlxText(icon.x - 1.0, icon.y + 9.0, icon.width, String(i + 1));
 				number.setFormat("propomin", 16, 0xFFCCDDEE, "center", 0xFF001122);
+				number.alpha = alpha;
 				icon_numbers.add(number);
+				
+				// Add score data if necessary.
+				if (i < LevelProgress.levels_completed && scores[i]) {
+					// The time icon.
+					level_scores.add(new FlxSprite(icon.x - 2.0, icon.y + icon.height + 3.0, Assets.clock_icon));
+					
+					// The time text.
+					var time:FlxText = new FlxText(icon.x + 3.0, icon.y + icon.height + 1.0, icon.width, MathUtil.formatNumber(scores[i].time, 1));
+					time.setFormat("propomin", 8, 0xFF333344, "left");
+					level_scores.add(time);
+					
+					// Bonus kills text.
+					if (scores[i].bonus_kills > 0) {
+						var bonus_kills:FlxText = new FlxText(icon.x - 3.0, icon.y + icon.height + 1.0, icon.width + 7.0, scores[i].bonus_kills);
+						bonus_kills.setFormat("propomin", 8, 0xFFDD2222, "right");
+						level_scores.add(bonus_kills);
+					}
+				}
 				
 				// Move to the next row if necessary.
 				if (col === levels_per_row - 1) {
@@ -124,6 +148,7 @@ package {
 			add(icon_highlight);
 			add(icons);
 			add(icon_numbers);
+			add(level_scores);
 			add(ghost.trails);
 			add(ghost.sprite);
 			add(select_label);
@@ -156,6 +181,39 @@ package {
 			level_name.text = (Game.current_level < Level.levels.length) ? Level.levels[Game.current_level].name : "";
 		}
 		
+		// Moves the selection in the given direction (FlxObject.LEFT, etc). This is a pretty nasty function, and I'm
+		// sure there's an easier way to do this, but I'm hella tired right now.
+		public function moveSelection(direction:int):void {
+			var new_index:int = Game.current_level;
+			
+			if (direction === FlxObject.UP) {
+				new_index -= levels_per_row;
+				
+				if (new_index < 0) {
+					new_index = LevelProgress.levels_completed + MathUtil.mod(new_index, Math.max(1, LevelProgress.levels_completed));
+					
+					while (new_index > LevelProgress.levels_completed) {
+						new_index -= levels_per_row;
+					} 
+				}
+			}
+			else if (direction === FlxObject.RIGHT) {
+				new_index = MathUtil.mod(new_index + 1, LevelProgress.levels_completed + 1);
+			}
+			else if (direction === FlxObject.DOWN) {
+				new_index += levels_per_row;
+				
+				if (new_index > LevelProgress.levels_completed) {
+					new_index %= levels_per_row;
+				}
+			}
+			else if (direction === FlxObject.LEFT) {
+				new_index = MathUtil.mod(new_index - 1, LevelProgress.levels_completed + 1);
+			}
+			
+			selectLevel(new_index);
+		}
+		
 		// Returns the center point of the icon for the given level index. Depends on the icons already being generated.
 		private function levelIconPosition(level_index:int):FlxPoint {
 			level_index        = MathUtil.mod(level_index, Level.levels.length);
@@ -178,32 +236,32 @@ package {
 			// Move the selection.
 			// TODO: Clean this crap up.
 			if (FlxG.keys.justPressed("E")) {
-				selectLevel(Game.current_level - levels_per_row);
+				moveSelection(FlxObject.UP);
 			}
 			else if (FlxG.keys.justPressed("S")) {
-				selectLevel(Game.current_level - 1);
+				moveSelection(FlxObject.LEFT);
 			}
 			else if (FlxG.keys.justPressed("D")) {
-				selectLevel(Game.current_level + levels_per_row);
+				moveSelection(FlxObject.DOWN);
 			}
 			else if (FlxG.keys.justPressed("F")) {
-				selectLevel(Game.current_level + 1);
+				moveSelection(FlxObject.RIGHT);
 			}
 			else if (button_held_time >= KeyRepeatThreshold) {
 				repeat_time += FlxG.elapsed;
 				
 				if (repeat_time >= KeyRepeatRate) {
 					if (FlxG.keys.E) {
-						selectLevel(Game.current_level - levels_per_row);
+						moveSelection(FlxObject.UP);
 					}
 					else if (FlxG.keys.S) {
-						selectLevel(Game.current_level - 1);
+						moveSelection(FlxObject.LEFT);
 					}
 					else if (FlxG.keys.D) {
-						selectLevel(Game.current_level + levels_per_row);
+						moveSelection(FlxObject.DOWN);
 					}
 					else if (FlxG.keys.F) {
-						selectLevel(Game.current_level + 1);
+						moveSelection(FlxObject.RIGHT);
 					}
 					
 					repeat_time = 0.0;

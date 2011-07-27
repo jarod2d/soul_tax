@@ -269,6 +269,11 @@ package {
 					music = FlxG.play((level.objectives_complete) ? Assets.level_won_music : Assets.level_failed_music, 0.75);
 					
 					// TODO: Play a little cutscene of the player being killed by Death if they lost.
+					
+					// Save the player's progress.
+					if (level.objectives_complete) {
+						LevelProgress.recordCurrentScore();
+					}
 				});
 			}
 			

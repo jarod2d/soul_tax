@@ -79,6 +79,10 @@ package {
 		// The amount of time remaining in the level.
 		public var time_remaining:Number;
 		
+		// The time it took the player to complete the level. The value is zero until the player actually completes the
+		// level.
+		public var completion_time:Number;
+		
 		// The level's dialogue. The object potentially has two keys -- "start" and "end", which contain the dialogue
 		// arrays for the start and the end of the level, respectively.
 		public var dialogue:Object;
@@ -119,7 +123,8 @@ package {
 				progress[npc_type] = 0;
 			}
 			
-			time_remaining = level_data.time;
+			time_remaining  = level_data.time;
+			completion_time = 0.0;
 			
 			// Set up the props and NPCs.
 			var prop_data:Object = JSON.decode(new Assets[level_data.id + "_props"]);
@@ -275,9 +280,10 @@ package {
 			// Increment the appropriate progress counter.
 			progress[dead_npc.objective_type]++;
 			
-			// If the level is complete, show the level complete message.
+			// If the level is complete, show the level complete message and make note of the time.
 			if (objectives_complete && time_remaining > 0.0) {
 				Game.ui.level_complete_message.setAll("alpha", 1.0);
+				completion_time = Level.levels[Game.current_level].time - time_remaining;
 			}
 		}
 		
