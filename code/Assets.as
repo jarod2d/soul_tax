@@ -143,6 +143,16 @@ package {
 		[Embed(source="../levels/ceo_intro.props.json", mimeType="application/octet-stream")] public static var ceo_intro_props:Class;
 		[Embed(source="../levels/ceo_intro.dialogue.json", mimeType="application/octet-stream")] public static var ceo_intro_dialogue:Class;
 		
+		[Embed(source="../levels/arches.0.csv", mimeType="application/octet-stream")] public static var arches_bg_tiles:Class;
+		[Embed(source="../levels/arches.1.csv", mimeType="application/octet-stream")] public static var arches_wall_tiles:Class;
+		[Embed(source="../levels/arches.props.json", mimeType="application/octet-stream")] public static var arches_props:Class;
+		[Embed(source="../levels/arches.dialogue.json", mimeType="application/octet-stream")] public static var arches_dialogue:Class;
+		
+		[Embed(source="../levels/cops_and_robbers.0.csv", mimeType="application/octet-stream")] public static var cops_and_robbers_bg_tiles:Class;
+		[Embed(source="../levels/cops_and_robbers.1.csv", mimeType="application/octet-stream")] public static var cops_and_robbers_wall_tiles:Class;
+		[Embed(source="../levels/cops_and_robbers.props.json", mimeType="application/octet-stream")] public static var cops_and_robbers_props:Class;
+		[Embed(source="../levels/cops_and_robbers.dialogue.json", mimeType="application/octet-stream")] public static var cops_and_robbers_dialogue:Class;
+		
 		// Processes some of the loaded data. Should be called once at the beginning of the game.
 		public static function load():void {
 			// Load the level data.

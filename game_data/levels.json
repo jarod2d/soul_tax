@@ -24,6 +24,17 @@
 	},
 	
 	{
+		"id":   "arches",
+		"name": "Arches",
+		"time": 60.0,
+		"objectives": {
+			"businessman": 14,
+			"maintenance_guy": 2,
+			"bank_manager": 2
+		}
+	},
+	
+	{
 		"id":   "ceo_intro",
 		"name": "CEO Intro",
 		"time": 20.0,
@@ -113,6 +124,15 @@
 		"time": 12.0,
 		"objectives": {
 			"businessman": 10
+		}
+	},
+	
+	{
+		"id":   "cops_and_robbers",
+		"name": "Cop and Robbers",
+		"time": 30.0,
+		"objectives": {
+			"burglar": 10
 		}
 	},
 	
