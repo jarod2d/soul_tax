@@ -24,6 +24,16 @@
 	},
 	
 	{
+		"id":   "ceo_intro",
+		"name": "CEO Intro",
+		"time": 20.0,
+		"objectives": {
+			"businessman": 6,
+			"bank_manager": 6
+		}
+	},
+	
+	{
 		"id":   "supervillain_intro",
 		"name": "Dr. Derp's Nefarious Plan",
 		"time": 32.0,
@@ -78,7 +88,7 @@
 	{
 		"id":   "kill_dudes",
 		"name": "Kill Some Dudes",
-		"time": 60.0,
+		"time": 70.0,
 		"objectives": {
 			"any": 4,
 			"businessman": 6,
@@ -103,6 +113,15 @@
 		"time": 12.0,
 		"objectives": {
 			"businessman": 10
+		}
+	},
+	
+	{
+		"id":   "maze",
+		"name": "Maze",
+		"time": 75.0,
+		"objectives": {
+			"old_lady": 6
 		}
 	}
 ]
