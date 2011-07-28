@@ -6,6 +6,15 @@
 
 [
 	{
+		"id":   "basic_window",
+		"name": "A Window of Opportunity",
+		"time": 25.0,
+		"objectives": {
+			"businessman": 5
+		}
+	},
+	
+	{
 		"id":   "ceo_assassination",
 		"name": "Get That CEO",
 		"time": 45.0,
@@ -58,6 +67,24 @@
 			"old_lady": 2,
 			"bank_manager": 2,
 			"maintenance_guy": 2
+		}
+	},
+	
+	{
+		"id":   "float",
+		"name": "Floating Building",
+		"time": 40.0,
+		"objectives": {
+			"maintenance_guy": 12
+		}
+	},
+	
+	{
+		"id":   "vomit_tower",
+		"name": "Tower of Money",
+		"time": 12.0,
+		"objectives": {
+			"businessman": 10
 		}
 	}
 ]

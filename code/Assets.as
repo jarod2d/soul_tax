@@ -108,6 +108,21 @@ package {
 		[Embed(source="../levels/kill_dudes.props.json", mimeType="application/octet-stream")] public static var kill_dudes_props:Class;
 		[Embed(source="../levels/kill_dudes.dialogue.json", mimeType="application/octet-stream")] public static var kill_dudes_dialogue:Class;
 		
+		[Embed(source="../levels/float.0.csv", mimeType="application/octet-stream")] public static var float_bg_tiles:Class;
+		[Embed(source="../levels/float.1.csv", mimeType="application/octet-stream")] public static var float_wall_tiles:Class;
+		[Embed(source="../levels/float.props.json", mimeType="application/octet-stream")] public static var float_props:Class;
+		[Embed(source="../levels/float.dialogue.json", mimeType="application/octet-stream")] public static var float_dialogue:Class;
+		
+		[Embed(source="../levels/vomit_tower.0.csv", mimeType="application/octet-stream")] public static var vomit_tower_bg_tiles:Class;
+		[Embed(source="../levels/vomit_tower.1.csv", mimeType="application/octet-stream")] public static var vomit_tower_wall_tiles:Class;
+		[Embed(source="../levels/vomit_tower.props.json", mimeType="application/octet-stream")] public static var vomit_tower_props:Class;
+		[Embed(source="../levels/vomit_tower.dialogue.json", mimeType="application/octet-stream")] public static var vomit_tower_dialogue:Class;
+		
+		[Embed(source="../levels/basic_window.0.csv", mimeType="application/octet-stream")] public static var basic_window_bg_tiles:Class;
+		[Embed(source="../levels/basic_window.1.csv", mimeType="application/octet-stream")] public static var basic_window_wall_tiles:Class;
+		[Embed(source="../levels/basic_window.props.json", mimeType="application/octet-stream")] public static var basic_window_props:Class;
+		[Embed(source="../levels/basic_window.dialogue.json", mimeType="application/octet-stream")] public static var basic_window_dialogue:Class;
+		
 		// Processes some of the loaded data. Should be called once at the beginning of the game.
 		public static function load():void {
 			// Load the level data.

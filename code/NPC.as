@@ -202,9 +202,7 @@ package {
 				
 				// If we collided with glass, we need to break the glass and restore our old velocity so that the NPC
 				// keeps moving through the window.
-				// TODO: When the NPC is going too fast, we get weird behavior when we try to maintain their velocity
-				// through the window. As a temporary hack, we only maintain velocity under a certain threshold.
-				if (Game.level.breakGlassAt(npc.center.x + impact_direction.x * Level.TileSize, npc.center.y + impact_direction.y * Level.TileSize) && base_impact < 250.0) {
+				if (Game.level.breakGlassAt(npc.center.x + impact_direction.x * Level.TileSize, npc.center.y + impact_direction.y * Level.TileSize) && npc.state !== PossessedState) {
 					npc.knockback_velocity.x = npc.old_velocity.x;
 					npc.knockback_velocity.y = npc.old_velocity.y;
 				}

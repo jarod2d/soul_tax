@@ -1,0 +1,11 @@
+{
+	"start": [
+		["Death", "right", "BLEAURUGGHGHHH"],
+		["Ghost", "left",  "OK"]
+	],
+	
+	"end": [
+		["Death", "right", "YOU WON!!!!!!!!!!!!!!!!!!!!!"],
+		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"]
+	]
+}
