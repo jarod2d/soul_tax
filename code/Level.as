@@ -299,7 +299,10 @@ package {
 			
 			// If the level is complete, show the level complete message and make note of the time.
 			if (objectives_complete && completion_time === 0.0) {
-				Game.ui.level_complete_message.setAll("alpha", 1.0);
+				if (time_remaining > 0.0) {
+					Game.ui.level_complete_message.setAll("alpha", 1.0);
+				}
+				
 				completion_time = Level.levels[Game.current_level].time - Math.max(0.0, time_remaining);
 			}
 		}

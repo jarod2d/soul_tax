@@ -201,7 +201,7 @@ package {
 				MathUtil.normalize(impact_direction);
 				
 				// If we collided with glass, we need to break the glass and restore our old velocity so that the NPC
-				// keeps moving through the window.
+				// keeps moving through the window
 				if (Game.level.breakGlassAt(npc.center.x + impact_direction.x * Level.TileSize, npc.center.y + impact_direction.y * Level.TileSize) && npc.state !== PossessedState) {
 					npc.knockback_velocity.x = npc.old_velocity.x;
 					npc.knockback_velocity.y = npc.old_velocity.y;

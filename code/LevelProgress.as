@@ -38,6 +38,8 @@ package {
 					bonus_kills: Game.level.progress.bonus,
 					time: Game.level.completion_time
 				};
+				
+				save();
 			}
 		}
 		

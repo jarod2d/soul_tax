@@ -15,6 +15,24 @@
 	},
 	
 	{
+		"id":   "kill_dudes_2",
+		"name": "Kill Dudes 2",
+		"time": 60.0,
+		"objectives": {
+			"any": 20
+		}
+	},
+	
+	{
+		"id":   "supervillain_intro",
+		"name": "Dr. Derp's Nefarious Plan",
+		"time": 32.0,
+		"objectives": {
+			"any": 28
+		}
+	},
+	
+	{
 		"id":   "ceo_assassination",
 		"name": "Get That CEO",
 		"time": 45.0,
@@ -34,8 +52,8 @@
 	},
 	
 	{
-		"id":   "superhero_massacre",
-		"name": "Superhero Massacre",
+		"id":   "superhero_intro",
+		"name": "Superhero Intro",
 		"time": 20.0,
 		"objectives": {
 			"businessman": 19,

@@ -93,10 +93,10 @@ package {
 		[Embed(source="../levels/basement.props.json", mimeType="application/octet-stream")] public static var basement_props:Class;
 		[Embed(source="../levels/basement.dialogue.json", mimeType="application/octet-stream")] public static var basement_dialogue:Class;
 		
-		[Embed(source="../levels/superhero_massacre.0.csv", mimeType="application/octet-stream")] public static var superhero_massacre_bg_tiles:Class;
-		[Embed(source="../levels/superhero_massacre.1.csv", mimeType="application/octet-stream")] public static var superhero_massacre_wall_tiles:Class;
-		[Embed(source="../levels/superhero_massacre.props.json", mimeType="application/octet-stream")] public static var superhero_massacre_props:Class;
-		[Embed(source="../levels/superhero_massacre.dialogue.json", mimeType="application/octet-stream")] public static var superhero_massacre_dialogue:Class;
+		[Embed(source="../levels/superhero_intro.0.csv", mimeType="application/octet-stream")] public static var superhero_intro_bg_tiles:Class;
+		[Embed(source="../levels/superhero_intro.1.csv", mimeType="application/octet-stream")] public static var superhero_intro_wall_tiles:Class;
+		[Embed(source="../levels/superhero_intro.props.json", mimeType="application/octet-stream")] public static var superhero_intro_props:Class;
+		[Embed(source="../levels/superhero_intro.dialogue.json", mimeType="application/octet-stream")] public static var superhero_intro_dialogue:Class;
 		
 		[Embed(source="../levels/bullseye.0.csv", mimeType="application/octet-stream")] public static var bullseye_bg_tiles:Class;
 		[Embed(source="../levels/bullseye.1.csv", mimeType="application/octet-stream")] public static var bullseye_wall_tiles:Class;
@@ -122,6 +122,16 @@ package {
 		[Embed(source="../levels/basic_window.1.csv", mimeType="application/octet-stream")] public static var basic_window_wall_tiles:Class;
 		[Embed(source="../levels/basic_window.props.json", mimeType="application/octet-stream")] public static var basic_window_props:Class;
 		[Embed(source="../levels/basic_window.dialogue.json", mimeType="application/octet-stream")] public static var basic_window_dialogue:Class;
+		
+		[Embed(source="../levels/kill_dudes_2.0.csv", mimeType="application/octet-stream")] public static var kill_dudes_2_bg_tiles:Class;
+		[Embed(source="../levels/kill_dudes_2.1.csv", mimeType="application/octet-stream")] public static var kill_dudes_2_wall_tiles:Class;
+		[Embed(source="../levels/kill_dudes_2.props.json", mimeType="application/octet-stream")] public static var kill_dudes_2_props:Class;
+		[Embed(source="../levels/kill_dudes_2.dialogue.json", mimeType="application/octet-stream")] public static var kill_dudes_2_dialogue:Class;
+		
+		[Embed(source="../levels/supervillain_intro.0.csv", mimeType="application/octet-stream")] public static var supervillain_intro_bg_tiles:Class;
+		[Embed(source="../levels/supervillain_intro.1.csv", mimeType="application/octet-stream")] public static var supervillain_intro_wall_tiles:Class;
+		[Embed(source="../levels/supervillain_intro.props.json", mimeType="application/octet-stream")] public static var supervillain_intro_props:Class;
+		[Embed(source="../levels/supervillain_intro.dialogue.json", mimeType="application/octet-stream")] public static var supervillain_intro_dialogue:Class;
 		
 		// Processes some of the loaded data. Should be called once at the beginning of the game.
 		public static function load():void {
