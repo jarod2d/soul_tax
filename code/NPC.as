@@ -180,7 +180,6 @@ package {
 			var damage_impact:Number = (base_impact - ContactDamageThreshold) * 0.95;
 			var glass_impact:Number  = (base_impact - GlassBreakThreshold);
 			
-			
 			// Apply damage.
 			if (damage_impact > 0.0) {
 				npc.hurt(damage_impact, "falling");
@@ -203,7 +202,9 @@ package {
 				
 				// If we collided with glass, we need to break the glass and restore our old velocity so that the NPC
 				// keeps moving through the window.
-				if (Game.level.breakGlassAt(npc.center.x + impact_direction.x * Level.TileSize, npc.center.y + impact_direction.y * Level.TileSize)) {
+				// TODO: When the NPC is going too fast, we get weird behavior when we try to maintain their velocity
+				// through the window. As a temporary hack, we only maintain velocity under a certain threshold.
+				if (Game.level.breakGlassAt(npc.center.x + impact_direction.x * Level.TileSize, npc.center.y + impact_direction.y * Level.TileSize) && base_impact < 250.0) {
 					npc.knockback_velocity.x = npc.old_velocity.x;
 					npc.knockback_velocity.y = npc.old_velocity.y;
 				}

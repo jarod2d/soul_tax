@@ -46,8 +46,9 @@ package {
 		public var borders:FlxGroup;
 		public var bottomless_borders:FlxGroup;
 		
-		// The list of props in the level.
-		public var props:FlxGroup;
+		// The list of props in the level. Props can be either in the background or the foreground.
+		public var background_props:FlxGroup;
+		public var foreground_props:FlxGroup;
 		
 		// The list of NPCs in the level, as well as a subset of shrunken NPCs.
 		public var NPCs:FlxGroup;
@@ -102,7 +103,8 @@ package {
 			wall_tiles         = new FlxTilemap();
 			borders            = new FlxGroup();
 			bottomless_borders = new FlxGroup();
-			props              = new FlxGroup();
+			background_props   = new FlxGroup();
+			foreground_props   = new FlxGroup();
 			NPCs               = new FlxGroup();
 			shrunk_NPCs        = new FlxGroup();
 			robots             = new FlxGroup();
@@ -115,8 +117,8 @@ package {
 			dying_npcs         = [];
 			
 			// Create our tilemaps.
-			bg_tiles.loadMap(new Assets[level_data.id + "_bg_tiles"], Assets.tiles, TileSize, TileSize, NaN, 1, 1, 2);
-			wall_tiles.loadMap(new Assets[level_data.id + "_wall_tiles"], Assets.tiles, TileSize, TileSize, NaN, 1, 1, 2);
+			bg_tiles.loadMap(new Assets[level_data.id + "_bg_tiles"], Assets.tiles, TileSize, TileSize, NaN, 1, 1, 3);
+			wall_tiles.loadMap(new Assets[level_data.id + "_wall_tiles"], Assets.tiles, TileSize, TileSize, NaN, 1, 1, 3);
 			
 			// Grab the dialogue.
 			dialogue = JSON.decode(new Assets[level_data.id + "_dialogue"]);
@@ -138,18 +140,24 @@ package {
 			
 			// Add props.
 			for (i = 0; i < prop_data[0].length; i++) {
-				// TODO: Add props.
+				var data:Object = prop_data[0][i];
+				background_props.add(new FlxSprite(data.x, data.y, Assets[data.id]));
+			}
+			
+			for (i = 0; i < prop_data[2].length; i++) {
+				var data:Object = prop_data[2][i];
+				foreground_props.add(new FlxSprite(data.x, data.y, Assets[data.id]));
 			}
 			
 			// Add NPCs and position the player.
 			for (i = 0; i < prop_data[1].length; i++) {
-				var npc_data:Object = prop_data[1][i];
+				var data:Object = prop_data[1][i];
 				
-				if (npc_data.id === "player") {
-					Game.player.warp(npc_data.x, npc_data.y);
+				if (data.id === "player") {
+					Game.player.warp(data.x, data.y);
 				}
 				else {
-					var npc:NPC = new NPC(npc_data.id, npc_data.x, npc_data.y);
+					var npc:NPC = new NPC(data.id, data.x, data.y);
 					NPCs.add(npc.sprite);
 					
 					// Add robots to their own group.
@@ -188,7 +196,7 @@ package {
 			
 			// Group all of the contents of the level.
 			contents.add(bg_tiles);
-			contents.add(props);
+			contents.add(background_props);
 			contents.add(wall_tiles);
 			contents.add(glass_emitter.particles);
 			contents.add(gib_emitter.particles);
@@ -197,6 +205,7 @@ package {
 			contents.add(money_emitter.particles);
 			contents.add(NPCs);
 			contents.add(hitboxes);
+			contents.add(foreground_props);
 			contents.add(Game.player.trails);
 			contents.add(Game.player.sprite);
 		}
@@ -232,7 +241,7 @@ package {
 		// If there's a door tile at the given coordinates (pixels, not tiles), this will open that door. Returns
 		// whether we opened a door or not.
 		public function openDoorAt(x:int, y:int):Boolean {
-			return destroyWall(3, x, y);
+			return destroyWall(4, x, y);
 		}
 		
 		// If there's a glass tile at the given coordinates (pixels, not tiles), this will break the glass.
@@ -241,7 +250,7 @@ package {
 			glass_emitter.spawnGlassAt(x, y);
 			
 			// Glass can be left- or right-facing, so there are two different tiles we need to check.
-			return (destroyWall(4, x, y) || destroyWall(6, x, y));
+			return (destroyWall(5, x, y) || destroyWall(7, x, y));
 		}
 		
 		// A little function that swaps the visual position of the player and the NPCs. That is, if the player is in

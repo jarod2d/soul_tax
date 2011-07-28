@@ -6,35 +6,35 @@
 
 [
 	{
-		"id":   "test",
-		"name": "Test Level",
-		"time": 30.0,
+		"id":   "ceo_assassination",
+		"name": "Get That CEO",
+		"time": 45.0,
 		"objectives": {
-			"any": 3,
-			"businessman": 3,
-			"maintenance_guy": 2,
-			"bank_manager": 1
+			"ceo": 1,
+			"businessman": 6
 		}
 	},
 	
 	{
-		"id":   "tiny",
-		"name": "Tiny Level",
-		"time": 8000.0,
+		"id":   "basement",
+		"name": "Creepy Boss",
+		"time": 35.0,
 		"objectives": {
-			"businessman": 1
+			"ceo": 1
 		}
 	},
 	
 	{
-		"id":   "demo",
-		"name": "Demo Level",
-		"time": 50.0,
+		"id":   "superhero_massacre",
+		"name": "Superhero Massacre",
+		"time": 20.0,
 		"objectives": {
-			"any": 4,
-			"businessman": 6,
-			"maintenance_guy": 2,
-			"old_lady": 1
+			"businessman": 19,
+			"ceo": 1,
+			"security_guard": 5,
+			"old_lady": 4,
+			"bank_manager": 8,
+			"superhero": 1
 		}
 	}
 ]

@@ -83,20 +83,20 @@ package {
 		[Embed(source="../game_data/npcs.json", mimeType="application/octet-stream")] public static var npc_data:Class;
 		
 		// Level data.
-		[Embed(source="../levels/test.0.csv", mimeType="application/octet-stream")] public static var test_bg_tiles:Class;
-		[Embed(source="../levels/test.1.csv", mimeType="application/octet-stream")] public static var test_wall_tiles:Class;
-		[Embed(source="../levels/test.props.json", mimeType="application/octet-stream")] public static var test_props:Class;
-		[Embed(source="../levels/test.dialogue.json", mimeType="application/octet-stream")] public static var test_dialogue:Class;
+		[Embed(source="../levels/ceo_assassination.0.csv", mimeType="application/octet-stream")] public static var ceo_assassination_bg_tiles:Class;
+		[Embed(source="../levels/ceo_assassination.1.csv", mimeType="application/octet-stream")] public static var ceo_assassination_wall_tiles:Class;
+		[Embed(source="../levels/ceo_assassination.props.json", mimeType="application/octet-stream")] public static var ceo_assassination_props:Class;
+		[Embed(source="../levels/ceo_assassination.dialogue.json", mimeType="application/octet-stream")] public static var ceo_assassination_dialogue:Class;
 		
-		[Embed(source="../levels/tiny.0.csv", mimeType="application/octet-stream")] public static var tiny_bg_tiles:Class;
-		[Embed(source="../levels/tiny.1.csv", mimeType="application/octet-stream")] public static var tiny_wall_tiles:Class;
-		[Embed(source="../levels/tiny.props.json", mimeType="application/octet-stream")] public static var tiny_props:Class;
-		[Embed(source="../levels/tiny.dialogue.json", mimeType="application/octet-stream")] public static var tiny_dialogue:Class;
+		[Embed(source="../levels/basement.0.csv", mimeType="application/octet-stream")] public static var basement_bg_tiles:Class;
+		[Embed(source="../levels/basement.1.csv", mimeType="application/octet-stream")] public static var basement_wall_tiles:Class;
+		[Embed(source="../levels/basement.props.json", mimeType="application/octet-stream")] public static var basement_props:Class;
+		[Embed(source="../levels/basement.dialogue.json", mimeType="application/octet-stream")] public static var basement_dialogue:Class;
 		
-		[Embed(source="../levels/demo.0.csv", mimeType="application/octet-stream")] public static var demo_bg_tiles:Class;
-		[Embed(source="../levels/demo.1.csv", mimeType="application/octet-stream")] public static var demo_wall_tiles:Class;
-		[Embed(source="../levels/demo.props.json", mimeType="application/octet-stream")] public static var demo_props:Class;
-		[Embed(source="../levels/demo.dialogue.json", mimeType="application/octet-stream")] public static var demo_dialogue:Class;
+		[Embed(source="../levels/superhero_massacre.0.csv", mimeType="application/octet-stream")] public static var superhero_massacre_bg_tiles:Class;
+		[Embed(source="../levels/superhero_massacre.1.csv", mimeType="application/octet-stream")] public static var superhero_massacre_wall_tiles:Class;
+		[Embed(source="../levels/superhero_massacre.props.json", mimeType="application/octet-stream")] public static var superhero_massacre_props:Class;
+		[Embed(source="../levels/superhero_massacre.dialogue.json", mimeType="application/octet-stream")] public static var superhero_massacre_dialogue:Class;
 		
 		// Processes some of the loaded data. Should be called once at the beginning of the game.
 		public static function load():void {
