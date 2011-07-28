@@ -98,6 +98,16 @@ package {
 		[Embed(source="../levels/superhero_massacre.props.json", mimeType="application/octet-stream")] public static var superhero_massacre_props:Class;
 		[Embed(source="../levels/superhero_massacre.dialogue.json", mimeType="application/octet-stream")] public static var superhero_massacre_dialogue:Class;
 		
+		[Embed(source="../levels/bullseye.0.csv", mimeType="application/octet-stream")] public static var bullseye_bg_tiles:Class;
+		[Embed(source="../levels/bullseye.1.csv", mimeType="application/octet-stream")] public static var bullseye_wall_tiles:Class;
+		[Embed(source="../levels/bullseye.props.json", mimeType="application/octet-stream")] public static var bullseye_props:Class;
+		[Embed(source="../levels/bullseye.dialogue.json", mimeType="application/octet-stream")] public static var bullseye_dialogue:Class;
+		
+		[Embed(source="../levels/kill_dudes.0.csv", mimeType="application/octet-stream")] public static var kill_dudes_bg_tiles:Class;
+		[Embed(source="../levels/kill_dudes.1.csv", mimeType="application/octet-stream")] public static var kill_dudes_wall_tiles:Class;
+		[Embed(source="../levels/kill_dudes.props.json", mimeType="application/octet-stream")] public static var kill_dudes_props:Class;
+		[Embed(source="../levels/kill_dudes.dialogue.json", mimeType="application/octet-stream")] public static var kill_dudes_dialogue:Class;
+		
 		// Processes some of the loaded data. Should be called once at the beginning of the game.
 		public static function load():void {
 			// Load the level data.

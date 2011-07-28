@@ -322,9 +322,16 @@ package {
 				FlxG.collide(player.victim.sprite, level.bottomless_borders);
 				FlxG.collide(player.victim.sprite, level.NPCs, NPC.processCollision);
 				FlxG.overlap(player.victim.sprite, level.shrunk_NPCs, function(victim_sprite:EntitySprite, npc_sprite:EntitySprite):void {
+							 FlxG.log("npc_sprite 1: " + npc_sprite);
 					(npc_sprite.entity as NPC).kill();
 				});
 			}
+			
+			FlxG.log("gib_emitter: " + level.gib_emitter);
+			FlxG.log("robot_emitter: " + level.robot_gib_emitter);
+			FlxG.log("smoke_emitter: " + level.smoke_emitter);
+			FlxG.log("money_emitter: " + level.money_emitter);
+			FlxG.log("glass_emitter: " + level.glass_emitter);
 			
 			FlxG.collide(player.sprite, level.borders);
 			FlxG.collide(level.NPCs, level.wall_tiles, NPC.processCollision);
@@ -336,9 +343,20 @@ package {
 			
 			// Handle hitbox collisions.
 			FlxG.overlap(level.NPCs, level.hitboxes, function(npc_sprite:EntitySprite, hb_sprite:EntitySprite):void {
+						 
+						 
+						 FlxG.log("npc_sprite 2: " + npc_sprite);
+						 
+						 FlxG.log("hb_sprite 1: " + hb_sprite);
+						 
 				var npc:NPC   = npc_sprite.entity as NPC;
 				var hb:HitBox = hb_sprite.entity as HitBox;
 				
+						 
+						 FlxG.log("npc: " + npc);
+						 
+						 FlxG.log("hb 1: " + hb);
+						 
 				// Flixel has a very strange bug at the moment where it will give you a bunch of false overlaps in some
 				// cases. In order to get around this, we do our own stupid overlap detection before trying to attack
 				// the npc.
@@ -352,10 +370,15 @@ package {
 					continue;
 				}
 				
+				FlxG.log("hb_sprite 2: " + hb_sprite);
+				
 				var hb:HitBox = hb_sprite.entity as HitBox;
+				
+				FlxG.log("hb 2: " + hb);
 				
 				if (hb.dies_on_contact) {
 					FlxG.collide(hb_sprite, level.wall_tiles, function(hb_sprite:EntitySprite, tiles:FlxTilemap) {
+								 FlxG.log("hb_sprite 3: " + hb_sprite);
 						level.breakGlassAt(hb_sprite.x + Level.TileSize / 2.0, hb_sprite.y);
 						level.breakGlassAt(hb_sprite.x - Level.TileSize / 2.0, hb_sprite.y);
 						hb_sprite.kill();

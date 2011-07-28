@@ -36,5 +36,28 @@
 			"bank_manager": 8,
 			"superhero": 1
 		}
+	},
+	
+	{
+		"id":   "bullseye",
+		"name": "Bullseye",
+		"time": 6.0,
+		"objectives": {
+			"businessman": 1,
+			"security_guard": 1
+		}
+	},
+	
+	{
+		"id":   "kill_dudes",
+		"name": "Kill Some Dudes",
+		"time": 60.0,
+		"objectives": {
+			"any": 4,
+			"businessman": 6,
+			"old_lady": 2,
+			"bank_manager": 2,
+			"maintenance_guy": 2
+		}
 	}
 ]
