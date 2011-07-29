@@ -102,6 +102,10 @@ package {
 		// A timer that gets set whenever the NPC gets hurt, used for tinting the NPC and fading it out over time.
 		private var flash_timer:Number;
 		
+		// If the NPC is causing a looping sound at the moment, this will be a reference to that sound so that we can
+		// cancel it when we need to.
+		private var active_sound:FlxSound;
+		
 		// Constructor. The id should be a string that corresponds to one of the keys in npcs.json.
 		public function NPC(id:String, x:Number, y:Number) {
 			super(x, y);
@@ -190,6 +194,10 @@ package {
 				if (obstacle is EntitySprite && (obstacle as EntitySprite).entity is NPC) {
 					((obstacle as EntitySprite).entity as NPC).hurt(damage_impact, "falling");
 				}
+				
+				// Play a sound.
+				var sound:Class = (Math.random() < 0.5) ? Assets.punch_hit_2_sound : Assets.punch_hit_3_sound;
+				FlxG.play(sound, 0.65);
 			}
 			
 			// Break glass.
@@ -220,6 +228,11 @@ package {
 			
 			if (sprite.isTouching(FlxObject.DOWN)) {
 				velocity.y = jump_strength * power * -60.0;
+				
+				// Only play a sound if this is the player jumping.
+				if (state === PossessedState) {
+					FlxG.play(Assets.jump_sound, 0.4);
+				}
 			}
 		}
 		
@@ -261,10 +274,15 @@ package {
 			
 			// The businessman does a large knockback attack.
 			else if (type.id === "businessman") {
+				// Spawn the hitbox.
 				var hb:HitBox = new HitBox(this, 0, 0, 6, height);
 				hb.setAttributes(HitBox.PlayerAllegiance, 0.15, strength / 6.0, 300.0);
 				
+				// Play the animation.
 				sprite.play("special", true);
+				
+				// Play a sound.
+				FlxG.play(Assets.kick_miss_2_sound, 0.75);
 			}
 			
 			// The security guard shoots a gun.
@@ -279,11 +297,14 @@ package {
 				bullet.sprite.loadGraphic(Assets.bullet_sprite);
 				bullet.velocity.x = (facing === FlxObject.LEFT) ? -300.0 : 300.0;
 				
-				// Projectiles don't spawn exactly where they're supposed to
+				// Projectiles don't spawn exactly where they're supposed to, so we have to adjust them a bit.
 				bullet.x -= bullet.velocity.x * FlxG.elapsed * ((facing === FlxObject.LEFT) ? 2.75 : 0.75);
 				
 				// Play the shooting animation.
 				sprite.play("special", true);
+				
+				// Play a sound.
+				FlxG.play(Assets.gun_sound, 0.9);
 			}
 			
 			// The supervillain shoots a shrink ray.
@@ -307,11 +328,28 @@ package {
 				
 				// Play the shooting animation.
 				sprite.play("special", true);
+				
+				// Play a sound.
+				FlxG.play(Assets.shrink_ray_sound, 0.8);
 			}
 			
 			// These NPCs have continuous attacks that just require calling down to the continuous effect.
 			else if (type.id === "bank_manager" || type.id === "ceo" || type.id === "maintenance_guy" || type.id === "old_lady" || type.id === "superhero") {
 				continueSpecialAttack();
+			}
+			
+			// Play sounds.
+			if (type.id === "bank_manager") {
+				FlxG.play(Assets.female_yell_sound, 0.7);
+			}
+			else if (type.id === "ceo") {
+				active_sound = FlxG.play(Assets.ceo_vomit_sound, 0.85, true);
+			}
+			else if (type.id === "old_lady") {
+				FlxG.play(Assets.old_lady_jabber_sound, 0.65);
+			}
+			else if (type.id === "superhero") {
+				FlxG.play(Assets.superhero_special_sound, 0.6);
 			}
 		}
 		
@@ -373,10 +411,14 @@ package {
 			else if (type.id === "maintenance_guy") {
 				// We don't want the player to move while this is happening.
 				Game.player.direction.x = Game.player.direction.y = 0.0;
+				acceleration.x = velocity.x = 0.0;
 				
 				// Destroy tiles underneath the NPC.
 				if (special_interval <= 0.0) {
-					Game.level.wall_tiles.setTile(center.x / Level.TileSize, (bottom + Level.TileSize / 2.0) / Level.TileSize, 0);
+					var destroy_y:Number = (bottom + Level.TileSize / 2.0) / Level.TileSize;
+					Game.level.wall_tiles.setTile(left / Level.TileSize, destroy_y, 0);
+					Game.level.wall_tiles.setTile(right / Level.TileSize, destroy_y, 0);
+					
 					special_interval = MaintenanceGuySpecialInterval;
 				}
 				
@@ -471,6 +513,12 @@ package {
 			// We're no longer using the special attack, and we need to reset our interval.
 			using_special    = false;
 			special_interval = 0.0;
+			
+			// Stop any looping sounds.
+			if (active_sound) {
+				active_sound.stop();
+				active_sound = null;
+			}
 		}
 		
 		// Hurts the NPC, killing him if necessary.
@@ -522,6 +570,18 @@ package {
 				FlxG.shake(0.001, 0.15);
 			}
 			
+			// Play a sound.
+			var sound:Class;
+			
+			if (type.id === "robot") {
+				sound = (Math.random() < 0.45) ? Assets.npc_death_fancy_1_sound : Assets.npc_death_fancy_2_sound;
+			}
+			else {
+				sound = (Math.random() < 0.45) ? Assets.npc_death_1_sound : Assets.npc_death_2_sound;
+			}
+			
+			FlxG.play(sound, 0.5);
+			
 			// TODO: Make everyone within a certain radius panic, just like in the HitBox class. Make a reusable Level
 			// function I guess.
 		}
@@ -569,7 +629,8 @@ package {
 		
 		// Callback that occurs when the NPC enters the possessed state.
 		protected function startBePossessed():void {
-			// TODO: Implement me!
+			// Cancel out any old animations.
+			sprite.finished = true;
 		}
 		
 		// Callback that occurs when the NPC enters the stunned state.
@@ -834,7 +895,9 @@ package {
 			// If they're within a certain distance, run towards them.
 			if (distance_squared < 2500.0) {
 				target = victim.sprite;
-				state        = ChaseState;
+				state  = ChaseState;
+				
+				FlxG.play(Assets.robot_aggro_sound, 0.5);
 			}
 		}
 		

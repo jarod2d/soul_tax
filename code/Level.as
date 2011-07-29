@@ -7,6 +7,7 @@
 package {
 	
 	import org.flixel.*;
+	import flash.utils.*;
 	import com.adobe.serialization.json.*;
 	
 	public class Level {
@@ -136,22 +137,23 @@ package {
 			
 			// Set up the props and NPCs.
 			var prop_data:Object = JSON.decode(new Assets[level_data.id + "_props"]);
+			var data:Object;
 			var i:Number;
 			
 			// Add props.
 			for (i = 0; i < prop_data[0].length; i++) {
-				var data:Object = prop_data[0][i];
+				data = prop_data[0][i];
 				background_props.add(new FlxSprite(data.x, data.y, Assets[data.id]));
 			}
 			
 			for (i = 0; i < prop_data[2].length; i++) {
-				var data:Object = prop_data[2][i];
+				data = prop_data[2][i];
 				foreground_props.add(new FlxSprite(data.x, data.y, Assets[data.id]));
 			}
 			
 			// Add NPCs and position the player.
 			for (i = 0; i < prop_data[1].length; i++) {
-				var data:Object = prop_data[1][i];
+				data = prop_data[1][i];
 				
 				if (data.id === "player") {
 					Game.player.warp(data.x, data.y);
@@ -241,7 +243,13 @@ package {
 		// If there's a door tile at the given coordinates (pixels, not tiles), this will open that door. Returns
 		// whether we opened a door or not.
 		public function openDoorAt(x:int, y:int):Boolean {
-			return destroyWall(4, x, y);
+			if (destroyWall(4, x, y)) {
+				FlxG.play(Assets.door_open_sound, 0.9);
+				
+				return true;
+			}
+			
+			return false;
 		}
 		
 		// If there's a glass tile at the given coordinates (pixels, not tiles), this will break the glass.
@@ -250,7 +258,13 @@ package {
 			glass_emitter.spawnGlassAt(x, y);
 			
 			// Glass can be left- or right-facing, so there are two different tiles we need to check.
-			return (destroyWall(5, x, y) || destroyWall(7, x, y));
+			if (destroyWall(5, x, y) || destroyWall(7, x, y)) {
+				FlxG.play(Assets.glass_break_sound, 0.65);
+				
+				return true;
+			}
+			
+			return false;
 		}
 		
 		// A little function that swaps the visual position of the player and the NPCs. That is, if the player is in
@@ -282,6 +296,11 @@ package {
 			
 			// Tell the UI to spawn a ghost.
 			Game.ui.kill_counter.spawnGhost(dead_npc);
+			
+			// Play a little flying-away sound after a few moments.
+			setTimeout(function():void {
+				FlxG.play(Assets.ghost_going_up_sound, 0.175);
+			}, 400.0 + 350.0 * Math.random());
 		}
 		
 		// Updates the progress of the player in the level by counting the given NPC as a kill. You probably shouldn't
@@ -293,6 +312,18 @@ package {
 			if (index >= 0) {
 				dying_npcs.splice(index, 1);
 			}
+			
+			// Play the appropriate sound.
+			var sound:Class;
+			
+			if (dead_npc.objective_type === "bonus") {
+				sound = (Math.random() < 0.666) ? Assets.bonus_kill_1_sound : Assets.bonus_kill_2_sound;
+			}
+			else {
+				sound = Assets.meter_fill_sound;
+			}
+			
+			FlxG.play(sound, 0.375);
 			
 			// Increment the appropriate progress counter.
 			progress[dead_npc.objective_type]++;

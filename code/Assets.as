@@ -78,6 +78,44 @@ package {
 		[Embed(source="../audio/level_failed.mp3")] public static var level_failed_music:Class;
 		[Embed(source="../audio/main_theme.mp3")] public static var main_theme_music:Class;
 		
+		// Sounds.
+		[Embed(source="../audio/bonus_kill_1.mp3")] public static var bonus_kill_1_sound:Class;
+		[Embed(source="../audio/bonus_kill_2.mp3")] public static var bonus_kill_2_sound:Class;
+		[Embed(source="../audio/ceo_vomit.mp3")] public static var ceo_vomit_sound:Class;
+		[Embed(source="../audio/dialogue_confirm.mp3")] public static var dialogue_confirm_sound:Class;
+		[Embed(source="../audio/door_open.mp3")] public static var door_open_sound:Class;
+		[Embed(source="../audio/female_yell.mp3")] public static var female_yell_sound:Class;
+		[Embed(source="../audio/ghost_flying.mp3")] public static var ghost_flying_sound:Class;
+		[Embed(source="../audio/ghost_going_up.mp3")] public static var ghost_going_up_sound:Class;
+		[Embed(source="../audio/glass_break.mp3")] public static var glass_break_sound:Class;
+		[Embed(source="../audio/gun.mp3")] public static var gun_sound:Class;
+		[Embed(source="../audio/jump.mp3")] public static var jump_sound:Class;
+		[Embed(source="../audio/kick_miss_1.mp3")] public static var kick_miss_1_sound:Class;
+		[Embed(source="../audio/kick_miss_2.mp3")] public static var kick_miss_2_sound:Class;
+		[Embed(source="../audio/knockback_1.mp3")] public static var knockback_1_sound:Class;
+		[Embed(source="../audio/knockback_2.mp3")] public static var knockback_2_sound:Class;
+		[Embed(source="../audio/level_end.mp3")] public static var level_end_sound:Class;
+		[Embed(source="../audio/menu_confirm.mp3")] public static var menu_confirm_sound:Class;
+		[Embed(source="../audio/menu_select.mp3")] public static var menu_select_sound:Class;
+		[Embed(source="../audio/meter_fill.mp3")] public static var meter_fill_sound:Class;
+		[Embed(source="../audio/npc_death_1.mp3")] public static var npc_death_1_sound:Class;
+		[Embed(source="../audio/npc_death_2.mp3")] public static var npc_death_2_sound:Class;
+		[Embed(source="../audio/npc_death_fancy_1.mp3")] public static var npc_death_fancy_1_sound:Class;
+		[Embed(source="../audio/npc_death_fancy_2.mp3")] public static var npc_death_fancy_2_sound:Class;
+		[Embed(source="../audio/old_lady_jabber.mp3")] public static var old_lady_jabber_sound:Class;
+		[Embed(source="../audio/possess.mp3")] public static var possess_sound:Class;
+		[Embed(source="../audio/punch_hit_1.mp3")] public static var punch_hit_1_sound:Class;
+		[Embed(source="../audio/punch_hit_2.mp3")] public static var punch_hit_2_sound:Class;
+		[Embed(source="../audio/punch_hit_3.mp3")] public static var punch_hit_3_sound:Class;
+		[Embed(source="../audio/punch_miss_1.mp3")] public static var punch_miss_1_sound:Class;
+		[Embed(source="../audio/punch_miss_2.mp3")] public static var punch_miss_2_sound:Class;
+		[Embed(source="../audio/robot_aggro.mp3")] public static var robot_aggro_sound:Class;
+		[Embed(source="../audio/select.mp3")] public static var select_sound:Class;
+		[Embed(source="../audio/shrink_ray.mp3")] public static var shrink_ray_sound:Class;
+		[Embed(source="../audio/stop_possess.mp3")] public static var stop_possess_sound:Class;
+		[Embed(source="../audio/superhero_special.mp3")] public static var superhero_special_sound:Class;
+		[Embed(source="../audio/timer_countdown.mp3")] public static var timer_countdown_sound:Class;
+		
 		// Game data.
 		[Embed(source="../game_data/levels.json", mimeType="application/octet-stream")] public static var level_data:Class;
 		[Embed(source="../game_data/npcs.json", mimeType="application/octet-stream")] public static var npc_data:Class;
@@ -157,6 +195,11 @@ package {
 		[Embed(source="../levels/kill_dudes_3.1.csv", mimeType="application/octet-stream")] public static var kill_dudes_3_wall_tiles:Class;
 		[Embed(source="../levels/kill_dudes_3.props.json", mimeType="application/octet-stream")] public static var kill_dudes_3_props:Class;
 		[Embed(source="../levels/kill_dudes_3.dialogue.json", mimeType="application/octet-stream")] public static var kill_dudes_3_dialogue:Class;
+		
+		[Embed(source="../levels/window_washers.0.csv", mimeType="application/octet-stream")] public static var window_washers_bg_tiles:Class;
+		[Embed(source="../levels/window_washers.1.csv", mimeType="application/octet-stream")] public static var window_washers_wall_tiles:Class;
+		[Embed(source="../levels/window_washers.props.json", mimeType="application/octet-stream")] public static var window_washers_props:Class;
+		[Embed(source="../levels/window_washers.dialogue.json", mimeType="application/octet-stream")] public static var window_washers_dialogue:Class;
 		
 		// Processes some of the loaded data. Should be called once at the beginning of the game.
 		public static function load():void {

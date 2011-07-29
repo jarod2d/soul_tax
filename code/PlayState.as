@@ -7,6 +7,7 @@
 package {
 	
 	import org.flixel.*;
+	import flash.utils.*;
 	
 	public class PlayState extends FlxState {
 		
@@ -76,7 +77,7 @@ package {
 				FlxG.music = null;
 			}
 			
-			music = FlxG.play(Assets.level_start_music, 0.65);
+			music = FlxG.play(Assets.level_start_music, 0.22);
 		}
 		
 		// Update for dialogue mode.
@@ -124,12 +125,12 @@ package {
 				if (level.dialogue && level.dialogue.start) {
 					Game.ui.dialogue_box.startDialogue(level.dialogue.start, DialogueBox.StoryDialogueMode, function():void {
 						substate = NoSubstate;
-						FlxG.playMusic(Assets.main_theme_music, 0.85);
+						FlxG.playMusic(Assets.main_theme_music, 0.3);
 					});
 				}
 				else {
 					substate = NoSubstate;
-					FlxG.playMusic(Assets.main_theme_music, 0.85);
+					FlxG.playMusic(Assets.main_theme_music, 0.3);
 				}
 			}
 			
@@ -216,6 +217,13 @@ package {
 				
 				// Stop the music.
 				FlxG.music.fadeOut(1.0);
+				setTimeout(function():void {
+					FlxG.music.stop();
+					FlxG.music = null;
+				}, 1000.0);
+				
+				// Play a sound.
+				FlxG.play(Assets.level_end_sound, 0.8);
 				
 				// Update the substate.
 				substate = TimeUpSubstate;
@@ -266,7 +274,7 @@ package {
 						FlxG.music = null;
 					}
 					
-					music = FlxG.play((level.objectives_complete) ? Assets.level_won_music : Assets.level_failed_music, 0.75);
+					music = FlxG.play((level.objectives_complete) ? Assets.level_won_music : Assets.level_failed_music, 0.25);
 					
 					// TODO: Play a little cutscene of the player being killed by Death if they lost.
 					
@@ -321,17 +329,13 @@ package {
 			if (player.victim) {
 				FlxG.collide(player.victim.sprite, level.bottomless_borders);
 				FlxG.collide(player.victim.sprite, level.NPCs, NPC.processCollision);
-				FlxG.overlap(player.victim.sprite, level.shrunk_NPCs, function(victim_sprite:EntitySprite, npc_sprite:EntitySprite):void {
-							 FlxG.log("npc_sprite 1: " + npc_sprite);
-					(npc_sprite.entity as NPC).kill();
-				});
+				
+				if (!player.victim.is_shrunk) {
+					FlxG.overlap(player.victim.sprite, level.shrunk_NPCs, function(victim_sprite:EntitySprite, npc_sprite:EntitySprite):void {
+						(npc_sprite.entity as NPC).kill();
+					});
+				}
 			}
-			
-			FlxG.log("gib_emitter: " + level.gib_emitter);
-			FlxG.log("robot_emitter: " + level.robot_gib_emitter);
-			FlxG.log("smoke_emitter: " + level.smoke_emitter);
-			FlxG.log("money_emitter: " + level.money_emitter);
-			FlxG.log("glass_emitter: " + level.glass_emitter);
 			
 			FlxG.collide(player.sprite, level.borders);
 			FlxG.collide(level.NPCs, level.wall_tiles, NPC.processCollision);
@@ -343,20 +347,9 @@ package {
 			
 			// Handle hitbox collisions.
 			FlxG.overlap(level.NPCs, level.hitboxes, function(npc_sprite:EntitySprite, hb_sprite:EntitySprite):void {
-						 
-						 
-						 FlxG.log("npc_sprite 2: " + npc_sprite);
-						 
-						 FlxG.log("hb_sprite 1: " + hb_sprite);
-						 
 				var npc:NPC   = npc_sprite.entity as NPC;
 				var hb:HitBox = hb_sprite.entity as HitBox;
 				
-						 
-						 FlxG.log("npc: " + npc);
-						 
-						 FlxG.log("hb 1: " + hb);
-						 
 				// Flixel has a very strange bug at the moment where it will give you a bunch of false overlaps in some
 				// cases. In order to get around this, we do our own stupid overlap detection before trying to attack
 				// the npc.
@@ -370,15 +363,10 @@ package {
 					continue;
 				}
 				
-				FlxG.log("hb_sprite 2: " + hb_sprite);
-				
 				var hb:HitBox = hb_sprite.entity as HitBox;
 				
-				FlxG.log("hb 2: " + hb);
-				
 				if (hb.dies_on_contact) {
-					FlxG.collide(hb_sprite, level.wall_tiles, function(hb_sprite:EntitySprite, tiles:FlxTilemap) {
-								 FlxG.log("hb_sprite 3: " + hb_sprite);
+					FlxG.collide(hb_sprite, level.wall_tiles, function(hb_sprite:EntitySprite, tiles:FlxTilemap):void {
 						level.breakGlassAt(hb_sprite.x + Level.TileSize / 2.0, hb_sprite.y);
 						level.breakGlassAt(hb_sprite.x - Level.TileSize / 2.0, hb_sprite.y);
 						hb_sprite.kill();
@@ -429,7 +417,7 @@ package {
 			
 			// Lower the volume.
 			old_volume  = FlxG.volume;
-			FlxG.volume = (old_volume > 0.1) ? 0.1 : old_volume;
+			FlxG.volume = (old_volume > 0.25) ? 0.25 : old_volume;
 		}
 		
 		// A helper function to unpause the game.

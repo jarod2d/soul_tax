@@ -107,6 +107,11 @@ package {
 			
 			// Have the camera follow the NPC now.
 			FlxG.camera.follow(victim.sprite);
+			
+			// Play a sound.
+			if (FlxG.state is PlayState) {
+				FlxG.play(Assets.possess_sound, 0.7);
+			}
 		}
 		
 		// Stops possessing the current victim, releasing the ghost from the NPC.
@@ -131,6 +136,9 @@ package {
 			
 			// Have the camera follow the player again.
 			FlxG.camera.follow(sprite);
+			
+			// Play a sound.
+			FlxG.play(Assets.stop_possess_sound, 0.7);
 		}
 		
 		// The regular punch attack the player uses when they're possessing someone.
@@ -145,6 +153,7 @@ package {
 			
 			// Create the hitbox.
 			var hb:HitBox = new HitBox(victim, 0, 0, 5, victim.height);
+			hb.sound = (Math.random() < 0.5) ? Assets.punch_hit_1_sound : Assets.punch_hit_2_sound;
 			hb.setAttributes(HitBox.PlayerAllegiance, 0.15, victim.strength, 0.0);
 			
 			// Play the victim's punch animation.
@@ -153,6 +162,10 @@ package {
 			// Break any glass that we hit.
 			var break_direction:Number = (victim.facing === FlxObject.RIGHT) ? victim.right + Level.TileSize / 2.0 : victim.left - Level.TileSize / 2.0;
 			Game.level.breakGlassAt(break_direction, victim.s_center.y);
+			
+			// Play a sound.
+			var sound:Class = (Math.random() < 0.5) ? Assets.punch_miss_1_sound : Assets.punch_miss_2_sound;
+			FlxG.play(sound, 0.4);
 		}
 		
 		// The secondary knockback attack the player uses when they're possessing someone.
@@ -167,6 +180,7 @@ package {
 			
 			// Create the hitbox.
 			var hb:HitBox = new HitBox(victim, 0, 0, 5, victim.height);
+			hb.sound = (Math.random() < 0.66) ? Assets.knockback_1_sound : Assets.knockback_2_sound;
 			hb.setAttributes(HitBox.PlayerAllegiance, 0.15, victim.strength / 5.0, 150.0);
 			
 			// Play the victim's kick animation.
@@ -175,6 +189,9 @@ package {
 			// Break any glass that we hit.
 			var break_direction:Number = (victim.facing === FlxObject.RIGHT) ? victim.right + Level.TileSize / 2.0 : victim.left - Level.TileSize / 2.0;
 			Game.level.breakGlassAt(break_direction, victim.s_center.y);
+			
+			// Play a sound.
+			FlxG.play(Assets.kick_miss_1_sound, 0.4);
 		}
 		
 		// Update.
@@ -286,7 +303,7 @@ package {
 		
 		public function set potential_victim(value:NPC):void {
 			// We don't allow the player to possess robots or shrunken NPCs.
-			if (value === null || (value.type.id !== "robot" && !value.is_shrunk)) {
+			if (value === null || (value.type.id !== "robot")) {
 				$potential_victim = value;
 			}
 		}

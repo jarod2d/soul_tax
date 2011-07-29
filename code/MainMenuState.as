@@ -13,6 +13,9 @@ package {
 		override public function create():void {
 			super.create();
 			
+			// The default volume sucks.
+			FlxG.volume = 0.9;
+			
 			// Set the background color.
 			FlxG.bgColor = 0xFF33353A;
 			
@@ -58,7 +61,7 @@ package {
 				FlxG.music = null;
 			}
 			
-			FlxG.playMusic(Assets.title_screen_music);
+			FlxG.playMusic(Assets.title_screen_music, 0.6);
 		}
 		
 		override public function update():void {

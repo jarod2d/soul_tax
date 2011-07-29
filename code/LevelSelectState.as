@@ -140,8 +140,8 @@ package {
 			ghost.possess();
 			ghost.color = Player.NormalColor;
 			
-			// Initially we select the latest unlocked level.
-			selectLevel(LevelProgress.levels_completed);
+			// Set the initial selection.
+			selectLevel(Game.current_level);
 			
 			// Add everything.
 			add(title);
@@ -163,7 +163,7 @@ package {
 				FlxG.music = null;
 			}
 			
-			FlxG.playMusic(Assets.level_select_music, 0.75);
+			FlxG.playMusic(Assets.level_select_music, 0.3);
 		}
 		
 		// Selects the given level, moving the selection.
@@ -186,6 +186,7 @@ package {
 		public function moveSelection(direction:int):void {
 			var new_index:int = Game.current_level;
 			
+			// Figure out our new level index.
 			if (direction === FlxObject.UP) {
 				new_index -= levels_per_row;
 				
@@ -211,6 +212,11 @@ package {
 				new_index = MathUtil.mod(new_index - 1, LevelProgress.levels_completed + 1);
 			}
 			
+			// Play the selection sound.
+			if (new_index !== Game.current_level) {
+				FlxG.play(Assets.menu_select_sound, 0.75);
+			}
+			
 			selectLevel(new_index);
 		}
 		
@@ -227,6 +233,7 @@ package {
 			// Move on to the play state.
 			if (FlxG.keys.SPACE || FlxG.keys.ENTER || FlxG.keys.J) {
 				FlxG.switchState(new PlayState());
+				FlxG.play(Assets.menu_confirm_sound);
 				return;
 			}
 			

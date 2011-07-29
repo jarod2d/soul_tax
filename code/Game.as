@@ -32,7 +32,7 @@ package {
 			
 			// Load any stored level progress.
 			LevelProgress.load();
-			current_level = 0;
+			current_level = LevelProgress.levels_completed;
 			
 			// Load assets.
 			Assets.load();

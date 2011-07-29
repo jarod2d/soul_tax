@@ -8,36 +8,16 @@
 	{
 		"id":   "window_tutorial",
 		"name": "A Window of Opportunity",
-		"time": 30.0,
+		"time": 40.0,
 		"objectives": {
 			"businessman": 5
 		}
 	},
 	
 	{
-		"id":   "kill_dudes_2",
-		"name": "Kill Dudes 2",
-		"time": 60.0,
-		"objectives": {
-			"any": 20
-		}
-	},
-	
-	{
-		"id":   "arches",
-		"name": "Arches",
-		"time": 60.0,
-		"objectives": {
-			"businessman": 14,
-			"maintenance_guy": 2,
-			"bank_manager": 2
-		}
-	},
-	
-	{
 		"id":   "ceo_intro",
 		"name": "CEO Intro",
-		"time": 20.0,
+		"time": 25.0,
 		"objectives": {
 			"businessman": 6,
 			"bank_manager": 6
@@ -47,16 +27,25 @@
 	{
 		"id":   "supervillain_intro",
 		"name": "Dr. Derp's Nefarious Plan",
-		"time": 32.0,
+		"time": 35.0,
 		"objectives": {
 			"any": 28
 		}
 	},
 	
 	{
+		"id":   "kill_dudes_2",
+		"name": "Generic Level 2",
+		"time": 65.0,
+		"objectives": {
+			"any": 20
+		}
+	},
+	
+	{
 		"id":   "ceo_assassination",
 		"name": "Get That CEO",
-		"time": 45.0,
+		"time": 55.0,
 		"objectives": {
 			"ceo": 1,
 			"businessman": 6
@@ -64,9 +53,28 @@
 	},
 	
 	{
+		"id":   "window_washers",
+		"name": "Window Washers",
+		"time": 60.0,
+		"objectives": {
+			"maintenance_guy": 8,
+			"bank_manager": 1
+		}
+	},
+	
+	{
+		"id":   "cops_and_robbers",
+		"name": "Cop and Robbers",
+		"time": 30.0,
+		"objectives": {
+			"burglar": 10
+		}
+	},
+	
+	{
 		"id":   "basement",
 		"name": "Creepy Boss",
-		"time": 35.0,
+		"time": 40.0,
 		"objectives": {
 			"ceo": 1
 		}
@@ -87,6 +95,17 @@
 	},
 	
 	{
+		"id":   "arches",
+		"name": "Arches",
+		"time": 80.0,
+		"objectives": {
+			"businessman": 14,
+			"maintenance_guy": 2,
+			"bank_manager": 2
+		}
+	},
+	
+	{
 		"id":   "bullseye",
 		"name": "Bullseye",
 		"time": 6.0,
@@ -98,7 +117,7 @@
 	
 	{
 		"id":   "kill_dudes",
-		"name": "Kill Some Dudes",
+		"name": "Generic Level 1",
 		"time": 70.0,
 		"objectives": {
 			"any": 4,
@@ -112,7 +131,7 @@
 	{
 		"id":   "float",
 		"name": "Floating Building",
-		"time": 40.0,
+		"time": 45.0,
 		"objectives": {
 			"maintenance_guy": 12
 		}
@@ -128,18 +147,9 @@
 	},
 	
 	{
-		"id":   "cops_and_robbers",
-		"name": "Cop and Robbers",
-		"time": 30.0,
-		"objectives": {
-			"burglar": 10
-		}
-	},
-	
-	{
 		"id":   "kill_dudes_3",
-		"name": "Kill Dudes 3",
-		"time": 70.0,
+		"name": "Generic Level 3",
+		"time": 65.0,
 		"objectives": {
 			"any": 12,
 			"businessman": 10,
