@@ -35,7 +35,7 @@ package {
 			level_select_text.setFormat("propomin", 16, 0xFFEEEEEE, "left");
 			level_select_text.scrollFactor.x = level_select_text.scrollFactor.y = 0.0;
 			
-			var replay_text:FlxText = new FlxText(25.0, FlxG.height - 30.0, FlxG.width - 50.0, "R: Replay Level");
+			var replay_text:FlxText = new FlxText(25.0, FlxG.height - 30.0, FlxG.width - 50.0, "R: Restart Level");
 			replay_text.setFormat("propomin", 16, 0xFFEEEEEE, "right");
 			replay_text.scrollFactor.x = replay_text.scrollFactor.y = 0.0;
 			

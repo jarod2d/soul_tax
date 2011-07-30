@@ -19,10 +19,10 @@ package {
 			super();
 			
 			// Set up the text.
-			complete_message = new FlxText(0.0, UI.HUDBarHeight + 4.0, FlxG.width, "Level Complete!").setFormat("propomin", 8, 0xFFFAFAFA, "center", 0xFF050505);
+			complete_message = new FlxText(2.0, UI.HUDBarHeight + 4.0, FlxG.width, "Level Complete!").setFormat("propomin", 8, 0xFFFAFAFA, "left", 0xFF050505);
 			complete_message.scrollFactor.x = complete_message.scrollFactor.y = 0.0;
 			
-			continue_message = new FlxText(0.0, UI.HUDBarHeight + 13.0, FlxG.width, "Press Enter to end the level").setFormat("propomin", 8, 0xFFDADADA, "center", 0xFF040404);
+			continue_message = new FlxText(2.0, UI.HUDBarHeight + 13.0, FlxG.width, "Press Enter to end the level").setFormat("propomin", 8, 0xFFDADADA, "left", 0xFF040404);
 			continue_message.scrollFactor.x = continue_message.scrollFactor.y = 0.0;
 			
 			// Add everything.

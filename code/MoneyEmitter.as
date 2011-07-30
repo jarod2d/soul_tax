@@ -51,7 +51,7 @@ package {
 			// Set the angular area so it launches in the right direction.
 			angular_area = (npc.facing === FlxObject.LEFT) ? left_angular_area : right_angular_area;
 			
-			emit(2, 1.35);
+			emit(2, 1.75);
 		}
 		
 	}

@@ -2,40 +2,129 @@
 
 <html>
 	<head>
-		<title>DEATH and TAXES</title>
+		<title>Death and Taxes</title>
 		
 		<style>
+			@font-face {
+				font-family: Propomin;
+				src: url("fonts/propomin_5.ttf");
+			} 
+			
 			* {
 				margin: 0px;
 				padding: 0px;
 			}
 			
+			html {
+				width: 100%;
+				height: 100%;
+			}
+			
 			body {
-				margin: 25px;
-				font: 15px Lucida Grande, Helvetica, Arial, sans-serif;
-				color: #CCCCCF;
-				background: #22222A;
+				width: 100%;
+				height: 100%;
+				font: 14px Propomin, Courier, monospace;
+				color: rgb(42, 45, 47);
+				background: rgb(50, 50, 50);
+				background:      -o-linear-gradient(top, rgb(65, 65, 65) 10%, rgb(45, 45, 45));
+				background:     -ms-linear-gradient(top, rgb(65, 65, 65) 10%, rgb(45, 45, 45));
+				background:    -moz-linear-gradient(top, rgb(65, 65, 65) 10%, rgb(45, 45, 45));
+				background: -webkit-linear-gradient(top, rgb(65, 65, 65) 10%, rgb(45, 45, 45));
+			}
+			
+			a {
+				color: rgb(30, 140, 240);
+				text-decoration: none;
 			}
 			
 			h1 {
-				height: 50px;
+				padding: 14px 0px;
+				font-size: 36px;
 				text-align: center;
 			}
 			
-			#game {
+			#content {
 				width: 800px;
+				height: 100%;
+				margin: 0px auto 0px auto;
+				background: rgb(240, 243, 245);
+				background:      -o-linear-gradient(top, rgb(250, 253, 255) 15%, rgb(200, 205, 210));
+				background:     -ms-linear-gradient(top, rgb(250, 253, 255) 15%, rgb(200, 205, 210));
+				background:    -moz-linear-gradient(top, rgb(250, 253, 255) 15%, rgb(200, 205, 210));
+				background: -webkit-linear-gradient(top, rgb(250, 253, 255) 15%, rgb(200, 205, 210));
+				border-right: 2px solid rgb(0, 0, 0);
+				border-left: 2px solid rgb(0, 0, 0);
+				-webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.55);
+			}
+			
+			#game {
 				height: 640px;
-				margin: 10px auto 0px auto;
-				border: 4px solid #000011;
+				border-top: 2px solid rgb(0, 0, 0);
+				border-bottom: 2px solid rgb(0, 0, 0);
+			}
+			
+			#info {
+				margin: 8px 10px;
+			}
+			
+			#info_link {
+				font-size: 12px;
+				text-align: right;
+				display: block;
+				opacity: 0.65;
+			}
+			
+			#info_content {
+				margin: 8px 0px;
+				padding: 4px 6px;
+				line-height: 16px;
+				background: rgba(0, 0, 0, 0.2);
+				display: none;
+			}
+			
+			#info_content ul {
+				margin: 0px 0px 0px 16px;
 			}
 		</style>
+		
+		<script>
+			// We just set up a simple toggle on the info link to show and hide the info box.
+			window.onload = function() {
+				var info_link  = document.getElementById("info_link");
+				var info       = document.getElementById("info_content");
+				var info_shown = false;
+				
+				info_link.onmousedown = function() {
+					var display_value = (info_shown) ? "none" : "block";
+					info.setAttribute("style", "display: " + display_value + ";");
+					
+					info_shown = !info_shown;
+					
+					return false;
+				};
+			};
+		</script>
 	</head>
 	
 	<body>
-		<h1>Death and Taxes</h1>
-		
-		<div id="game">
-			<embed src="game.swf" width="800px" height="640px" />
+		<div id="content">
+			<h1>Death and Taxes</h1>
+			
+			<div id="game">
+				<embed src="game.swf" width="800px" height="640px" />
+			</div>
+			
+			<div id="info">
+				<a href="#" id="info_link">Info</a>
+				
+				<div id="info_content">
+					<ul>
+						<li>Made in one month for the <a target="_blank" href="http://forums.somethingawful.com/showthread.php?threadid=3422722">Something Awful Game Dev VI</a> event.</li>
+						<li>Developed using the <a target="_blank" href="http://flixel.org/">Flixel</a> framework.</li>
+						<li>Feel free to check out or contact any of the developers: <a target="_blank" href="http://jarodlong.com/">Jarod Long</a>, <a target="_blank" href="http://laurencareccia.com/">Lauren Careccia</a>, <a target="_blank" href="http://bradjsnyder.com/">Brad Snyder</a>.</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>

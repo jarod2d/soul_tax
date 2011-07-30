@@ -15,6 +15,9 @@ package {
 		public static const PlayerAllegiance:int = 0;
 		public static const EnemyAllegiance:int  = 1;
 		
+		// The angle of the knockback force when a hitbox hits an NPC.
+		public static const KnockbackAngle:Number = 14.0 * MathUtil.DEGREE_TO_RADIAN_CONSTANT;
+		
 		// The entity that spawned the hitbox.
 		public var host:Entity;
 		
@@ -44,12 +47,23 @@ package {
 		// during update.
 		public var is_projectile:Boolean;
 		
+		// Whether or not the hitbox will die when it hits a wall.
+		public var dies_on_contact:Boolean;
+		
+		// The sound that plays when the hitbox hits something. You can also specify the maximum number of times that
+		// the sound will play when it hits something. Defaults to 2.
+		public var sound:Class;
+		public var max_sound_count:int;
+		
 		// Any special behavior that needs to happen when the hitbox makes contact, for whatever special effects your
 		// attack needs. The function takes two parameters, the hitbox and the victim.
 		public var callback:Function;
 		
 		// We keep track of who we've hit so that we don't attack the same NPC twice.
 		public var victims:Array;
+		
+		// We keep track of how many times we play our sound so that we can make sure not to play
+		private var sound_played_count:int;
 		
 		// Constructor. Everything should be pretty straightforward, except the x_offset and y_offset. These values
 		// determine where the hitbox appears relative to the host. For example, an x_offset of 2.0 would mean the
@@ -63,6 +77,8 @@ package {
 			this.is_projectile = is_projectile;
 			live_time          = 0.0;
 			victims            = [];
+			dies_on_contact    = false;
+			max_sound_count    = 2;
 			
 			if (!is_projectile) {
 				sprite.makeGraphic(width, height, 0xCCEEAA11);
@@ -97,21 +113,26 @@ package {
 				
 				// Do some knockback.
 				if (knockback > 0.0) {
-					npc.knockback_velocity.x = npc.center.x - host.center.x;
-					npc.knockback_velocity.y = npc.center.y - (host.center.y + 1.0);
+					var angle:Number = (host.x < npc.x) ? KnockbackAngle : (Math.PI - KnockbackAngle);
 					
-					MathUtil.normalize(npc.knockback_velocity);
-					
-					npc.knockback_velocity.x *= knockback;
-					npc.knockback_velocity.y *= knockback;
+					npc.knockback_velocity.x = Math.cos(angle) * knockback;
+					npc.knockback_velocity.y = -Math.sin(angle) * knockback;
 				}
 			}
 			
 			// Make note that we've attacked this victim.
 			victims.push(npc);
 			
+			// TODO: Make everyone within a certain radius panic.
+			
+			// Play a sound.
+			if (sound && sound_played_count < max_sound_count) {
+				FlxG.play(sound, 0.5);
+				sound_played_count++;
+			}
+			
 			// Do the callback.
-			if (callback) {
+			if (callback !== null) {
 				callback(this, npc);
 			}
 		}

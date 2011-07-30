@@ -7,7 +7,7 @@
 {
 	"bank_manager": {
 		"id":            "bank_manager",
-		"name":          "Bank Manager",
+		"name":          "Manager",
 		"color":         "0xFFFFBBBB",
 		"special":       "Yells real loud",
 		"hp":            100.0,
@@ -15,7 +15,7 @@
 		"jump_strength": 3.75,
 		"attack_speed":  0.9,
 		"run_speed":     1.0,
-		"cooldown":      1.0,
+		"cooldown":      0.0,
 		"frame_width":   12,
 		"frame_height":  16,
 		"bounds_width":  4,
@@ -28,7 +28,7 @@
 			{ "name": "possessed_walk", "speed": 10, "looped": true,  "frames": [12, 13, 14, 15] },
 			{ "name": "punch",          "speed": 22, "looped": false, "frames": [4, 5, 6, 7] },
 			{ "name": "kick",           "speed": 44, "looped": false, "frames": [9, 10, 10, 11] },
-			{ "name": "sleep",          "speed": 7,  "looped": true,  "frames": [16, 16, 16, 17] },
+			{ "name": "sleep",          "speed": 1,  "looped": true,  "frames": [16, 16, 16, 16, 17] },
 			{ "name": "panic",          "speed": 10, "looped": true,  "frames": [20, 21, 22, 23] },
 			{ "name": "special",        "speed": 14, "looped": true,  "frames": [25, 25, 25, 25, 24, 24, 25, 25, 24, 25, 25, 24, 24, 24, 24, 25, 24] }
 		]
@@ -44,7 +44,7 @@
 		"jump_strength": 3.75,
 		"attack_speed":  0.5,
 		"run_speed":     1.25,
-		"cooldown":      2.5,
+		"cooldown":      0.5,
 		"frame_width":   12,
 		"frame_height":  16,
 		"bounds_width":  4,
@@ -57,7 +57,7 @@
 			{ "name": "possessed_walk", "speed": 10, "looped": true,  "frames": [12, 13, 14, 15] },
 			{ "name": "punch",          "speed": 22, "looped": false, "frames": [4, 5, 6, 7] },
 			{ "name": "kick",           "speed": 44, "looped": false, "frames": [9, 10, 10, 11] },
-			{ "name": "sleep",          "speed": 7,  "looped": true,  "frames": [16, 16, 16, 17] },
+			{ "name": "sleep",          "speed": 1,  "looped": true,  "frames": [16, 16, 16, 16, 17] },
 			{ "name": "panic",          "speed": 10, "looped": true,  "frames": [20, 21, 22, 23] }
 		]
 	},
@@ -72,7 +72,7 @@
 		"jump_strength": 3.75,
 		"attack_speed":  1.0,
 		"run_speed":     1.0,
-		"cooldown":      1.75,
+		"cooldown":      1.65,
 		"frame_width":   18,
 		"frame_height":  16,
 		"bounds_width":  4,
@@ -85,7 +85,7 @@
 			{ "name": "possessed_walk", "speed": 10, "looped": true,  "frames": [12, 13, 14, 15] },
 			{ "name": "punch",          "speed": 22, "looped": false, "frames": [4, 5, 6, 7] },
 			{ "name": "kick",           "speed": 44, "looped": false, "frames": [9, 10, 10, 11] },
-			{ "name": "sleep",          "speed": 7,  "looped": true,  "frames": [16, 16, 16, 17] },
+			{ "name": "sleep",          "speed": 1,  "looped": true,  "frames": [16, 16, 16, 16, 17] },
 			{ "name": "panic",          "speed": 10, "looped": true,  "frames": [20, 21, 22, 23] },
 			{ "name": "special",        "speed": 22, "looped": false, "frames": [24, 25, 26, 26, 27] }
 		]
@@ -114,7 +114,7 @@
 			{ "name": "possessed_walk", "speed": 10, "looped": true,  "frames": [12, 13, 14, 15] },
 			{ "name": "punch",          "speed": 22, "looped": false, "frames": [4, 5, 6, 7] },
 			{ "name": "kick",           "speed": 44, "looped": false, "frames": [9, 10, 10, 11] },
-			{ "name": "sleep",          "speed": 7,  "looped": true,  "frames": [16, 16, 16, 17] },
+			{ "name": "sleep",          "speed": 1,  "looped": true,  "frames": [16, 16, 16, 16, 17] },
 			{ "name": "panic",          "speed": 10, "looped": true,  "frames": [20, 21, 22, 23] }
 		]
 	},
@@ -129,7 +129,7 @@
 		"jump_strength": 3.75,
 		"attack_speed":  1.0,
 		"run_speed":     1.0,
-		"cooldown":      1.0,
+		"cooldown":      0.25,
 		"frame_width":   12,
 		"frame_height":  16,
 		"bounds_width":  4,
@@ -142,7 +142,7 @@
 			{ "name": "possessed_walk", "speed": 10, "looped": true,  "frames": [12, 13, 14, 15] },
 			{ "name": "punch",          "speed": 22, "looped": false, "frames": [4, 5, 6, 7] },
 			{ "name": "kick",           "speed": 44, "looped": false, "frames": [9, 10, 10, 11] },
-			{ "name": "sleep",          "speed": 7,  "looped": true,  "frames": [16, 16, 16, 17] },
+			{ "name": "sleep",          "speed": 1,  "looped": true,  "frames": [16, 16, 16, 16, 17] },
 			{ "name": "panic",          "speed": 10, "looped": true,  "frames": [20, 21, 22, 23] },
 			{ "name": "special",        "speed": 30, "looped": false, "frames": [24, 25, 26, 25] }
 		]
@@ -158,7 +158,7 @@
 		"jump_strength": 3.75,
 		"attack_speed":  3.0,
 		"run_speed":     0.7,
-		"cooldown":      1.0,
+		"cooldown":      0.0,
 		"frame_width":   17,
 		"frame_height":  16,
 		"bounds_width":  6,
@@ -190,9 +190,9 @@
 		"cooldown":      1.0,
 		"frame_width":   11,
 		"frame_height":  16,
-		"bounds_width":  7,
-		"bounds_height": 13,
-		"offset":        { "x": 2, "y": 3 },
+		"bounds_width":  5,
+		"bounds_height": 10,
+		"offset":        { "x": 3, "y": 6 },
 		"animations": [
 			{ "name": "scan_idle", "speed": 10, "looped": true, "frames": [7, 7, 4, 5, 5, 6] },
 			{ "name": "scan_walk", "speed": 8,  "looped": true, "frames": [0, 1, 2, 3] },
@@ -207,11 +207,11 @@
 		"color":         "0xFF2260CC",
 		"special":       "Has a gun",
 		"hp":            150.0,
-		"strength":      33.5,
+		"strength":      45.0,
 		"jump_strength": 3.75,
 		"attack_speed":  0.8,
 		"run_speed":     1.1,
-		"cooldown":      1.25,
+		"cooldown":      0.75,
 		"frame_width":   12,
 		"frame_height":  16,
 		"bounds_width":  4,
@@ -224,7 +224,7 @@
 			{ "name": "possessed_walk", "speed": 10, "looped": true,  "frames": [12, 13, 14, 15] },
 			{ "name": "punch",          "speed": 22, "looped": false, "frames": [4, 5, 6, 7] },
 			{ "name": "kick",           "speed": 44, "looped": false, "frames": [9, 10, 10, 11] },
-			{ "name": "sleep",          "speed": 7,  "looped": true,  "frames": [16, 16, 16, 17] },
+			{ "name": "sleep",          "speed": 1,  "looped": true,  "frames": [16, 16, 16, 16, 17] },
 			{ "name": "panic",          "speed": 10, "looped": true,  "frames": [20, 21, 22, 23] },
 			{ "name": "special",        "speed": 2,  "looped": false, "frames": [25] }
 		]
@@ -232,15 +232,15 @@
 	
 	"superhero": {
 		"id":            "superhero",
-		"name":          "Cpt. Rush",
-		"color":         "0xFF4411AA",
+		"name":          "Cpt. Blitz",
+		"color":         "0xFF6633AA",
 		"special":       "Superhuman speed",
 		"hp":            500.0,
 		"strength":      65.0,
 		"jump_strength": 3.75,
 		"attack_speed":  0.5,
 		"run_speed":     1.4,
-		"cooldown":      1.0,
+		"cooldown":      0.0,
 		"frame_width":   16,
 		"frame_height":  16,
 		"bounds_width":  8,
@@ -253,7 +253,7 @@
 			{ "name": "possessed_walk", "speed": 10, "looped": true,  "frames": [12, 13, 14, 15] },
 			{ "name": "punch",          "speed": 22, "looped": false, "frames": [4, 5, 6, 7] },
 			{ "name": "kick",           "speed": 44, "looped": false, "frames": [9, 10, 10, 11] },
-			{ "name": "sleep",          "speed": 7,  "looped": true,  "frames": [16, 16, 16, 17] },
+			{ "name": "sleep",          "speed": 1,  "looped": true,  "frames": [16, 16, 16, 16, 17] },
 			{ "name": "panic",          "speed": 10, "looped": true,  "frames": [20, 21, 22, 23] },
 			{ "name": "special",        "speed": 16, "looped": true,  "frames": [24, 25, 26, 27] }
 		]
@@ -269,17 +269,22 @@
 		"jump_strength": 3.75,
 		"attack_speed":  0.85,
 		"run_speed":     1.075,
-		"cooldown":      1.0,
-		"frame_width":   10,
+		"cooldown":      0.75,
+		"frame_width":   16,
 		"frame_height":  16,
 		"bounds_width":  4,
 		"bounds_height": 14,
-		"offset":        { "x": 2, "y": 2 },
+		"offset":        { "x": 6, "y": 2 },
 		"animations": [
-			{ "name": "idle",  "speed": 10, "looped": true,  "frames": [0] },
-			{ "name": "walk",  "speed": 10, "looped": true,  "frames": [0, 1, 2, 3] },
-			{ "name": "punch", "speed": 22, "looped": false, "frames": [4, 5, 6, 7] },
-			{ "name": "kick",  "speed": 44, "looped": false, "frames": [9, 10, 10, 11] }
+			{ "name": "idle",           "speed": 10, "looped": true,  "frames": [0] },
+			{ "name": "walk",           "speed": 10, "looped": true,  "frames": [0, 1, 2, 3] },
+			{ "name": "possessed_idle", "speed": 10, "looped": true,  "frames": [12] },
+			{ "name": "possessed_walk", "speed": 10, "looped": true,  "frames": [12, 13, 14, 15] },
+			{ "name": "punch",          "speed": 22, "looped": false, "frames": [4, 5, 6, 7] },
+			{ "name": "kick",           "speed": 44, "looped": false, "frames": [9, 10, 10, 11] },
+			{ "name": "sleep",          "speed": 1,  "looped": true,  "frames": [16, 16, 16, 16, 17] },
+			{ "name": "panic",          "speed": 10, "looped": true,  "frames": [20, 21, 22, 23] },
+			{ "name": "special",        "speed": 2,  "looped": false, "frames": [25] }
 		]
 	}
 }

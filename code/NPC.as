@@ -20,6 +20,7 @@ package {
 		public static const ChaseState:int     = 3;
 		public static const PossessedState:int = 4;
 		public static const StunnedState:int   = 5;
+		public static const PanicState:int     = 6;
 		
 		// Multipliers for the NPC's speed in various states.
 		public static const WanderSpeedFactor:Number = 0.25;
@@ -55,6 +56,9 @@ package {
 		// Keeps track of the NPC's special attack cooldown.
 		public var special_cooldown:Number;
 		
+		// Whether or not the NPC has been shrunk by the supervillain's shrink ray attack.
+		public var is_shrunk:Boolean;
+		
 		// How much health does the NPC have?
 		public var hp:Number;
 		
@@ -87,8 +91,13 @@ package {
 		// unfortunately has to be stuck on all NPCs for now.
 		public var special_interval:Number;
 		
-		// The target sprite that the NPC is chasing when he's in the chase state.
-		public var chase_target:FlxSprite;
+		// The target sprite that the NPC is chasing when he's in the chase state, or who he's fleeing from when he's in
+		// the flee state.
+		public var target:FlxSprite;
+		
+		// If the NPC is causing a looping sound at the moment, this will be a reference to that sound so that we can
+		// cancel it when we need to.
+		public var active_sound:FlxSound;
 		
 		// Flixel has a rather poorly-designed collision callback system that doesn't provide information about the
 		// objects' changes in velocity. We need that information, so each NPC stores their pre-collision velocity here.
@@ -117,7 +126,6 @@ package {
 			run_speed     = type.run_speed;
 			
 			// Set up movement.
-			// TODO: Grab speed stats from the NPC stat data.
 			max_velocity       = new FlxPoint(90.0 * run_speed, 480.0);
 			drag               = new FlxPoint(450.0 * run_speed, 450.0);
 			acceleration.y     = 615.0;
@@ -176,17 +184,20 @@ package {
 			var damage_impact:Number = (base_impact - ContactDamageThreshold) * 0.95;
 			var glass_impact:Number  = (base_impact - GlassBreakThreshold);
 			
-			
 			// Apply damage.
 			if (damage_impact > 0.0) {
-				npc.hurt(damage_impact);
+				npc.hurt(damage_impact, "falling");
 				
 				// Hurt the other NPC too if the other object is indeed an NPC.
 				// TODO: There's some weird stuff going on when colliding with other NPCs at the moment. I think it has
 				// to do with the value of the velocity change not being quite right in that case.
 				if (obstacle is EntitySprite && (obstacle as EntitySprite).entity is NPC) {
-					((obstacle as EntitySprite).entity as NPC).hurt(damage_impact);
+					((obstacle as EntitySprite).entity as NPC).hurt(damage_impact, "falling");
 				}
+				
+				// Play a sound.
+				var sound:Class = (Math.random() < 0.5) ? Assets.punch_hit_2_sound : Assets.punch_hit_3_sound;
+				FlxG.play(sound, 0.65);
 			}
 			
 			// Break glass.
@@ -198,8 +209,8 @@ package {
 				MathUtil.normalize(impact_direction);
 				
 				// If we collided with glass, we need to break the glass and restore our old velocity so that the NPC
-				// keeps moving through the window.
-				if (Game.level.breakGlassAt(npc.center.x + impact_direction.x * Level.TileSize, npc.center.y + impact_direction.y * Level.TileSize)) {
+				// keeps moving through the window
+				if (Game.level.breakGlassAt(npc.center.x + impact_direction.x * Level.TileSize, npc.center.y + impact_direction.y * Level.TileSize) && npc.state !== PossessedState) {
 					npc.knockback_velocity.x = npc.old_velocity.x;
 					npc.knockback_velocity.y = npc.old_velocity.y;
 				}
@@ -217,7 +228,28 @@ package {
 			
 			if (sprite.isTouching(FlxObject.DOWN)) {
 				velocity.y = jump_strength * power * -60.0;
+				
+				// Only play a sound if this is the player jumping.
+				if (state === PossessedState) {
+					FlxG.play(Assets.jump_sound, 0.4);
+				}
 			}
+		}
+		
+		// Shrinks the NPC so that they can be stomped on.
+		public function shrink():void {
+			// Scale down the sprite.
+			sprite.scale.x = sprite.scale.y = 0.5;
+			offset.y += Math.floor((height - 6.0) / 2.0);
+			offset.x += Math.floor((width - 2.0) / 2.0);
+			width    = 2.0;
+			height   = 6.0;
+			
+			// Add the NPC to the list of shrunken NPCs.
+			Game.level.shrunk_NPCs.add(sprite);
+			
+			// Need to keep track of the fact that we're shrunk.
+			is_shrunk = true;
 		}
 		
 		// Called when the player just pressed the special attack button. It's a giant nasty monolithic function, but
@@ -242,16 +274,23 @@ package {
 			
 			// The businessman does a large knockback attack.
 			else if (type.id === "businessman") {
+				// Spawn the hitbox.
 				var hb:HitBox = new HitBox(this, 0, 0, 6, height);
 				hb.setAttributes(HitBox.PlayerAllegiance, 0.15, strength / 6.0, 300.0);
 				
+				// Play the animation.
 				sprite.play("special", true);
+				
+				// Play a sound.
+				FlxG.play(Assets.kick_miss_2_sound, 0.75);
 			}
 			
 			// The security guard shoots a gun.
 			else if (type.id === "security_guard") {
 				// Spawn the bullet.
 				var bullet:HitBox = new HitBox(this, 0, 3, 3, 2, true);
+				bullet.dies_on_contact = true;
+				bullet.sound = Assets.punch_hit_1_sound;
 				bullet.setAttributes(HitBox.PlayerAllegiance, 3.0, 150.0, 50.0, function(hb:HitBox, npc:NPC):void {
 					hb.sprite.kill();
 				});
@@ -259,19 +298,59 @@ package {
 				bullet.sprite.loadGraphic(Assets.bullet_sprite);
 				bullet.velocity.x = (facing === FlxObject.LEFT) ? -300.0 : 300.0;
 				
-				// For some reason, when facing left, the bullet spawns way out in front of the player. This is a little
-				// hack to fix that.
-				if (facing === FlxObject.LEFT) {
-					bullet.x -= bullet.velocity.x * FlxG.elapsed * 2.75;
-				}
+				// Projectiles don't spawn exactly where they're supposed to, so we have to adjust them a bit.
+				bullet.x -= bullet.velocity.x * FlxG.elapsed * ((facing === FlxObject.LEFT) ? 2.75 : 0.75);
 				
 				// Play the shooting animation.
 				sprite.play("special", true);
+				
+				// Play a sound.
+				FlxG.play(Assets.gun_sound, 0.9);
+			}
+			
+			// The supervillain shoots a shrink ray.
+			else if (type.id === "supervillain") {
+				// Spawn the laser.
+				var laser:HitBox = new HitBox(this, 0, 5, 5, 2, true);
+				laser.setAttributes(HitBox.PlayerAllegiance, 3.0, 0.0, 0.0, function(hb:HitBox, npc:NPC):void {
+					if (npc.type.id !== "robot") {
+						npc.shrink();
+					}
+				});
+				
+				laser.sprite.loadGraphic(Assets.laser_sprite, true, true, 5, 2);
+				laser.sprite.addAnimation("shoot", [0, 1, 2, 3], 15, true);
+				laser.sprite.play("shoot");
+				laser.velocity.x = (facing === FlxObject.LEFT) ? -300.0 : 300.0;
+				laser.facing     = facing;
+				
+				// Same hack as the security guard above.
+				laser.x -= laser.velocity.x * FlxG.elapsed * ((facing === FlxObject.LEFT) ? 2.25 : 1.0);
+				
+				// Play the shooting animation.
+				sprite.play("special", true);
+				
+				// Play a sound.
+				FlxG.play(Assets.shrink_ray_sound, 0.8);
 			}
 			
 			// These NPCs have continuous attacks that just require calling down to the continuous effect.
 			else if (type.id === "bank_manager" || type.id === "ceo" || type.id === "maintenance_guy" || type.id === "old_lady" || type.id === "superhero") {
 				continueSpecialAttack();
+			}
+			
+			// Play sounds.
+			if (type.id === "bank_manager") {
+				FlxG.play(Assets.female_yell_sound, 0.7);
+			}
+			else if (type.id === "ceo") {
+				active_sound = FlxG.play(Assets.ceo_vomit_sound, 0.85, true);
+			}
+			else if (type.id === "old_lady") {
+				FlxG.play(Assets.old_lady_jabber_sound, 0.65);
+			}
+			else if (type.id === "superhero") {
+				FlxG.play(Assets.superhero_special_sound, 0.6);
 			}
 		}
 		
@@ -282,9 +361,37 @@ package {
 				return;
 			}
 			
+			// Declaring these here to avoid stupid hoisting warnings...
+			var distance:FlxPoint;
+			var npc:NPC;
+			var npc_sprite:EntitySprite;
+			var distance_squared:Number;
+			
 			// Manager special.
 			if (type.id === "bank_manager") {
-				// TODO: Implement fleeing stuff.
+				// Scare everyone within a certain radius.
+				distance = new FlxPoint();
+				
+				for each (npc_sprite in Game.level.NPCs.members) {
+					npc = npc_sprite.entity as NPC;
+					
+					// We don't want to scare ourselves or robots.
+					if (npc === this || npc.type.id === "robot") {
+						continue;
+					}
+					
+					// Make sure the NPC is within a certain radius.
+					distance.x = npc.x - x;
+					distance.y = npc.y - y;
+					
+					distance_squared = MathUtil.vectorLengthSquared(distance);
+					
+					if (npc.state !== FleeState && distance_squared < 2500.0) {
+						// Scare the NPC.
+						npc.target = this.sprite;
+						npc.state  = FleeState;
+					}
+				}
 				
 				// We don't want the player to move while this is happening.
 				Game.player.direction.x = Game.player.direction.y = 0.0;
@@ -305,10 +412,14 @@ package {
 			else if (type.id === "maintenance_guy") {
 				// We don't want the player to move while this is happening.
 				Game.player.direction.x = Game.player.direction.y = 0.0;
+				acceleration.x = velocity.x = 0.0;
 				
 				// Destroy tiles underneath the NPC.
 				if (special_interval <= 0.0) {
-					Game.level.wall_tiles.setTile(center.x / Level.TileSize, (bottom + Level.TileSize / 2.0) / Level.TileSize, 0);
+					var destroy_y:Number = (bottom + Level.TileSize / 2.0) / Level.TileSize;
+					Game.level.wall_tiles.setTile(left / Level.TileSize, destroy_y, 0);
+					Game.level.wall_tiles.setTile((right - 1.0) / Level.TileSize, destroy_y, 0);
+					
 					special_interval = MaintenanceGuySpecialInterval;
 				}
 				
@@ -321,7 +432,29 @@ package {
 			
 			// Old lady special.
 			else if (type.id === "old_lady") {
-				// TODO: Implement sleep stuff.
+				// Make everyone within a certain radius fall asleep.
+				distance = new FlxPoint();
+				
+				for each (npc_sprite in Game.level.NPCs.members) {
+					npc = npc_sprite.entity as NPC;
+					
+					// We don't want to make ourselves fall asleep.
+					if (npc === this) {
+						continue;
+					}
+					
+					// Make sure the NPC is within a certain radius.
+					distance.x = npc.x - x;
+					distance.y = npc.y - y;
+					
+					distance_squared = MathUtil.vectorLengthSquared(distance);
+					
+					if (npc.state !== FleeState && distance_squared < 2750.0) {
+						// Make them fall asleep.
+						npc.target = this.sprite;
+						npc.state  = StunnedState;
+					}
+				}
 				
 				// We don't want the player to move while this is happening.
 				Game.player.direction.x = Game.player.direction.y = 0.0;
@@ -367,51 +500,91 @@ package {
 			}
 			
 			// Superhero special.
-			if (type.id === "superhero") {
+			else if (type.id === "superhero") {
 				// Reset the charge velocity and max velocity with some yucky repeated values.
 				velocity.x     = 0.0;
 				max_velocity.x = 90.0 * run_speed;
 			}
 			
+			// Certain NPCs need to stop their animation.
+			if (type.id === "bank_manager" || type.id === "maintenance_guy" || type.id === "old_lady") {
+				sprite.finished = true;
+			}
+			
 			// We're no longer using the special attack, and we need to reset our interval.
 			using_special    = false;
 			special_interval = 0.0;
+			
+			// Stop any looping sounds.
+			if (active_sound) {
+				active_sound.stop();
+				active_sound = null;
+			}
 		}
 		
 		// Hurts the NPC, killing him if necessary.
-		public function hurt(damage:Number):void {
+		public function hurt(damage:Number, source:String = null):void {
 			hp -= damage;
 			
 			// Set the hurt flash timer.
-			flash_timer = HurtFlashTime;
+			if (damage > 0.0) {
+				flash_timer = HurtFlashTime;
+			}
 			
 			// Kill the NPC if necessary, or make them flee if they're not dead.
 			if (hp <= 0.0) {
-				kill();
+				kill(source);
 			}
-			else if (Game.player.victim !== this && state !== FleeState) {
-				state = FleeState;
+			
+			// If the NPC got hurt from falling, shake the screen a bit.
+			if (source === "falling") {
+				// How severe we want the screen shake to be, based on the damage done.
+				var severity:Number = MathUtil.clamp(damage / 100.0, 0.0, 1.0);
+				
+				FlxG.shake(0.00065 + 0.0015 * severity, 0.15 + 0.075 * severity);
 			}
 		}
 		
 		// Kills the NPC. This is different from Flixel's version of killing -- this is what happens when the NPC
 		// actually runs out of health and dies, including playing sounds, animations, etc.
-		public function kill():void {
+		public function kill(source:String = null):void {
 			// If the player is possessing us, we need to release him now.
 			if (Game.player.victim === this) {
 				Game.player.stopPossessing();
 			}
 			
-			// Update the level progress.
+			// Update the level progress and explode.
 			if (type.id !== "robot") {
 				Game.level.queueDeadNPC(this);
+				Game.level.gib_emitter.spawnGibsForNPC(this);
 			}
-			
-			// Explode!!!
-			Game.level.gib_emitter.spawnGibsForNPC(this);
+			else {
+				Game.level.robot_gib_emitter.spawnGibsForNPC(this);
+				Game.level.smoke_emitter.spawnSmokeForNPC(this);
+			}
 			
 			// Kill the sprite.
 			sprite.kill();
+			
+			// Shake the screen if the NPC died from going out of bounds.
+			if (source === "out_of_bounds") {
+				FlxG.shake(0.001, 0.15);
+			}
+			
+			// Play a sound.
+			var sound:Class;
+			
+			if (type.id === "robot") {
+				sound = (Math.random() < 0.45) ? Assets.npc_death_fancy_1_sound : Assets.npc_death_fancy_2_sound;
+			}
+			else {
+				sound = (Math.random() < 0.45) ? Assets.npc_death_1_sound : Assets.npc_death_2_sound;
+			}
+			
+			FlxG.play(sound, 0.5);
+			
+			// TODO: Make everyone within a certain radius panic, just like in the HitBox class. Make a reusable Level
+			// function I guess.
 		}
 		
 		// Callback that occurs when the NPC's behavior changes to idle.
@@ -448,27 +621,36 @@ package {
 		
 		// Callback that occurs when the NPC's behavior changes to flee.
 		protected function startFlee():void {
-			// TODO: Implement me!
+			// Set the max duration.
+			state_max_duration = 1.0 + Math.random() * 0.75;
+			
+			// Set the animation.
+			sprite.play("panic");
 		}
 		
 		// Callback that occurs when the NPC enters the possessed state.
 		protected function startBePossessed():void {
-			// TODO: Implement me!
+			// Cancel out any old animations.
+			sprite.finished = true;
 		}
 		
 		// Callback that occurs when the NPC enters the stunned state.
 		protected function startBeStunned():void {
 			// Set the max duration.
-			state_max_duration = 0.25;
+			state_max_duration = 9.5 + Math.random() * 2.5;
 			
 			// Stop the NPC from moving.
-			// TODO: It would be nice if we could retain movement if we're currently in the air, so that when the player
-			// stops possessing the NPC mid-jump, they continue their trajectory.
-			acceleration.x = 0.0;
+			velocity.x = acceleration.x = 0.0;
 			
 			// Set the animation.
-			// TODO: Play some sort of stunned animation.
-			sprite.play(animation_prefix + "idle");
+			sprite.play("sleep");
+			
+			// TODO: Play the Z's animation.
+		}
+		
+		// Callback that occurs when the NPC's behavior changes to panic.
+		protected function startPanic():void {
+			// TODO: Implement me!
 		}
 		
 		// Runs the NPC's idle behavior.
@@ -505,7 +687,18 @@ package {
 		
 		// Runs the NPC's flee behavior.
 		protected function flee():void {
-			// TODO: Implement me!
+			// If the target's gone, we're done fleeing. Also switch back to idle behavior after a certain duration.
+			if (!target || !target.alive || state_duration > state_max_duration) {
+				target = null;
+				state = IdleState;
+				return;
+			}
+			
+			// Flee!
+			velocity.x = (x < target.x) ? -65.0 * run_speed : 65.0 * run_speed;
+			
+			// Set the NPC's facing based on the direction.
+			facing = (velocity.x < 0.0) ? FlxObject.LEFT : FlxObject.RIGHT;
 		}
 		
 		// Runs the NPC's chase behavior.
@@ -514,19 +707,19 @@ package {
 			// the player's victim (for robot chasing) or a money particle.
 			var target_npc:NPC = null;
 			
-			if ((chase_target is EntitySprite && (chase_target as EntitySprite).entity is NPC)) {
-				target_npc = (chase_target as EntitySprite).entity as NPC;
+			if ((target is EntitySprite && (target as EntitySprite).entity is NPC)) {
+				target_npc = (target as EntitySprite).entity as NPC;
 			}
 			
 			// If the target's gone, we're done chasing.
-			if (!chase_target || !chase_target.alive || (target_npc && Game.player.victim !== target_npc)) {
-				chase_target = null;
+			if (!target || !target.alive || (target_npc && Game.player.victim !== target_npc)) {
+				target = null;
 				state = IdleState;
 				return;
 			}
 			
 			// The horizontal distance between the NPC and the target.
-			var distance:Number = chase_target.x - x;
+			var distance:Number = target.x - x;
 			
 			// If we've found our target, we jump up and down on it unless it's an NPC. Otherwise we chase it.
 			if (Math.abs(distance) < 3.0) {
@@ -556,6 +749,16 @@ package {
 			}
 		}
 		
+		// Runs the NPC's panic behavior.
+		protected function panic():void {
+			// Switch back to idle behavior after a certain duration.
+			if (state_duration > state_max_duration) {
+				state = IdleState;
+			}
+			
+			// TODO: Run back and forth.
+		}
+		
 		// Runs all of the NPC's AI. This just calls out to the AI method that corresponds to the NPC's current state.
 		protected function behave():void {
 			switch (state) {
@@ -565,10 +768,9 @@ package {
 				case ChaseState:     chase();       break;
 				case PossessedState: bePossessed(); break;
 				case StunnedState:   beStunned();   break;
+				case PanicState:     panic();       break;
 			}
 		}
-		
-		
 		
 		// Returns how far the NPC can walk in the given direction (use -1 for left, 1 for right) without falling in a
 		// pit or being blocked by an obstacle. You can pass in a maximum distance you'd like returned, so that the
@@ -671,7 +873,7 @@ package {
 				
 				// Make the NPC run towards the particle.
 				if (nearby_particle) {
-					chase_target = nearby_particle;
+					target = nearby_particle;
 					state        = ChaseState;
 				}
 			}
@@ -693,8 +895,10 @@ package {
 			
 			// If they're within a certain distance, run towards them.
 			if (distance_squared < 2500.0) {
-				chase_target = victim.sprite;
-				state        = ChaseState;
+				target = victim.sprite;
+				state  = ChaseState;
+				
+				FlxG.play(Assets.robot_aggro_sound, 0.5);
 			}
 		}
 		
@@ -709,7 +913,7 @@ package {
 				
 				// For some reason Flixel makes us explicitly tell sprites to stop following their path when they're
 				// done.
-				if (state !== ChaseState && sprite.pathSpeed == 0.0) {
+				if (state !== ChaseState && state !== FleeState && state !== StunnedState && sprite.pathSpeed == 0.0) {
 					sprite.stopFollowingPath(true);
 					velocity.x = 0.0;
 					
@@ -760,7 +964,7 @@ package {
 			
 			// Kill the NPC if they've fallen off the map.
 			if (y > Game.level.height) {
-				kill();
+				kill("out_of_bounds");
 			}
 		}
 		
@@ -790,6 +994,7 @@ package {
 				case ChaseState:     startChase();       break;
 				case PossessedState: startBePossessed(); break;
 				case StunnedState:   startBeStunned();   break;
+				case PanicState:     startPanic();       break;
 			}
 		}
 		
@@ -815,8 +1020,14 @@ package {
 		
 		// Getter for the current color the NPC should be based on their state and the flash timer.
 		public function get current_color():uint {
-			var base_color:uint       = (state === PossessedState) ? PossessionColor : 0xFFFFFF;
+			var base_color:uint;
 			var flash_progress:Number = 1.0 - flash_timer / HurtFlashTime;
+			
+			switch (state) {
+				case PossessedState: base_color = PossessionColor; break;
+				case StunnedState:   base_color = 0x88AAEE;        break;
+				default:             base_color = 0xFFFFFF;
+			}
 			
 			return (flash_timer > 0.0) ? ColorUtil.blend(HurtColor, base_color, flash_progress) : base_color;
 		}

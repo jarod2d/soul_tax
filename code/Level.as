@@ -7,6 +7,7 @@
 package {
 	
 	import org.flixel.*;
+	import flash.utils.*;
 	import com.adobe.serialization.json.*;
 	
 	public class Level {
@@ -46,11 +47,13 @@ package {
 		public var borders:FlxGroup;
 		public var bottomless_borders:FlxGroup;
 		
-		// The list of props in the level.
-		public var props:FlxGroup;
+		// The list of props in the level. Props can be either in the background or the foreground.
+		public var background_props:FlxGroup;
+		public var foreground_props:FlxGroup;
 		
-		// The list of NPCs in the level.
+		// The list of NPCs in the level, as well as a subset of shrunken NPCs.
 		public var NPCs:FlxGroup;
+		public var shrunk_NPCs:FlxGroup;
 		
 		// The list of all robot NPCs in the level -- a subset of the NPCs group. They have some special behavior that
 		// requires them to be in their own list.
@@ -59,8 +62,12 @@ package {
 		// The list of hitboxes in the level.
 		public var hitboxes:FlxGroup;
 		
-		// Our gib spawning effect.
+		// Our gib spawning effect. Robots have their own because they need different-colored gibs.
 		public var gib_emitter:GibEmitter;
+		public var robot_gib_emitter:GibEmitter;
+		
+		// A smoke emitter for robot deaths.
+		public var smoke_emitter:SmokeEmitter;
 		
 		// An emitter for the CEO's special attack.
 		public var money_emitter:MoneyEmitter;
@@ -78,6 +85,10 @@ package {
 		// The amount of time remaining in the level.
 		public var time_remaining:Number;
 		
+		// The time it took the player to complete the level. The value is zero until the player actually completes the
+		// level.
+		public var completion_time:Number;
+		
 		// The level's dialogue. The object potentially has two keys -- "start" and "end", which contain the dialogue
 		// arrays for the start and the end of the level, respectively.
 		public var dialogue:Object;
@@ -93,18 +104,22 @@ package {
 			wall_tiles         = new FlxTilemap();
 			borders            = new FlxGroup();
 			bottomless_borders = new FlxGroup();
-			props              = new FlxGroup();
+			background_props   = new FlxGroup();
+			foreground_props   = new FlxGroup();
 			NPCs               = new FlxGroup();
+			shrunk_NPCs        = new FlxGroup();
 			robots             = new FlxGroup();
 			hitboxes           = new FlxGroup();
 			gib_emitter        = new GibEmitter();
+			robot_gib_emitter  = new GibEmitter(0xFF222222, 40);
+			smoke_emitter      = new SmokeEmitter();
 			money_emitter      = new MoneyEmitter();
 			glass_emitter      = new GlassEmitter();
 			dying_npcs         = [];
 			
 			// Create our tilemaps.
-			bg_tiles.loadMap(new Assets[level_data.id + "_bg_tiles"], Assets.tiles, TileSize, TileSize, NaN, 1, 1, 2);
-			wall_tiles.loadMap(new Assets[level_data.id + "_wall_tiles"], Assets.tiles, TileSize, TileSize, NaN, 1, 1, 2);
+			bg_tiles.loadMap(new Assets[level_data.id + "_bg_tiles"], Assets.tiles, TileSize, TileSize, NaN, 1, 1, 3);
+			wall_tiles.loadMap(new Assets[level_data.id + "_wall_tiles"], Assets.tiles, TileSize, TileSize, NaN, 1, 1, 3);
 			
 			// Grab the dialogue.
 			dialogue = JSON.decode(new Assets[level_data.id + "_dialogue"]);
@@ -117,26 +132,34 @@ package {
 				progress[npc_type] = 0;
 			}
 			
-			time_remaining = level_data.time;
+			time_remaining  = level_data.time;
+			completion_time = 0.0;
 			
 			// Set up the props and NPCs.
 			var prop_data:Object = JSON.decode(new Assets[level_data.id + "_props"]);
+			var data:Object;
 			var i:Number;
 			
 			// Add props.
 			for (i = 0; i < prop_data[0].length; i++) {
-				// TODO: Add props.
+				data = prop_data[0][i];
+				background_props.add(new FlxSprite(data.x, data.y, Assets[data.id]));
+			}
+			
+			for (i = 0; i < prop_data[2].length; i++) {
+				data = prop_data[2][i];
+				foreground_props.add(new FlxSprite(data.x, data.y, Assets[data.id]));
 			}
 			
 			// Add NPCs and position the player.
 			for (i = 0; i < prop_data[1].length; i++) {
-				var npc_data:Object = prop_data[1][i];
+				data = prop_data[1][i];
 				
-				if (npc_data.id === "player") {
-					Game.player.warp(npc_data.x, npc_data.y);
+				if (data.id === "player") {
+					Game.player.warp(data.x, data.y);
 				}
 				else {
-					var npc:NPC = new NPC(npc_data.id, npc_data.x, npc_data.y);
+					var npc:NPC = new NPC(data.id, data.x, data.y);
 					NPCs.add(npc.sprite);
 					
 					// Add robots to their own group.
@@ -175,13 +198,16 @@ package {
 			
 			// Group all of the contents of the level.
 			contents.add(bg_tiles);
-			contents.add(props);
+			contents.add(background_props);
 			contents.add(wall_tiles);
 			contents.add(glass_emitter.particles);
 			contents.add(gib_emitter.particles);
+			contents.add(robot_gib_emitter.particles);
+			contents.add(smoke_emitter.particles);
 			contents.add(money_emitter.particles);
 			contents.add(NPCs);
 			contents.add(hitboxes);
+			contents.add(foreground_props);
 			contents.add(Game.player.trails);
 			contents.add(Game.player.sprite);
 		}
@@ -217,7 +243,13 @@ package {
 		// If there's a door tile at the given coordinates (pixels, not tiles), this will open that door. Returns
 		// whether we opened a door or not.
 		public function openDoorAt(x:int, y:int):Boolean {
-			return destroyWall(3, x, y);
+			if (destroyWall(4, x, y)) {
+				FlxG.play(Assets.door_open_sound, 0.9);
+				
+				return true;
+			}
+			
+			return false;
 		}
 		
 		// If there's a glass tile at the given coordinates (pixels, not tiles), this will break the glass.
@@ -226,7 +258,13 @@ package {
 			glass_emitter.spawnGlassAt(x, y);
 			
 			// Glass can be left- or right-facing, so there are two different tiles we need to check.
-			return (destroyWall(4, x, y) || destroyWall(6, x, y));
+			if (destroyWall(5, x, y) || destroyWall(7, x, y)) {
+				FlxG.play(Assets.glass_break_sound, 0.65);
+				
+				return true;
+			}
+			
+			return false;
 		}
 		
 		// A little function that swaps the visual position of the player and the NPCs. That is, if the player is in
@@ -258,6 +296,11 @@ package {
 			
 			// Tell the UI to spawn a ghost.
 			Game.ui.kill_counter.spawnGhost(dead_npc);
+			
+			// Play a little flying-away sound after a few moments.
+			setTimeout(function():void {
+				FlxG.play(Assets.ghost_going_up_sound, 0.175);
+			}, 400.0 + 350.0 * Math.random());
 		}
 		
 		// Updates the progress of the player in the level by counting the given NPC as a kill. You probably shouldn't
@@ -270,12 +313,28 @@ package {
 				dying_npcs.splice(index, 1);
 			}
 			
+			// Play the appropriate sound.
+			var sound:Class;
+			
+			if (dead_npc.objective_type === "bonus") {
+				sound = (Math.random() < 0.666) ? Assets.bonus_kill_1_sound : Assets.bonus_kill_2_sound;
+			}
+			else {
+				sound = Assets.meter_fill_sound;
+			}
+			
+			FlxG.play(sound, 0.375);
+			
 			// Increment the appropriate progress counter.
 			progress[dead_npc.objective_type]++;
 			
-			// If the level is complete, show the level complete message.
-			if (objectives_complete && time_remaining > 0.0) {
-				Game.ui.level_complete_message.setAll("alpha", 1.0);
+			// If the level is complete, show the level complete message and make note of the time.
+			if (objectives_complete && completion_time === 0.0) {
+				if (time_remaining > 0.0) {
+					Game.ui.level_complete_message.setAll("alpha", 1.0);
+				}
+				
+				completion_time = Level.levels[Game.current_level].time - Math.max(0.0, time_remaining);
 			}
 		}
 		

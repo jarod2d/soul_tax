@@ -30,8 +30,9 @@ package {
 			FlxG.debug     = true;
 			FlxG.framerate = FlxG.flashFramerate = 45;
 			
-			// By default we start on the first level.
-			current_level = 0;
+			// Load any stored level progress.
+			LevelProgress.load();
+			current_level = LevelProgress.levels_completed;
 			
 			// Load assets.
 			Assets.load();

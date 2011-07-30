@@ -17,6 +17,10 @@ package {
 		public var won_contents:FlxGroup;
 		public var lost_contents:FlxGroup;
 		
+		// We keep a reference to the player's score texts so we can update them later.
+		public var time_text:FlxText;
+		public var bonus_text:FlxText;
+		
 		// The timer for fading in the screen.
 		public var fade_timer:Number;
 		
@@ -53,6 +57,23 @@ package {
 			replay_text.setFormat("propomin", 16, 0xFFEEEEEE, "right");
 			replay_text.scrollFactor.x = replay_text.scrollFactor.y = 0.0;
 			
+			// Set up the score display.
+			var time_icon:FlxSprite = new FlxSprite(111.0, FlxG.height / 2.0, Assets.clock_icon);
+			time_icon.scale.x = time_icon.scale.y = 3.0;
+			time_icon.scrollFactor.x = time_icon.scrollFactor.y = 0.0;
+			
+			time_text = new FlxText(124.0, time_icon.y - 5.0, FlxG.width - 280.0, "");
+			time_text.setFormat("propomin", 16, 0xFFDDDDDD);
+			time_text.scrollFactor.x = time_text.scrollFactor.y = 0.0;
+			
+			bonus_text = new FlxText(time_text.x, time_text.y, time_text.width, "");
+			bonus_text.setFormat("propomin", 16, 0xFFDD2222, "right");
+			bonus_text.scrollFactor.x = bonus_text.scrollFactor.y = 0.0;
+			
+			var bonus_label:FlxText = new FlxText(bonus_text.x + bonus_text.width + 2.0, bonus_text.y, FlxG.width, "bonus");
+			bonus_label.setFormat("propomin", 16, 0xFFDDDDDD, "left");
+			bonus_label.scrollFactor.x = bonus_label.scrollFactor.y = 0.0;
+			
 			// Set up the won contents.
 			won_contents = new FlxGroup();
 			won_contents.add(bg);
@@ -60,6 +81,10 @@ package {
 			won_contents.add(continue_text);
 			won_contents.add(level_select_text);
 			won_contents.add(replay_text);
+			won_contents.add(time_icon);
+			won_contents.add(time_text);
+			won_contents.add(bonus_text);
+			won_contents.add(bonus_label);
 			
 			// Set up the lost contents.
 			lost_contents = new FlxGroup();
@@ -81,6 +106,11 @@ package {
 			remove(won_contents);
 			remove(lost_contents);
 			add(current_contents);
+			
+			if (Game.level.objectives_complete) {
+				time_text.text  = MathUtil.formatNumber(Game.level.completion_time, 1);
+				bonus_text.text = Game.level.progress.bonus;
+			}
 			
 			current_contents.setAll("alpha", 0.0);
 		}

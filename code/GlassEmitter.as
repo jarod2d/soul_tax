@@ -37,7 +37,7 @@ package {
 			var window_type:int = wall_tiles.getTile(x, y);
 			
 			// Set our bounds to match the window's.
-			if (window_type === 4 || window_type === 6) {
+			if (window_type === 5 || window_type === 7) {
 				// Move to the top of the window.
 				while (wall_tiles.getTile(x, y - 1) === window_type) {
 					y--;
@@ -47,7 +47,7 @@ package {
 				setPosition(x * Level.TileSize, y * Level.TileSize);
 				
 				// Modify the horizontal position based on the type.
-				if (window_type === 4) {
+				if (window_type === 5) {
 					this.x += Level.TileSize;
 				}
 				
