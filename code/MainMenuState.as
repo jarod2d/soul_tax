@@ -67,7 +67,7 @@ package {
 		override public function update():void {
 			// Move on to the Level Select state.
 			if (FlxG.keys.SPACE || FlxG.keys.J || FlxG.keys.ENTER) {
-				FlxG.switchState(new CreditsState());
+				FlxG.switchState(new LevelSelectState());
 			}
 			
 			super.update();
