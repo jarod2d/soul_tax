@@ -19,9 +19,29 @@
 		"name": "Burglar Intro",
 		"time": 50.0,
 		"objectives": {
-			"businessman": 3,
+			"businessman": 5,
 			"security_guard": 3,
 			"bank_manager": 1
+		}
+	},
+	
+	{
+		"id":   "robot_intro",
+		"name": "Robot Intro",
+		"time": 40.0,
+		"objectives": {
+			"security_guard": 4,
+			"bank_manager": 1
+		}
+	},
+	
+	{
+		"id":   "old_lady_intro",
+		"name": "Old Lady Intro",
+		"time": 55.0,
+		"objectives": {
+			"businessman": 2,
+			"bank_manager": 3
 		}
 	},
 	

@@ -184,32 +184,34 @@ package {
 		// Moves the selection in the given direction (FlxObject.LEFT, etc). This is a pretty nasty function, and I'm
 		// sure there's an easier way to do this, but I'm hella tired right now.
 		public function moveSelection(direction:int):void {
-			var new_index:int = Game.current_level;
+			var new_index:int        = Game.current_level;
+			var level_count:int      = Level.levels.length;
+			var levels_completed:int = LevelProgress.levels_completed;
 			
 			// Figure out our new level index.
 			if (direction === FlxObject.UP) {
 				new_index -= levels_per_row;
 				
 				if (new_index < 0) {
-					new_index = LevelProgress.levels_completed + MathUtil.mod(new_index, Math.max(1, LevelProgress.levels_completed));
+					new_index = levels_completed + MathUtil.mod(new_index, Math.max(1, levels_per_row)) - 1;
 					
-					while (new_index > LevelProgress.levels_completed) {
+					while (new_index > levels_completed) {
 						new_index -= levels_per_row;
-					} 
+					}
 				}
 			}
 			else if (direction === FlxObject.RIGHT) {
-				new_index = MathUtil.mod(new_index + 1, Math.min(LevelProgress.levels_completed + 1, Level.levels.length));
+				new_index = MathUtil.mod(new_index + 1, Math.min(levels_completed + 1, level_count));
 			}
 			else if (direction === FlxObject.DOWN) {
 				new_index += levels_per_row;
 				
-				if (new_index > LevelProgress.levels_completed) {
+				if (new_index > levels_completed) {
 					new_index %= levels_per_row;
 				}
 			}
 			else if (direction === FlxObject.LEFT) {
-				new_index = MathUtil.mod(new_index - 1, Math.min(LevelProgress.levels_completed + 1, Level.levels.length));
+				new_index = MathUtil.mod(new_index - 1, Math.min(levels_completed + 1, level_count));
 			}
 			
 			// Play the selection sound.

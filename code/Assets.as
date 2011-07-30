@@ -211,6 +211,16 @@ package {
 		[Embed(source="../levels/burglar_intro.props.json", mimeType="application/octet-stream")] public static var burglar_intro_props:Class;
 		[Embed(source="../levels/burglar_intro.dialogue.json", mimeType="application/octet-stream")] public static var burglar_intro_dialogue:Class;
 		
+		[Embed(source="../levels/robot_intro.0.csv", mimeType="application/octet-stream")] public static var robot_intro_bg_tiles:Class;
+		[Embed(source="../levels/robot_intro.1.csv", mimeType="application/octet-stream")] public static var robot_intro_wall_tiles:Class;
+		[Embed(source="../levels/robot_intro.props.json", mimeType="application/octet-stream")] public static var robot_intro_props:Class;
+		[Embed(source="../levels/robot_intro.dialogue.json", mimeType="application/octet-stream")] public static var robot_intro_dialogue:Class;
+		
+		[Embed(source="../levels/old_lady_intro.0.csv", mimeType="application/octet-stream")] public static var old_lady_intro_bg_tiles:Class;
+		[Embed(source="../levels/old_lady_intro.1.csv", mimeType="application/octet-stream")] public static var old_lady_intro_wall_tiles:Class;
+		[Embed(source="../levels/old_lady_intro.props.json", mimeType="application/octet-stream")] public static var old_lady_intro_props:Class;
+		[Embed(source="../levels/old_lady_intro.dialogue.json", mimeType="application/octet-stream")] public static var old_lady_intro_dialogue:Class;
+		
 		// Processes some of the loaded data. Should be called once at the beginning of the game.
 		public static function load():void {
 			// Load the level data.
