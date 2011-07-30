@@ -113,10 +113,19 @@ package {
 				
 				// Do some knockback.
 				if (knockback > 0.0) {
-					var angle:Number = (host.x < npc.x) ? KnockbackAngle : (Math.PI - KnockbackAngle);
+					var angle:Number;
+					
+					if (host.bottom > npc.bottom) {
+						angle = (host.x < npc.x) ? (KnockbackAngle / 1.5) : (Math.PI - KnockbackAngle / 1.5);
+					}
+					else {
+						angle = (host.x < npc.x) ? KnockbackAngle : (Math.PI - KnockbackAngle);
+					}
 					
 					npc.knockback_velocity.x = Math.cos(angle) * knockback;
 					npc.knockback_velocity.y = -Math.sin(angle) * knockback;
+					
+					FlxG.log(npc.knockback_velocity.x + ", " + npc.knockback_velocity.y);
 				}
 			}
 			
