@@ -7,7 +7,7 @@
 {
 	"bank_manager": {
 		"id":            "bank_manager",
-		"name":          "Bank Manager",
+		"name":          "Manager",
 		"color":         "0xFFFFBBBB",
 		"special":       "Yells real loud",
 		"hp":            100.0,
@@ -44,7 +44,7 @@
 		"jump_strength": 3.75,
 		"attack_speed":  0.5,
 		"run_speed":     1.25,
-		"cooldown":      2.75,
+		"cooldown":      0.5,
 		"frame_width":   12,
 		"frame_height":  16,
 		"bounds_width":  4,

@@ -201,6 +201,16 @@ package {
 		[Embed(source="../levels/window_washers.props.json", mimeType="application/octet-stream")] public static var window_washers_props:Class;
 		[Embed(source="../levels/window_washers.dialogue.json", mimeType="application/octet-stream")] public static var window_washers_dialogue:Class;
 		
+		[Embed(source="../levels/shrink.0.csv", mimeType="application/octet-stream")] public static var shrink_bg_tiles:Class;
+		[Embed(source="../levels/shrink.1.csv", mimeType="application/octet-stream")] public static var shrink_wall_tiles:Class;
+		[Embed(source="../levels/shrink.props.json", mimeType="application/octet-stream")] public static var shrink_props:Class;
+		[Embed(source="../levels/shrink.dialogue.json", mimeType="application/octet-stream")] public static var shrink_dialogue:Class;
+		
+		[Embed(source="../levels/burglar_intro.0.csv", mimeType="application/octet-stream")] public static var burglar_intro_bg_tiles:Class;
+		[Embed(source="../levels/burglar_intro.1.csv", mimeType="application/octet-stream")] public static var burglar_intro_wall_tiles:Class;
+		[Embed(source="../levels/burglar_intro.props.json", mimeType="application/octet-stream")] public static var burglar_intro_props:Class;
+		[Embed(source="../levels/burglar_intro.dialogue.json", mimeType="application/octet-stream")] public static var burglar_intro_dialogue:Class;
+		
 		// Processes some of the loaded data. Should be called once at the beginning of the game.
 		public static function load():void {
 			// Load the level data.

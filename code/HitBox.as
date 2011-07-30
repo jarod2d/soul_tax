@@ -15,6 +15,9 @@ package {
 		public static const PlayerAllegiance:int = 0;
 		public static const EnemyAllegiance:int  = 1;
 		
+		// The angle of the knockback force when a hitbox hits an NPC.
+		public static const KnockbackAngle:Number = 14.0 * MathUtil.DEGREE_TO_RADIAN_CONSTANT;
+		
 		// The entity that spawned the hitbox.
 		public var host:Entity;
 		
@@ -110,13 +113,10 @@ package {
 				
 				// Do some knockback.
 				if (knockback > 0.0) {
-					npc.knockback_velocity.x = npc.center.x - host.center.x;
-					npc.knockback_velocity.y = npc.center.y - (host.center.y + 1.0);
+					var angle:Number = (host.x < npc.x) ? KnockbackAngle : (Math.PI - KnockbackAngle);
 					
-					MathUtil.normalize(npc.knockback_velocity);
-					
-					npc.knockback_velocity.x *= knockback;
-					npc.knockback_velocity.y *= knockback;
+					npc.knockback_velocity.x = Math.cos(angle) * knockback;
+					npc.knockback_velocity.y = -Math.sin(angle) * knockback;
 				}
 			}
 			

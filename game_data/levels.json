@@ -15,6 +15,17 @@
 	},
 	
 	{
+		"id":   "burglar_intro",
+		"name": "Burglar Intro",
+		"time": 50.0,
+		"objectives": {
+			"businessman": 3,
+			"security_guard": 3,
+			"bank_manager": 1
+		}
+	},
+	
+	{
 		"id":   "ceo_intro",
 		"name": "CEO Intro",
 		"time": 25.0,
@@ -58,7 +69,7 @@
 		"time": 60.0,
 		"objectives": {
 			"maintenance_guy": 8,
-			"bank_manager": 1
+			"bank_manager": 2
 		}
 	},
 	
@@ -118,7 +129,7 @@
 	{
 		"id":   "kill_dudes",
 		"name": "Generic Level 1",
-		"time": 70.0,
+		"time": 80.0,
 		"objectives": {
 			"any": 4,
 			"businessman": 6,
@@ -131,7 +142,7 @@
 	{
 		"id":   "float",
 		"name": "Floating Building",
-		"time": 45.0,
+		"time": 55.0,
 		"objectives": {
 			"maintenance_guy": 12
 		}
@@ -164,6 +175,16 @@
 		"time": 75.0,
 		"objectives": {
 			"old_lady": 6
+		}
+	},
+	
+	{
+		"id":   "shrink",
+		"name": "Dr. Derp's Revenge",
+		"time": 75.0,
+		"objectives": {
+			"businessman": 11,
+			"superhero": 1
 		}
 	}
 ]

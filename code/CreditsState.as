@@ -36,7 +36,7 @@ package {
 			
 			// Set up the text and icon at the bottom.
 			var bottom_text:FlxText = new FlxText(0.0, FlxG.height - 82.0, FlxG.width, "Made in one month for");
-			bottom_text.setFormat("propomin", 8, 0xFFEEEEEE, "center");
+			bottom_text.setFormat("propomin", 8, 0xFFDDDDDD, "center");
 			
 			var logo:FlxSprite = new FlxSprite(0.0, 0.0, Assets.sa_gamedev_logo);
 			logo.origin.y = logo.height;

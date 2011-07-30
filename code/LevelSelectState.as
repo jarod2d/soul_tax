@@ -199,7 +199,7 @@ package {
 				}
 			}
 			else if (direction === FlxObject.RIGHT) {
-				new_index = MathUtil.mod(new_index + 1, LevelProgress.levels_completed + 1);
+				new_index = MathUtil.mod(new_index + 1, Math.min(LevelProgress.levels_completed + 1, Level.levels.length));
 			}
 			else if (direction === FlxObject.DOWN) {
 				new_index += levels_per_row;
@@ -209,7 +209,7 @@ package {
 				}
 			}
 			else if (direction === FlxObject.LEFT) {
-				new_index = MathUtil.mod(new_index - 1, LevelProgress.levels_completed + 1);
+				new_index = MathUtil.mod(new_index - 1, Math.min(LevelProgress.levels_completed + 1, Level.levels.length));
 			}
 			
 			// Play the selection sound.

@@ -240,10 +240,10 @@ package {
 		public function shrink():void {
 			// Scale down the sprite.
 			sprite.scale.x = sprite.scale.y = 0.5;
-			width    = Math.ceil(s_width * 0.25);
-			height   = Math.ceil(s_height * 0.75);
-			offset.y = 0.0;
-			offset.x = 6.0;
+			offset.y += Math.floor((height - 6.0) / 2.0);
+			offset.x += Math.floor((width - 2.0) / 2.0);
+			width    = 2.0;
+			height   = 6.0;
 			
 			// Add the NPC to the list of shrunken NPCs.
 			Game.level.shrunk_NPCs.add(sprite);
@@ -418,7 +418,7 @@ package {
 				if (special_interval <= 0.0) {
 					var destroy_y:Number = (bottom + Level.TileSize / 2.0) / Level.TileSize;
 					Game.level.wall_tiles.setTile(left / Level.TileSize, destroy_y, 0);
-					Game.level.wall_tiles.setTile(right / Level.TileSize, destroy_y, 0);
+					Game.level.wall_tiles.setTile((right - 1.0) / Level.TileSize, destroy_y, 0);
 					
 					special_interval = MaintenanceGuySpecialInterval;
 				}
