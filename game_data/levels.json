@@ -17,7 +17,7 @@
 	{
 		"id":   "burglar_intro",
 		"name": "Burglar Intro",
-		"time": 50.0,
+		"time": 55.0,
 		"objectives": {
 			"businessman": 5,
 			"security_guard": 3,
@@ -105,7 +105,7 @@
 	{
 		"id":   "basement",
 		"name": "Creepy Boss",
-		"time": 40.0,
+		"time": 60.0,
 		"objectives": {
 			"ceo": 1
 		}

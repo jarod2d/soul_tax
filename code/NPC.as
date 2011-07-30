@@ -34,7 +34,7 @@ package {
 		public static const GlassBreakThreshold:Number    = 150.0;
 		
 		// How often the maintenance guy's special attack gets triggered.
-		public static const MaintenanceGuySpecialInterval:Number = 0.6;
+		public static const MaintenanceGuySpecialInterval:Number = 0.5;
 		
 		// Some NPC tinting colors.
 		public static const PossessionColor:uint = 0xFFCCEE;
@@ -418,7 +418,7 @@ package {
 				if (special_interval <= 0.0) {
 					var destroy_y:Number = (bottom + Level.TileSize / 2.0) / Level.TileSize;
 					Game.level.wall_tiles.setTile(left / Level.TileSize, destroy_y, 0);
-					Game.level.wall_tiles.setTile((right - 1.0) / Level.TileSize, destroy_y, 0);
+					Game.level.wall_tiles.setTile(right / Level.TileSize, destroy_y, 0);
 					
 					special_interval = MaintenanceGuySpecialInterval;
 				}
@@ -492,11 +492,6 @@ package {
 			// Make sure we're actually using our special attack right now.
 			if (!using_special) {
 				return;
-			}
-			
-			// Maintenance guy special.
-			if (type.id === "maintenance_guy") {
-				// Reset his interval
 			}
 			
 			// Superhero special.

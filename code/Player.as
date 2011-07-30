@@ -22,7 +22,7 @@ package {
 		
 		// The base cooldown times for each attack.
 		public static const PunchCooldownTime:Number = 0.3;
-		public static const KickCooldownTime:Number  = 0.195;
+		public static const KickCooldownTime:Number  = 0.215;
 		
 		// The direction of the player's movement. To move the player (or the NPC that the player is possessing), set
 		// this to point towards where you want the player to move. You need to set the player's sprite's maxSpeed and
@@ -187,7 +187,7 @@ package {
 			// Create the hitbox.
 			var hb:HitBox = new HitBox(victim, 0, 0, 5, victim.height);
 			hb.sound = (Math.random() < 0.66) ? Assets.knockback_1_sound : Assets.knockback_2_sound;
-			hb.setAttributes(HitBox.PlayerAllegiance, 0.15, victim.strength / 5.0, 150.0);
+			hb.setAttributes(HitBox.PlayerAllegiance, 0.15, victim.strength / 5.0, 165.0);
 			
 			// Play the victim's kick animation.
 			victim.sprite.play("kick", true);
