@@ -22,11 +22,11 @@ package {
 			thanks_text.setFormat("propomin", 32, 0xFFEEEEEE, "center");
 			
 			// Set up the credits.
-			var roles_text:FlxText = new FlxText(12.0, 120.0, FlxG.width / 2.0, "Coding and Design:\nArt and Design:\nMusic and Sounds:");
+			var roles_text:FlxText = new FlxText(12.0, 110.0, FlxG.width / 2.0, "Coding and Design:\nArt and Design:\nMusic and Sounds:\nDialogue Writing:");
 			roles_text.lineSpacing = 20.0;
 			roles_text.setFormat("propomin", 16, 0xFF888B9A, "right");
 			
-			var credits_text:FlxText = new FlxText(FlxG.width / 2.0 + 16.0, 120.0, FlxG.width / 2.0 - 4.0, "Jarod Long\nLauren Careccia\nBrad Snyder");
+			var credits_text:FlxText = new FlxText(FlxG.width / 2.0 + 16.0, 110.0, FlxG.width / 2.0 - 4.0, "Jarod Long\nLauren Careccia\nBrad Snyder\nDevin Presbury");
 			credits_text.lineSpacing = 20.0;
 			credits_text.setFormat("propomin", 16, 0xFFDDDDE2, "left");
 			
@@ -35,8 +35,8 @@ package {
 			url_text.setFormat("propomin", 8, 0xFFAAAAAE, "left");
 			
 			// Set up the text and icon at the bottom.
-			var bottom_text:FlxText = new FlxText(0.0, FlxG.height - 86.0, FlxG.width, "Made in one month for");
-			bottom_text.setFormat("propomin", 16, 0xFFEEEEEE, "center");
+			var bottom_text:FlxText = new FlxText(0.0, FlxG.height - 82.0, FlxG.width, "Made in one month for");
+			bottom_text.setFormat("propomin", 8, 0xFFEEEEEE, "center");
 			
 			var logo:FlxSprite = new FlxSprite(0.0, 0.0, Assets.sa_gamedev_logo);
 			logo.origin.y = logo.height;
@@ -58,7 +58,7 @@ package {
 				FlxG.music = null;
 			}
 			
-			FlxG.playMusic(Assets.title_screen_music);
+			FlxG.playMusic(Assets.title_screen_music, 0.6);
 		}
 		
 		override public function update():void {

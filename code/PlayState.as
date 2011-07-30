@@ -125,12 +125,12 @@ package {
 				if (level.dialogue && level.dialogue.start) {
 					Game.ui.dialogue_box.startDialogue(level.dialogue.start, DialogueBox.StoryDialogueMode, function():void {
 						substate = NoSubstate;
-						FlxG.playMusic(Assets.main_theme_music, 0.3);
+						FlxG.playMusic(Assets.main_theme_music, 0.28);
 					});
 				}
 				else {
 					substate = NoSubstate;
-					FlxG.playMusic(Assets.main_theme_music, 0.3);
+					FlxG.playMusic(Assets.main_theme_music, 0.28);
 				}
 			}
 			

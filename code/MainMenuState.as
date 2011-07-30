@@ -28,12 +28,12 @@ package {
 			add(text);
 			
 			// Set up the credits.
-			text = new FlxText(FlxG.width / 2.0 - 90.0, 180.0, 100.0, "Coding and Design:\nArt and Design:\nMusic and Sounds:");
+			text = new FlxText(FlxG.width / 2.0 - 140.0, 180.0, 150.0, "Coding and Design:\nArt and Design:\nMusic and Sounds:\nDialogue Writing:");
 			text.lineSpacing = 3.0;
 			text.setFormat("propomin", 8, 0xFFE0E2E4, "right", 0xFF000A10);
 			add(text);
 			
-			text = new FlxText(FlxG.width / 2.0 + 10.0, 180.0, 150.0, "Jarod Long\nLauren Careccia\nBrad Snyder");
+			text = new FlxText(FlxG.width / 2.0 + 10.0, 180.0, 150.0, "Jarod Long\nLauren Careccia\nBrad Snyder\nDevin Presbury");
 			text.lineSpacing = 3.0;
 			text.setFormat("propomin", 8, 0xFFD0D9E8, "left", 0xFF001528);
 			add(text);
@@ -67,7 +67,7 @@ package {
 		override public function update():void {
 			// Move on to the Level Select state.
 			if (FlxG.keys.SPACE || FlxG.keys.J || FlxG.keys.ENTER) {
-				FlxG.switchState(new LevelSelectState());
+				FlxG.switchState(new CreditsState());
 			}
 			
 			super.update();

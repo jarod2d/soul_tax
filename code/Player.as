@@ -124,6 +124,12 @@ package {
 			// Return to the normal color.
 			color = NormalColor;
 			
+			// Stop playing the victim's sound, if any.
+			if (victim.active_sound) {
+				victim.active_sound.stop();
+				victim.active_sound = null;
+			}
+			
 			// Get rid of the victim.
 			victim.state          = NPC.IdleState
 			victim.acceleration.x = 0.0;

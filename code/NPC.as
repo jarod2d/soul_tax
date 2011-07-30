@@ -95,16 +95,16 @@ package {
 		// the flee state.
 		public var target:FlxSprite;
 		
+		// If the NPC is causing a looping sound at the moment, this will be a reference to that sound so that we can
+		// cancel it when we need to.
+		public var active_sound:FlxSound;
+		
 		// Flixel has a rather poorly-designed collision callback system that doesn't provide information about the
 		// objects' changes in velocity. We need that information, so each NPC stores their pre-collision velocity here.
 		private var old_velocity:FlxPoint;
 		
 		// A timer that gets set whenever the NPC gets hurt, used for tinting the NPC and fading it out over time.
 		private var flash_timer:Number;
-		
-		// If the NPC is causing a looping sound at the moment, this will be a reference to that sound so that we can
-		// cancel it when we need to.
-		private var active_sound:FlxSound;
 		
 		// Constructor. The id should be a string that corresponds to one of the keys in npcs.json.
 		public function NPC(id:String, x:Number, y:Number) {
@@ -290,6 +290,7 @@ package {
 				// Spawn the bullet.
 				var bullet:HitBox = new HitBox(this, 0, 3, 3, 2, true);
 				bullet.dies_on_contact = true;
+				bullet.sound = Assets.punch_hit_1_sound;
 				bullet.setAttributes(HitBox.PlayerAllegiance, 3.0, 150.0, 50.0, function(hb:HitBox, npc:NPC):void {
 					hb.sprite.kill();
 				});

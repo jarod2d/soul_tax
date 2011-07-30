@@ -17,7 +17,7 @@ package {
 		// Some metrics for the various components of the screen.
 		private static const ScreenPaddingX:Number = 10.0;
 		private static const ScreenPaddingY:Number = 18.0;
-		private static const TitleHeight:Number    = 38.0;
+		private static const TitleHeight:Number    = 44.0;
 		private static const IconSize:Number       = 32.0;
 		private static const IconPaddingX:Number   = 12.0;
 		private static const IconPaddingY:Number   = 22.0;
@@ -68,6 +68,10 @@ package {
 			// Set up the title text.
 			var title:FlxText = new FlxText(0, ScreenPaddingY, FlxG.width, "Level Select");
 			title.setFormat("propomin", 24, 0xFFE0E2E4, "center", 0xFF001118);
+			
+			// Create the text for the level title.
+			level_name = new FlxText(0, 42.0, FlxG.width, "");
+			level_name.setFormat("propomin", 16, 0xFFC0C2C4, "center", 0xFF000508);
 			
 			// Set up the icon highlight.
 			icon_highlight = new FlxSprite();
@@ -128,10 +132,6 @@ package {
 			var esdf_keys:FlxSprite = new FlxSprite(54.0, FlxG.height - 27.0, Assets.esdf_keys);
 			var j_key:FlxSprite     = new FlxSprite(21.0, FlxG.height - 22.0, Assets.j_key);
 			
-			// Create the text for the level title at the bottom.
-			level_name = new FlxText(0, FlxG.height - 30, FlxG.width, "");
-			level_name.setFormat("propomin", 16, 0xFFD0D2D4, "center", 0xFF001020);
-			
 			// Set up our hacky ghost following stuff.
 			ghost = new Player();
 			ghost.max_velocity.x = ghost.max_velocity.y = 90.0;
@@ -163,7 +163,7 @@ package {
 				FlxG.music = null;
 			}
 			
-			FlxG.playMusic(Assets.level_select_music, 0.3);
+			FlxG.playMusic(Assets.level_select_music, 0.415);
 		}
 		
 		// Selects the given level, moving the selection.
@@ -232,8 +232,8 @@ package {
 		override public function update():void {
 			// Move on to the play state.
 			if (FlxG.keys.SPACE || FlxG.keys.ENTER || FlxG.keys.J) {
+				FlxG.play(Assets.menu_confirm_sound).survive = true;
 				FlxG.switchState(new PlayState());
-				FlxG.play(Assets.menu_confirm_sound);
 				return;
 			}
 			

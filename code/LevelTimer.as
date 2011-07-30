@@ -50,7 +50,7 @@ package {
 					
 					// Play a sound.
 					if (new_timer_value > 0) {
-						FlxG.play(Assets.timer_countdown_sound, 0.9);
+						FlxG.play(Assets.timer_countdown_sound, 1.0);
 					}
 				}
 			}

@@ -97,7 +97,7 @@
 	{
 		"id":   "arches",
 		"name": "Arches",
-		"time": 80.0,
+		"time": 75.0,
 		"objectives": {
 			"businessman": 14,
 			"maintenance_guy": 2,
