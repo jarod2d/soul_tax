@@ -132,8 +132,8 @@ package {
 			if (setting === "day") {
 				FlxG.bgColor = 0xFFBBDDFF;
 				
-				var sun:FlxSprite = new FlxSprite(0.0, -UI.HUDBarHeight * 0.15, Assets.sun_image);
-				sun.scrollFactor.y = 0.15;
+				var sun:FlxSprite = new FlxSprite(0.0, -UI.HUDBarHeight * 0.2, Assets.sun_image);
+				sun.scrollFactor.y = 0.2;
 				
 				clouds = new FlxSprite(0.0, FlxG.height - 300.0, Assets.clouds_day_image);
 				clouds.scrollFactor.y = 0.5;
@@ -144,11 +144,11 @@ package {
 			else if (setting === "night") {
 				FlxG.bgColor = 0xFF23405E;
 				
-				var stars:FlxSprite = new FlxSprite(0.0, -UI.HUDBarHeight * 0.2 + 4.0, Assets.stars_image);
-				stars.scrollFactor.y = 0.2;
+				var stars:FlxSprite = new FlxSprite(0.0, -UI.HUDBarHeight * 0.125 + 4.0, Assets.stars_image);
+				stars.scrollFactor.y = 0.125;
 				
-				var moon:FlxSprite = new FlxSprite(0.0, -UI.HUDBarHeight * 0.3, Assets.moon_image);
-				moon.scrollFactor.y = 0.3;
+				var moon:FlxSprite = new FlxSprite(0.0, -UI.HUDBarHeight * 0.2, Assets.moon_image);
+				moon.scrollFactor.y = 0.2;
 				
 				clouds = new FlxSprite(0.0, FlxG.height - 300.0, Assets.clouds_night_image);
 				clouds.scrollFactor.y = 0.5;

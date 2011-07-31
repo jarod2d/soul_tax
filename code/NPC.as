@@ -192,8 +192,9 @@ package {
 			var damage_impact:Number = (base_impact - damage_threshold) * 0.95;
 			var glass_impact:Number  = (base_impact - GlassBreakThreshold);
 			
-			// Apply damage.
-			if (damage_impact > 0.0) {
+			// Apply damage. We need to make sure not to apply damage when the superhero is charging through NPCs,
+			// though.
+			if (damage_impact > 0.0 && (!obstacle_is_npc || npc.type.id !== "superhero" || !npc.using_special)) {
 				// Need to tweak NPC damage.
 				if (obstacle_is_npc) {
 					damage_impact *= 3.25;
@@ -293,6 +294,10 @@ package {
 				// Spawn the hitbox.
 				var hb:HitBox = new HitBox(this, 0, 0, 6, height);
 				hb.setAttributes(HitBox.PlayerAllegiance, 0.15, strength / 6.0, 300.0);
+				
+				// Break glass.
+				var break_direction:Number = (facing === FlxObject.RIGHT) ? right + Level.TileSize / 2.0 : left - Level.TileSize / 2.0;
+				Game.level.breakGlassAt(break_direction, s_center.y);
 				
 				// Play the animation.
 				sprite.play("special", true);
