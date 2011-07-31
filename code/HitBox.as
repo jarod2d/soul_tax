@@ -124,8 +124,6 @@ package {
 					
 					npc.knockback_velocity.x = Math.cos(angle) * knockback;
 					npc.knockback_velocity.y = -Math.sin(angle) * knockback;
-					
-					FlxG.log(npc.knockback_velocity.x + ", " + npc.knockback_velocity.y);
 				}
 			}
 			

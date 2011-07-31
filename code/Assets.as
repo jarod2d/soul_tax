@@ -63,6 +63,7 @@ package {
 		[Embed(source="../images/security_guard_portrait.png")] public static var security_guard_portrait:Class;
 		[Embed(source="../images/superhero_portrait.png")] public static var superhero_portrait:Class;
 		[Embed(source="../images/supervillain_portrait.png")] public static var supervillain_portrait:Class;
+		[Embed(source="../images/prop_copier_portrait.png")] public static var copier_portrait:Class;
 		
 		// Projectile images.
 		[Embed(source="../images/bullet.png")] public static var bullet_sprite:Class;

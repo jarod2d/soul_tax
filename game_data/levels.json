@@ -135,7 +135,7 @@
 	{
 		"id":   "superhero_intro",
 		"name": "Superhero Intro",
-		"time": 20.0,
+		"time": 22.0,
 		"setting": "day",
 		"objectives": {
 			"businessman": 19,

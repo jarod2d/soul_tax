@@ -324,14 +324,14 @@ package {
 			
 			// Standard collisions.
 			if (player.victim) {
-				FlxG.collide(player.victim.sprite, level.bottomless_borders);
-				FlxG.collide(player.victim.sprite, level.NPCs, NPC.processCollision);
-				
 				if (!player.victim.is_shrunk) {
 					FlxG.overlap(player.victim.sprite, level.shrunk_NPCs, function(victim_sprite:EntitySprite, npc_sprite:EntitySprite):void {
 						(npc_sprite.entity as NPC).kill();
 					});
 				}
+				
+				FlxG.collide(player.victim.sprite, level.bottomless_borders);
+				FlxG.collide(player.victim.sprite, level.NPCs, NPC.processCollision);
 			}
 			
 			FlxG.collide(player.sprite, level.borders);
@@ -356,7 +356,7 @@ package {
 			});
 			
 			for each (var hb_sprite:EntitySprite in level.hitboxes.members) {
-				if (!hb_sprite) {
+				if (!hb_sprite || !hb_sprite.alive) {
 					continue;
 				}
 				

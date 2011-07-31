@@ -31,6 +31,7 @@ package {
 		
 		// The velocity threshold after which the NPC will take damage when colliding with something.
 		public static const ContactDamageThreshold:Number = 280.0;
+		public static const NPCDamageThreshold:Number     = 140.0;
 		public static const GlassBreakThreshold:Number    = 150.0;
 		
 		// How often the maintenance guy's special attack gets triggered.
@@ -155,7 +156,9 @@ package {
 		// A callback that occurs when an NPC collides with anything, to be used in calculating collision damage,
 		// diminishing knockback velocity, etc.
 		public static function processCollision(npc_sprite:EntitySprite, obstacle:FlxObject):void {
-			var npc:NPC = npc_sprite.entity as NPC;
+			var npc:NPC                 = npc_sprite.entity as NPC;
+			var obstacle_is_npc:Boolean = (obstacle is EntitySprite && (obstacle as EntitySprite).entity is NPC);
+			var obstacle_npc:NPC        = (obstacle_is_npc) ? (obstacle as EntitySprite).entity as NPC : null;
 			
 			// Grab the change in the NPC's velocity.
 			var velocity_change:FlxPoint = new FlxPoint(Math.abs(npc.velocity.x - npc.old_velocity.x), Math.abs(npc.velocity.y - npc.old_velocity.y));
@@ -183,19 +186,26 @@ package {
 			}
 			
 			// Calculate the NPC's impact force to determine how much damage should be done.
+			var damage_threshold:Number = (obstacle is EntitySprite && (obstacle as EntitySprite).entity is NPC) ? NPCDamageThreshold : ContactDamageThreshold;
+			
 			var base_impact:Number   = MathUtil.vectorLength(velocity_change);
-			var damage_impact:Number = (base_impact - ContactDamageThreshold) * 0.95;
+			var damage_impact:Number = (base_impact - damage_threshold) * 0.95;
 			var glass_impact:Number  = (base_impact - GlassBreakThreshold);
 			
 			// Apply damage.
 			if (damage_impact > 0.0) {
+				// Need to tweak NPC damage.
+				if (obstacle_is_npc) {
+					damage_impact *= 3.25;
+				}
+				
 				npc.hurt(damage_impact, "falling");
 				
 				// Hurt the other NPC too if the other object is indeed an NPC.
 				// TODO: There's some weird stuff going on when colliding with other NPCs at the moment. I think it has
 				// to do with the value of the velocity change not being quite right in that case.
-				if (obstacle is EntitySprite && (obstacle as EntitySprite).entity is NPC) {
-					((obstacle as EntitySprite).entity as NPC).hurt(damage_impact, "falling");
+				if (obstacle_is_npc) {
+					obstacle_npc.hurt(damage_impact, "falling");
 				}
 				
 				// Play a sound.
