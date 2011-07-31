@@ -24,6 +24,39 @@
 			"businessman": 5
 		}
 	},
+		
+	{
+		"id":   "arches",
+		"name": "Arches",
+		"time": 75.0,
+		"setting": "day",
+		"objectives": {
+			"businessman": 14,
+			"maintenance_guy": 2,
+			"bank_manager": 2
+		}
+	},
+	
+	{
+		"id":   "old_lady_intro",
+		"name": "Old Lady Intro",
+		"time": 55.0,
+		"setting": "day",
+		"objectives": {
+			"businessman": 2,
+			"bank_manager": 3
+		}
+	},
+	
+	{
+		"id":   "float",
+		"name": "Floating Building",
+		"time": 55.0,
+		"setting": "day",
+		"objectives": {
+			"maintenance_guy": 12
+		}
+	},
 	
 	{
 		"id":   "burglar_intro",
@@ -49,13 +82,12 @@
 	},
 	
 	{
-		"id":   "old_lady_intro",
-		"name": "Old Lady Intro",
-		"time": 55.0,
+		"id":   "cops_and_robbers",
+		"name": "Cop and Robbers",
+		"time": 30.0,
 		"setting": "day",
 		"objectives": {
-			"businessman": 2,
-			"bank_manager": 3
+			"burglar": 10
 		}
 	},
 	
@@ -71,16 +103,6 @@
 	},
 	
 	{
-		"id":   "supervillain_intro",
-		"name": "Dr. Derp's Nefarious Plan",
-		"time": 35.0,
-		"setting": "day",
-		"objectives": {
-			"any": 28
-		}
-	},
-	
-	{
 		"id":   "kill_dudes_2",
 		"name": "Generic Level 2",
 		"time": 65.0,
@@ -91,13 +113,23 @@
 	},
 	
 	{
-		"id":   "ceo_assassination",
-		"name": "Get That CEO",
-		"time": 55.0,
+		"id":   "bullseye",
+		"name": "Bullseye",
+		"time": 6.0,
 		"setting": "day",
 		"objectives": {
-			"ceo": 1,
-			"businessman": 6
+			"businessman": 1,
+			"security_guard": 1
+		}
+	},
+	
+	{
+		"id":   "vomit_tower",
+		"name": "Tower of Money",
+		"time": 12.0,
+		"setting": "day",
+		"objectives": {
+			"businessman": 10
 		}
 	},
 	
@@ -113,22 +145,44 @@
 	},
 	
 	{
-		"id":   "cops_and_robbers",
-		"name": "Cop and Robbers",
-		"time": 30.0,
+		"id":   "ceo_assassination",
+		"name": "Get That CEO",
+		"time": 55.0,
 		"setting": "day",
 		"objectives": {
-			"burglar": 10
+			"ceo": 1,
+			"businessman": 6
 		}
 	},
 	
 	{
-		"id":   "basement",
-		"name": "Creepy Boss",
-		"time": 50.0,
+		"id":   "maze",
+		"name": "Maze",
+		"time": 80.0,
 		"setting": "day",
 		"objectives": {
-			"ceo": 1
+			"old_lady": 6
+		}
+	},
+	
+	{
+		"id":   "bullseye_2",
+		"name": "Bullseye 2",
+		"time": 20.0,
+		"setting": "day",
+		"objectives": {
+			"maintenance_guy": 1,
+			"businessman": 1
+		}
+	},
+	
+	{
+		"id":   "supervillain_intro",
+		"name": "Dr. Derp's Nefarious Plan",
+		"time": 35.0,
+		"setting": "day",
+		"objectives": {
+			"any": 28
 		}
 	},
 	
@@ -148,25 +202,26 @@
 	},
 	
 	{
-		"id":   "arches",
-		"name": "Arches",
+		"id":   "kill_dudes_3",
+		"name": "Generic Level 3",
 		"time": 75.0,
 		"setting": "day",
 		"objectives": {
-			"businessman": 14,
-			"maintenance_guy": 2,
-			"bank_manager": 2
+			"any": 12,
+			"businessman": 10,
+			"bank_manager": 2,
+			"old_lady": 2
 		}
 	},
 	
 	{
-		"id":   "bullseye",
-		"name": "Bullseye",
-		"time": 6.0,
+		"id":   "shrink",
+		"name": "Dr. Derp's Revenge",
+		"time": 75.0,
 		"setting": "day",
 		"objectives": {
-			"businessman": 1,
-			"security_guard": 1
+			"businessman": 11,
+			"superhero": 1
 		}
 	},
 	
@@ -185,67 +240,12 @@
 	},
 	
 	{
-		"id":   "bullseye_2",
-		"name": "Bullseye 2",
-		"time": 20.0,
+		"id":   "basement",
+		"name": "Creepy Boss",
+		"time": 50.0,
 		"setting": "day",
 		"objectives": {
-			"maintenance_guy": 1,
-			"businessman": 1
-		}
-	},
-	
-	{
-		"id":   "float",
-		"name": "Floating Building",
-		"time": 55.0,
-		"setting": "day",
-		"objectives": {
-			"maintenance_guy": 12
-		}
-	},
-	
-	{
-		"id":   "vomit_tower",
-		"name": "Tower of Money",
-		"time": 12.0,
-		"setting": "day",
-		"objectives": {
-			"businessman": 10
-		}
-	},
-	
-	{
-		"id":   "kill_dudes_3",
-		"name": "Generic Level 3",
-		"time": 75.0,
-		"setting": "day",
-		"objectives": {
-			"any": 12,
-			"businessman": 10,
-			"bank_manager": 2,
-			"old_lady": 2
-		}
-	},
-	
-	{
-		"id":   "maze",
-		"name": "Maze",
-		"time": 80.0,
-		"setting": "day",
-		"objectives": {
-			"old_lady": 6
-		}
-	},
-	
-	{
-		"id":   "shrink",
-		"name": "Dr. Derp's Revenge",
-		"time": 75.0,
-		"setting": "day",
-		"objectives": {
-			"businessman": 11,
-			"superhero": 1
+			"ceo": 1
 		}
 	},
 	
