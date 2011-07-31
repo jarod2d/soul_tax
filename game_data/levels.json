@@ -37,7 +37,7 @@
 	
 	{
 		"id":   "arches",
-		"name": "Arches",
+		"name": "Arches (RENAME?)",
 		"time": 75.0,
 		"setting": "day",
 		"objectives": {
@@ -49,7 +49,7 @@
 	
 	{
 		"id":   "old_lady_intro",
-		"name": "Old Lady Intro",
+		"name": "Old Lady Intro (RENAME)",
 		"time": 55.0,
 		"setting": "day",
 		"objectives": {
@@ -60,7 +60,7 @@
 	
 	{
 		"id":   "float",
-		"name": "Floating Building",
+		"name": "Floating Building (RENAME)",
 		"time": 55.0,
 		"setting": "day",
 		"objectives": {
@@ -168,7 +168,7 @@
 	{
 		"id":   "maze",
 		"name": "Maze",
-		"time": 80.0,
+		"time": 75.0,
 		"setting": "day",
 		"objectives": {
 			"old_lady": 6
@@ -249,7 +249,7 @@
 	
 	{
 		"id":   "kill_dudes",
-		"name": "Generic Level 1",
+		"name": "Generic Level 1 (RENAME)",
 		"time": 80.0,
 		"setting": "day",
 		"objectives": {
@@ -264,7 +264,7 @@
 	{
 		"id":   "basement",
 		"name": "Creepy Boss",
-		"time": 50.0,
+		"time": 45.0,
 		"setting": "day",
 		"objectives": {
 			"ceo": 1
