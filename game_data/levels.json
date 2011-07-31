@@ -6,6 +6,16 @@
 
 [
 	{
+		"id":   "level1_copier",
+		"name": "Tutorial",
+		"time": 60.0,
+		"setting": "night",
+		"objectives": {
+			"businessman": 2
+		}
+	},
+	
+	{
 		"id":   "window_tutorial",
 		"name": "A Window of Opportunity",
 		"time": 50.0,

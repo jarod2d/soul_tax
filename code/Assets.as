@@ -247,7 +247,12 @@ package {
 		[Embed(source="../levels/old_lady_intro.1.csv", mimeType="application/octet-stream")] public static var old_lady_intro_wall_tiles:Class;
 		[Embed(source="../levels/old_lady_intro.props.json", mimeType="application/octet-stream")] public static var old_lady_intro_props:Class;
 		[Embed(source="../levels/old_lady_intro.dialogue.json", mimeType="application/octet-stream")] public static var old_lady_intro_dialogue:Class;
-		
+
+		[Embed(source="../levels/level1_copier.0.csv", mimeType="application/octet-stream")] public static var level1_copier_bg_tiles:Class;
+		[Embed(source="../levels/level1_copier.1.csv", mimeType="application/octet-stream")] public static var level1_copier_wall_tiles:Class;
+		[Embed(source="../levels/level1_copier.props.json", mimeType="application/octet-stream")] public static var level1_copier_props:Class;
+		[Embed(source="../levels/level1_copier.dialogue.json", mimeType="application/octet-stream")] public static var level1_copier_dialogue:Class;
+				
 		// Processes some of the loaded data. Should be called once at the beginning of the game.
 		public static function load():void {
 			// Load the level data.
