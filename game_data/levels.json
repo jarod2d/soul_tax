@@ -225,8 +225,18 @@
 	},
 	
 	{
-		"id":   "maze",
-		"name": "Maze (RENAME)",
+		"id":   "hero_justice",
+		"name": "Hero's Justice",
+		"time": 30.0,
+		"setting": "day",
+		"objectives": {
+			"businessman": 4,
+			"bank_manager": 3,
+			"supervillain": 1
+		}
+	},
+	
+	{
 		"id":   "shrink",
 		"name": "Dr. Derp's Revenge",
 		"time": 75.0,
