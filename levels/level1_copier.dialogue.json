@@ -33,11 +33,11 @@
 		["Reaper", "left", "Let’s start with these two losers. Possess one of them and clobber the other to death!"],
 		["Ghost", "right", "What?! Clobber them to-wait, I can possess people?"],
 		["Reaper", "left", "Yeeeaah...somebody probably should have told you that."],
-		["Reaper", "left", "Also, considering the severity of your debt, you should probably take out the other as well."],
+		["Reaper", "left", "Also, considering the severity of your debt, you should probably take out the remaining one as well."],
 		["Reaper", "left", "Out the window, preferably..."],
 		["Ghost", "right", "What?!"],
 		["Reaper", "left", "Go hover over one of those idiots and press spacebar to take control of them."], 
-		["Reaper", "left", "Use J to punch and K to kick!"]
+		["Reaper", "left", "Use J to punch and K to kick! And if you screw up, press P to pause and then R to restart."]
 	],   
 	     
 	"end": [

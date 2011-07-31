@@ -36,6 +36,39 @@
 	},
 	
 	{
+		"id":   "arches",
+		"name": "Arches",
+		"time": 75.0,
+		"setting": "day",
+		"objectives": {
+			"businessman": 14,
+			"maintenance_guy": 2,
+			"bank_manager": 2
+		}
+	},
+	
+	{
+		"id":   "old_lady_intro",
+		"name": "Old Lady Intro",
+		"time": 55.0,
+		"setting": "day",
+		"objectives": {
+			"businessman": 2,
+			"bank_manager": 3
+		}
+	},
+	
+	{
+		"id":   "float",
+		"name": "Floating Building",
+		"time": 55.0,
+		"setting": "day",
+		"objectives": {
+			"maintenance_guy": 12
+		}
+	},
+	
+	{
 		"id":   "burglar_intro",
 		"name": "Burglar Intro (RENAME)",
 		"time": 55.0,
@@ -59,13 +92,12 @@
 	},
 	
 	{
-		"id":   "old_lady_intro",
-		"name": "Old Lady Intro (RENAME)",
-		"time": 55.0,
+		"id":   "cops_and_robbers",
+		"name": "Cop and Robbers",
+		"time": 30.0,
 		"setting": "day",
 		"objectives": {
-			"businessman": 2,
-			"bank_manager": 3
+			"burglar": 10
 		}
 	},
 	
@@ -81,81 +113,12 @@
 	},
 	
 	{
-		"id":   "supervillain_intro",
-		"name": "Dr. Derp's Nefarious Plan",
-		"time": 35.0,
-		"setting": "day",
-		"objectives": {
-			"any": 28
-		}
-	},
-	
-	{
 		"id":   "kill_dudes_2",
 		"name": "Generic Level 2 (RENAME)",
 		"time": 65.0,
 		"setting": "day",
 		"objectives": {
 			"any": 20
-		}
-	},
-	
-	{
-		"id":   "ceo_assassination",
-		"name": "Get That CEO",
-		"time": 55.0,
-		"setting": "day",
-		"objectives": {
-			"ceo": 1,
-			"businessman": 6
-		}
-	},
-	
-	{
-		"id":   "window_washers",
-		"name": "Window Washers",
-		"time": 65.0,
-		"setting": "day",
-		"objectives": {
-			"maintenance_guy": 8,
-			"bank_manager": 2
-		}
-	},
-	
-	{
-		"id":   "cops_and_robbers",
-		"name": "Cop and Robbers",
-		"time": 30.0,
-		"setting": "day",
-		"objectives": {
-			"burglar": 10
-		}
-	},
-	
-	{
-		"id":   "superhero_intro",
-		"name": "Superhero Intro (RENAME)",
-		"time": 22.0,
-		"setting": "day",
-		"objectives": {
-			"businessman": 19,
-			"ceo": 1,
-			"security_guard": 5,
-			"old_lady": 4,
-			"bank_manager": 8,
-			"superhero": 1
-		}
-	},
-	
-	{
-		"id":   "arches",
-		"name": "Arches (RENAME?)",
-		"time": 65.0,
-		"setting": "day",
-		"objectives": {
-			"businessman": 14,
-			"maintenance_guy": 2,
-			"bank_manager": 2
 		}
 	},
 	
@@ -171,16 +134,44 @@
 	},
 	
 	{
-		"id":   "kill_dudes",
-		"name": "Generic Level 1 (RENAME)",
+		"id":   "vomit_tower",
+		"name": "Tower of Money",
+		"time": 12.0,
+		"setting": "day",
+		"objectives": {
+			"businessman": 10
+		}
+	},
+	
+	{
+		"id":   "window_washers",
+		"name": "Window Washers",
+		"time": 65.0,
+		"setting": "day",
+		"objectives": {
+			"maintenance_guy": 8,
+			"bank_manager": 2
+		}
+	},
+	
+	{
+		"id":   "ceo_assassination",
+		"name": "Get That CEO",
+		"time": 55.0,
+		"setting": "day",
+		"objectives": {
+			"ceo": 1,
+			"businessman": 6
+		}
+	},
+	
+	{
+		"id":   "maze",
+		"name": "Maze",
 		"time": 80.0,
 		"setting": "day",
 		"objectives": {
-			"any": 4,
-			"businessman": 6,
-			"old_lady": 2,
-			"bank_manager": 2,
-			"maintenance_guy": 2
+			"old_lady": 6
 		}
 	},
 	
@@ -196,22 +187,27 @@
 	},
 	
 	{
-		"id":   "float",
-		"name": "Floating Building (RENAME)",
-		"time": 55.0,
+		"id":   "supervillain_intro",
+		"name": "Dr. Derp's Nefarious Plan",
+		"time": 35.0,
 		"setting": "day",
 		"objectives": {
-			"maintenance_guy": 12
+			"any": 28
 		}
 	},
 	
 	{
-		"id":   "vomit_tower",
-		"name": "Tower of Money",
-		"time": 12.0,
+		"id":   "superhero_intro",
+		"name": "Superhero Intro",
+		"time": 22.0,
 		"setting": "day",
 		"objectives": {
-			"businessman": 10
+			"businessman": 19,
+			"ceo": 1,
+			"security_guard": 5,
+			"old_lady": 4,
+			"bank_manager": 8,
+			"superhero": 1
 		}
 	},
 	
@@ -231,26 +227,6 @@
 	{
 		"id":   "maze",
 		"name": "Maze (RENAME)",
-		"time": 75.0,
-		"setting": "day",
-		"objectives": {
-			"old_lady": 6
-		}
-	},
-	
-	{
-		"id":   "hero_justice",
-		"name": "Hero's Justice",
-		"time": 30.0,
-		"setting": "day",
-		"objectives": {
-			"businessman": 4,
-			"bank_manager": 3,
-			"supervillain": 1
-		}
-	},
-	
-	{
 		"id":   "shrink",
 		"name": "Dr. Derp's Revenge",
 		"time": 75.0,
@@ -262,9 +238,23 @@
 	},
 	
 	{
+		"id":   "kill_dudes",
+		"name": "Generic Level 1",
+		"time": 80.0,
+		"setting": "day",
+		"objectives": {
+			"any": 4,
+			"businessman": 6,
+			"old_lady": 2,
+			"bank_manager": 2,
+			"maintenance_guy": 2
+		}
+	},
+	
+	{
 		"id":   "basement",
 		"name": "Creepy Boss",
-		"time": 45.0,
+		"time": 50.0,
 		"setting": "day",
 		"objectives": {
 			"ceo": 1
