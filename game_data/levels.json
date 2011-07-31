@@ -185,6 +185,17 @@
 	},
 	
 	{
+		"id":   "bullseye_2",
+		"name": "Bullseye 2",
+		"time": 20.0,
+		"setting": "day",
+		"objectives": {
+			"maintenance_guy": 1,
+			"businessman": 1
+		}
+	},
+	
+	{
 		"id":   "float",
 		"name": "Floating Building",
 		"time": 55.0,
@@ -207,7 +218,7 @@
 	{
 		"id":   "kill_dudes_3",
 		"name": "Generic Level 3",
-		"time": 65.0,
+		"time": 75.0,
 		"setting": "day",
 		"objectives": {
 			"any": 12,
@@ -220,7 +231,7 @@
 	{
 		"id":   "maze",
 		"name": "Maze",
-		"time": 75.0,
+		"time": 80.0,
 		"setting": "day",
 		"objectives": {
 			"old_lady": 6
@@ -235,6 +246,19 @@
 		"objectives": {
 			"businessman": 11,
 			"superhero": 1
+		}
+	},
+	
+	{
+		"id":   "final_level",
+		"name": "Big Boss Castle",
+		"time": 105.0,
+		"setting": "day",
+		"objectives": {
+			"businessman": 9,
+			"security_guard": 12,
+			"bank_manager": 9,
+			"ceo": 7
 		}
 	}
 ]

@@ -192,8 +192,9 @@ package {
 			var damage_impact:Number = (base_impact - damage_threshold) * 0.95;
 			var glass_impact:Number  = (base_impact - GlassBreakThreshold);
 			
-			// Apply damage.
-			if (damage_impact > 0.0) {
+			// Apply damage. We need to make sure not to apply damage when the superhero is charging through NPCs,
+			// though.
+			if (damage_impact > 0.0 && (!obstacle_is_npc || npc.type.id !== "superhero" || !npc.using_special)) {
 				// Need to tweak NPC damage.
 				if (obstacle_is_npc) {
 					damage_impact *= 3.25;

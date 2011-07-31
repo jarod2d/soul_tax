@@ -22,7 +22,7 @@ package {
 			// Set up the title.
 			var text:FlxText;
 			
-			text = new FlxText(0, 90.0, FlxG.width, "A Ghost and His Taxes");
+			text = new FlxText(0, 90.0, FlxG.width, "Soul Tax");
 			text.lineSpacing = 10.0;
 			text.setFormat("propomin", 32, 0xFFE0E2E4, "center", 0xFF001118);
 			add(text);
