@@ -49,8 +49,8 @@ package {
 					timer_value.color = (new_timer_value % 2 === 0) ? TimerStandardColor : TimerBlinkColor;
 					
 					// Play a sound.
-					if (new_timer_value > 0) {
-						FlxG.play(Assets.timer_countdown_sound, 1.0);
+					if (new_timer_value > 0 && new_timer_value < 5) {
+						FlxG.play(Assets.timer_countdown_sound, 0.55);
 					}
 				}
 			}

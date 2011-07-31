@@ -203,9 +203,9 @@ package {
 				var scroll_rate:Number = (FlxG.keys.J || FlxG.keys.SPACE || FlxG.keys.ENTER) ? FastScrollRate : ScrollRate;
 				
 				while (scroll_timer >= scroll_rate) {
-					// Play a sound
+					// Play a sound.
 					if (current_char % 3 === 0) {
-						FlxG.play(Assets.dialogue_confirm_sound, 0.7);
+						FlxG.play(Assets.dialogue_blip_sound, 0.45);
 					}
 					
 					// Move to the next character.

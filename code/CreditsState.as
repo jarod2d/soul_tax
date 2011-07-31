@@ -58,7 +58,7 @@ package {
 				FlxG.music = null;
 			}
 			
-			FlxG.playMusic(Assets.title_screen_music, 0.6);
+			FlxG.playMusic(Assets.title_screen_music, 0.55);
 		}
 		
 		override public function update():void {
