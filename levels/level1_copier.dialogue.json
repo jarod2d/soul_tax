@@ -26,17 +26,24 @@
 		["Ghost", "right", "I’ve been haunting this place forever and no one’s asked me for a thing. What’re you, my landlord?"],
 		["Death", "left", "What, you expected all this for free?"],
 		["Death", "left", "You unfortunately slipped through the cracks of the system. Mistakes do happen."], 
-		["Death", "left", "Afterall, how can you expect a Reaper to get work done on New Years when there’s champagne to be had and-Essentially, you owe 8 years in soul taxes."],
+		["Death", "left", "Afterall, how can you expect a Reaper to get work done on New Years when there’s champagne to be had and-"],
+		["Death", "left", "Essentially, you owe 8 years in soul taxes."],
 		["Death", "left", "Now, since I may have been somewhat responsible for your debt, I’m willing to help you out."],
 		["Ghost", "right", "Great, I've got Skeletor on my side."],
 		["Death", "left", "Let’s start with these two losers. Possess one of them and clobber the other to death!"],
 		["Ghost", "right", "What?! Clobber them to-wait, I can possess people?"],
-		["Death", "left", "Yeeeaah...somebody probably should have told you that. Go hover over one of those idiots and press spacebar to take control of them."], 
-		["Death", "left", "Use J to punch, and K to kick!"]
+		["Death", "left", "Yeeeaah...somebody probably should have told you that."],
+		["Death", "left", "Go hover over one of those idiots and press spacebar to take control of them."], 
+		["Death", "left", "Use J to punch and K to kick!"]
 	],
 	
 	"end": [
-		["Death", "right", "YOU WON!!!!!!!!!!!!!!!!!!!!!"],
-		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"]
+		["Death", "left", "See, that wasn’t so hard. Now you’ve got 2 less souls to go!"],
+		["Ghost", "right", "I'm not sure this is right..."],
+		["Death", "left", "Hey, you wanna go to the Great Beyond right now? Because I can take you there. It’s all brimstone, smoke, and Bieber music."],
+		["Ghost", "right", "I figured I'd go to Heaven..."],
+		["Death", "left", "After what you just did? Hell no."],
+		["Ghost", "right", "But you-"],
+		["Death", "left", "Time to find some more meat puppets."]
 	]
 }
