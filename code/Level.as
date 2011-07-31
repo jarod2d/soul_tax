@@ -78,6 +78,9 @@ package {
 		// An emitter for when glass breaks.
 		public var glass_emitter:GlassEmitter;
 		
+		// Collection of the "zzz" sprites above NPCs' heads when they fall asleep.
+		public var sleep_effects:FlxGroup;
+		
 		// A queue of NPCs that have recently been killed and are waiting to be logged as dead.
 		public var dying_npcs:Array;
 		
@@ -120,16 +123,19 @@ package {
 			smoke_emitter      = new SmokeEmitter();
 			money_emitter      = new MoneyEmitter();
 			glass_emitter      = new GlassEmitter();
+			sleep_effects      = new FlxGroup();
 			dying_npcs         = [];
 			
 			// Set up the background.
+			var clouds:FlxSprite;
+			
 			if (setting === "day") {
 				FlxG.bgColor = 0xFFBBDDFF;
 				
 				var sun:FlxSprite = new FlxSprite(0.0, -UI.HUDBarHeight * 0.15, Assets.sun_image);
 				sun.scrollFactor.y = 0.15;
 				
-				var clouds:FlxSprite = new FlxSprite(0.0, FlxG.height - 300.0, Assets.clouds_day_image);
+				clouds = new FlxSprite(0.0, FlxG.height - 300.0, Assets.clouds_day_image);
 				clouds.scrollFactor.y = 0.5;
 				
 				background.add(sun);
@@ -144,7 +150,7 @@ package {
 				var moon:FlxSprite = new FlxSprite(0.0, -UI.HUDBarHeight * 0.3, Assets.moon_image);
 				moon.scrollFactor.y = 0.3;
 				
-				var clouds:FlxSprite = new FlxSprite(0.0, FlxG.height - 300.0, Assets.clouds_night_image);
+				clouds = new FlxSprite(0.0, FlxG.height - 300.0, Assets.clouds_night_image);
 				clouds.scrollFactor.y = 0.5;
 				
 				background.add(stars);
@@ -243,6 +249,7 @@ package {
 			contents.add(robot_gib_emitter.particles);
 			contents.add(smoke_emitter.particles);
 			contents.add(money_emitter.particles);
+			contents.add(sleep_effects);
 			contents.add(NPCs);
 			contents.add(hitboxes);
 			contents.add(foreground_props);

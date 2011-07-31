@@ -106,6 +106,9 @@ package {
 		// A timer that gets set whenever the NPC gets hurt, used for tinting the NPC and fading it out over time.
 		private var flash_timer:Number;
 		
+		// A reference to the NPC's sleeping "z" animation, so we can remove it when we're done sleeping.
+		private var sleep_effect:FlxSprite;
+		
 		// Constructor. The id should be a string that corresponds to one of the keys in npcs.json.
 		public function NPC(id:String, x:Number, y:Number) {
 			super(x, y);
@@ -459,8 +462,8 @@ package {
 				for each (npc_sprite in Game.level.NPCs.members) {
 					npc = npc_sprite.entity as NPC;
 					
-					// We don't want to make ourselves fall asleep.
-					if (npc === this) {
+					// We don't want to make ourselves or dead NPCs fall asleep.
+					if (npc === this || !npc.sprite.alive) {
 						continue;
 					}
 					
@@ -471,6 +474,16 @@ package {
 					distance_squared = MathUtil.vectorLengthSquared(distance);
 					
 					if (npc.state !== FleeState && distance_squared < 2750.0) {
+						// Put some z's above their head if they're not already sleeping.
+						if (npc.state !== StunnedState) {
+							npc.sleep_effect = new FlxSprite(npc.center.x, npc.top - 10.0);
+							npc.sleep_effect.loadGraphic(Assets.zzz_sprite, true, false, 8, 8);
+							npc.sleep_effect.addAnimation("pulse", [0, 1], 1, true);
+							npc.sleep_effect.play("pulse");
+							
+							Game.level.sleep_effects.add(npc.sleep_effect);
+						}
+						
 						// Make them fall asleep.
 						npc.target = this.sprite;
 						npc.state  = StunnedState;
@@ -599,6 +612,11 @@ package {
 			
 			FlxG.play(sound, 0.5);
 			
+			// Remove z's.
+			if (sleep_effect) {
+				Game.level.sleep_effects.remove(sleep_effect);
+			}
+			
 			// TODO: Make everyone within a certain radius panic, just like in the HitBox class. Make a reusable Level
 			// function I guess.
 		}
@@ -660,8 +678,6 @@ package {
 			
 			// Set the animation.
 			sprite.play("sleep");
-			
-			// TODO: Play the Z's animation.
 		}
 		
 		// Callback that occurs when the NPC's behavior changes to panic.
@@ -762,6 +778,11 @@ package {
 			// Switch back to idle behavior after a certain duration.
 			if (state_duration > state_max_duration) {
 				state = IdleState;
+				
+				// Remove our Z's.
+				if (sleep_effect) {
+					Game.level.sleep_effects.remove(sleep_effect);
+				}
 			}
 		}
 		
@@ -981,6 +1002,12 @@ package {
 			// Kill the NPC if they've fallen off the map.
 			if (y > Game.level.height) {
 				kill("out_of_bounds");
+			}
+			
+			// Keep our zzz sprite in sync with our position.
+			if (sleep_effect) {
+				sleep_effect.x = center.x;
+				sleep_effect.y = top - 10.0;
 			}
 		}
 		
