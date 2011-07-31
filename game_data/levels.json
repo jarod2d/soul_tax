@@ -26,6 +26,16 @@
 	},
 	
 	{
+		"id":   "maintenance_guy_intro",
+		"name": "Maintenance Guy Intro (RENAME)",
+		"time": 50.0,
+		"setting": "night",
+		"objectives": {
+			"businessman": 5
+		}
+	},
+	
+	{
 		"id":   "window_tutorial",
 		"name": "A Window of Opportunity",
 		"time": 50.0,
