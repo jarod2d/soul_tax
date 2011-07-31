@@ -305,7 +305,7 @@ package {
 			// Glass can be left- or right-facing, so there are two different tiles we need to check.
 			if (destroyWall(5, x, y) || destroyWall(7, x, y)) {
 				var sound:Class = (Math.random() < 0.5) ? Assets.glass_break_1_sound : Assets.glass_break_2_sound;
-				FlxG.play(sound, 0.65);
+				FlxG.play(sound, 0.5);
 				
 				return true;
 			}
@@ -320,17 +320,21 @@ package {
 			var members:Array    = contents.members;
 			var npc_index:int    = members.indexOf(NPCs);
 			var trails_index:int = members.indexOf(Game.player.trails);
-			var player_index:int = members.indexOf(Game.player.sprite);
+			var low_index:int    = (npc_index < trails_index) ? npc_index : trails_index;
 			
-			if (npc_index < player_index) {
-				members[npc_index]    = Game.player.trails;
-				members[trails_index] = Game.player.sprite;
-				members[player_index] = NPCs;
+			if (npc_index < trails_index) {
+				members[low_index]     = Game.player.trails;
+				members[low_index + 1] = Game.player.sprite;
+				members[low_index + 2] = NPCs;
+				members[low_index + 3] = hitboxes;
+				members[low_index + 4] = foreground_props;
 			}
 			else {
-				members[trails_index] = NPCs;
-				members[player_index] = Game.player.trails;
-				members[npc_index]    = Game.player.sprite;
+				members[low_index]     = NPCs;
+				members[low_index + 1] = hitboxes;
+				members[low_index + 2] = foreground_props;
+				members[low_index + 3] = Game.player.trails;
+				members[low_index + 4] = Game.player.sprite;
 			}
 		}
 		
@@ -345,7 +349,7 @@ package {
 			
 			// Play a little flying-away sound after a few moments.
 			setTimeout(function():void {
-				FlxG.play(Assets.ghost_going_up_sound, 0.175);
+				FlxG.play(Assets.ghost_going_up_sound, 0.215);
 			}, 400.0 + 350.0 * Math.random());
 		}
 		

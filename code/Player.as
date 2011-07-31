@@ -171,7 +171,7 @@ package {
 			
 			// Play a sound.
 			var sound:Class = (Math.random() < 0.5) ? Assets.punch_miss_1_sound : Assets.punch_miss_2_sound;
-			FlxG.play(sound, 0.4);
+			FlxG.play(sound, 0.415);
 		}
 		
 		// The secondary knockback attack the player uses when they're possessing someone.
@@ -197,7 +197,7 @@ package {
 			Game.level.breakGlassAt(break_direction, victim.s_center.y);
 			
 			// Play a sound.
-			FlxG.play(Assets.kick_miss_1_sound, 0.4);
+			FlxG.play(Assets.kick_miss_1_sound, 0.415);
 		}
 		
 		// Update.

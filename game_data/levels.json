@@ -123,16 +123,6 @@
 	},
 	
 	{
-		"id":   "basement",
-		"name": "Creepy Boss",
-		"time": 50.0,
-		"setting": "day",
-		"objectives": {
-			"ceo": 1
-		}
-	},
-	
-	{
 		"id":   "superhero_intro",
 		"name": "Superhero Intro",
 		"time": 22.0,
@@ -150,7 +140,7 @@
 	{
 		"id":   "arches",
 		"name": "Arches",
-		"time": 75.0,
+		"time": 65.0,
 		"setting": "day",
 		"objectives": {
 			"businessman": 14,
@@ -231,10 +221,22 @@
 	{
 		"id":   "maze",
 		"name": "Maze",
-		"time": 80.0,
+		"time": 75.0,
 		"setting": "day",
 		"objectives": {
 			"old_lady": 6
+		}
+	},
+	
+	{
+		"id":   "hero_justice",
+		"name": "Hero's Justice",
+		"time": 30.0,
+		"setting": "day",
+		"objectives": {
+			"businessman": 4,
+			"bank_manager": 3,
+			"supervillain": 1
 		}
 	},
 	
@@ -250,9 +252,19 @@
 	},
 	
 	{
+		"id":   "basement",
+		"name": "Creepy Boss",
+		"time": 45.0,
+		"setting": "day",
+		"objectives": {
+			"ceo": 1
+		}
+	},
+	
+	{
 		"id":   "final_level",
 		"name": "Big Boss Castle",
-		"time": 105.0,
+		"time": 100.0,
 		"setting": "day",
 		"objectives": {
 			"businessman": 9,
