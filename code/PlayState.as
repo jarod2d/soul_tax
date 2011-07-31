@@ -44,9 +44,6 @@ package {
 		override public function create():void {
 			super.create();
 			
-			// Set the background color.
-			FlxG.bgColor = 0xFFBBDDFF;
-			
 			// Create the player.
 			var player:Player = Game.player = new Player();
 			
@@ -77,7 +74,7 @@ package {
 				FlxG.music = null;
 			}
 			
-			music = FlxG.play(Assets.level_start_music, 0.22);
+			music = FlxG.play(Assets.level_start_music, 0.2);
 		}
 		
 		// Update for dialogue mode.
@@ -125,12 +122,12 @@ package {
 				if (level.dialogue && level.dialogue.start) {
 					Game.ui.dialogue_box.startDialogue(level.dialogue.start, DialogueBox.StoryDialogueMode, function():void {
 						substate = NoSubstate;
-						FlxG.playMusic(Assets.main_theme_music, 0.28);
+						FlxG.playMusic(Assets.main_theme_music, 0.22);
 					});
 				}
 				else {
 					substate = NoSubstate;
-					FlxG.playMusic(Assets.main_theme_music, 0.28);
+					FlxG.playMusic(Assets.main_theme_music, 0.22);
 				}
 			}
 			
@@ -223,7 +220,7 @@ package {
 				}, 1000.0);
 				
 				// Play a sound.
-				FlxG.play(Assets.level_end_sound, 0.8);
+				FlxG.play(Assets.level_end_sound, 0.6);
 				
 				// Update the substate.
 				substate = TimeUpSubstate;
@@ -274,7 +271,7 @@ package {
 						FlxG.music = null;
 					}
 					
-					music = FlxG.play((level.objectives_complete) ? Assets.level_won_music : Assets.level_failed_music, 0.25);
+					music = FlxG.play((level.objectives_complete) ? Assets.level_won_music : Assets.level_failed_music, 0.225);
 					
 					// TODO: Play a little cutscene of the player being killed by Death if they lost.
 					

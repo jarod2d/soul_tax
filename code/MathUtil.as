@@ -125,6 +125,11 @@ package {
 			return divisor % dividend;
 		}
 		
+		// Returns either 1.0 or -1.0 based on whether the number is positive or negative respectively.
+		public static function sign(n:Number):Number {
+			return (n < 0.0) ? -1.0 : 1.0;
+		}
+		
 		// Rotates a point around a pivot point around the given angle (in degrees, since Flixel likes to use degrees).
 		// Rotates clockwise by default -- pass in true for reverse to rotate counter-clockwise.
 		public static function rotatePoint(p:FlxPoint, pivot:FlxPoint, angle:Number, reverse:Boolean = false):FlxPoint {

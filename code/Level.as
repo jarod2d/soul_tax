@@ -36,6 +36,9 @@ package {
 		// For convenience, we group all of our tiles here.
 		public var contents:FlxGroup;
 		
+		// Contains the various sprites that make up the level's background.
+		public var background:FlxGroup;
+		
 		// We have two tilemaps -- one for the background stuff, and one for the wall and platform tiles on top of the
 		// background.
 		public var bg_tiles:FlxTilemap;
@@ -97,9 +100,11 @@ package {
 		public function Level(index:uint) {
 			// Grab our raw level data.
 			var level_data:Object = levels[index];
+			var setting:String    = (level_data.setting) ? level_data.setting : "day";
 			
 			// Create all of our groups, etc.
 			contents           = new FlxGroup();
+			background         = new FlxGroup();
 			bg_tiles           = new FlxTilemap();
 			wall_tiles         = new FlxTilemap();
 			borders            = new FlxGroup();
@@ -117,9 +122,39 @@ package {
 			glass_emitter      = new GlassEmitter();
 			dying_npcs         = [];
 			
+			// Set up the background.
+			if (setting === "day") {
+				FlxG.bgColor = 0xFFBBDDFF;
+				
+				var sun:FlxSprite = new FlxSprite(0.0, -UI.HUDBarHeight * 0.15, Assets.sun_image);
+				sun.scrollFactor.y = 0.15;
+				
+				var clouds:FlxSprite = new FlxSprite(0.0, FlxG.height - 300.0, Assets.clouds_day_image);
+				clouds.scrollFactor.y = 0.5;
+				
+				background.add(sun);
+				background.add(clouds);
+			}
+			else if (setting === "night") {
+				FlxG.bgColor = 0xFF23405E;
+				
+				var stars:FlxSprite = new FlxSprite(0.0, -UI.HUDBarHeight * 0.2 + 4.0, Assets.stars_image);
+				stars.scrollFactor.y = 0.2;
+				
+				var moon:FlxSprite = new FlxSprite(0.0, -UI.HUDBarHeight * 0.3, Assets.moon_image);
+				moon.scrollFactor.y = 0.3;
+				
+				var clouds:FlxSprite = new FlxSprite(0.0, FlxG.height - 300.0, Assets.clouds_night_image);
+				clouds.scrollFactor.y = 0.5;
+				
+				background.add(stars);
+				background.add(moon);
+				background.add(clouds);
+			}
+			
 			// Create our tilemaps.
-			bg_tiles.loadMap(new Assets[level_data.id + "_bg_tiles"], Assets.tiles, TileSize, TileSize, NaN, 1, 1, 3);
-			wall_tiles.loadMap(new Assets[level_data.id + "_wall_tiles"], Assets.tiles, TileSize, TileSize, NaN, 1, 1, 3);
+			bg_tiles.loadMap(new Assets[level_data.id + "_bg_tiles"], Assets[setting + "_tiles"], TileSize, TileSize, NaN, 1, 1, 3);
+			wall_tiles.loadMap(new Assets[level_data.id + "_wall_tiles"], Assets[setting + "_tiles"], TileSize, TileSize, NaN, 1, 1, 3);
 			
 			// Grab the dialogue.
 			dialogue = JSON.decode(new Assets[level_data.id + "_dialogue"]);
@@ -162,9 +197,11 @@ package {
 					var npc:NPC = new NPC(data.id, data.x, data.y);
 					NPCs.add(npc.sprite);
 					
-					// Add robots to their own group.
+					// Add robots to their own group. Also adjust their position, because their hitbox doesn't line up
+					// perfectly with their sprite.
 					if (npc.type.id === "robot") {
 						robots.add(npc.sprite);
+						npc.y += 2.0;
 					}
 				}
 			}
@@ -197,6 +234,7 @@ package {
 			bottomless_borders.add(border);
 			
 			// Group all of the contents of the level.
+			contents.add(background);
 			contents.add(bg_tiles);
 			contents.add(background_props);
 			contents.add(wall_tiles);
@@ -259,7 +297,8 @@ package {
 			
 			// Glass can be left- or right-facing, so there are two different tiles we need to check.
 			if (destroyWall(5, x, y) || destroyWall(7, x, y)) {
-				FlxG.play(Assets.glass_break_sound, 0.65);
+				var sound:Class = (Math.random() < 0.5) ? Assets.glass_break_1_sound : Assets.glass_break_2_sound;
+				FlxG.play(sound, 0.65);
 				
 				return true;
 			}
@@ -323,7 +362,7 @@ package {
 				sound = Assets.meter_fill_sound;
 			}
 			
-			FlxG.play(sound, 0.375);
+			FlxG.play(sound, 0.435);
 			
 			// Increment the appropriate progress counter.
 			progress[dead_npc.objective_type]++;

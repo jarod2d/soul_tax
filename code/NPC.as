@@ -526,8 +526,8 @@ package {
 				flash_timer = HurtFlashTime;
 			}
 			
-			// Kill the NPC if necessary, or make them flee if they're not dead.
-			if (hp <= 0.0) {
+			// Kill the NPC if necessary.
+			if (hp <= 0.0 || is_shrunk) {
 				kill(source);
 			}
 			

@@ -163,7 +163,7 @@ package {
 				FlxG.music = null;
 			}
 			
-			FlxG.playMusic(Assets.level_select_music, 0.415);
+			FlxG.playMusic(Assets.level_select_music, 0.385);
 		}
 		
 		// Selects the given level, moving the selection.

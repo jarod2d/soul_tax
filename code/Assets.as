@@ -24,6 +24,7 @@ package {
 		[Embed(source="../images/clock_icon.png")] public static var clock_icon:Class;
 		[Embed(source="../images/j_key.png")] public static var j_key:Class;
 		[Embed(source="../images/esdf_keys.png")] public static var esdf_keys:Class;
+		[Embed(source="../images/zzz.png")] public static var zzz_sprite:Class;
 		
 		// Character sprites.
 		[Embed(source="../images/ghost.png")] public static var ghost_sprite:Class;
@@ -68,7 +69,25 @@ package {
 		[Embed(source="../images/laser.png")] public static var laser_sprite:Class;
 		
 		// Tiles.
-		[Embed(source="../images/tiles.png")] public static var tiles:Class;
+		[Embed(source="../images/tiles.png")] public static var day_tiles:Class;
+		[Embed(source="../images/tiles_night.png")] public static var night_tiles:Class;
+		
+		// Background images.
+		[Embed(source="../images/sun.png")] public static var sun_image:Class;
+		[Embed(source="../images/moon.png")] public static var moon_image:Class;
+		[Embed(source="../images/stars.png")] public static var stars_image:Class;
+		[Embed(source="../images/clouds_day.png")] public static var clouds_day_image:Class;
+		[Embed(source="../images/clouds_night.png")] public static var clouds_night_image:Class;
+		
+		// Props.
+		[Embed(source="../images/prop_chair.png")] public static var chair_prop:Class;
+		[Embed(source="../images/prop_copier.png")] public static var copier_prop:Class;
+		[Embed(source="../images/prop_desk.png")] public static var desk_prop:Class;
+		[Embed(source="../images/prop_painting_1.png")] public static var painting_1_prop:Class;
+		[Embed(source="../images/prop_painting_2.png")] public static var painting_2_prop:Class;
+		[Embed(source="../images/prop_painting_3.png")] public static var painting_3_prop:Class;
+		[Embed(source="../images/prop_plant.png")] public static var plant_prop:Class;
+		[Embed(source="../images/prop_teller.png")] public static var teller_prop:Class;
 		
 		// Music.
 		[Embed(source="../audio/title_screen.mp3")] public static var title_screen_music:Class;
@@ -79,15 +98,19 @@ package {
 		[Embed(source="../audio/main_theme.mp3")] public static var main_theme_music:Class;
 		
 		// Sounds.
+		[Embed(source="../audio/block_break_1.mp3")] public static var block_break_1_sound:Class;
+		[Embed(source="../audio/block_break_2.mp3")] public static var block_break_2_sound:Class;
 		[Embed(source="../audio/bonus_kill_1.mp3")] public static var bonus_kill_1_sound:Class;
 		[Embed(source="../audio/bonus_kill_2.mp3")] public static var bonus_kill_2_sound:Class;
 		[Embed(source="../audio/ceo_vomit.mp3")] public static var ceo_vomit_sound:Class;
+		[Embed(source="../audio/dialogue_blip.mp3")] public static var dialogue_blip_sound:Class;
 		[Embed(source="../audio/dialogue_confirm.mp3")] public static var dialogue_confirm_sound:Class;
 		[Embed(source="../audio/door_open.mp3")] public static var door_open_sound:Class;
 		[Embed(source="../audio/female_yell.mp3")] public static var female_yell_sound:Class;
 		[Embed(source="../audio/ghost_flying.mp3")] public static var ghost_flying_sound:Class;
 		[Embed(source="../audio/ghost_going_up.mp3")] public static var ghost_going_up_sound:Class;
-		[Embed(source="../audio/glass_break.mp3")] public static var glass_break_sound:Class;
+		[Embed(source="../audio/glass_break_1.mp3")] public static var glass_break_1_sound:Class;
+		[Embed(source="../audio/glass_break_2.mp3")] public static var glass_break_2_sound:Class;
 		[Embed(source="../audio/gun.mp3")] public static var gun_sound:Class;
 		[Embed(source="../audio/jump.mp3")] public static var jump_sound:Class;
 		[Embed(source="../audio/kick_miss_1.mp3")] public static var kick_miss_1_sound:Class;
@@ -111,6 +134,9 @@ package {
 		[Embed(source="../audio/punch_miss_2.mp3")] public static var punch_miss_2_sound:Class;
 		[Embed(source="../audio/robot_aggro.mp3")] public static var robot_aggro_sound:Class;
 		[Embed(source="../audio/select.mp3")] public static var select_sound:Class;
+		[Embed(source="../audio/shrink_hit_1.mp3")] public static var shrink_hit_1_sound:Class;
+		[Embed(source="../audio/shrink_hit_2.mp3")] public static var shrink_hit_2_sound:Class;
+		[Embed(source="../audio/shrink_hit_3.mp3")] public static var shrink_hit_3_sound:Class;
 		[Embed(source="../audio/shrink_ray.mp3")] public static var shrink_ray_sound:Class;
 		[Embed(source="../audio/stop_possess.mp3")] public static var stop_possess_sound:Class;
 		[Embed(source="../audio/superhero_special.mp3")] public static var superhero_special_sound:Class;
