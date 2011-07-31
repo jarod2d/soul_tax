@@ -220,7 +220,7 @@ package {
 				}, 1000.0);
 				
 				// Play a sound.
-				FlxG.play(Assets.level_end_sound, 0.5);
+				FlxG.play(Assets.level_end_sound, 0.415);
 				
 				// Update the substate.
 				substate = TimeUpSubstate;

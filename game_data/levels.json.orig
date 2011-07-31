@@ -24,7 +24,7 @@
 			"businessman": 5
 		}
 	},
-	
+		
 	{
 		"id":   "arches",
 		"name": "Arches",
@@ -145,13 +145,59 @@
 	},
 	
 	{
+<<<<<<< HEAD
 		"id":   "ceo_assassination",
 		"name": "Get That CEO",
 		"time": 55.0,
+=======
+		"id":   "cops_and_robbers",
+		"name": "Cop and Robbers",
+		"time": 30.0,
+		"setting": "day",
+		"objectives": {
+			"burglar": 10
+		}
+	},
+	
+	{
+		"id":   "superhero_intro",
+		"name": "Superhero Intro",
+		"time": 22.0,
+>>>>>>> 00975ae1ef07f8529e5e363f9bebdfff30e14b09
 		"setting": "day",
 		"objectives": {
 			"ceo": 1,
+<<<<<<< HEAD
 			"businessman": 6
+=======
+			"security_guard": 5,
+			"old_lady": 4,
+			"bank_manager": 8,
+			"superhero": 1
+		}
+	},
+	
+	{
+		"id":   "arches",
+		"name": "Arches",
+		"time": 65.0,
+		"setting": "day",
+		"objectives": {
+			"businessman": 14,
+			"maintenance_guy": 2,
+			"bank_manager": 2
+		}
+	},
+	
+	{
+		"id":   "bullseye",
+		"name": "Bullseye",
+		"time": 6.0,
+		"setting": "day",
+		"objectives": {
+			"businessman": 1,
+			"security_guard": 1
+>>>>>>> 00975ae1ef07f8529e5e363f9bebdfff30e14b09
 		}
 	},
 	
@@ -215,6 +261,7 @@
 	},
 	
 	{
+<<<<<<< HEAD
 		"id":   "shrink",
 		"name": "Dr. Derp's Revenge",
 		"time": 75.0,
@@ -229,6 +276,11 @@
 		"id":   "kill_dudes",
 		"name": "Generic Level 1",
 		"time": 80.0,
+=======
+		"id":   "maze",
+		"name": "Maze",
+		"time": 75.0,
+>>>>>>> 00975ae1ef07f8529e5e363f9bebdfff30e14b09
 		"setting": "day",
 		"objectives": {
 			"any": 4,
@@ -240,9 +292,37 @@
 	},
 	
 	{
+<<<<<<< HEAD
 		"id":   "basement",
 		"name": "Creepy Boss",
 		"time": 50.0,
+=======
+		"id":   "hero_justice",
+		"name": "Hero's Justice",
+		"time": 30.0,
+		"setting": "day",
+		"objectives": {
+			"businessman": 4,
+			"bank_manager": 3,
+			"supervillain": 1
+		}
+	},
+	
+	{
+		"id":   "shrink",
+		"name": "Dr. Derp's Revenge",
+		"time": 75.0,
+>>>>>>> 00975ae1ef07f8529e5e363f9bebdfff30e14b09
+		"setting": "day",
+		"objectives": {
+			"ceo": 1
+		}
+	},
+	
+	{
+		"id":   "basement",
+		"name": "Creepy Boss",
+		"time": 45.0,
 		"setting": "day",
 		"objectives": {
 			"ceo": 1

@@ -134,7 +134,7 @@ package {
 			
 			// Play a sound.
 			if (sound && (sound_played_count < max_sound_count || max_sound_count === 0)) {
-				FlxG.play(sound, 0.5);
+				FlxG.play(sound, 0.6);
 				sound_played_count++;
 			}
 			

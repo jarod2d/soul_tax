@@ -210,8 +210,9 @@ package {
 				}
 				
 				// Play a sound.
+				var volume:Number = (npc.type.id === "superhero" && npc.using_special) ? 0.25 : 0.65;
 				var sound:Class = (Math.random() < 0.5) ? Assets.punch_hit_2_sound : Assets.punch_hit_3_sound;
-				FlxG.play(sound, 0.65);
+				FlxG.play(sound, volume);
 			}
 			
 			// Break glass.
@@ -224,7 +225,9 @@ package {
 				
 				// If we collided with glass, we need to break the glass and restore our old velocity so that the NPC
 				// keeps moving through the window
-				if (Game.level.breakGlassAt(npc.center.x + impact_direction.x * Level.TileSize, npc.center.y + impact_direction.y * Level.TileSize) && npc.state !== PossessedState) {
+				var break_point:FlxPoint = new FlxPoint(npc.center.x + impact_direction.x * Level.TileSize, npc.center.y + impact_direction.y * Level.TileSize);
+				
+				if (npc.state !== PossessedState && Game.level.breakGlassAt(break_point.x, break_point.y)) {
 					npc.knockback_velocity.x = npc.old_velocity.x;
 					npc.knockback_velocity.y = npc.old_velocity.y;
 				}
