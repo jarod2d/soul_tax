@@ -265,7 +265,7 @@ package {
 			is_shrunk = true;
 			
 			// Play a sound.
-			FlxG.play(Assets["shrink_hit_" + (MathUtil.randomInt(3) + 1) + "_sound"], 0.25);
+			FlxG.play(Assets["shrink_hit_" + (MathUtil.randomInt(3) + 1) + "_sound"], 0.235);
 		}
 		
 		// Called when the player just pressed the special attack button. It's a giant nasty monolithic function, but
