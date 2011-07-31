@@ -1,4 +1,4 @@
-{
+{        
 	"start": [
 		["Businessman", "right", "Overtime again?"],
 		["Businessman", "left", "Yeah."],
@@ -14,36 +14,40 @@
 		["Businessman", "left", "Ew..."],
 		["Ghost", "right", "Oh, come on!"],
 		["Copier", "right", "*WHAM* *WHAM*"],
-		["Death", "left", "Wow, this has got to be the sorriest excuse for haunting I’ve seen since Amityville."],
+		["Reaper", "left", "Wow, this has got to be the sorriest excuse for haunting I’ve seen since Amityville."],
 		["Ghost", "right", "Woah!...Death?"],
-		["Death", "left", "Not quite."],
+		["Reaper", "left", "Not quite."],
 		["Ghost", "right", "Where the hell have you been? I’ve been dead for like 5 years."],
-		["Death", "left", "Says 8 here. Details. Anyway, no time for banter, we’ve got business."],
+		["Reaper", "left", "Says 8 here. Details. Anyway, no time for banter, we’ve got business."],
 		["Ghost", "right", "Business?"],
-		["Death", "left", "You have quite an outstanding debt. Lots of souls. Tsk, tsk."],
+		["Reaper", "left", "You have quite an outstanding debt. Lots of souls. Tsk, tsk."],
 		["Ghost", "right", "Debt?"],
-		["Death", "left", "It’s really quite simple, you multiply the number of years post mortuum-"],
+		["Reaper", "left", "It’s really quite simple, you multiply the number of years post mortuum-"],
 		["Ghost", "right", "I’ve been haunting this place forever and no one’s asked me for a thing. What’re you, my landlord?"],
-		["Death", "left", "What, you expected all this for free?"],
-		["Death", "left", "You unfortunately slipped through the cracks of the system. Mistakes do happen."], 
-		["Death", "left", "Afterall, how can you expect a Reaper to get work done on New Years when there’s champagne to be had and-"],
-		["Death", "left", "Essentially, you owe 8 years in soul taxes."],
-		["Death", "left", "Now, since I may have been somewhat responsible for your debt, I’m willing to help you out."],
+		["Reaper", "left", "What, you expected all this for free?"],
+		["Reaper", "left", "You unfortunately slipped through the cracks of the system. Mistakes do happen."], 
+		["Reaper", "left", "Afterall, how can you expect a Reaper to get work done on New Years when there’s champagne to be had and-"],
+		["Reaper", "left", "Essentially, you owe 8 years in soul taxes."],
+		["Reaper", "left", "Now, since I may have been somewhat responsible for your debt, I’m willing to help you out."],
 		["Ghost", "right", "Great, I've got Skeletor on my side."],
-		["Death", "left", "Let’s start with these two losers. Possess one of them and clobber the other to death!"],
+		["Reaper", "left", "Let’s start with these two losers. Possess one of them and clobber the other to death!"],
 		["Ghost", "right", "What?! Clobber them to-wait, I can possess people?"],
-		["Death", "left", "Yeeeaah...somebody probably should have told you that."],
-		["Death", "left", "Go hover over one of those idiots and press spacebar to take control of them."], 
-		["Death", "left", "Use J to punch and K to kick!"]
-	],
-	
+		["Reaper", "left", "Yeeeaah...somebody probably should have told you that."],
+		["Reaper", "left", "Also, considering the severity of your debt, you should probably take out the other as well."],
+		["Reaper", "left", "Out the window, preferably..."],
+		["Ghost", "right", "What?!"],
+		["Reaper", "left", "Go hover over one of those idiots and press spacebar to take control of them."], 
+		["Reaper", "left", "Use J to punch and K to kick!"]
+	],   
+	     
 	"end": [
-		["Death", "left", "See, that wasn’t so hard. Now you’ve got 2 less souls to go!"],
-		["Ghost", "right", "I'm not sure this is right..."],
-		["Death", "left", "Hey, you wanna go to the Great Beyond right now? Because I can take you there. It’s all brimstone, smoke, and Bieber music."],
-		["Ghost", "right", "I figured I'd go to Heaven..."],
-		["Death", "left", "After what you just did? Hell no."],
-		["Ghost", "right", "But you-"],
-		["Death", "left", "Time to find some more meat puppets."]
-	]
-}
+		["Reaper", "left", "See, that wasn’t so hard. Now you’ve got 2 less souls to go!"],
+		["Ghost",  "right", "I'm not sure this is right..."],
+		["Reaper", "left", "Hey, you wanna go to the Great Beyond right now? Because I can take you there. It’s all brimstone, smoke, and Bieber music."],
+		["Ghost",  "right", "I figured I'd go to Heaven..."],
+		["Reaper", "left", "After what you just did? Hell no."],
+		["Ghost",  "right", "But you-"],
+		["Reaper", "left", "Time to find some more meat puppets."]
+	]    
+}        
+         
