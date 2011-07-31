@@ -106,6 +106,7 @@ package {
 		[Embed(source="../audio/dialogue_blip.mp3")] public static var dialogue_blip_sound:Class;
 		[Embed(source="../audio/dialogue_confirm.mp3")] public static var dialogue_confirm_sound:Class;
 		[Embed(source="../audio/door_open.mp3")] public static var door_open_sound:Class;
+		[Embed(source="../audio/drill.mp3")] public static var drill_sound:Class;
 		[Embed(source="../audio/female_yell.mp3")] public static var female_yell_sound:Class;
 		[Embed(source="../audio/ghost_flying.mp3")] public static var ghost_flying_sound:Class;
 		[Embed(source="../audio/ghost_going_up.mp3")] public static var ghost_going_up_sound:Class;

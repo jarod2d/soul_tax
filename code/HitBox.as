@@ -51,7 +51,7 @@ package {
 		public var dies_on_contact:Boolean;
 		
 		// The sound that plays when the hitbox hits something. You can also specify the maximum number of times that
-		// the sound will play when it hits something. Defaults to 2.
+		// the sound will play when it hits something. Defaults to 2. Set to 0 for no limit.
 		public var sound:Class;
 		public var max_sound_count:int;
 		
@@ -135,7 +135,7 @@ package {
 			// TODO: Make everyone within a certain radius panic.
 			
 			// Play a sound.
-			if (sound && sound_played_count < max_sound_count) {
+			if (sound && (sound_played_count < max_sound_count || max_sound_count === 0)) {
 				FlxG.play(sound, 0.5);
 				sound_played_count++;
 			}

@@ -362,7 +362,7 @@ package {
 				sound = Assets.meter_fill_sound;
 			}
 			
-			FlxG.play(sound, 0.435);
+			FlxG.play(sound, 0.385);
 			
 			// Increment the appropriate progress counter.
 			progress[dead_npc.objective_type]++;

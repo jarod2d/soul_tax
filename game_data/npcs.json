@@ -197,7 +197,8 @@
 			{ "name": "scan_idle", "speed": 10, "looped": true, "frames": [7, 7, 4, 5, 5, 6] },
 			{ "name": "scan_walk", "speed": 8,  "looped": true, "frames": [0, 1, 2, 3] },
 			{ "name": "hunt_idle", "speed": 14, "looped": true, "frames": [15, 15, 12, 13, 13, 14] },
-			{ "name": "hunt_walk", "speed": 12, "looped": true, "frames": [8, 9, 10, 11] }
+			{ "name": "hunt_walk", "speed": 12, "looped": true, "frames": [8, 9, 10, 11] },
+			{ "name": "sleep",     "speed": 1,  "looped": true, "frames": [16] }
 		]
 	},
 	

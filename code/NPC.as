@@ -250,6 +250,9 @@ package {
 			
 			// Need to keep track of the fact that we're shrunk.
 			is_shrunk = true;
+			
+			// Play a sound.
+			FlxG.play(Assets["shrink_hit_" + (MathUtil.randomInt(3) + 1) + "_sound"], 0.25);
 		}
 		
 		// Called when the player just pressed the special attack button. It's a giant nasty monolithic function, but
@@ -346,6 +349,9 @@ package {
 			else if (type.id === "ceo") {
 				active_sound = FlxG.play(Assets.ceo_vomit_sound, 0.85, true);
 			}
+			else if (type.id === "maintenance_guy") {
+				active_sound = FlxG.play(Assets.drill_sound, 0.375, true);
+			}
 			else if (type.id === "old_lady") {
 				FlxG.play(Assets.old_lady_jabber_sound, 0.65);
 			}
@@ -416,11 +422,26 @@ package {
 				
 				// Destroy tiles underneath the NPC.
 				if (special_interval <= 0.0) {
+					var tiles:FlxTilemap = Game.level.wall_tiles;
 					var destroy_y:Number = (bottom + Level.TileSize / 2.0) / Level.TileSize;
-					Game.level.wall_tiles.setTile(left / Level.TileSize, destroy_y, 0);
-					Game.level.wall_tiles.setTile(right / Level.TileSize, destroy_y, 0);
+					var left:FlxPoint    = new FlxPoint(left / Level.TileSize, destroy_y);
+					var right:FlxPoint   = new FlxPoint(right / Level.TileSize, destroy_y);
 					
-					special_interval = MaintenanceGuySpecialInterval;
+					// The hard-coded value here is the tilemap's collision index -- basically, we're checking to see if
+					// there are destroyable tiles underneath us. Flixel gives us no easy way of getting the tilemap's
+					// collision index.
+					if (tiles.getTile(left.x, left.y) >= 3 ||tiles.getTile(right.x, right.y) >= 3) {
+						// Destroy the tiles.
+						tiles.setTile(left.x, left.y, 0);
+						tiles.setTile(right.x, right.y, 0);
+						
+						// Set the interval.
+						special_interval = MaintenanceGuySpecialInterval;
+						
+						// Play a sound.
+						var sound:Class = (Math.random() < 0.5) ? Assets.block_break_1_sound : Assets.block_break_2_sound;
+						FlxG.play(sound, 0.4);
+					}
 				}
 				
 				// Maintenance guy's cooldown resets when he's done drilling.
