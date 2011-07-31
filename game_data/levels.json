@@ -39,9 +39,21 @@
 		"id":   "window_tutorial",
 		"name": "A Window of Opportunity",
 		"time": 50.0,
-		"setting": "day",
+		"setting": "night",
 		"objectives": {
 			"businessman": 5
+		}
+	},
+	
+	{
+		"id":   "manager_intro",
+		"name": "Manager Intro (RENAME)",
+		"time": 30.0,
+		"setting": "night",
+		"objectives": {
+			"businessman": 5,
+			"maintenance_guy": 1,
+			"bank_manager": 1
 		}
 	},
 	
