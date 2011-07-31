@@ -269,6 +269,11 @@ package {
 		[Embed(source="../levels/hero_justice.1.csv", mimeType="application/octet-stream")] public static var hero_justice_wall_tiles:Class;
 		[Embed(source="../levels/hero_justice.props.json", mimeType="application/octet-stream")] public static var hero_justice_props:Class;
 		[Embed(source="../levels/hero_justice.dialogue.json", mimeType="application/octet-stream")] public static var hero_justice_dialogue:Class;
+		
+		[Embed(source="../levels/level_2.0.csv", mimeType="application/octet-stream")] public static var level_2_bg_tiles:Class;
+		[Embed(source="../levels/level_2.1.csv", mimeType="application/octet-stream")] public static var level_2_wall_tiles:Class;
+		[Embed(source="../levels/level_2.props.json", mimeType="application/octet-stream")] public static var level_2_props:Class;
+		[Embed(source="../levels/level_2.dialogue.json", mimeType="application/octet-stream")] public static var level_2_dialogue:Class;
 				
 		// Processes some of the loaded data. Should be called once at the beginning of the game.
 		public static function load():void {

@@ -16,6 +16,16 @@
 	},
 	
 	{
+		"id":   "level_2",
+		"name": "Level 2 (RENAME)",
+		"time": 60.0,
+		"setting": "night",
+		"objectives": {
+			"businessman": 8
+		}
+	},
+	
+	{
 		"id":   "window_tutorial",
 		"name": "A Window of Opportunity",
 		"time": 50.0,
@@ -27,7 +37,7 @@
 	
 	{
 		"id":   "burglar_intro",
-		"name": "Burglar Intro",
+		"name": "Burglar Intro (RENAME)",
 		"time": 55.0,
 		"setting": "night",
 		"objectives": {
@@ -39,7 +49,7 @@
 	
 	{
 		"id":   "robot_intro",
-		"name": "Robot Intro",
+		"name": "Robot Intro (RENAME)",
 		"time": 40.0,
 		"setting": "night",
 		"objectives": {
@@ -50,7 +60,7 @@
 	
 	{
 		"id":   "old_lady_intro",
-		"name": "Old Lady Intro",
+		"name": "Old Lady Intro (RENAME)",
 		"time": 55.0,
 		"setting": "day",
 		"objectives": {
@@ -61,7 +71,7 @@
 	
 	{
 		"id":   "ceo_intro",
-		"name": "CEO Intro",
+		"name": "CEO Intro (RENAME)",
 		"time": 25.0,
 		"setting": "day",
 		"objectives": {
@@ -82,7 +92,7 @@
 	
 	{
 		"id":   "kill_dudes_2",
-		"name": "Generic Level 2",
+		"name": "Generic Level 2 (RENAME)",
 		"time": 65.0,
 		"setting": "day",
 		"objectives": {
@@ -124,7 +134,7 @@
 	
 	{
 		"id":   "superhero_intro",
-		"name": "Superhero Intro",
+		"name": "Superhero Intro (RENAME)",
 		"time": 22.0,
 		"setting": "day",
 		"objectives": {
@@ -139,7 +149,7 @@
 	
 	{
 		"id":   "arches",
-		"name": "Arches",
+		"name": "Arches (RENAME?)",
 		"time": 65.0,
 		"setting": "day",
 		"objectives": {
@@ -162,7 +172,7 @@
 	
 	{
 		"id":   "kill_dudes",
-		"name": "Generic Level 1",
+		"name": "Generic Level 1 (RENAME)",
 		"time": 80.0,
 		"setting": "day",
 		"objectives": {
@@ -187,7 +197,7 @@
 	
 	{
 		"id":   "float",
-		"name": "Floating Building",
+		"name": "Floating Building (RENAME)",
 		"time": 55.0,
 		"setting": "day",
 		"objectives": {
@@ -207,7 +217,7 @@
 	
 	{
 		"id":   "kill_dudes_3",
-		"name": "Generic Level 3",
+		"name": "Generic Level 3 (RENAME)",
 		"time": 75.0,
 		"setting": "day",
 		"objectives": {
@@ -220,7 +230,7 @@
 	
 	{
 		"id":   "maze",
-		"name": "Maze",
+		"name": "Maze (RENAME)",
 		"time": 75.0,
 		"setting": "day",
 		"objectives": {
