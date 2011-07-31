@@ -190,14 +190,13 @@ package {
 			
 			// Figure out our new level index.
 			if (direction === FlxObject.UP) {
-				new_index -= levels_per_row;
-				
-				if (new_index < 0) {
-					new_index = levels_completed + MathUtil.mod(new_index, Math.max(1, levels_per_row)) - 1;
-					
-					while (new_index > levels_completed) {
-						new_index -= levels_per_row;
+				if (new_index - levels_per_row < 0) {
+					while (new_index + levels_per_row <= levels_completed) {
+						new_index += levels_per_row;
 					}
+				}
+				else {
+					new_index -= levels_per_row;
 				}
 			}
 			else if (direction === FlxObject.RIGHT) {
