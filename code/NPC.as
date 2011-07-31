@@ -294,6 +294,10 @@ package {
 				var hb:HitBox = new HitBox(this, 0, 0, 6, height);
 				hb.setAttributes(HitBox.PlayerAllegiance, 0.15, strength / 6.0, 300.0);
 				
+				// Break glass.
+				var break_direction:Number = (facing === FlxObject.RIGHT) ? right + Level.TileSize / 2.0 : left - Level.TileSize / 2.0;
+				Game.level.breakGlassAt(break_direction, s_center.y);
+				
 				// Play the animation.
 				sprite.play("special", true);
 				
