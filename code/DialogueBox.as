@@ -140,6 +140,10 @@ package {
 				return;
 			}
 			
+			// Keep reference to our old speaker and side.
+			var old_name:String = current_name;
+			var old_side:String = current_side;
+			
 			// Move to the next line.
 			current_line++;
 			current_char = 0;
@@ -147,7 +151,12 @@ package {
 			done_timer   = 0.0;
 			
 			// End the dialogue if necessary, otherwise update the speaker.
-			(current_line >= dialogue.length) ? endDialogue() : updateSpeaker();
+			if (current_line >= dialogue.length) {
+				endDialogue();
+			}
+			else if (old_name !== current_name || old_side !== current_side) {
+				updateSpeaker();
+			}
 		}
 		
 		// Ends the current dialogue.
