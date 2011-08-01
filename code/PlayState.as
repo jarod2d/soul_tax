@@ -204,7 +204,11 @@ package {
 			// Count down the level timer, and end the level if necessary.
 			level.time_remaining -= FlxG.elapsed;
 			
-			if (level.time_remaining <= 0.0 || (FlxG.keys.ENTER && level.objectives_complete)) {
+			// !!TEMP!! For last-minute testing purposes, we're allowing us to skip the level by pressing enter. Need to
+			// make sure we remove this before we release the game!!
+			if (level.time_remaining <= 0.0 || FlxG.keys.justPressed("ENTER")) {
+			
+//			if (level.time_remaining <= 0.0 || (FlxG.keys.ENTER && level.objectives_complete)) {
 				// Set the timer to zero in case the user ended the level early.
 				level.time_remaining = 0.0;
 				

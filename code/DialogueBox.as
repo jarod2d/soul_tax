@@ -150,6 +150,12 @@ package {
 			scroll_timer = 0.0;
 			done_timer   = 0.0;
 			
+			// Some super-hacky last-minute code to get some effects during a few specific dialogue moments.
+			if (current_line < dialogue.length && current_name === "Copier") {
+				FlxG.shake(0.0125, 0.3);
+				FlxG.play(Assets.npc_death_fancy_1_sound, 0.9);
+			}
+			
 			// End the dialogue if necessary, otherwise update the speaker.
 			if (current_line >= dialogue.length) {
 				endDialogue();
