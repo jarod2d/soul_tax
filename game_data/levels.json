@@ -82,17 +82,6 @@
 	},
 	
 	{
-		"id":   "old_lady_intro",
-		"name": "Back In My Day",
-		"time": 55.0,
-		"setting": "day",
-		"objectives": {
-			"businessman": 2,
-			"bank_manager": 3
-		}
-	},
-	
-	{
 		"id":   "float",
 		"name": "Castle in the Sky",
 		"time": 55.0,
@@ -116,12 +105,23 @@
 	
 	{
 		"id":   "robot_intro",
-		"name": "Robot Intro (RENAME)",
+		"name": "BEBOOP, DESTROY!",
 		"time": 40.0,
 		"setting": "night",
 		"objectives": {
 			"security_guard": 4,
 			"bank_manager": 1
+		}
+	},
+	
+	{
+		"id":   "old_lady_intro",
+		"name": "Back In My Day",
+		"time": 55.0,
+		"setting": "day",
+		"objectives": {
+			"businessman": 2,
+			"bank_manager": 3
 		}
 	},
 	
