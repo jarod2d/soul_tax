@@ -1,7 +1,13 @@
 {
 	"start": [
-		["Death", "right", "BLEAURUGGHGHHH"],
-		["Ghost", "left",  "OK"]
+		["Old Lady", "left", "MARTHA? MARTHA!? WHERE ARE YOU?"],
+		["Old Lady", "left", "I BROUGHT MY COPY OF MEMOIRS OF A TWO DOLLAR STREET WALKER! IS THIS THE SHADY OAKS BOOK CLUB? MARTHA!?"],
+		["Robot", "right",  "BEEBOOP, DESTROY!"],
+		["Old Lady", "left", "WHAT IS THIS CONTRAPTION?! WHERE IS THE BOOK CLUB?"],
+		["Old Lady", "left", "OH, I KNEW I SHOULDN’T TRUST THOSE GOOGLY MAPS!"],
+		["Reaper", "right", "How does it feel to be nearly finished paying off that pesky debt?"],
+		["Ghost", "left", "I’d feel a lot better if this new CEO closed the bank."],
+		["Reaper", "right", "Keep up the good work and your wish could be granted."]
 	],
 	
 	"end": [

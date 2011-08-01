@@ -1,11 +1,17 @@
 {
 	"start": [
-		["Death", "right", "BLEAURUGGHGHHH"],
-		["Ghost", "left",  "OK"]
+		["Superhero", "left", "Shrink rays you say? Hah! My superspeed will put an end to this villainy!"],
+		["CEO", "right", "Yeah, yeah, just do your job."],
+		["CEO", "right", "And take care of that pesky ghost if you can too. Thing’s costing me big bucks."],
+		["Superhero", "left",  "Ghosts don't scare me!"],
+		["Businessman", "right", "You should be scared. Last shift, I saw this dude get impaled by a jackhammer. It was totally metal."],
+		["Supervillain", "left", "At last, my chance has come to confront that discount hero!"],
+		["Supervillain", "left", "The League of Bargain Heroes will rue the day they rejected Dr. Derp’s application! Come, my goon!"],
+		["Burglar", "right", "Don't call me that."]
 	],
 	
 	"end": [
-		["Death", "right", "YOU WON!!!!!!!!!!!!!!!!!!!!!"],
-		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"]
+		["Ghost", "left", "You think they'll take me seriously now?"],
+		["Reaper", "right",  "Probably not."]
 	]
 }

@@ -1,11 +1,15 @@
 {
 	"start": [
-		["Death", "right", "BLEAURUGGHGHHH"],
-		["Ghost", "left",  "OK"]
+		["Supervillain", "left", "Uwhee hee hee, this conveniently placed chamber is the perfect launch point for my insidious plan!"],
+		["Reaper", "right", "You get rid of one villain and another appears to take his place."],
+		["Ghost", "left", "Is this guy serious? What’s he going to do, run in there with that dinky plastic gun and get slaughtered?"],
+		["Reaper", "right", "I wouldn’t be so quick to judge. He’s packing serious heat."],
+		["Ghost", "left",  "Seriously?"],
+		["Reaper", "right", "That’s a shrink ray. I think you can figure out the rest."]
 	],
 	
 	"end": [
-		["Death", "right", "YOU WON!!!!!!!!!!!!!!!!!!!!!"],
-		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"]
+		["Ghost", "left", "So this guy has the power to shrink people, and he decides to rob a third-rate bank?"],
+		["Reaper", "right", "Obviously he's a man of high ambitions."]
 	]
 }

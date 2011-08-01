@@ -1,11 +1,19 @@
 {
 	"start": [
-		["Death", "right", "BLEAURUGGHGHHH"],
-		["Ghost", "left",  "OK"]
+		["Manager", "left", "Why are there so many of them?!"],
+		["Businessman", "right",  "Senior citizens?"],
+		["Manager", "left", "Old farts!"],
+		["Businessman", "right", "Apparently it’s Bingo night at Shady Meadows."],
+		["Manager", "left", "This isn't the nursing home!"],
+		["Businessman", "right", "That’s what I said, but they refused to listen."],
+		["Businessman", "right", "That or their hearing devices were turned down."],
+		["Old Lady", "left", "B12? DID I HEARD B12? I CAN’T HEAR YOU! WHERE’S THE LEMONADE? I ORDERED LEMONADE TEN MINUTES AGO!"],
+		["Old Lady", "right", "I WANT SWEET TEA! AND FIVE PACKETS OF PLAIN, WHITE SUGAR. NOT THAT SPLENDA NEWFANGLED NONSENSE."],
+		["Old Lady", "right", "BACK IN MY DAY, WE ONLY HAD CANE SUGAR AND WE MADE DO WITH THAT JUST FINE, I’LL LET YOU KNOW!"]
 	],
 	
 	"end": [
-		["Death", "right", "YOU WON!!!!!!!!!!!!!!!!!!!!!"],
-		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"]
+		["Ghost", "left", "I'm glad I was NEVER that obnoxious when I was old and dying."],
+		["Reaper", "right", "Yeah, that's totally why kids kept throwing rocks through your windows."]
 	]
 }

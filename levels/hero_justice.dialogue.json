@@ -1,7 +1,13 @@
 {
 	"start": [
-		["Death", "right", "BLEAURUGGHGHHH"],
-		["Ghost", "left",  "OK"]
+		["Supervillain", "left", "Uwhee hee hee! More pawns for my nefarious shrink ray!"],
+		["Supervillain", "left",  "They will make most splendid miniature minions!"],
+		["Ghost", "right", "He came back? Really?"],
+		["Reaper", "left", "Look at that guy, this is probably his only hobby."],
+		["Reaper", "left", "Besides that should be the least of your concerns."],
+		["Ghost", "right", "They hired a new CEO, great."],
+		["Reaper", "left", "You’ll have to put the fear in this one quicker."],
+		["Ghost", "right", "I wonder if he'd like to be shrunk."]
 	],
 	
 	"end": [
