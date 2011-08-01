@@ -1,11 +1,24 @@
 {
 	"start": [
-		["Death", "right", "BLEAURUGGHGHHH"],
-		["Ghost", "left",  "OK"]
+		["Businessman", "left", "Did you hear about Jim and Steve last night?"],
+		["Businessman", "right", "Like anyone tells me anything."],
+		["Businessman", "left", "Jim went crazy and clobbered Steve to death before jumping out the window!"],
+		["Businessman", "right", "WHAT?!"],
+		["Businessman", "left", "I know, it's terrible! I'm stuck with all their work, and I don't even get paid overtime!"],
+		["Businessman", "right", "..."],
+		["Businessman", "left", "Oh, yeah and I guess their deaths were sad too..."],
+		["Reaper", "right", "This will be like shooting fish in a barrel."],
+		["Ghost", "left", "I am concerned about the ethical ramifications of this."],
+		["Reaper", "right", "What you should be concerned with is the fact that they're not all on the same floor."],
+		["Reaper", "right", "You're going to have to jump from body to body."],
+		["Ghost", "left", "But-"],
+		["Reaper", "right", "Hop to! You've only got 60 seconds before your next payment's due."]
 	],
 	
 	"end": [
-		["Death", "right", "YOU WON!!!!!!!!!!!!!!!!!!!!!"],
-		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"]
+		["Reaper", "left", "Good work."],
+		["Reaper", "left", "You're actually saving me a lot of paperwork by paying off your debt instead of just defaulting, you know."],
+		["Ghost", "right",  "Oh goodie, I'm helping out an undead tax collector."],
+		["Reaper", "left", "Let the slaughter continue!"]
 	]
 }

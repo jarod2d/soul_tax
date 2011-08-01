@@ -43,7 +43,8 @@
 	"end": [
 		["Reaper", "left", "See, that wasn’t so hard. Now you’ve got 2 less souls to go!"],
 		["Ghost",  "right", "I'm not sure this is right..."],
-		["Reaper", "left", "Hey, you wanna go to the Great Beyond right now? Because I can take you there. It’s all brimstone, smoke, and Bieber music."],
+		["Reaper", "left", "Hey, you wanna go to the Great Beyond right now?"],
+		["Reaper", "left", "Because I can take you there. It’s all brimstone, smoke, and Bieber music."],
 		["Ghost",  "right", "I figured I'd go to Heaven..."],
 		["Reaper", "left", "After what you just did? Hell no."],
 		["Ghost",  "right", "But you-"],

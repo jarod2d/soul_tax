@@ -17,7 +17,7 @@
 	
 	{
 		"id":   "level_2",
-		"name": "Level 2 (RENAME)",
+		"name": "Body Hop",
 		"time": 60.0,
 		"setting": "night",
 		"objectives": {
