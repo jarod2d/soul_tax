@@ -1,11 +1,15 @@
 {
 	"start": [
-		["Death", "right", "BLEAURUGGHGHHH"],
-		["Ghost", "left",  "OK"]
+		["Security", "left", "Hey, have you heard about the Board of Directors?"],
+		["Security", "right",  "The CEO’s brothers?"],
+		["Security", "left", "Yeah, Cindy in accounting said they’re coming here."],
+		["Security", "left", "They’re gonna deal with this whole haunting personally."],
+		["Security", "right", "How? They’re executives not mediums!"],
+		["Security", "left", "The boss always says ‘never underestimate the power of money.’"]
 	],
 	
 	"end": [
-		["Death", "right", "YOU WON!!!!!!!!!!!!!!!!!!!!!"],
-		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"]
+		["Ghost", "left", "What do you think those security guys meant?"],
+		["Reaper", "right",  "Knowing these guys? It means you're going to deal with a lot of stupidity in the near future."]
 	]
 }

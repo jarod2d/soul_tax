@@ -1,11 +1,23 @@
 {
 	"start": [
-		["Death", "right", "BLEAURUGGHGHHH"],
-		["Ghost", "left",  "OK"]
+		["Reaper", "left", "This is it. There’s enough people here to pay off your debt entirely."],
+		["Ghost", "right",  "And if I can take care of those CEOs, the bank will close!"],
+		["CEO", "left", "Tonight, I call a meeting of the Board of Directors!"],
+		["CEO", "right", "We are gathered here tonight to channel our power into an exorcism."],
+		["CEO", "left", "Yes, bring forth the piles of money!"],
+		["CEO", "right", "Long live the Lord of Liquid Assets!"],
+		["CEO", "left", "No force, dead or living, can withstand the arcane might of Moneycraft!"],
+		["Ghost", "right", "They’re trying to exorcise me with...money? Really?"],
+		["Reaper", "left", "Better take advantage of their ill advised gathering."],
+		["Ghost", "right", "If I get them all, no one’ll be left to run the bank."],
+		["Reaper", "left", "Good luck."]
 	],
 	
 	"end": [
-		["Death", "right", "YOU WON!!!!!!!!!!!!!!!!!!!!!"],
-		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"]
+		["Reaper", "left", "Congratulations! You have paid off every single soul of your debt. I’m impressed."],
+		["Ghost", "right",  "It’s all over?"],
+		["Reaper", "left", "The Board of Directors has been destroyed. This bank will wither and perish within the week."],
+		["Ghost", "right", "Does this mean I’m moving on?"],
+		["Reaper", "left", "Yes, now let’s get on our way! There’s a birthday party I’m dying to get to. I hear they have clowns and a moon walk!"]
 	]
 }
