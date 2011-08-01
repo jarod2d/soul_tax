@@ -58,6 +58,18 @@
 	},
 	
 	{
+		"id":   "security_guard_intro",
+		"name": "Security Guard Intro (RENAME)",
+		"time": 30.0,
+		"setting": "night",
+		"objectives": {
+			"businessman": 7,
+			"bank_manager": 2,
+			"security_guard": 1
+		}
+	},
+	
+	{
 		"id":   "arches",
 		"name": "Arches (RENAME?)",
 		"time": 75.0,

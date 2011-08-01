@@ -31,7 +31,7 @@ package {
 		
 		// The velocity threshold after which the NPC will take damage when colliding with something.
 		public static const ContactDamageThreshold:Number = 280.0;
-		public static const NPCDamageThreshold:Number     = 140.0;
+		public static const NPCDamageThreshold:Number     = 175.0;
 		public static const GlassBreakThreshold:Number    = 150.0;
 		
 		// How often the maintenance guy's special attack gets triggered.
@@ -100,6 +100,10 @@ package {
 		// cancel it when we need to.
 		public var active_sound:FlxSound;
 		
+		// A quick little last-minute hack to prevent NPCs from taking tons of damage when they collide with multiple
+		// NPCs at once.
+		public var has_hit_npc:Boolean;
+		
 		// Flixel has a rather poorly-designed collision callback system that doesn't provide information about the
 		// objects' changes in velocity. We need that information, so each NPC stores their pre-collision velocity here.
 		private var old_velocity:FlxPoint;
@@ -135,6 +139,7 @@ package {
 			acceleration.y     = 615.0;
 			knockback_velocity = new FlxPoint();
 			old_velocity       = new FlxPoint();
+			has_hit_npc        = false;
 			
 			// Set the initial state.
 			state = IdleState;
@@ -159,6 +164,7 @@ package {
 			var npc:NPC                 = npc_sprite.entity as NPC;
 			var obstacle_is_npc:Boolean = (obstacle is EntitySprite && (obstacle as EntitySprite).entity is NPC);
 			var obstacle_npc:NPC        = (obstacle_is_npc) ? (obstacle as EntitySprite).entity as NPC : null;
+			var is_hero_attack:Boolean  = (npc.type.id === "superhero" && npc.using_special);
 			
 			// Grab the change in the NPC's velocity.
 			var velocity_change:FlxPoint = new FlxPoint(Math.abs(npc.velocity.x - npc.old_velocity.x), Math.abs(npc.velocity.y - npc.old_velocity.y));
@@ -194,10 +200,11 @@ package {
 			
 			// Apply damage. We need to make sure not to apply damage when the superhero is charging through NPCs,
 			// though.
-			if (damage_impact > 0.0 && (!obstacle_is_npc || npc.type.id !== "superhero" || !npc.using_special)) {
+			if (damage_impact > 0.0 && (!obstacle_is_npc || !is_hero_attack) && (!obstacle_is_npc || !npc.has_hit_npc)) {
 				// Need to tweak NPC damage.
 				if (obstacle_is_npc) {
-					damage_impact *= 3.25;
+					damage_impact *= 2.0;
+					npc.has_hit_npc = true;
 				}
 				
 				npc.hurt(damage_impact, "falling");
@@ -210,7 +217,7 @@ package {
 				}
 				
 				// Play a sound.
-				var volume:Number = (npc.type.id === "superhero" && npc.using_special) ? 0.25 : 0.65;
+				var volume:Number = (is_hero_attack) ? 0.25 : 0.65;
 				var sound:Class = (Math.random() < 0.5) ? Assets.punch_hit_2_sound : Assets.punch_hit_3_sound;
 				FlxG.play(sound, volume);
 			}
@@ -1016,6 +1023,9 @@ package {
 			
 			// Increment the state duration.
 			state_duration += FlxG.elapsed;
+			
+			// Reset the hit NPC status.
+			has_hit_npc = false;
 			
 			// Kill the NPC if they've fallen off the map.
 			if (y > Game.level.height) {

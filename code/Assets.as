@@ -284,6 +284,11 @@ package {
 		[Embed(source="../levels/manager_intro.1.csv", mimeType="application/octet-stream")] public static var manager_intro_wall_tiles:Class;
 		[Embed(source="../levels/manager_intro.props.json", mimeType="application/octet-stream")] public static var manager_intro_props:Class;
 		[Embed(source="../levels/manager_intro.dialogue.json", mimeType="application/octet-stream")] public static var manager_intro_dialogue:Class;
+		
+		[Embed(source="../levels/security_guard_intro.0.csv", mimeType="application/octet-stream")] public static var security_guard_intro_bg_tiles:Class;
+		[Embed(source="../levels/security_guard_intro.1.csv", mimeType="application/octet-stream")] public static var security_guard_intro_wall_tiles:Class;
+		[Embed(source="../levels/security_guard_intro.props.json", mimeType="application/octet-stream")] public static var security_guard_intro_props:Class;
+		[Embed(source="../levels/security_guard_intro.dialogue.json", mimeType="application/octet-stream")] public static var security_guard_intro_dialogue:Class;
 				
 		// Processes some of the loaded data. Should be called once at the beginning of the game.
 		public static function load():void {
