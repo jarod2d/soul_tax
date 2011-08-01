@@ -59,7 +59,7 @@
 	
 	{
 		"id":   "security_guard_intro",
-		"name": "Security Guard Intro (RENAME)",
+		"name": "Shoot for the Stars",
 		"time": 30.0,
 		"setting": "night",
 		"objectives": {
@@ -71,8 +71,8 @@
 	
 	{
 		"id":   "arches",
-		"name": "Arches (RENAME?)",
-		"time": 75.0,
+		"name": "Scream and Shoot",
+		"time": 80.0,
 		"setting": "day",
 		"objectives": {
 			"businessman": 14,
@@ -83,7 +83,7 @@
 	
 	{
 		"id":   "old_lady_intro",
-		"name": "Old Lady Intro (RENAME)",
+		"name": "Back In My Day",
 		"time": 55.0,
 		"setting": "day",
 		"objectives": {

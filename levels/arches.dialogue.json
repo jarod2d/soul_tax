@@ -1,11 +1,17 @@
 {
 	"start": [
-		["Death", "right", "BLEAURUGGHGHHH"],
-		["Ghost", "left",  "OK"]
+		["Bank Manager", "left", "Keep working, you slackers!"],
+		["Businessman", "right", "Geez, ever since those deaths they've been working us like dogs!"],
+		["Businessman", "left", "Well duh, no one wants to work nights anymore."],
+		["Businessman", "right", "Good point."],
+		["Bank Manager", "left",  "Chop chop! A dead man's work isn't going to finish itself!"],
+		["Ghost", "right", "Is there a reason we're doing this during the daytime?"],
+		["Reaper", "left", "I figured it was time for a change in scenery."],
+		["Reaper", "left", "Enjoy!"]
 	],
 	
 	"end": [
-		["Death", "right", "YOU WON!!!!!!!!!!!!!!!!!!!!!"],
-		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"]
+		["Reaper", "left", "At this rate, you'll scare them all out of working here at all."],
+		["Ghost", "right", "That's what I'm going for."]
 	]
 }

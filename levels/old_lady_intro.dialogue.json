@@ -5,7 +5,9 @@
 		["Old Lady", "left", "HELLO? HELLO?! IS ANYBODY GOING TO HELP ME? I NEED TO DEPOSIT THIS CHECK BEFORE JEOPARDY COMES ON!"],
 		["Businessman", "left", "I...I want to help her. But every time I get near her I feel sleepy."],
 		["Businessman", "right", "No way I'm going near her."],
-		["Old Lady", "left", "OH BACK WHEN IT WAS ALEX TREBEK, I USED TO WATCH JEOPARDY EVERY DAY. EVEN THE RERUNS!"]
+		["Old Lady", "left", "OH BACK WHEN IT WAS ALEX TREBEK, I USED TO WATCH JEOPARDY EVERY DAY. EVEN THE RERUNS!"],
+		["Ghost", "right", "Oh dear lord, can I kill her now?"],
+		["Reaper", "left", "I don't recommend it. She should be a useful ally."]
 	],
 	
 	"end": [

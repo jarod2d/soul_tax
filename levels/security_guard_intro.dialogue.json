@@ -1,19 +1,19 @@
 {
 	"start": [
-		["Manager", "left", "Any questions?"],
-		["Security Guy", "right",  "I heard there’s a psychopath that lives in the vaults."],
-		["Security Guy", "left", "Yeah, he wears this bloody sock puppet on one arm and a chainsaw on the other!"],
-		["Manager", "left", "That’s nonsense. We’ve just had some...unfortunate accidents, yes that’s all."],
-		["Security Guy", "right", "And what if we have an accident?"],
-		["Manager", "left", "You’re security! You guys are like redshirts, you’re paid to die!"],
-		["Security Guy", "left", "..."],
-		["Manager", "right", "That didn't come out right."],
+		["Bank Manager", "left", "Any questions?"],
+		["Security Guard", "right",  "I heard there’s a psychopath that lives in the vaults."],
+		["Security Guard", "left", "Yeah, he wears this bloody sock puppet on one arm and a chainsaw on the other!"],
+		["Bank Manager", "right", "That’s nonsense. We’ve just had some...unfortunate accidents, yes that’s all."],
+		["Security Guard", "left", "And what if we have an accident?"],
+		["Bank Manager", "right", "You’re security! You guys are like redshirts, you’re paid to die!"],
+		["Security Guard", "left", "..."],
+		["Bank Manager", "right", "That didn't come out right."],
 		["Ghost", "left", "These guys are new. I guess someone was bound to notice all the mysterious deaths."],
 		["Reaper", "right", "Oh look, the new guys have guns. Won’t that be fun!"]
 	],
 	
 	"end": [
 		["Ghost", "left", "Y'know, I wonder how these people's families are going to feel about their deaths..."],
-		["Reaper", "right", "I don't! Moving on!"]
+		["Reaper", "right", "I don't! Hurry up, you've got more souls to pay."]
 	]
 }
