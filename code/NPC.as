@@ -200,20 +200,16 @@ package {
 			
 			// Apply damage. We need to make sure not to apply damage when the superhero is charging through NPCs,
 			// though.
-			if (damage_impact > 0.0 && (!obstacle_is_npc || !is_hero_attack) && (!obstacle_is_npc || !npc.has_hit_npc)) {
-				// Need to tweak NPC damage.
+			if (damage_impact > 0.0 && (!obstacle_is_npc || !is_hero_attack)) {
+				// Need to tweak NPC damage, and also hurt the other NPC.
 				if (obstacle_is_npc) {
 					damage_impact *= 2.0;
-					npc.has_hit_npc = true;
+					obstacle_npc.hurt(damage_impact, "falling");
 				}
 				
-				npc.hurt(damage_impact, "falling");
-				
-				// Hurt the other NPC too if the other object is indeed an NPC.
-				// TODO: There's some weird stuff going on when colliding with other NPCs at the moment. I think it has
-				// to do with the value of the velocity change not being quite right in that case.
-				if (obstacle_is_npc) {
-					obstacle_npc.hurt(damage_impact, "falling");
+				if (!obstacle_is_npc || !npc.has_hit_npc) {
+					npc.hurt(damage_impact, "falling");
+					npc.has_hit_npc = true;
 				}
 				
 				// Play a sound.
