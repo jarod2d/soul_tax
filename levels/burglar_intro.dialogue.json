@@ -11,6 +11,7 @@
 	"end": [
 		["Ghost", "left", "I'm starting to think these people are, well, how do you say-"],
 		["Reaper", "right",  "Too stupid to live?"],
-		["Ghost", "left", "Yeah, that's it."]
+		["Ghost", "left", "Yeah, that's it."],
+		["Reaper", "right", "Get used to it."]
 	]
 }

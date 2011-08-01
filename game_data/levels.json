@@ -94,7 +94,7 @@
 	
 	{
 		"id":   "float",
-		"name": "Floating Building (RENAME)",
+		"name": "Castle in the Sky",
 		"time": 55.0,
 		"setting": "day",
 		"objectives": {
@@ -104,7 +104,7 @@
 	
 	{
 		"id":   "burglar_intro",
-		"name": "Burglar Intro (RENAME)",
+		"name": "Stranger in the Night",
 		"time": 55.0,
 		"setting": "night",
 		"objectives": {
