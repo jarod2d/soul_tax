@@ -202,7 +202,7 @@
 		"id":   "ceo_assassination",
 		"name": "Get That CEO",
 		"time": 55.0,
-		"setting": "day",
+		"setting": "night",
 		"objectives": {
 			"ceo": 1,
 			"businessman": 6

@@ -1,11 +1,18 @@
 {
 	"start": [
-		["Death", "right", "BLEAURUGGHGHHH"],
-		["Ghost", "left",  "OK"]
+		["Reaper", "left", "What on earth is going on here?"],
+		["Businessman", "right", "Marco!"],
+		["Businessman", "left", "Polo!"],
+		["Businessman", "right", "I'll find you eventually!"],
+		["Old Lady", "left", "MITTENS?! MITTENS WHERE ARE YOU!"],
+		["Ghost", "right", "Well...I guess I should do something about this."]
 	],
 	
 	"end": [
-		["Death", "right", "YOU WON!!!!!!!!!!!!!!!!!!!!!"],
-		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"]
+		["Reaper", "left", "How did you manage to navigate through that mess?"],
+		["Ghost", "right",  "I guess you could say I have a sixth sense."],
+		["Reaper", "left", "..."],
+		["Reaper", "left", "That was awful. I'm adding 10 extra souls to your debt just for that."],
+		["Ghost", "right", "What?!"]
 	]
 }

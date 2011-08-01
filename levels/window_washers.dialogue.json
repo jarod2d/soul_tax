@@ -1,8 +1,8 @@
 {
 	"start": [
-		["Security", "left", "Last night was close."],
+		["Security Guard", "left", "Last night was close."],
 		["CEO", "right",  "Well, maybe if some peons were better at their jobs, none of this madness would be happening!"],
-		["Security", "left", "But, it's a ghost, we can't-"],
+		["Security Guard", "left", "But, it's a ghost, we can't-"],
 		["CEO", "right", "GET OUT!"],
 		["Reaper", "left", "Somebody's cranky."],
 		["Ghost", "right", "Maybe he's finally getting it."],

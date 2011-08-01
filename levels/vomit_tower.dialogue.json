@@ -1,11 +1,11 @@
 {
 	"start": [
-		["Manager", "left", "All these deaths are bad for business."],
+		["Bank Manager", "left", "All these deaths are bad for business."],
 		["CEO", "right",  "We can make this work for us."],
-		["Manager", "left", "Excuse me?"],
-		["CEO", "right", "Think of it. The first “haunted” bank!"]
+		["Bank Manager", "left", "Excuse me?"],
+		["CEO", "right", "Think of it. The first “haunted” bank!"],
 		["CEO", "right", "We can have tours and a commercial with a catchy jingle! This place will be booming with business!"],
-		["Manager", "left", "But, sir, people are dying."],
+		["Bank Manager", "left", "But, sir, people are dying."],
 		["CEO", "right", "Accidents happen every day! Besides, this ghost talk is baloney."],
 		["Reaper", "left", "Seems like he's determined to ignore you."],
 		["Ghost", "right", "Well, he's in for a surprise."]
