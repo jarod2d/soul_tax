@@ -1,10 +1,10 @@
 {
 	"start": [
-		["Manager", "left", "Why are there so many of them?!"],
+		["Bank Manager", "left", "Why are there so many of them?!"],
 		["Businessman", "right",  "Senior citizens?"],
-		["Manager", "left", "Old farts!"],
+		["Bank Manager", "left", "Old farts!"],
 		["Businessman", "right", "Apparently it’s Bingo night at Shady Meadows."],
-		["Manager", "left", "This isn't the nursing home!"],
+		["Bank Manager", "left", "This isn't the nursing home!"],
 		["Businessman", "right", "That’s what I said, but they refused to listen."],
 		["Businessman", "right", "That or their hearing devices were turned down."],
 		["Old Lady", "left", "B12? DID I HEARD B12? I CAN’T HEAR YOU! WHERE’S THE LEMONADE? I ORDERED LEMONADE TEN MINUTES AGO!"],

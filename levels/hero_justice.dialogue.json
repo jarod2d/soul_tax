@@ -5,13 +5,14 @@
 		["Ghost", "right", "He came back? Really?"],
 		["Reaper", "left", "Look at that guy, this is probably his only hobby."],
 		["Reaper", "left", "Besides that should be the least of your concerns."],
-		["Ghost", "right", "They hired a new CEO, great."],
-		["Reaper", "left", "You’ll have to put the fear in this one quicker."],
-		["Ghost", "right", "I wonder if he'd like to be shrunk."]
+		["Superhero", "right", "Never fear, Captain Crimebuster is here!"],
+		["Reaper", "left", "We've got company."]
 	],
 	
 	"end": [
-		["Death", "right", "YOU WON!!!!!!!!!!!!!!!!!!!!!"],
-		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"]
+		["Ghost", "left", "Finally, he's gone."],
+		["Reaper", "right",  "I doubt that's the last we'll see of Dr. Derp."],
+		["Ghost", "left", "Really? Why?"],
+		["Reaper", "right", "You'll see. Let's keep going."]
 	]
 }

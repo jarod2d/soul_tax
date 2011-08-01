@@ -2,8 +2,8 @@
 	"start": [
 		["Ghost", "left", "Oh, this is precious. First Dr. Derp and now a Superhero?"],
 		["Superhero", "right",  "NEVER FEAR, CAPTAIN CRIMEBUSTER IS HERE!"],
-		["Security", "left", "Yeah, yeah we heard you the first three times."],
-		["Security", "right", "Ugh, Rent-a-Heroes. Lowest of the low."],
+		["Security Guard", "left", "Yeah, yeah we heard you the first three times."],
+		["Security Guard", "right", "Ugh, Rent-a-Heroes. Lowest of the low."],
 		["Superhero", "left", "Hey, don’t you badmouth the League of Bargain Heroes."],
 		["Reaper", "right", "I’ll bet he has some cool abilities you could use."],
 		["Ghost", "left", "Like X-Ray vision or laser sight?"],

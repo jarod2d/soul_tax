@@ -11,7 +11,8 @@
 	],
 	
 	"end": [
-		["Death", "right", "YOU WON!!!!!!!!!!!!!!!!!!!!!"],
-		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"]
+		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"],
+		["Ghost", "left", "Take that evil bank!"],
+		["Reaper", "right", "If I didn't know any better, I'd say you're having fun with this."]
 	]
 }

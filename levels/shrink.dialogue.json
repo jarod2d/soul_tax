@@ -11,7 +11,9 @@
 	],
 	
 	"end": [
-		["Ghost", "left", "You think they'll take me seriously now?"],
-		["Reaper", "right",  "Probably not."]
+		["Ghost", "left", "Think they're scared now?"],
+		["Reaper", "right",  "Probably not. They seem pretty stuck in denial."],
+		["Ghost", "left", "I guess I need to step things up."],
+		["Reaper", "right", "Yeah, you really should. Your final deadline's coming up soon."]
 	]
 }

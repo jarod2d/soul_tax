@@ -1,11 +1,13 @@
 {
 	"start": [
-		["Security", "left", "Hey, have you heard about the Board of Directors?"],
-		["Security", "right",  "The CEO’s brothers?"],
-		["Security", "left", "Yeah, Cindy in accounting said they’re coming here."],
-		["Security", "left", "They’re gonna deal with this whole haunting personally."],
-		["Security", "right", "How? They’re executives not mediums!"],
-		["Security", "left", "The boss always says ‘never underestimate the power of money.’"]
+		["Security Guard", "left", "There sure are a lot of people here..."],
+		["Security Guard", "right", "Hey Sgt. Bob! Fancy meeting you here."],
+		["Security Guard", "left", "Hey Sgt. John, have you heard about this whole Board of Directors thing?"],
+		["Security Guard", "right", "You mean the CEO’s brothers?"],
+		["Security Guard", "left", "Yeah, Cindy in accounting said they’re coming here."],
+		["Security Guard", "left", "They’re gonna deal with this whole haunting personally. That's why they've called us all here."],
+		["Security Guard", "right", "How? They’re executives not mediums!"],
+		["Security Guard", "left", "The boss always says ‘never underestimate the power of money.’"]
 	],
 	
 	"end": [

@@ -242,7 +242,7 @@
 	
 	{
 		"id":   "superhero_intro",
-		"name": "Superhero Intro",
+		"name": "Captain Crimebuster",
 		"time": 22.0,
 		"setting": "day",
 		"objectives": {
@@ -257,7 +257,7 @@
 	
 	{
 		"id":   "kill_dudes_3",
-		"name": "Generic Level 3 (RENAME)",
+		"name": "Bingo Night",
 		"time": 75.0,
 		"setting": "day",
 		"objectives": {
@@ -293,7 +293,7 @@
 	
 	{
 		"id":   "kill_dudes",
-		"name": "Generic Level 1 (RENAME)",
+		"name": "Googly Maps",
 		"time": 80.0,
 		"setting": "day",
 		"objectives": {
@@ -306,22 +306,22 @@
 	},
 	
 	{
-		"id":   "basement",
-		"name": "Creepy Boss",
-		"time": 45.0,
-		"setting": "day",
-		"objectives": {
-			"ceo": 1
-		}
-	},
-	
-	{
 		"id":   "kill_dudes_6",
 		"name": "Generic Level 6 (RENAME)",
 		"time": 95.0,
 		"setting": "day",
 		"objectives": {
 			"any": 75
+		}
+	},
+	
+	{
+		"id":   "basement",
+		"name": "Sacrificial Basement",
+		"time": 45.0,
+		"setting": "day",
+		"objectives": {
+			"ceo": 1
 		}
 	},
 	
