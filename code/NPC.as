@@ -230,7 +230,7 @@ package {
 				// keeps moving through the window
 				var break_point:FlxPoint = new FlxPoint(npc.center.x + impact_direction.x * Level.TileSize, npc.center.y + impact_direction.y * Level.TileSize);
 				
-				if (npc.state !== PossessedState && Game.level.breakGlassAt(break_point.x, break_point.y)) {
+				if (Game.level.breakGlassAt(break_point.x, break_point.y) && npc.state !== PossessedState) {
 					npc.knockback_velocity.x = npc.old_velocity.x;
 					npc.knockback_velocity.y = npc.old_velocity.y;
 				}
