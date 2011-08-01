@@ -27,7 +27,7 @@
 	
 	{
 		"id":   "maintenance_guy_intro",
-		"name": "Maintenance Guy Intro (RENAME)",
+		"name": "Drill Deep Down",
 		"time": 50.0,
 		"setting": "night",
 		"objectives": {
