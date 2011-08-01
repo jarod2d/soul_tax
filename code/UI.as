@@ -24,6 +24,7 @@ package {
 		public var kill_counter:KillCounter;
 		public var level_timer:LevelTimer;
 		public var level_complete_message:LevelCompleteMessage;
+		public var level_intro_screen:LevelIntroScreen;
 		public var level_end_screen:LevelEndScreen;
 		public var dialogue_box:DialogueBox;
 		public var pause_screen:PauseScreen;
@@ -35,6 +36,7 @@ package {
 			possession_monitor     = new PossessionMonitor();
 			kill_counter           = new KillCounter();
 			level_timer            = new LevelTimer();
+			level_intro_screen     = new LevelIntroScreen();
 			level_complete_message = new LevelCompleteMessage();
 			level_end_screen       = new LevelEndScreen();
 			dialogue_box           = new DialogueBox();
@@ -50,6 +52,7 @@ package {
 			contents.add(kill_counter);
 			contents.add(level_timer);
 			contents.add(level_complete_message);
+			contents.add(level_intro_screen);
 			contents.add(level_end_screen);
 			contents.add(dialogue_box);
 			contents.add(pause_screen);

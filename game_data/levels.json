@@ -190,7 +190,7 @@
 	{
 		"id":   "window_washers",
 		"name": "Window Washers",
-		"time": 65.0,
+		"time": 70.0,
 		"setting": "day",
 		"objectives": {
 			"maintenance_guy": 8,

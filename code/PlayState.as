@@ -111,12 +111,15 @@ package {
 			intro_timer += FlxG.elapsed;
 			
 			// Move on to the intro dialogue. If there's no intro dialogue, we go straight into the game.
-			if (intro_timer >= LevelIntroTotalTime || FlxG.keys.SPACE || FlxG.keys.J || FlxG.keys.ENTER) {
+			if (intro_timer >= LevelIntroTotalTime || FlxG.keys.justPressed("SPACE") || FlxG.keys.justPressed("J") || FlxG.keys.justPressed("ENTER")) {
 				// Fade out the intro music.
 				music.fadeOut(0.3);
 				
 				// Move the camera to the player.
 				FlxG.camera.follow(Game.player.sprite);
+				
+				// Remove the level title.
+				Game.ui.level_intro_screen.level_title.alpha = 0.0;
 				
 				// Play the dialogue or change the state.
 				if (level.dialogue && level.dialogue.start) {
@@ -204,10 +207,7 @@ package {
 			// Count down the level timer, and end the level if necessary.
 			level.time_remaining -= FlxG.elapsed;
 			
-			// !!TEMP!! For last-minute testing purposes, we're allowing us to skip the level by pressing enter. Need to
-			// make sure we remove this before we release the game!!
-			if (level.time_remaining <= 0.0 || FlxG.keys.justPressed("ENTER")) {
-//			if (level.time_remaining <= 0.0 || (FlxG.keys.ENTER && level.objectives_complete)) {
+			if (level.time_remaining <= 0.0 || (FlxG.keys.ENTER && level.objectives_complete)) {
 				// Set the timer to zero in case the user ended the level early.
 				level.time_remaining = 0.0;
 				

@@ -203,7 +203,7 @@ package {
 			if (damage_impact > 0.0 && (!obstacle_is_npc || !is_hero_attack)) {
 				// Need to tweak NPC damage, and also hurt the other NPC.
 				if (obstacle_is_npc) {
-					damage_impact *= 2.0;
+					damage_impact *= 3.0;
 					obstacle_npc.hurt(damage_impact, "falling");
 				}
 				

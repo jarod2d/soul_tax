@@ -390,9 +390,6 @@ package {
 		
 		// A getter for whether or not the player has completed all of their objectives.
 		public function get objectives_complete():Boolean {
-			// !!!!!TEMP!!!!!! For testing purposes...
-			return true;
-			
 			for (var objective:String in objectives) {
 				if (progress[objective] < objectives[objective]) {
 					return false;

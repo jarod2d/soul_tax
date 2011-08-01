@@ -18,7 +18,7 @@ package {
 		// should be using this to get a progress object in most cases rather than creating one yourself.
 		public static function load():void {
 			save_data = new FlxSave();
-			save_data.bind("death_and_taxes_save_data");
+			save_data.bind("death_and_taxes_save_data_release");
 			
 			// Create the progress object if it doesn't exist already.
 			if (!save_data.data.scores) {
