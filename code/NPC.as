@@ -964,6 +964,12 @@ package {
 		override public function beforeUpdate():void {
 			super.beforeUpdate();
 			
+			// Skip out on all this stuff if we're not in PlayState. This happens when an NPC is being used for menu
+			// effect purposes.
+			if (!(FlxG.state is PlayState)) {
+				return;
+			}
+			
 			// We don't run AI if we're possessed.
 			if (state !== PossessedState) {
 				// Run the AI.

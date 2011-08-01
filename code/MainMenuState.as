@@ -10,6 +10,13 @@ package {
 	
 	public class MainMenuState extends FlxState {
 		
+		// The npc and ghost sprites that run around on the menu.
+		private var ghost:Player;
+		private var bait:NPC;
+		
+		// Which way the dudes are running.
+		private var run_direction:int;
+		
 		override public function create():void {
 			super.create();
 			
@@ -22,9 +29,9 @@ package {
 			// Set up the title.
 			var text:FlxText;
 			
-			text = new FlxText(0, 90.0, FlxG.width, "Soul Tax");
+			text = new FlxText(0, 110.0, FlxG.width, "Soul Tax");
 			text.lineSpacing = 10.0;
-			text.setFormat("propomin", 32, 0xFFE0E2E4, "center", 0xFF001118);
+			text.setFormat("propomin", 48, 0xFFE0E2E4, "center", 0xFF001118);
 			add(text);
 			
 			// Set up the credits.
@@ -55,6 +62,27 @@ package {
 			var j_key:FlxSprite = new FlxSprite(21.0, FlxG.height - 22.0, Assets.j_key);
 			add(j_key);
 			
+			// Set up our hacky ghost chasing sequence.
+			run_direction = FlxObject.RIGHT;
+			
+			ghost = new Player();
+			ghost.warp(-65.0, 55.0);
+			ghost.max_velocity.x = ghost.max_velocity.y = 59.0;
+			
+			bait  = new NPC("businessman", ghost.x + 50.0, ghost.y);
+			bait.velocity.x = 60.0;
+			bait.acceleration.x = bait.acceleration.y = 0.0;
+			bait.sprite.drag.x = bait.sprite.drag.y = 0.0;
+			bait.sprite.play("walk");
+			
+			ghost.potential_victim = bait;
+			ghost.possess();
+			ghost.color = Player.NormalColor;
+			
+			add(ghost.trails);
+			add(ghost.sprite);
+			add(bait.sprite);
+			
 			// Play the title theme.
 			if (FlxG.music) {
 				FlxG.music.stop();
@@ -65,12 +93,28 @@ package {
 		}
 		
 		override public function update():void {
+			super.update();
+			
 			// Move on to the Level Select state.
 			if (FlxG.keys.SPACE || FlxG.keys.J || FlxG.keys.ENTER) {
 				FlxG.switchState(new LevelSelectState());
 			}
 			
-			super.update();
+			// Keep the ghost and NPC chasing each other.
+			if (run_direction === FlxObject.RIGHT && ghost.left > FlxG.width) {
+				bait.velocity.x *= -1.0;
+				bait.x  = FlxG.width + 130.0;
+				ghost.x = bait.x + 50.0;
+				
+				run_direction = bait.facing = ghost.facing = FlxObject.LEFT;
+			}
+			else if (run_direction === FlxObject.LEFT && ghost.right < -14.0) {
+				bait.velocity.x *= -1.0;
+				bait.x  = -130.0;
+				ghost.x = bait.x - 50.0;
+				
+				run_direction = bait.facing = ghost.facing = FlxObject.RIGHT;
+			}
 		}
 		
 	}

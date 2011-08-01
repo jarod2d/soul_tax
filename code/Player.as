@@ -103,13 +103,11 @@ package {
 			// Reorder the player and the NPCs in the scene to put the player behind the NPCs.
 			if (FlxG.state is PlayState) {
 				Game.level.swapPlayerAndNPCs();
-			}
-			
-			// Have the camera follow the NPC now.
-			FlxG.camera.follow(victim.sprite);
-			
-			// Play a sound.
-			if (FlxG.state is PlayState) {
+				
+				// Have the camera follow the NPC now.
+				FlxG.camera.follow(victim.sprite);
+				
+				// Play a sound.
 				FlxG.play(Assets.possess_sound, 0.7);
 			}
 		}
@@ -136,15 +134,17 @@ package {
 			victim                = null;
 			
 			// Swap the player and NPCs.
-			if (Game.level) {
-				Game.level.swapPlayerAndNPCs();
+			if (FlxG.state is PlayState) {
+				if (Game.level) {
+					Game.level.swapPlayerAndNPCs();
+				}
+				
+				// Have the camera follow the player again.
+				FlxG.camera.follow(sprite);
+				
+				// Play a sound.
+				FlxG.play(Assets.stop_possess_sound, 0.7);
 			}
-			
-			// Have the camera follow the player again.
-			FlxG.camera.follow(sprite);
-			
-			// Play a sound.
-			FlxG.play(Assets.stop_possess_sound, 0.7);
 		}
 		
 		// The regular punch attack the player uses when they're possessing someone.
@@ -226,12 +226,14 @@ package {
 				acceleration.y = yoyo_distance.y * 90.0;
 				
 				// We need to make sure the player doesn't stray too far from the NPC.
-				if (Math.abs(yoyo_distance.x) > 10.0) {
-					x += yoyo_distance.x * FlxG.elapsed * 10.0;
-				}
-				
-				if (Math.abs(yoyo_distance.y) > 10.0) {
-					y += yoyo_distance.y * FlxG.elapsed * 10.0;
+				if (!(FlxG.state is MainMenuState)) {
+					if (Math.abs(yoyo_distance.x) > 10.0) {
+						x += yoyo_distance.x * FlxG.elapsed * 10.0;
+					}
+					
+					if (Math.abs(yoyo_distance.y) > 10.0) {
+						y += yoyo_distance.y * FlxG.elapsed * 10.0;
+					}
 				}
 				
 				victim.facing = facing;
