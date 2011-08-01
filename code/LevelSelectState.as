@@ -17,7 +17,7 @@ package {
 		// Some metrics for the various components of the screen.
 		private static const ScreenPaddingX:Number = 10.0;
 		private static const ScreenPaddingY:Number = 18.0;
-		private static const TitleHeight:Number    = 44.0;
+		private static const TitleHeight:Number    = 48.0;
 		private static const IconSize:Number       = 32.0;
 		private static const IconPaddingX:Number   = 12.0;
 		private static const IconPaddingY:Number   = 22.0;
