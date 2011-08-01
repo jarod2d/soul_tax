@@ -3,9 +3,9 @@
 		["Businessman", "left", "I need copies of these."],
 		["Businessman", "right", "No way! I'm not going near that copier. I heard it killed those guys."],
 		["Businessman", "left", "It wasn’t the copier, it was the fax machine, duh."],
-		["Manager", "right", "QUIT BITCHING! I need those copies now!"],
+		["Bank Manager", "right", "QUIT BITCHING! I need those copies now!"],
 		["Maintenance Guy", "left", "Hey, you weren’t the one who had to mop up the entrails. You know what they say about bowels and-"],
-		["Manager", "right", "SHUT UP!"],
+		["Bank Manager", "right", "SHUT UP!"],
 		["Maintenance Guy", "left", "Well, it’s true. My mop will never be the same."],
 		["Reaper", "right", "Ooh, even more sheep to the slaughter!"],
 		["Ghost", "left", "You know, you’re not doing a great job of selling this wholesale murder of innocents thing."],
@@ -17,8 +17,8 @@
 	
 	"end": [
 		["Ghost", "right", "I'm not sure I want to do this anymore..."],
-		["Reaper", "left", "Well, you can always hang out with that manager you just offed."],
-		["Reaper", "left", "I'm sure she'll have a lot to yell at you about."],
-		["Ghost", "right", "On the other hand..."]
+		["Reaper", "left", "Well, you can always hang out with that manager you just offed in Hell."],
+		["Ghost", "right", "On the other hand..."],
+		["Reaper", "left", "That's what I thought."]
 	]
 }
