@@ -1,11 +1,13 @@
 {
 	"start": [
-		["Death", "right", "BLEAURUGGHGHHH"],
-		["Ghost", "left",  "OK"]
+		["Reaper", "left", "This must be the strangest bank I've ever seen."],
+		["Ghost", "right",  "Who wouldn’t place their money in a gigantic chamber suspended over the gaping maw of a bottomless pit?"],
+		["Reaper", "left", "Well, you know the drill..."],
+		["Ghost", "right", "..."]
 	],
 	
 	"end": [
-		["Death", "right", "YOU WON!!!!!!!!!!!!!!!!!!!!!"],
-		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"]
+		["Ghost", "left", "Not too sure what their intention was with that layout."],
+		["Reaper", "right", "And now we'll never know."]
 	]
 }

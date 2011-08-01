@@ -1,11 +1,16 @@
 {
 	"start": [
-		["Death", "right", "BLEAURUGGHGHHH"],
-		["Ghost", "left",  "OK"]
+		["Businessman", "left", "What is that awful noise?"],
+		["Businessman", "right",  "Mrs. Ferguson is back."],
+		["Old Lady", "left", "HELLO? HELLO?! IS ANYBODY GOING TO HELP ME? I NEED TO DEPOSIT THIS CHECK BEFORE JEOPARDY COMES ON!"],
+		["Businessman", "left", "I...I want to help her. But every time I get near her I feel sleepy."],
+		["Businessman", "right", "No way I'm going near her."],
+		["Old Lady", "left", "OH BACK WHEN IT WAS ALEX TREBEK, I USED TO WATCH JEOPARDY EVERY DAY. EVEN THE RERUNS!"]
 	],
 	
 	"end": [
-		["Death", "right", "YOU WON!!!!!!!!!!!!!!!!!!!!!"],
-		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"]
+		["Reaper", "left", "Who knew old ladies could be so useful?"],
+		["Ghost", "right",  "I am SO going to hell for this..."],
+		["Reaper", "left", "Well, yeah. But all you have to do is keep this up forever, and then you'll never have to go!"]
 	]
 }

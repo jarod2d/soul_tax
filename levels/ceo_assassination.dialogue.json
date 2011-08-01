@@ -1,11 +1,19 @@
 {
 	"start": [
-		["Death", "right", "KILL THE CEO"],
-		["Ghost", "left",  "OK"]
+		["CEO", "left", "KEEP WORKING! NO COMPLAINTS, NO BREAKS, NO EXCUSES!"]
+		["CEO", "left", "I’VE FILLED THIS PLACE UP THE WAZOO WITH ROBOTS, NOTHING WILL HAPPEN TONIGHT!"],
+		["Security", "right", "Everyone, stay calm. We’ve got this under control!"],
+		["Businessman", "left",  "But maybe it’s a message. What if the ghost wants us to go?"],
+		["CEO", "right", "OVER MY COLD, DEAD BODY!"],
+		["Ghost", "left", "I couldn’t have said it better myself."],
+		["Reaper", "right", "Be careful, this place is full of those pesky robots."],
+		["Ghost", "left", "I've got this."]
 	],
 	
 	"end": [
-		["Death", "right", "YOU WON!!!!!!!!!!!!!!!!!!!!!"],
-		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"]
+		["Reaper", "left", "So how does it feel to have destroyed your worst enemy?"],
+		["Ghost", "right",  "It feels great!"],
+		["Reaper", "left", "You know he has like 10 brothers in the banking business, right?"],
+		["Ghost", "right", "WHAT?!"]
 	]
 }

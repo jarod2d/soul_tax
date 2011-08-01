@@ -1,11 +1,17 @@
 {
 	"start": [
-		["Death", "right", "BLEAURUGGHGHHH"],
-		["Ghost", "left",  "OK"]
+		["Manager", "left", "Haha, these psychic robots will protect me from any poltergeists!"],
+		["Robot", "right",  "BEEBOOP, DESTROY!"],
+		["Manager", "left", "Best investment ever."],
+		["Burglar", "right", "Why is this place swarming with Roombas?"],
+		["Ghost", "left", "Pyschic Robots? Where’d they get these things, a yard sale? I bet they don’t even work."],
+		["Reaper", "right", "I wouldn't be so sure..."],
+		["Ghost", "left", "Maybe I can lure them to their deaths somehow..."]
 	],
 	
 	"end": [
-		["Death", "right", "YOU WON!!!!!!!!!!!!!!!!!!!!!"],
-		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"]
+		["Ghost", "left", "Damn, those things are annoying!"],
+		["Reaper", "right", "Something tells me they're not going anywhere anytime soon."],
+		["Reaper", "right", "Good luck, champ!"]
 	]
 }

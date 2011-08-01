@@ -1,11 +1,14 @@
 {
 	"start": [
-		["Death", "right", "BLEAURUGGHGHHH"],
-		["Ghost", "left",  "OK"]
+		["Burglar", "left", "Okay, so we blow open the vault and take all the money!"]
+		["Burglar", "right", "What about the ghosts? I heard this place's haunted, man!"],
+		["Burglar", "left",  "Haunted? By what, Casper the friendly ghost? Let’s get moving."],
+		["Burglar", "right", "Okay, but if I hear a little girl singing, I’m bouncing, man!"]
 	],
 	
 	"end": [
-		["Death", "right", "YOU WON!!!!!!!!!!!!!!!!!!!!!"],
-		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"]
+		["Reaper", "left", "Nicely done. I'd say you've paid back most of your debt!"],
+		["Ghost", "right",  "Seriously?"],
+		["Reaper", "left", "Nope, gotcha!"]
 	]
 }

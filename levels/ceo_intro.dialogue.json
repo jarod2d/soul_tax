@@ -1,11 +1,16 @@
 {
 	"start": [
-		["Death", "right", "BLEAURUGGHGHHH"],
-		["Ghost", "left",  "OK"]
+		["CEO", "left", "Haunted? Pah!"]
+		["CEO", "left", "I’ve been building banks on Indian burial grounds for decades, this place isn’t haunted, this is just some union scam!"],
+		["Ghost", "right",  "That's him, the CEO."],
+		["Reaper", "left", "Do you know him?"],
+		["Ghost", "right", "This guy bulldozed my house and built this atrocity! He’s the reason I got into haunting, but he’s never in town."],
+		["Reaper", "left", "Well, if you can reach him, revenge is yours."],
+		["Ghost", "right", "Revenge? I just want to scare him. Maybe if I scare him, he’ll pack up the place and leave."]
 	],
 	
 	"end": [
-		["Death", "right", "YOU WON!!!!!!!!!!!!!!!!!!!!!"],
-		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"]
+		["Reaper", "left", "Feel any better?"],
+		["Ghost", "right",  "Just a bit, but I'm not done with him yet."]
 	]
 }

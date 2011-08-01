@@ -1,11 +1,15 @@
 {
 	"start": [
-		["Death", "right", "BLEAURUGGHGHHH"],
-		["Ghost", "left",  "OK"]
+		["Businessman", "left", "That's odd..."],
+		["Businessman", "right",  "What?"],
+		["Businessman", "left", "My desk was on a different floor yesterday. And it was facing another direction."],
+		["Businessman", "right", "Now that you mention it, I got lost in the lobby again. Sometimes I feel like this place just arbitrarily changes."],
+		["Businessman", "left", "Weird..."]
 	],
 	
 	"end": [
-		["Death", "right", "YOU WON!!!!!!!!!!!!!!!!!!!!!"],
-		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"]
+		["Reaper", "left", "You know, you could make a fine Reaper one day."],
+		["Ghost", "right",  "Why would I want to be like you?"],
+		["Reaper", "left", "Sheesh, no need to be mean about it."]
 	]
 }

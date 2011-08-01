@@ -1,11 +1,14 @@
 {
 	"start": [
-		["Death", "right", "BLEAURUGGHGHHH"],
-		["Ghost", "left",  "OK"]
+		["Old Lady", "left", "I KNOW YOU’RE IN THERE SONNY! COME OUT AND GIVE ME MITTENS AND SNOWBALL BEFORE I CALL THE BBB ON YOU!"],
+		["Businessman", "right",  "Oh my god, I can’t think between her and the jackhammer."],
+		["Old Lady", "left", "WHERE’S MITTENS AND SNOWBALL?"],
+		["Old Lady", "left", "I WANT TO SPEAK TO LINDA, THIS IS OUTRAGEOUS, MEWTOPOLIS HAS NEVER TREATED ME LIKE THIS AND I WILL NOT STAND SUCH TREATMENT!!!"],
+		["Businessman", "right", "Please go away, please go away!"]
 	],
 	
 	"end": [
-		["Death", "right", "YOU WON!!!!!!!!!!!!!!!!!!!!!"],
-		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"]
+		["Reaper", "left", "Thank you."],
+		["Ghost", "right",  "I didn't do it for you. I just hate old cat ladies."]
 	]
 }

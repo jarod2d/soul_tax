@@ -1,11 +1,16 @@
 {
 	"start": [
-		["Death", "right", "BLEAURUGGHGHHH"],
-		["Ghost", "left",  "OK"]
+		["Security", "left", "Last night was close."],
+		["CEO", "right",  "Well, maybe if some peons were better at their jobs, none of this madness would be happening!"],
+		["Security", "left", "But, it's a ghost, we can't-"],
+		["CEO", "right", "GET OUT!"],
+		["Reaper", "left", "Somebody's cranky."],
+		["Ghost", "right", "Maybe he's finally getting it."],
+		["Reaper", "left", "Oh, I don’t know. May take breaking a few windows to convince him."]
 	],
 	
 	"end": [
-		["Death", "right", "YOU WON!!!!!!!!!!!!!!!!!!!!!"],
-		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"]
+		["Reaper", "left", "Wow, you really know how to destroy a man's reputation."],
+		["Ghost", "right", "That's not the only thing I'm going to destroy."]
 	]
 }

@@ -1,11 +1,16 @@
 {
 	"start": [
-		["Death", "right", "BLEAURUGGHGHHH"],
-		["Ghost", "left",  "OK"]
+		["Businessman", "left", "Ugh, just look at that guy."],
+		["Businessman", "right",  "The one in the striped shirt and ski mask?"],
+		["Businessman", "left", "Yeah, who wears that to a bank? I bet he thinks it’s edgy too."],
+		["Businessman", "right", "Hipsters-I’ll never get ‘em."],
+		["Businessman", "left", "Maybe if we ignore him he’ll go away."],
+		["Reaper", "right", "Looks like our conspicuous thief can pick locks. Try opening the front door."]
 	],
 	
 	"end": [
-		["Death", "right", "YOU WON!!!!!!!!!!!!!!!!!!!!!"],
-		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"]
+		["Ghost", "left", "I'm starting to think these people are, well, how do you say-"],
+		["Reaper", "right",  "Too stupid to live?"],
+		["Ghost", "left", "Yeah, that's it."]
 	]
 }
