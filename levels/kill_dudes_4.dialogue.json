@@ -1,11 +1,17 @@
 {
 	"start": [
-		["Death", "right", "BLEAURUGGHGHHH"],
-		["Ghost", "left",  "OK"]
+		["Businessman", "left", "Ms. Manager, why do we have to stand on these tiny platforms?"],
+		["Bank Manager", "right", "To keep you idiots from killing each other, hopefully!"],
+		["Businessman", "left", "Ms. Manager, may I use the bathroom?"],
+		["Bank Manager", "right", "Of course not!"],
+		["Reaper", "left",  "Man, taking out these poor saps would be a mercy killing."],
+		["Ghost", "right", "I'll get right on it."]
 	],
 	
 	"end": [
-		["Death", "right", "YOU WON!!!!!!!!!!!!!!!!!!!!!"],
-		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"]
+		["Reaper", "left", "Good work. You have freed those poor souls from a living Hell."],
+		["Ghost", "right", "How does it compare to actual hell?"],
+		["Reaper", "left", "..."],
+		["Reaper", "left", "Not even close."]
 	]
 }

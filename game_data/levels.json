@@ -137,7 +137,7 @@
 	
 	{
 		"id":   "kill_dudes_4",
-		"name": "Generic Level 4 (RENAME)",
+		"name": "Poor Souls",
 		"time": 60.0,
 		"setting": "day",
 		"objectives": {
@@ -147,7 +147,7 @@
 	
 	{
 		"id":   "ceo_intro",
-		"name": "CEO Intro (RENAME)",
+		"name": "The Enemy Appears",
 		"time": 25.0,
 		"setting": "day",
 		"objectives": {
@@ -158,7 +158,7 @@
 	
 	{
 		"id":   "kill_dudes_2",
-		"name": "Generic Level 2 (RENAME)",
+		"name": "Another Day, Another Massacre",
 		"time": 65.0,
 		"setting": "day",
 		"objectives": {
@@ -179,7 +179,7 @@
 	
 	{
 		"id":   "vomit_tower",
-		"name": "Tower of Money",
+		"name": "Shower of Money",
 		"time": 12.0,
 		"setting": "day",
 		"objectives": {

@@ -1,6 +1,6 @@
 {
 	"start": [
-		["CEO", "left", "Haunted? Pah!"]
+		["CEO", "left", "Haunted? Pah!"],
 		["CEO", "left", "I’ve been building banks on Indian burial grounds for decades, this place isn’t haunted, this is just some union scam!"],
 		["Ghost", "right",  "That's him, the CEO."],
 		["Reaper", "left", "Do you know him?"],
@@ -11,6 +11,7 @@
 	
 	"end": [
 		["Reaper", "left", "Feel any better?"],
-		["Ghost", "right",  "Just a bit, but I'm not done with him yet."]
+		["Ghost", "right",  "Just a bit, but I'm not done with him yet."],
+		["Reaper", "left", "Oh, this will be fun."]
 	]
 }
