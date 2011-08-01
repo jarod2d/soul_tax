@@ -307,7 +307,7 @@
 	
 	{
 		"id":   "kill_dudes_6",
-		"name": "Generic Level 6 (RENAME)",
+		"name": "All Out Massacre",
 		"time": 95.0,
 		"setting": "day",
 		"objectives": {
@@ -317,7 +317,7 @@
 	
 	{
 		"id":   "basement",
-		"name": "Sacrificial Basement",
+		"name": "Creepy Boss",
 		"time": 45.0,
 		"setting": "day",
 		"objectives": {
