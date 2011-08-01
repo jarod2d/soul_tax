@@ -1,16 +1,16 @@
 {
 	"start": [
-		["CEO", "left", "Board meeting my ass! Tonight I’m getting rid of our little ghost problem myself."],
+		["CEO", "left", "Board meeting my ass! Tonight I'm getting rid of our little ghost problem myself."],
 		["Manager", "right",  "So, why am I locked in this room again?"],
-		["CEO", "left", "Simple, you’re my sacrafice."],
+		["CEO", "left", "Simple, you're my sacrafice."],
 		["Manager", "right", "What?!"],
-		["CEO", "left", "That ghost is going to take control of you and then I’m going to banish it to Hell!"],
+		["CEO", "left", "That ghost is going to take control of you and then I'm going to banish it to Hell!"],
 		["Manager", "right", "But, what if it picks you instead?"],
-		["CEO", "left", "I’ve got a rabbit foot! I’m officially immune to possession!"]
+		["CEO", "left", "I've got a rabbit foot! I'm officially immune to possession!"],
 		["CEO", "left", "HAhahaa, this plan is fool proof! Bring it, ghost!"],
-		["Reaper", "right", "A board meeting of all the CEOs? This train’s headed for crazy town."],
-		["Ghost", "left", "He can’t actually banish me, can	he?"],
-		["Reaper", "right", "With a rabbit’s foot? Don’t make me laugh. This board, however, I don’t like the sound of that."]
+		["Reaper", "right", "A board meeting of all the CEOs? This train's headed for crazy town."],
+		["Ghost", "left", "He can't actually banish me, can he?"],
+		["Reaper", "right", "With a rabbit's foot? Don't make me laugh. This board, however, I don't like the sound of that."]
 	],
 	
 	"end": [
