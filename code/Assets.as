@@ -289,6 +289,11 @@ package {
 		[Embed(source="../levels/security_guard_intro.1.csv", mimeType="application/octet-stream")] public static var security_guard_intro_wall_tiles:Class;
 		[Embed(source="../levels/security_guard_intro.props.json", mimeType="application/octet-stream")] public static var security_guard_intro_props:Class;
 		[Embed(source="../levels/security_guard_intro.dialogue.json", mimeType="application/octet-stream")] public static var security_guard_intro_dialogue:Class;
+		
+		[Embed(source="../levels/kill_dudes_6.0.csv", mimeType="application/octet-stream")] public static var kill_dudes_6_bg_tiles:Class;
+		[Embed(source="../levels/kill_dudes_6.1.csv", mimeType="application/octet-stream")] public static var kill_dudes_6_wall_tiles:Class;
+		[Embed(source="../levels/kill_dudes_6.props.json", mimeType="application/octet-stream")] public static var kill_dudes_6_props:Class;
+		[Embed(source="../levels/kill_dudes_6.dialogue.json", mimeType="application/octet-stream")] public static var kill_dudes_6_dialogue:Class;
 				
 		// Processes some of the loaded data. Should be called once at the beginning of the game.
 		public static function load():void {
