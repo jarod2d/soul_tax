@@ -1,6 +1,6 @@
 {
 	"start": [
-		["Burglar", "left", "Okay, so we blow open the vault and take all the money!"]
+		["Burglar", "left", "Okay, so we blow open the vault and take all the money!"],
 		["Burglar", "right", "What about the ghosts? I heard this place's haunted, man!"],
 		["Burglar", "left",  "Haunted? By what, Casper the friendly ghost? Let’s get moving."],
 		["Burglar", "right", "Okay, but if I hear a little girl singing, I’m bouncing, man!"]

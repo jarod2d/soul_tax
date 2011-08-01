@@ -115,6 +115,16 @@
 	},
 	
 	{
+		"id":   "cops_and_robbers",
+		"name": "Cop and Robbers",
+		"time": 30.0,
+		"setting": "day",
+		"objectives": {
+			"burglar": 10
+		}
+	},
+	
+	{
 		"id":   "old_lady_intro",
 		"name": "Back In My Day",
 		"time": 55.0,
@@ -122,16 +132,6 @@
 		"objectives": {
 			"businessman": 2,
 			"bank_manager": 3
-		}
-	},
-	
-	{
-		"id":   "cops_and_robbers",
-		"name": "Cop and Robbers",
-		"time": 30.0,
-		"setting": "day",
-		"objectives": {
-			"burglar": 10
 		}
 	},
 	
