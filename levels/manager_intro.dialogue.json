@@ -1,11 +1,24 @@
 {
 	"start": [
-		["Death", "right", "BLEAURUGGHGHHH"],
-		["Ghost", "left",  "OK"]
+		["Businessman", "left", "I need copies of these."],
+		["Businessman", "right", "No way! I'm not going near that copier. I heard it killed those guys."],
+		["Businessman", "left", "It wasn’t the copier, it was the fax machine, duh."],
+		["Manager", "right", "QUIT BITCHING! I need those copies now!"],
+		["Maintenance Guy", "left", "Hey, you weren’t the one who had to mop up the entrails. You know what they say about bowels and-"],
+		["Manager", "right", "SHUT UP!"],
+		["Maintenance Guy", "left", "Well, it’s true. My mop will never be the same."],
+		["Reaper", "right", "Ooh, even more sheep to the slaughter!"],
+		["Ghost", "left", "You know, you’re not doing a great job of selling this wholesale murder of innocents thing."],
+		["Reaper", "right", "Hope you enjoy an eternity of rock pushing and SyFy reruns. I’m only trying to help you."],
+		["Ghost", "left", "Okay, okay. Actually, that manager is pretty shrill."],
+		["Ghost", "left", "I bet if she really raised her voice it might send everyone flying..."],
+		["Reaper", "right", "This I've got to see."]
 	],
 	
 	"end": [
-		["Death", "right", "YOU WON!!!!!!!!!!!!!!!!!!!!!"],
-		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"]
+		["Ghost", "right", "I'm not sure I want to do this anymore..."],
+		["Reaper", "left", "Well, you can always hang out with that manager you just offed."],
+		["Reaper", "left", "I'm sure she'll have a lot to yell at you about."],
+		["Ghost", "right", "On the other hand..."]
 	]
 }

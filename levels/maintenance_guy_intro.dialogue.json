@@ -1,11 +1,26 @@
 {
 	"start": [
-		["Death", "right", "BLEAURUGGHGHHH"],
-		["Ghost", "left",  "OK"]
+		["Reaper", "right", "Check out these sad saps."],
+		["Ghost", "left",  "Sad saps? This used to be my dining room. They’re playing beer pong where Aunt Sally’s china was!"],
+		["Businessman", "right", "*urp* Ugh, Gnarly Lite? How much did you spend on this dreck?"],
+		["Businessman", "left", "As much as I paid your mom...after we did it!"],
+		["Businessman", "right", "..."],
+		["Businessman", "right", "Weak."],
+		["Maintenance Guy", "left", "Hey, uh, hate to break up the party, but I gotta mop the floors and it’s getting kinda late."],
+		["Businessman", "right", "Hey, *hic* we’re here on business, bub!"],
+		["Businessman", "left", "Yeah, official biznes-oh, I feel kinda-"],
+		["Ghost", "right", "Oh, that's just sick!"],
+		["Reaper", "left", "That’s right, take your indignant rage and rain death and viscera upon these inebriated assholes!"],
+		["Ghost", "right", "Well, the janitor doesn't seem half bad..."],
+		["Reaper", "left", "I'm sure he's done something evil..."],
+		["Maintenance Guy", "right", "Come on, guys. I've got two kids waiting for bedtime stories at home, and I haven't even dropped off my donations to Goodwill yet!"],
+		["Reaper", "left", "At some point in his life...Look, he’s got a jackhammer and if he’s not gonna use it, who is?"],
+		["Reaper", "left", "Possess him and press L to take advantage of his unique abilities."]
 	],
 	
 	"end": [
-		["Death", "right", "YOU WON!!!!!!!!!!!!!!!!!!!!!"],
-		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"]
+		["Reaper", "left", "Alright, that should take care of a couple late penalties on your debt..."],
+		["Ghost", "right",  "You're seriously charging me late penalties on debt I never agreed to?"],
+		["Reaper", "left", "And interest, too. Now, time to wait for the next round of suckers."]
 	]
 }
