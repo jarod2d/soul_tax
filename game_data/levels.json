@@ -136,6 +136,16 @@
 	},
 	
 	{
+		"id":   "kill_dudes_4",
+		"name": "Generic Level 4 (RENAME)",
+		"time": 60.0,
+		"setting": "day",
+		"objectives": {
+			"any": 25
+		}
+	},
+	
+	{
 		"id":   "ceo_intro",
 		"name": "CEO Intro (RENAME)",
 		"time": 25.0,
