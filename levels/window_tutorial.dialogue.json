@@ -1,11 +1,20 @@
 {
 	"start": [
-		["Death", "right", "BLEAURUGGHGHHH"],
-		["Ghost", "left",  "OK"]
+		["Businessman", "left", "Remind me again why we can't work within 10 feet of each other?"],
+		["Businessman", "right", "New rules from the higher ups."],
+		["Businessman", "right", "Apparently it's for our own safety or something."],
+		["Businessman", "left", "Well at least I got a window seat. Been waiting for one of those for years."],
+		["Reaper", "right",  "So yeah, you're going to have to kill all of them."],
+		["Ghost", "left", "But how? They're so far apart."],
+		["Ghost", "left", "There's no way I can punch them to death in time."],
+		["Reaper", "right", "I think it's time for some defenestration."],
+		["Ghost", "left", "Come again?"],
+		["Reaper", "right", "Windows, my friend. Throw them out the windows."]
 	],
 	
 	"end": [
-		["Death", "right", "YOU WON!!!!!!!!!!!!!!!!!!!!!"],
-		["Ghost", "left",  "YEEEEEEEEEEEEEEEEEEHAW"]
+		["Reaper", "left", "Oh, I quite enjoyed that."],
+		["Ghost", "right", "How many souls do I have left again?"],
+		["Reaper", "left", "Innumerable. Let's move on."]
 	]
 }
