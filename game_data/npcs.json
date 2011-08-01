@@ -233,7 +233,7 @@
 	
 	"superhero": {
 		"id":            "superhero",
-		"name":          "Cpt. Blitz",
+		"name":          "Cpt. Crimebuster",
 		"color":         "0xFF6633AA",
 		"special":       "Superhuman speed",
 		"hp":            500.0,
