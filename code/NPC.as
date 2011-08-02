@@ -687,6 +687,11 @@ package {
 		protected function startBePossessed():void {
 			// Cancel out any old animations.
 			sprite.finished = true;
+			
+			// Remove our Z's.
+			if (sleep_effect) {
+				Game.level.sleep_effects.remove(sleep_effect);
+			}
 		}
 		
 		// Callback that occurs when the NPC enters the stunned state.

@@ -24,7 +24,7 @@ package {
 		// The dialogue that plays when you fail the level, and the default dialogue (typically overridden) when you
 		// beat the level.
 		public static var LevelFailedDialogue:Array = [
-			["Reaper", "right", "Sorry, buddy. Out of time."],
+			["Reaper", "right", "Sorry, buddy. Out of time. Time to go to hell!"],
 			["Ghost", "left", "Nooooooooooooo!!!!"]
 		];
 		
