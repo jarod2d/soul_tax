@@ -19,6 +19,7 @@ package {
 		public static var player:Player;
 		public static var level:Level;
 		public static var ui:UI;
+		public static var input:PlayerInput;
 		
 		// The index of the current level. Should be set before PlayState is loaded.
 		public static var current_level:int;
@@ -29,6 +30,7 @@ package {
 			// Set up a few values.
 			FlxG.debug     = false;
 			FlxG.framerate = FlxG.flashFramerate = 45;
+			input          = new PlayerInput();
 			
 			// Load any stored level progress.
 			LevelProgress.load();

@@ -148,16 +148,16 @@ package {
 			// possessing someone.
 			player.direction.x = player.direction.y = 0.0;
 			
-			if (FlxG.keys.E) {
+			if (Game.input.key("move_up")) {
 				player.direction.y -= 1.0;
 			}
-			if (FlxG.keys.F) {
+			if (Game.input.key("move_right")) {
 				player.direction.x += 1.0;
 			}
-			if (FlxG.keys.D) {
+			if (Game.input.key("move_down")) {
 				player.direction.y += 1.0;
 			}
-			if (FlxG.keys.S) {
+			if (Game.input.key("move_left")) {
 				player.direction.x -= 1.0;
 			}
 			

@@ -10,6 +10,10 @@ package {
 	
 	public class MainMenuState extends FlxState {
 		
+		// The text displaying which control scheme is currently set.
+		private var esdf_scheme_text:FlxText;
+		private var wasd_scheme_text:FlxText;
+		
 		// The npc and ghost sprites that run around on the menu.
 		private var ghost:Player;
 		private var bait:NPC;
@@ -61,6 +65,24 @@ package {
 			
 			var j_key:FlxSprite = new FlxSprite(21.0, FlxG.height - 22.0, Assets.j_key);
 			add(j_key);
+			
+			// Set up control scheme stuff.
+			esdf_scheme_text = new FlxText(FlxG.width - 90.0, FlxG.height - 18.0, FlxG.width, "ESDF");
+			esdf_scheme_text.setFormat("propomin", 8, 0xFFFDFDFD, "left", 0xFF111111);
+			add(esdf_scheme_text);
+			
+			wasd_scheme_text = new FlxText(FlxG.width - 55.0, FlxG.height - 18.0, FlxG.width, "WASD");
+			wasd_scheme_text.setFormat("propomin", 8, 0xFFFDFDFD, "left", 0xFF111111);
+			wasd_scheme_text.alpha = 0.25;
+			add(wasd_scheme_text);
+			
+			var scheme_label:FlxText = new FlxText(FlxG.width - 100.0, FlxG.height - 38.0, FlxG.width, "Control Scheme");
+			scheme_label.setFormat("propomin", 8, 0xFFDADADA, "left", 0xFF111111);
+			add(scheme_label);
+			
+			var scheme_instructions:FlxText = new FlxText(FlxG.width - 106.0, FlxG.height - 28.0, FlxG.width, "Press C to toggle");
+			scheme_instructions.setFormat("propomin", 8, 0xFFADADAD, "left", 0xFF111111);
+			add(scheme_instructions);
 			
 			// Set up our hacky ghost chasing sequence.
 			run_direction = FlxObject.RIGHT;
@@ -114,6 +136,20 @@ package {
 				ghost.x = bait.x - 50.0;
 				
 				run_direction = bait.facing = ghost.facing = FlxObject.RIGHT;
+			}
+			
+			// Toggle control scheme.
+			if (FlxG.keys.justPressed("C")) {
+				if (Game.input.control_scheme === PlayerInput.ESDFControlScheme) {
+					Game.input.control_scheme = PlayerInput.WASDControlScheme;
+					esdf_scheme_text.alpha    = 0.25;
+					wasd_scheme_text.alpha    = 1.0;
+				}
+				else {
+					Game.input.control_scheme = PlayerInput.ESDFControlScheme;
+					esdf_scheme_text.alpha    = 1.0;
+					wasd_scheme_text.alpha    = 0.25;
+				}
 			}
 		}
 		

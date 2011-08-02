@@ -23,6 +23,7 @@ package {
 			
 			// Set up the text.
 			level_title = new FlxText(4.0, UI.HUDBarHeight + 30.0, FlxG.width - 8.0, "\"" + Level.levels[Game.current_level].name + "\"");
+			level_title.lineSpacing = 3.0;
 			level_title.setFormat("propomin", 24, 0xFFFAFAFA, "center", 0xFF050505);
 			level_title.scrollFactor.x = level_title.scrollFactor.y = 0.0;
 			fading = false;

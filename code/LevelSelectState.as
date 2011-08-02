@@ -239,36 +239,36 @@ package {
 			}
 			
 			// Reset or increment button held time.
-			button_held_time = (!FlxG.keys.S && ! FlxG.keys.F) ? 0.0 : button_held_time + FlxG.elapsed;
+			button_held_time = (!Game.input.key("move_left") && !Game.input.key("move_right")) ? 0.0 : button_held_time + FlxG.elapsed;
 			
 			// Move the selection.
 			// TODO: Clean this crap up.
-			if (FlxG.keys.justPressed("E")) {
+			if (Game.input.justPressed("move_up")) {
 				moveSelection(FlxObject.UP);
 			}
-			else if (FlxG.keys.justPressed("S")) {
+			else if (Game.input.justPressed("move_left")) {
 				moveSelection(FlxObject.LEFT);
 			}
-			else if (FlxG.keys.justPressed("D")) {
+			else if (Game.input.justPressed("move_down")) {
 				moveSelection(FlxObject.DOWN);
 			}
-			else if (FlxG.keys.justPressed("F")) {
+			else if (Game.input.justPressed("move_right")) {
 				moveSelection(FlxObject.RIGHT);
 			}
 			else if (button_held_time >= KeyRepeatThreshold) {
 				repeat_time += FlxG.elapsed;
 				
 				if (repeat_time >= KeyRepeatRate) {
-					if (FlxG.keys.E) {
+					if (Game.input.key("move_up")) {
 						moveSelection(FlxObject.UP);
 					}
-					else if (FlxG.keys.S) {
+					else if (Game.input.key("move_left")) {
 						moveSelection(FlxObject.LEFT);
 					}
-					else if (FlxG.keys.D) {
+					else if (Game.input.key("move_down")) {
 						moveSelection(FlxObject.DOWN);
 					}
-					else if (FlxG.keys.F) {
+					else if (Game.input.key("move_right")) {
 						moveSelection(FlxObject.RIGHT);
 					}
 					
