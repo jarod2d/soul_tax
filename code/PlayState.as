@@ -172,7 +172,7 @@ package {
 			// Controls and behavior that are specific to possession or non-possession go here.
 			if (player.victim) {
 				// Jump.
-				if (FlxG.keys.justPressed("E")) {
+				if (Game.input.key("move_up")) {
 					player.victim.jump();
 				}
 				

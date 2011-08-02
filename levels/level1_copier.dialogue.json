@@ -38,7 +38,7 @@
 		["Ghost", "right", "What?!"],
 		["Reaper", "left", "Go hover over one of those idiots and press spacebar to take control of them."], 
 		["Reaper", "left", "Press J to punch and K to kick! And if you screw up, press P to pause and then R to restart."],
-		["Reaper", "left", "Oh yeah, and use ESDF to fly around."]
+		["Reaper", "left", "Oh yeah, and use ESDF or WASD to fly around."]
 	],   
 	     
 	"end": [

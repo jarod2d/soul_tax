@@ -129,7 +129,8 @@ package {
 			var confirm_label:FlxText = new FlxText(6.0, FlxG.height - 38.0, 200.0, "Continue");
 			confirm_label.setFormat("propomin", 8, 0xFFE0E2E4, "left", 0xFF000A10);
 			
-			var esdf_keys:FlxSprite = new FlxSprite(54.0, FlxG.height - 27.0, Assets.esdf_keys);
+			var control_graphic:Class = (Game.input.control_scheme === PlayerInput.ESDFControlScheme) ? Assets.esdf_keys : Assets.wasd_keys;
+			var esdf_keys:FlxSprite = new FlxSprite(54.0, FlxG.height - 27.0, control_graphic);
 			var j_key:FlxSprite     = new FlxSprite(21.0, FlxG.height - 22.0, Assets.j_key);
 			
 			// Set up our hacky ghost following stuff.

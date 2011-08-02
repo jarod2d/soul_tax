@@ -24,6 +24,7 @@ package {
 		[Embed(source="../images/clock_icon.png")] public static var clock_icon:Class;
 		[Embed(source="../images/j_key.png")] public static var j_key:Class;
 		[Embed(source="../images/esdf_keys.png")] public static var esdf_keys:Class;
+		[Embed(source="../images/wasd_keys.png")] public static var wasd_keys:Class;
 		[Embed(source="../images/zzz.png")] public static var zzz_sprite:Class;
 		
 		// Character sprites.
