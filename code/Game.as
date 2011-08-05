@@ -28,7 +28,7 @@ package {
 			super(400, 320, MainMenuState, 2);
 			
 			// Set up a few values.
-			FlxG.debug     = true;
+			FlxG.debug     = false;
 			FlxG.framerate = FlxG.flashFramerate = 45;
 			input          = new PlayerInput();
 			
