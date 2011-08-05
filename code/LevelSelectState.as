@@ -123,15 +123,11 @@ package {
 			}
 			
 			// Add the keyboard instruction graphics and labels.
-			var select_label:FlxText  = new FlxText(58.0, FlxG.height - 38.0, 200.0, "Select");
-			select_label.setFormat("propomin", 8, 0xFFE0E2E4, "left", 0xFF000A10);
-			
 			var confirm_label:FlxText = new FlxText(6.0, FlxG.height - 38.0, 200.0, "Continue");
 			confirm_label.setFormat("propomin", 8, 0xFFE0E2E4, "left", 0xFF000A10);
 			
-			var control_graphic:Class = (Game.input.control_scheme === PlayerInput.ESDFControlScheme) ? Assets.esdf_keys : Assets.wasd_keys;
-			var esdf_keys:FlxSprite = new FlxSprite(54.0, FlxG.height - 27.0, control_graphic);
-			var j_key:FlxSprite     = new FlxSprite(21.0, FlxG.height - 22.0, Assets.j_key);
+			var action_key:String            = (Game.input.control_scheme.id === "arrow") ? "z" : "j";
+			var confirm_key_sprite:FlxSprite = new FlxSprite(21.0, FlxG.height - 22.0, Assets[action_key + "_key"]);
 			
 			// Set up our hacky ghost following stuff.
 			ghost = new Player();
@@ -152,10 +148,8 @@ package {
 			add(level_scores);
 			add(ghost.trails);
 			add(ghost.sprite);
-			add(select_label);
 			add(confirm_label);
-			add(esdf_keys);
-			add(j_key);
+			add(confirm_key_sprite);
 			add(level_name);
 			
 			// Play the level select music.
@@ -233,7 +227,7 @@ package {
 		// Update.
 		override public function update():void {
 			// Move on to the play state.
-			if (FlxG.keys.SPACE || FlxG.keys.ENTER || FlxG.keys.J) {
+			if (Game.input.key("possess") || Game.input.key("punch") || FlxG.keys.ENTER) {
 				FlxG.play(Assets.menu_confirm_sound).survive = true;
 				FlxG.switchState(new PlayState());
 				return;

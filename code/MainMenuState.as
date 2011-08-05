@@ -10,9 +10,9 @@ package {
 	
 	public class MainMenuState extends FlxState {
 		
-		// The text displaying which control scheme is currently set.
-		private var esdf_scheme_text:FlxText;
-		private var wasd_scheme_text:FlxText;
+		// Images that display the currently-configured controls.
+		private var continue_key_sprite:FlxSprite;
+		private var control_scheme_sprite:FlxSprite;
 		
 		// The npc and ghost sprites that run around on the menu.
 		private var ghost:Player;
@@ -63,24 +63,19 @@ package {
 			confirm_label.setFormat("propomin", 8, 0xFFE0E2E4, "left", 0xFF000A10);
 			add(confirm_label);
 			
-			var j_key:FlxSprite = new FlxSprite(21.0, FlxG.height - 22.0, Assets.j_key);
-			add(j_key);
+			continue_key_sprite = new FlxSprite(21.0, FlxG.height - 22.0);
+			add(continue_key_sprite);
 			
-			// Set up control scheme stuff.
-			esdf_scheme_text = new FlxText(FlxG.width - 90.0, FlxG.height - 18.0, FlxG.width, "ESDF");
-			esdf_scheme_text.setFormat("propomin", 8, 0xFFFDFDFD, "left", 0xFF111111);
-			add(esdf_scheme_text);
+			control_scheme_sprite = new FlxSprite(FlxG.width - 104.0, FlxG.height - 25.0);
+			add(control_scheme_sprite);
 			
-			wasd_scheme_text = new FlxText(FlxG.width - 55.0, FlxG.height - 18.0, FlxG.width, "WASD");
-			wasd_scheme_text.setFormat("propomin", 8, 0xFFFDFDFD, "left", 0xFF111111);
-			wasd_scheme_text.alpha = 0.25;
-			add(wasd_scheme_text);
+			setHelperSprites();
 			
-			var scheme_label:FlxText = new FlxText(FlxG.width - 100.0, FlxG.height - 38.0, FlxG.width, "Control Scheme");
+			var scheme_label:FlxText = new FlxText(FlxG.width - 100.0, FlxG.height - 46.0, FlxG.width, "Control Scheme");
 			scheme_label.setFormat("propomin", 8, 0xFFDADADA, "left", 0xFF111111);
 			add(scheme_label);
 			
-			var scheme_instructions:FlxText = new FlxText(FlxG.width - 106.0, FlxG.height - 28.0, FlxG.width, "Press C to toggle");
+			var scheme_instructions:FlxText = new FlxText(FlxG.width - 106.0, FlxG.height - 36.0, FlxG.width, "Press C to change");
 			scheme_instructions.setFormat("propomin", 8, 0xFFADADAD, "left", 0xFF111111);
 			add(scheme_instructions);
 			
@@ -114,11 +109,12 @@ package {
 			FlxG.playMusic(Assets.title_screen_music, 0.55);
 		}
 		
+		// Update.
 		override public function update():void {
 			super.update();
 			
 			// Move on to the Level Select state.
-			if (FlxG.keys.SPACE || FlxG.keys.J || FlxG.keys.ENTER) {
+			if (Game.input.key("possess") || Game.input.key("punch") || FlxG.keys.ENTER) {
 				FlxG.switchState(new LevelSelectState());
 			}
 			
@@ -140,17 +136,21 @@ package {
 			
 			// Toggle control scheme.
 			if (FlxG.keys.justPressed("C")) {
-				if (Game.input.control_scheme === PlayerInput.ESDFControlScheme) {
-					Game.input.control_scheme = PlayerInput.WASDControlScheme;
-					esdf_scheme_text.alpha    = 0.25;
-					wasd_scheme_text.alpha    = 1.0;
-				}
-				else {
-					Game.input.control_scheme = PlayerInput.ESDFControlScheme;
-					esdf_scheme_text.alpha    = 1.0;
-					wasd_scheme_text.alpha    = 0.25;
-				}
+				Game.input.selectNextControlScheme();
+				setHelperSprites();
+				
+				// Play a sound.
+				FlxG.play(Assets.menu_select_sound, 0.45);
 			}
+		}
+		
+		// A little helper function to set the correct helper sprites based on the control scheme.
+		private function setHelperSprites():void {
+			var scheme_id:String  = Game.input.control_scheme.id;
+			var action_key:String = (scheme_id === "arrow") ? "z" : "j";
+			
+			control_scheme_sprite.loadGraphic(Assets[scheme_id + "_keys"]);
+			continue_key_sprite.loadGraphic(Assets[action_key + "_key"]);
 		}
 		
 	}

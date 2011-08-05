@@ -80,12 +80,12 @@ package {
 		// Update for dialogue mode.
 		private function updateDialogue():void {
 			// Advance the dialogue.
-			if (FlxG.keys.justPressed("J") || FlxG.keys.justPressed("SPACE")) {
+			if (Game.input.justPressed("punch") || Game.input.justPressed("possess")) {
 				Game.ui.dialogue_box.advanceDialogue();
 			}
 			
 			// Allow players to skip the dialogue.
-			if ( FlxG.keys.justPressed("ENTER")) {
+			if (FlxG.keys.justPressed("ENTER")) {
 				Game.ui.dialogue_box.endDialogue();
 			}
 			
@@ -111,7 +111,7 @@ package {
 			intro_timer += FlxG.elapsed;
 			
 			// Move on to the intro dialogue. If there's no intro dialogue, we go straight into the game.
-			if (intro_timer >= LevelIntroTotalTime || FlxG.keys.justPressed("SPACE") || FlxG.keys.justPressed("J") || FlxG.keys.justPressed("ENTER")) {
+			if (intro_timer >= LevelIntroTotalTime || Game.input.justPressed("possess") || Game.input.justPressed("punch") || FlxG.keys.justPressed("ENTER")) {
 				// Fade out the intro music.
 				music.fadeOut(0.3);
 				
@@ -162,7 +162,7 @@ package {
 			}
 			
 			// Possess or unpossess.
-			if (FlxG.keys.justPressed("SPACE")) {
+			if (Game.input.justPressed("possess")) {
 				(player.victim) ? player.stopPossessing() : player.possess();
 			}
 			
@@ -177,21 +177,21 @@ package {
 				}
 				
 				// Attack.
-				if (FlxG.keys.justPressed("J")) {
+				if (Game.input.justPressed("punch")) {
 					player.punchAttack();
 				}
-				else if (FlxG.keys.justPressed("K")) {
+				else if (Game.input.justPressed("kick")) {
 					player.knockbackAttack();
 				}
 				
 				// Special attack.
-				if (FlxG.keys.justPressed("L")) {
+				if (Game.input.justPressed("special")) {
 					player.victim.startSpecialAttack();
 				}
-				else if (FlxG.keys.justReleased("L")) {
+				else if (Game.input.justReleased("special")) {
 					player.victim.endSpecialAttack();
 				}
-				else if (FlxG.keys.L) {
+				else if (Game.input.key("special")) {
 					player.victim.continueSpecialAttack();
 				}
 			}
@@ -304,7 +304,7 @@ package {
 			}
 			
 			// Move on to the next level, or to the credits if we're on the last level.
-			if (FlxG.keys.justPressed("J") && Game.level.objectives_complete) {
+			if (Game.input.key("possess") && Game.level.objectives_complete) {
 				if (Game.current_level === Level.levels.length - 1) {
 					FlxG.switchState(new CreditsState());
 				}

@@ -150,10 +150,19 @@ package {
 			scroll_timer = 0.0;
 			done_timer   = 0.0;
 			
-			// Some super-hacky last-minute code to get some effects during a few specific dialogue moments.
-			if (current_line < dialogue.length && current_name === "Copier") {
-				FlxG.shake(0.01, 0.3);
-				FlxG.play(Assets.npc_death_fancy_1_sound, 0.9);
+			if (current_line < dialogue.length) {
+				// Some super-hacky last-minute code to get some effects during a few specific dialogue moments.
+				if (current_name === "Copier") {
+					FlxG.shake(0.01, 0.3);
+					FlxG.play(Assets.npc_death_fancy_1_sound, 0.9);
+				}
+				
+				// Some more super-hacky code to parse NPC dialogue and insert correct control key instructions.
+				var scheme:Object      = Game.input.control_scheme;
+				var move_string:String = (scheme.id === "arrow") ? "the arrow keys" : (scheme.id === "wasd") ? "WASD" : "ESDF";
+				var line:Array = dialogue[current_line];
+				
+				line[2] = line[2].replace("{{MOVE}}", move_string).replace("{{PUNCH}}", scheme.punch).replace("{{KICK}}", scheme.kick).replace("{{SPECIAL}}", scheme.special);
 			}
 			
 			// End the dialogue if necessary, otherwise update the speaker.
@@ -215,7 +224,7 @@ package {
 			
 			// Advance the text if necessary. Otherwise, advance the done timer.
 			if (!done_scrolling) {
-				var scroll_rate:Number = (FlxG.keys.J || FlxG.keys.SPACE || FlxG.keys.ENTER) ? FastScrollRate : ScrollRate;
+				var scroll_rate:Number = (Game.input.key("possess") || Game.input.key("punch") || FlxG.keys.ENTER) ? FastScrollRate : ScrollRate;
 				
 				while (scroll_timer >= scroll_rate) {
 					// Play a sound.

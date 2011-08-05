@@ -49,7 +49,7 @@ package {
 			level_select_text.setFormat("propomin", 16, 0xFFEEEEEE, "left");
 			level_select_text.scrollFactor.x = level_select_text.scrollFactor.y = 0.0;
 			
-			var continue_text:FlxText = new FlxText(25.0, FlxG.height - 52.0, FlxG.width - 50.0, "J: Continue");
+			var continue_text:FlxText = new FlxText(25.0, FlxG.height - 52.0, FlxG.width - 50.0, "SPACE: Continue");
 			continue_text.setFormat("propomin", 16, 0xFFEEEEEE, "center");
 			continue_text.scrollFactor.x = continue_text.scrollFactor.y = 0.0;
 			

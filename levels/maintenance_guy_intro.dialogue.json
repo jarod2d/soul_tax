@@ -16,7 +16,7 @@
 		["Maintenance Guy", "right", "Come on, guys."],
 		["Maintenance Guy", "right", "I've got two kids waiting for bedtime stories at home, and I haven't even dropped off my donations to Goodwill yet!"],
 		["Reaper", "left", "At some point in his life...Look, he’s got a jackhammer and if he’s not gonna use it, who is?"],
-		["Reaper", "left", "Possess him and press L to take advantage of his unique abilities."]
+		["Reaper", "left", "Possess him and press {{SPECIAL}} to take advantage of his unique abilities."]
 	],
 	
 	"end": [

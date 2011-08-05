@@ -63,7 +63,7 @@ package {
 		
 		override public function update():void {
 			// Move on to the level select state.
-			if (FlxG.keys.SPACE || FlxG.keys.J || FlxG.keys.ENTER) {
+			if (Game.input.key("possess") || Game.input.key("punch") || FlxG.keys.ENTER) {
 				FlxG.switchState(new LevelSelectState());
 			}
 			

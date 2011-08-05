@@ -14,26 +14,65 @@ package {
 		// function such as movement or attacking. Each value should be a string representing the key you want the
 		// to be bound to (the same as if you were using FlxG.keys).
 		public static const ESDFControlScheme:Object = {
+			id: "esdf",
+			
 			move_up:    "E",
 			move_right: "F",
 			move_down:  "D",
-			move_left:  "S"
+			move_left:  "S",
+			punch:      "J",
+			kick:       "K",
+			special:    "L",
+			possess:    "SPACE"
 		};
 		
 		public static const WASDControlScheme:Object = {
+			id: "wasd",
+			
 			move_up:    "W",
 			move_right: "D",
 			move_down:  "S",
-			move_left:  "A"
+			move_left:  "A",
+			punch:      "J",
+			kick:       "K",
+			special:    "L",
+			possess:    "SPACE"
 		};
+		
+		public static const ArrowControlScheme:Object = {
+			id: "arrow",
+			
+			move_up:    "UP",
+			move_right: "RIGHT",
+			move_down:  "DOWN",
+			move_left:  "LEFT",
+			punch:      "Z",
+			kick:       "X",
+			special:    "C",
+			possess:    "SPACE"
+		};
+		
+		// An array that contains all the possible control schemes, in the order that we want the player to cycle
+		// through them as they select their control scheme.
+		public static const control_schemes:Array = [
+			ArrowControlScheme,
+			WASDControlScheme,
+			ESDFControlScheme
+		];
 		
 		// The currently-selected control scheme.
 		public var control_scheme:Object;
 		
 		// Constructor.
 		public function PlayerInput() {
-			// The default control scheme for winners is ESDF!
-			control_scheme = PlayerInput.ESDFControlScheme;
+			// The default control scheme is arrow keys to appease the whiners!
+			control_scheme = PlayerInput.ArrowControlScheme;
+		}
+		
+		// Changes the control scheme to the next available one.
+		public function selectNextControlScheme():void {
+			var next_index:int = (control_schemes.indexOf(control_scheme) + 1) % control_schemes.length;
+			control_scheme = control_schemes[next_index];
 		}
 		
 		// This function checks if a key is down, analogous to doing something like "FlxG.keys.E". The string you pass
