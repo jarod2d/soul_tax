@@ -207,7 +207,7 @@ package {
 			// Count down the level timer, and end the level if necessary.
 			level.time_remaining -= FlxG.elapsed;
 			
-			if (level.time_remaining <= 0.0 || (FlxG.keys.ENTER && level.objectives_complete)) {
+			if ((level.time_remaining <= 0.0 && Game.difficulty !== Game.EasyDifficulty) || (FlxG.keys.ENTER && level.objectives_complete)) {
 				// Set the timer to zero in case the user ended the level early.
 				level.time_remaining = 0.0;
 				
@@ -304,7 +304,7 @@ package {
 			}
 			
 			// Move on to the next level, or to the credits if we're on the last level.
-			if (Game.input.key("possess") && Game.level.objectives_complete) {
+			if ((Game.input.key("possess") || Game.input.key("punch")) && Game.level.objectives_complete) {
 				if (Game.current_level === Level.levels.length - 1) {
 					FlxG.switchState(new CreditsState());
 				}

@@ -15,6 +15,11 @@ package {
 	
 	public class Game extends FlxGame {
 		
+		// Constants for each game difficulty.
+		public static const EasyDifficulty:int   = 0;
+		public static const NormalDifficulty:int = 1;
+		public static const HardDifficulty:int   = 2;
+		
 		// The major game objects.
 		public static var player:Player;
 		public static var level:Level;
@@ -24,12 +29,16 @@ package {
 		// The index of the current level. Should be set before PlayState is loaded.
 		public static var current_level:int;
 		
+		// The current game difficulty.
+		public static var difficulty:int;
+		
 		public function Game() {
 			super(400, 320, MainMenuState, 2);
 			
 			// Set up a few values.
-			FlxG.debug     = false;
+			FlxG.debug     = true;
 			FlxG.framerate = FlxG.flashFramerate = 45;
+			difficulty     = NormalDifficulty;
 			input          = new PlayerInput();
 			
 			// Load any stored level progress.

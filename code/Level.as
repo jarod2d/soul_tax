@@ -173,7 +173,7 @@ package {
 				progress[npc_type] = 0;
 			}
 			
-			time_remaining  = level_data.time;
+			time_remaining  = base_time;
 			completion_time = 0.0;
 			
 			// Set up the props and NPCs.
@@ -384,7 +384,7 @@ package {
 					Game.ui.level_complete_message.setAll("alpha", 1.0);
 				}
 				
-				completion_time = Level.levels[Game.current_level].time - Math.max(0.0, time_remaining);
+				completion_time = base_time - Math.max(0.0, time_remaining);
 			}
 		}
 		
@@ -415,6 +415,11 @@ package {
 		
 		public function get t_height():int {
 			return bg_tiles.heightInTiles;
+		}
+		
+		// Getter for the level's base time based on the difficulty.
+		public function get base_time():Number {
+			return (Game.difficulty === Game.HardDifficulty) ? levels[Game.current_level].hard_time : levels[Game.current_level].normal_time;
 		}
 		
 	}

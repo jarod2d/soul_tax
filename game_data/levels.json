@@ -8,7 +8,8 @@
 	{
 		"id":   "level1_copier",
 		"name": "Mistakes Were Made",
-		"time": 60.0,
+		"normal_time": 60.0,
+		"hard_time": 15.0,
 		"setting": "night",
 		"objectives": {
 			"businessman": 2
@@ -18,7 +19,8 @@
 	{
 		"id":   "level_2",
 		"name": "Body Hop",
-		"time": 60.0,
+		"normal_time": 60.0,
+		"hard_time": 30.0,
 		"setting": "night",
 		"objectives": {
 			"businessman": 8
@@ -28,7 +30,8 @@
 	{
 		"id":   "maintenance_guy_intro",
 		"name": "Drill Deep Down",
-		"time": 50.0,
+		"normal_time": 50.0,
+		"hard_time": 20.0,
 		"setting": "night",
 		"objectives": {
 			"businessman": 5
@@ -38,7 +41,8 @@
 	{
 		"id":   "window_tutorial",
 		"name": "A Window of Opportunity",
-		"time": 50.0,
+		"normal_time": 50.0,
+		"hard_time": 20.0,
 		"setting": "night",
 		"objectives": {
 			"businessman": 5
@@ -48,7 +52,8 @@
 	{
 		"id":   "manager_intro",
 		"name": "The Yell From Hell",
-		"time": 30.0,
+		"normal_time": 30.0,
+		"hard_time": 15.0,
 		"setting": "night",
 		"objectives": {
 			"businessman": 5,
@@ -60,7 +65,8 @@
 	{
 		"id":   "security_guard_intro",
 		"name": "Shoot for the Stars",
-		"time": 30.0,
+		"normal_time": 30.0,
+		"hard_time": 15.0,
 		"setting": "night",
 		"objectives": {
 			"businessman": 7,
@@ -72,7 +78,8 @@
 	{
 		"id":   "arches",
 		"name": "Scream and Shoot",
-		"time": 80.0,
+		"normal_time": 80.0,
+		"hard_time": 40.0,
 		"setting": "day",
 		"objectives": {
 			"businessman": 14,
@@ -84,7 +91,8 @@
 	{
 		"id":   "float",
 		"name": "Castle in the Sky",
-		"time": 55.0,
+		"normal_time": 55.0,
+		"hard_time": 35.0,
 		"setting": "day",
 		"objectives": {
 			"maintenance_guy": 12
@@ -94,7 +102,8 @@
 	{
 		"id":   "burglar_intro",
 		"name": "Stranger in the Night",
-		"time": 55.0,
+		"normal_time": 55.0,
+		"hard_time": 35.0,
 		"setting": "night",
 		"objectives": {
 			"businessman": 5,
@@ -106,7 +115,8 @@
 	{
 		"id":   "robot_intro",
 		"name": "BEBOOP, DESTROY!",
-		"time": 40.0,
+		"normal_time": 45.0,
+		"hard_time": 30.0,
 		"setting": "night",
 		"objectives": {
 			"security_guard": 4,
@@ -117,7 +127,8 @@
 	{
 		"id":   "cops_and_robbers",
 		"name": "Cop and Robbers",
-		"time": 30.0,
+		"normal_time": 30.0,
+		"hard_time": 25.0,
 		"setting": "day",
 		"objectives": {
 			"burglar": 10
@@ -127,7 +138,8 @@
 	{
 		"id":   "old_lady_intro",
 		"name": "Back In My Day",
-		"time": 55.0,
+		"normal_time": 55.0,
+		"hard_time": 30.0,
 		"setting": "day",
 		"objectives": {
 			"businessman": 2,
@@ -138,7 +150,8 @@
 	{
 		"id":   "kill_dudes_4",
 		"name": "Poor Souls",
-		"time": 60.0,
+		"normal_time": 60.0,
+		"hard_time": 30.0,
 		"setting": "day",
 		"objectives": {
 			"any": 25
@@ -148,7 +161,8 @@
 	{
 		"id":   "ceo_intro",
 		"name": "The Enemy Appears",
-		"time": 25.0,
+		"normal_time": 25.0,
+		"hard_time": 15.0,
 		"setting": "day",
 		"objectives": {
 			"businessman": 6,
@@ -159,7 +173,8 @@
 	{
 		"id":   "kill_dudes_2",
 		"name": "Another Day, Another Massacre",
-		"time": 65.0,
+		"normal_time": 65.0,
+		"hard_time": 35.0,
 		"setting": "day",
 		"objectives": {
 			"any": 20
@@ -169,7 +184,8 @@
 	{
 		"id":   "bullseye",
 		"name": "Bullseye",
-		"time": 6.0,
+		"normal_time": 6.0,
+		"hard_time": 6.0,
 		"setting": "day",
 		"objectives": {
 			"businessman": 1,
@@ -180,7 +196,8 @@
 	{
 		"id":   "vomit_tower",
 		"name": "Shower of Money",
-		"time": 12.0,
+		"normal_time": 12.0,
+		"hard_time": 11.0,
 		"setting": "day",
 		"objectives": {
 			"businessman": 10
@@ -190,7 +207,8 @@
 	{
 		"id":   "window_washers",
 		"name": "Window Washers",
-		"time": 70.0,
+		"normal_time": 70.0,
+		"hard_time": 45.0,
 		"setting": "day",
 		"objectives": {
 			"maintenance_guy": 8,
@@ -201,7 +219,8 @@
 	{
 		"id":   "ceo_assassination",
 		"name": "Get That CEO",
-		"time": 55.0,
+		"normal_time": 55.0,
+		"hard_time": 40.0,
 		"setting": "night",
 		"objectives": {
 			"ceo": 1,
@@ -212,7 +231,8 @@
 	{
 		"id":   "maze",
 		"name": "Maze",
-		"time": 75.0,
+		"normal_time": 75.0,
+		"hard_time": 50.0,
 		"setting": "day",
 		"objectives": {
 			"old_lady": 6
@@ -222,7 +242,8 @@
 	{
 		"id":   "bullseye_2",
 		"name": "Bullseye 2",
-		"time": 20.0,
+		"normal_time": 20.0,
+		"hard_time": 6.0,
 		"setting": "day",
 		"objectives": {
 			"maintenance_guy": 1,
@@ -233,7 +254,8 @@
 	{
 		"id":   "supervillain_intro",
 		"name": "Dr. Derp's Nefarious Plan",
-		"time": 35.0,
+		"normal_time": 35.0,
+		"hard_time": 25.0,
 		"setting": "day",
 		"objectives": {
 			"any": 28
@@ -243,7 +265,8 @@
 	{
 		"id":   "superhero_intro",
 		"name": "Captain Crimebuster",
-		"time": 22.0,
+		"normal_time": 22.0,
+		"hard_time": 18.0,
 		"setting": "day",
 		"objectives": {
 			"businessman": 19,
@@ -258,7 +281,8 @@
 	{
 		"id":   "kill_dudes_3",
 		"name": "Bingo Night",
-		"time": 75.0,
+		"normal_time": 75.0,
+		"hard_time": 50.0,
 		"setting": "day",
 		"objectives": {
 			"any": 12,
@@ -271,7 +295,8 @@
 	{
 		"id":   "hero_justice",
 		"name": "Hero's Justice",
-		"time": 30.0,
+		"normal_time": 30.0,
+		"hard_time": 20.0,
 		"setting": "day",
 		"objectives": {
 			"businessman": 4,
@@ -283,7 +308,8 @@
 	{
 		"id":   "shrink",
 		"name": "Dr. Derp's Revenge",
-		"time": 75.0,
+		"normal_time": 75.0,
+		"hard_time": 45.0,
 		"setting": "day",
 		"objectives": {
 			"businessman": 11,
@@ -294,7 +320,8 @@
 	{
 		"id":   "kill_dudes",
 		"name": "Googly Maps",
-		"time": 80.0,
+		"normal_time": 80.0,
+		"hard_time": 55.0,
 		"setting": "day",
 		"objectives": {
 			"any": 4,
@@ -308,7 +335,8 @@
 	{
 		"id":   "kill_dudes_6",
 		"name": "All Out Massacre",
-		"time": 95.0,
+		"normal_time": 95.0,
+		"hard_time": 85.0,
 		"setting": "day",
 		"objectives": {
 			"any": 75
@@ -318,7 +346,8 @@
 	{
 		"id":   "basement",
 		"name": "Creepy Boss",
-		"time": 45.0,
+		"normal_time": 45.0,
+		"hard_time": 20.0,
 		"setting": "day",
 		"objectives": {
 			"ceo": 1
@@ -328,7 +357,8 @@
 	{
 		"id":   "final_level",
 		"name": "Big Boss Castle",
-		"time": 100.0,
+		"normal_time": 100.0,
+		"hard_time": 75.0,
 		"setting": "day",
 		"objectives": {
 			"businessman": 9,

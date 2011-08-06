@@ -50,7 +50,11 @@ package {
 			contents.add(hud_bar);
 			contents.add(possession_monitor);
 			contents.add(kill_counter);
-			contents.add(level_timer);
+			
+			if (Game.difficulty !== Game.EasyDifficulty) {
+				contents.add(level_timer);
+			}
+			
 			contents.add(level_complete_message);
 			contents.add(level_intro_screen);
 			contents.add(level_end_screen);

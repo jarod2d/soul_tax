@@ -11,8 +11,11 @@ package {
 	public class MainMenuState extends FlxState {
 		
 		// Images that display the currently-configured controls.
-		private var continue_key_sprite:FlxSprite;
 		private var control_scheme_sprite:FlxSprite;
+		
+		// The text for the current difficulty selection.
+		private var difficulty_name:FlxText;
+		private var difficulty_description:FlxText;
 		
 		// The npc and ghost sprites that run around on the menu.
 		private var ghost:Player;
@@ -52,30 +55,42 @@ package {
 			// Add the SA Gamedev logo.
 			var logo:FlxSprite = new FlxSprite(0.0, 0.0, Assets.sa_gamedev_logo);
 			logo.origin.y = logo.height;
-			logo.x = (FlxG.width - logo.width) / 2.0;
+			logo.x = (FlxG.width - logo.width) / 2.0 + 3.0;
 			logo.y = FlxG.height - logo.height - 2.0;
 			
 			logo.scale.x = logo.scale.y = 0.5;
 			add(logo);
 			
+			// Add difficulty selection.
+			var difficulty_label:FlxText = new FlxText(34.0, FlxG.height - 48.0, FlxG.width, "Difficulty");
+			difficulty_label.setFormat("propomin", 8, 0xFFDADADA, "left", 0xFF111111);
+			add(difficulty_label);
+			
+			var difficulty_instructions:FlxText = new FlxText(14.0, FlxG.height - 38.0, FlxG.width, "Press D to change");
+			difficulty_instructions.setFormat("propomin", 8, 0xFFADADAD, "left", 0xFF111111);
+			add(difficulty_instructions);
+			
+			difficulty_name = new FlxText(0.0, FlxG.height - 27.0, 120.0);
+			difficulty_name.setFormat("propomin", 16, 0xFFD0D9E8, "center", 0xFF111111);
+			add(difficulty_name);
+			
+			difficulty_description = new FlxText(0.0, FlxG.height - 14.0, 118.0);
+			difficulty_description.setFormat("propomin", 8, 0xFFB0B6C2, "center", 0xFF111111);
+			add(difficulty_description);
+			
+			setDifficultyText();
+			
 			// Add keyboard helpers.
-			var confirm_label:FlxText = new FlxText(6.0, FlxG.height - 38.0, 200.0, "Continue");
-			confirm_label.setFormat("propomin", 8, 0xFFE0E2E4, "left", 0xFF000A10);
-			add(confirm_label);
-			
-			continue_key_sprite = new FlxSprite(21.0, FlxG.height - 22.0);
-			add(continue_key_sprite);
-			
 			control_scheme_sprite = new FlxSprite(FlxG.width - 104.0, FlxG.height - 25.0);
 			add(control_scheme_sprite);
 			
 			setHelperSprites();
 			
-			var scheme_label:FlxText = new FlxText(FlxG.width - 100.0, FlxG.height - 46.0, FlxG.width, "Control Scheme");
+			var scheme_label:FlxText = new FlxText(FlxG.width - 100.0, FlxG.height - 48.0, FlxG.width, "Control Scheme");
 			scheme_label.setFormat("propomin", 8, 0xFFDADADA, "left", 0xFF111111);
 			add(scheme_label);
 			
-			var scheme_instructions:FlxText = new FlxText(FlxG.width - 106.0, FlxG.height - 36.0, FlxG.width, "Press C to change");
+			var scheme_instructions:FlxText = new FlxText(FlxG.width - 106.0, FlxG.height - 38.0, FlxG.width, "Press C to change");
 			scheme_instructions.setFormat("propomin", 8, 0xFFADADAD, "left", 0xFF111111);
 			add(scheme_instructions);
 			
@@ -106,7 +121,7 @@ package {
 				FlxG.music = null;
 			}
 			
-			FlxG.playMusic(Assets.title_screen_music, 0.55);
+			FlxG.playMusic(Assets.title_screen_music, 0.525);
 		}
 		
 		// Update.
@@ -140,17 +155,32 @@ package {
 				setHelperSprites();
 				
 				// Play a sound.
-				FlxG.play(Assets.menu_select_sound, 0.45);
+				FlxG.play(Assets.menu_select_sound, 0.55);
+			}
+			
+			// Toggle difficulty.
+			if (FlxG.keys.justPressed("D")) {
+				Game.difficulty = (Game.difficulty + 1) % 3;
+				setDifficultyText();
+				
+				// Play a sound.
+				FlxG.play(Assets.menu_select_sound, 0.55);
 			}
 		}
 		
 		// A little helper function to set the correct helper sprites based on the control scheme.
 		private function setHelperSprites():void {
 			var scheme_id:String  = Game.input.control_scheme.id;
-			var action_key:String = (scheme_id === "arrow") ? "z" : "j";
-			
 			control_scheme_sprite.loadGraphic(Assets[scheme_id + "_keys"]);
-			continue_key_sprite.loadGraphic(Assets[action_key + "_key"]);
+		}
+		
+		// Sets the difficulty description based on the currently-set difficulty.
+		private function setDifficultyText():void {
+			switch (Game.difficulty) {
+				case Game.EasyDifficulty:   difficulty_name.text = "Easy";   difficulty_description.text = "No time limit!";     break;
+				case Game.NormalDifficulty: difficulty_name.text = "Normal"; difficulty_description.text = "Long time limits!";  break;
+				case Game.HardDifficulty:   difficulty_name.text = "Hard";   difficulty_description.text = "Short time limits!"; break;
+			}
 		}
 		
 	}
