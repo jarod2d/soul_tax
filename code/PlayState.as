@@ -172,7 +172,7 @@ package {
 			// Controls and behavior that are specific to possession or non-possession go here.
 			if (player.victim) {
 				// Jump.
-				if (Game.input.key("move_up")) {
+				if (Game.input.justPressed("move_up")) {
 					player.victim.jump();
 				}
 				
@@ -304,7 +304,7 @@ package {
 			}
 			
 			// Move on to the next level, or to the credits if we're on the last level.
-			if ((Game.input.key("possess") || Game.input.key("punch")) && Game.level.objectives_complete) {
+			if ((Game.input.justPressed("possess") || Game.input.justPressed("punch")) && Game.level.objectives_complete) {
 				if (Game.current_level === Level.levels.length - 1) {
 					FlxG.switchState(new CreditsState());
 				}
